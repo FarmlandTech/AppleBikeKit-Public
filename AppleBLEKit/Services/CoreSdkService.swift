@@ -68,7 +68,7 @@ class CoreSdkService: NSObject {
     }
     
     let updateDeviceInfoEvent: @convention(c) (DeviceInformation_T) -> Void = { deviceInfo in
-        //MARK: 因為是 update @Published variable，所以要放進主線程去更新
+        // MARK: 因為是 update @Published variable，所以要放進主線程去更新
         DispatchQueue.main.async {
             CoreSdkService.sharedInstance.deviceInfoDataDelegate?.updateDeviceInfo(deviceInfo: deviceInfo.FL)
         }
@@ -132,15 +132,13 @@ class CoreSdkService: NSObject {
     var dataPacketOutData: [UInt8] = [UInt8](repeating: 0x00, count: 244)
     var dataPacketOutDataLeng: UInt32 = 255
     
-    //MARK: CoreSDK 讀寫通道
+    // MARK: CoreSDK 讀寫通道
     @objc func outPutDataHandler() {
         // MARK: part 參數讀寫通道
         let commandPacketOutResult =  self.coreSDKInst.Method.BLECommandPacket_OUT(&self.commandPacketOutData, &self.commandPacketOutDataLeng)
         // MARK: 接收 sdk 處理後的 bin 檔 data，主要是更新 fw 會使用到
         let dataPacketOutResult = self.coreSDKInst.Method.BLEDataPacket_OUT(&self.dataPacketOutData, &self.dataPacketOutDataLeng)
                 
-//        print("commandPacketOutResult: \(commandPacketOutResult)")
-//        print("dataPacketOutResult: \(dataPacketOutResult)")
         if commandPacketOutResult == SDK_RETURN_SUCCESS.rawValue {
             // 要把處理過的原始封包丟給 BleSDK 去傳給 Hmi
             var newDataAry: [UInt8] = []
@@ -151,7 +149,7 @@ class CoreSdkService: NSObject {
             print("commandPacketData0: \(self.commandPacketOutData)")
             print("commandPacketLeng0: \(self.commandPacketOutDataLeng)")
             
-//            BluetoothService.sharedInstance.writeCharacteristic(bluetoothCharacteristic: BluetoothCharacteristic(characteristic: CurrentBleDevice.writeCharacteristic!), value: newDataAry)
+            BluetoothService.sharedInstance.writeCharacteristic(bluetoothCharacteristic: BluetoothCharacteristic(characteristic: CurrentBleDevice.writeCharacteristic!), value: newDataAry)
         }
         
         if dataPacketOutResult == SDK_RETURN_SUCCESS.rawValue {
@@ -161,11 +159,11 @@ class CoreSdkService: NSObject {
                 newDataAry.append(self.dataPacketOutData[Int(index)])
             }
             print("dataPacketOutResult newDataAry: \(newDataAry)")
-//            BluetoothService.sharedInstance.writeCharacteristic(bluetoothCharacteristic: BluetoothCharacteristic(characteristic: CurrentBleDevice.writeWithoutResponseCharacteristic!), value: newDataAry)
+            BluetoothService.sharedInstance.writeCharacteristic(bluetoothCharacteristic: BluetoothCharacteristic(characteristic: CurrentBleDevice.writeWithoutResponseCharacteristic!), value: newDataAry)
         }
     }
     
-    //MARK: Unsigned Int Byte Array Convert To Int Array
+    // MARK: Unsigned Int Byte Array Convert To Int Array
     func convertErrorList(errorList: [[UInt8]]) -> [Int] {
         var ary:[Int] = []
         for bytesAry in errorList {

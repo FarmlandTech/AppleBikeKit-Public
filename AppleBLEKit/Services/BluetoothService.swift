@@ -9,7 +9,6 @@ import Foundation
 import BikeBLEKit
 import CoreBluetooth
 import UIKit
-import AppleDevKit
 
 // 掃描附近裝置的 delegate
 public protocol BluetoothServiceDetectedDeviceDelegate: AnyObject {
@@ -52,7 +51,7 @@ public class BluetoothService: NSObject {
     }
     
     // 停止掃描
-    func stopScanning() {
+    public func stopScanning() {
         print("STOP SCANNING")
         bleManager.stopScanning()
     }
@@ -65,7 +64,7 @@ public class BluetoothService: NSObject {
     // 斷線
     func disconnect(bluetoothPeripheral: BluetoothPeripheral) {
         bleManager.disconnect(bluetoothPeripheral: bluetoothPeripheral)
-//        resetCurrentDevice()
+        resetCurrentDevice()
     }
     
     // 讀取藍芽訊號強度
@@ -105,7 +104,7 @@ public class BluetoothService: NSObject {
     }
     
     // 移除掃描裝置的 delegate
-    func removeDetectedDeviceDelegate(delegate: BluetoothServiceDetectedDeviceDelegate) {
+    public func removeDetectedDeviceDelegate(delegate: BluetoothServiceDetectedDeviceDelegate) {
         for (index, storedDelegate) in detectedDeviceDelegates.enumerated() {
             if delegate === storedDelegate {
                 detectedDeviceDelegates.remove(at: index)
@@ -134,7 +133,6 @@ extension BluetoothService: BLEManagerDelegate {
     // didDiscoverDevice callback
     public func didDiscoverDevice(bluetoothPeripheral: BluetoothPeripheral, advertisementData: [AdvertisementDataRetrievalKeys : Any]) {
         // 篩選出所有 Farmland 的設備
-        //"Nordic_FL"
         if bluetoothPeripheral.deviceName != nil && bluetoothPeripheral.deviceName!.matches("FL") {
             if devices.first(where: { $0.address == bluetoothPeripheral.address }) != nil {
                 for index in stride(from: 0, through: devices.count - 1, by: 1) {
@@ -150,23 +148,6 @@ extension BluetoothService: BLEManagerDelegate {
                 delegate.discoveredDevice(devices: devices)
             }
         }
-        
-//        if ((bluetoothPeripheral.deviceName?.matches("FL_")) == true) {
-//            if devices.first(where: { $0.address == bluetoothPeripheral.address }) != nil {
-//                for index in stride(from: 0, through: devices.count - 1, by: 1) {
-//                    if devices[index].address == bluetoothPeripheral.address {
-//                        devices[index] = bluetoothPeripheral
-//                    }
-//                }
-//            } else {
-//                devices.append(bluetoothPeripheral)
-//            }
-//
-//            detectedDeviceDelegates.forEach { delegate in
-//                delegate.discoveredDevice(devices: devices)
-//            }
-//        }
-        
     }
     
     public func didConnect(bluetoothPeripheral: BluetoothPeripheral) {
@@ -186,13 +167,10 @@ extension BluetoothService: BLEManagerDelegate {
     
     // 吐封包資料的 callback，這裡會將回傳的 data 傳遞給 CoreSDK 做解析
     public func didCharacteristicsValueChanged(bluetoothPeripheral: BluetoothPeripheral, bluetoothCharacteristic: BluetoothCharacteristic) {
-        
-//        print("fuck \(bluetoothCharacteristic)")
         let dataPacket: [UInt8]?
         if (bluetoothCharacteristic.characteristic.value != nil) {
             dataPacket = Array(bluetoothCharacteristic.characteristic.value!)
             CoreSdkService.sharedInstance.commandPacketIn(dataPacket: dataPacket!)
-            //print("Characteristics Value Changed \(bluetoothCharacteristic.characteristic.uuid), \(String(describing: dataPacket))")
         }
     }
     

@@ -1,27 +1,10 @@
 PODS:
-  - Alamofire (5.6.4)
-  - AppleDevKit (0.0.1):
-    - AppleDevKit/Common (= 0.0.1)
-    - AppleDevKit/NetworkClient (= 0.0.1)
-    - AppleDevKit/Sqlite (= 0.0.1)
   - AppleDevKit/Common (0.0.1)
-  - AppleDevKit/NetworkClient (0.0.1):
-    - Alamofire (~> 5.6.1)
-  - AppleDevKit/Sqlite (0.0.1):
-    - FMDB (~> 2.7.5)
   - BikeBLEKit (1.0.0)
-  - FMDB (2.7.5):
-    - FMDB/standard (= 2.7.5)
-  - FMDB/standard (2.7.5)
 
 DEPENDENCIES:
-  - AppleDevKit (from `/Users/yves/Project/AppleDevKit`)
+  - AppleDevKit/Common (from `/Users/yves/Project/AppleDevKit`)
   - BikeBLEKit (from `/Users/yves/Project/BLEManager_Mobile_SDK/BikeBLEKit`)
-
-SPEC REPOS:
-  trunk:
-    - Alamofire
-    - FMDB
 
 EXTERNAL SOURCES:
   AppleDevKit:
@@ -30,11 +13,9 @@ EXTERNAL SOURCES:
     :path: "/Users/yves/Project/BLEManager_Mobile_SDK/BikeBLEKit"
 
 SPEC CHECKSUMS:
-  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
-  AppleDevKit: d25159d018aa41b158d56fb8bd24219b10db95d2
+  AppleDevKit: 03093f7754c36ef9d805290948eb2515d313f6c1
   BikeBLEKit: 3638ecda626d68165e1bb6b427a9a2f7ebde3a34
-  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
 
-PODFILE CHECKSUM: 5f21f59adca50d7fe338ed07dc72a221ab3f2958
+PODFILE CHECKSUM: 9c13fd15b4c2050675052574ccc56fb7d10ad1eb
 
 COCOAPODS: 1.11.3

@@ -43,6 +43,15 @@
 		A32935732978F6A30096D365 /* CoreSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A32935542978F6A30096D365 /* CoreSDK.h */; };
 		A32935742978F6A30096D365 /* ActionScript.h in Headers */ = {isa = PBXBuildFile; fileRef = A32935552978F6A30096D365 /* ActionScript.h */; };
 		A32935752978F6A30096D365 /* UnixTime.h in Headers */ = {isa = PBXBuildFile; fileRef = A32935562978F6A30096D365 /* UnixTime.h */; };
+		A34C8BA429876D0B00B36BB2 /* CurrentBleDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BA329876D0B00B36BB2 /* CurrentBleDevice.swift */; };
+		A34C8BBE2987BF4700B36BB2 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BBD2987BF4700B36BB2 /* Parameter.swift */; };
+		A34C8BC02987BF5C00B36BB2 /* SearchDevicesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BBF2987BF5C00B36BB2 /* SearchDevicesViewModel.swift */; };
+		A34C8BC22987BF7000B36BB2 /* BikeInfoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BC12987BF7000B36BB2 /* BikeInfoVM.swift */; };
+		A34C8BC42987BFF500B36BB2 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BC32987BFF500B36BB2 /* MainViewModel.swift */; };
+		A34C8BC72987C03600B36BB2 /* SMIDData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BC52987C03600B36BB2 /* SMIDData.swift */; };
+		A34C8BC82987C03600B36BB2 /* SSNData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BC62987C03600B36BB2 /* SSNData.swift */; };
+		A34C8BCA2987C05B00B36BB2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BC92987C05B00B36BB2 /* NetworkManager.swift */; };
+		A34C8BCC2987C07900B36BB2 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BCB2987C07900B36BB2 /* BaseResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +103,15 @@
 		A32935542978F6A30096D365 /* CoreSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreSDK.h; sourceTree = "<group>"; };
 		A32935552978F6A30096D365 /* ActionScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionScript.h; sourceTree = "<group>"; };
 		A32935562978F6A30096D365 /* UnixTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnixTime.h; sourceTree = "<group>"; };
+		A34C8BA329876D0B00B36BB2 /* CurrentBleDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentBleDevice.swift; sourceTree = "<group>"; };
+		A34C8BBD2987BF4700B36BB2 /* Parameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
+		A34C8BBF2987BF5C00B36BB2 /* SearchDevicesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDevicesViewModel.swift; sourceTree = "<group>"; };
+		A34C8BC12987BF7000B36BB2 /* BikeInfoVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeInfoVM.swift; sourceTree = "<group>"; };
+		A34C8BC32987BFF500B36BB2 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		A34C8BC52987C03600B36BB2 /* SMIDData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMIDData.swift; sourceTree = "<group>"; };
+		A34C8BC62987C03600B36BB2 /* SSNData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNData.swift; sourceTree = "<group>"; };
+		A34C8BC92987C05B00B36BB2 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A34C8BCB2987C07900B36BB2 /* BaseResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		A5B50CAB7C1DD75B096B576E /* Pods-AppleBLEKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit.debug.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit/Pods-AppleBLEKit.debug.xcconfig"; sourceTree = "<group>"; };
 		B535D691ED3FFD72DBCC78EC /* Pods-AppleBLEKit-AppleBLEKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit-AppleBLEKitTests.debug.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit-AppleBLEKitTests/Pods-AppleBLEKit-AppleBLEKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E669F3A09233563C0452596A /* Pods-AppleBLEKit-AppleBLEKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit-AppleBLEKitTests.release.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit-AppleBLEKitTests/Pods-AppleBLEKit-AppleBLEKitTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -146,6 +164,7 @@
 			children = (
 				A329353A2978F6A30096D365 /* Core_SDK */,
 				A32935362978F6A30096D365 /* Services */,
+				A34C8BB02987B2C200B36BB2 /* Model */,
 				A329351F2978F68D0096D365 /* AppleBLEKit.h */,
 				A32935392978F6A30096D365 /* AppleBLEKit.modulemap */,
 				A32935202978F68D0096D365 /* AppleBLEKit.docc */,
@@ -203,6 +222,22 @@
 				A32935562978F6A30096D365 /* UnixTime.h */,
 			);
 			path = Core_SDK;
+			sourceTree = "<group>";
+		};
+		A34C8BB02987B2C200B36BB2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A34C8BA329876D0B00B36BB2 /* CurrentBleDevice.swift */,
+				A34C8BBD2987BF4700B36BB2 /* Parameter.swift */,
+				A34C8BC92987C05B00B36BB2 /* NetworkManager.swift */,
+				A34C8BCB2987C07900B36BB2 /* BaseResponse.swift */,
+				A34C8BC32987BFF500B36BB2 /* MainViewModel.swift */,
+				A34C8BC52987C03600B36BB2 /* SMIDData.swift */,
+				A34C8BC62987C03600B36BB2 /* SSNData.swift */,
+				A34C8BBF2987BF5C00B36BB2 /* SearchDevicesViewModel.swift */,
+				A34C8BC12987BF7000B36BB2 /* BikeInfoVM.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		F395BA6DF1F2B583F5790757 /* Frameworks */ = {
@@ -419,15 +454,24 @@
 				A329355F2978F6A30096D365 /* FL_Device_HMI.mm in Sources */,
 				A329355A2978F6A30096D365 /* FL_Logs.mm in Sources */,
 				A329356C2978F6A30096D365 /* FL_CanProtocol.mm in Sources */,
+				A34C8BBE2987BF4700B36BB2 /* Parameter.swift in Sources */,
 				A32935582978F6A30096D365 /* BluetoothService.swift in Sources */,
 				A329356B2978F6A30096D365 /* FL_Device_Controller.mm in Sources */,
 				A32935642978F6A30096D365 /* FL_Device_MainBatt.mm in Sources */,
 				A32935592978F6A30096D365 /* CoreSdkService.swift in Sources */,
 				A32935602978F6A30096D365 /* lib_event_scheduler.mm in Sources */,
+				A34C8BC82987C03600B36BB2 /* SSNData.swift in Sources */,
+				A34C8BCC2987C07900B36BB2 /* BaseResponse.swift in Sources */,
 				A32935702978F6A30096D365 /* UnixTime.mm in Sources */,
+				A34C8BC72987C03600B36BB2 /* SMIDData.swift in Sources */,
+				A34C8BCA2987C05B00B36BB2 /* NetworkManager.swift in Sources */,
 				A32935622978F6A30096D365 /* CoreSDK.mm in Sources */,
 				A32935632978F6A30096D365 /* lib_fifo_buff.mm in Sources */,
+				A34C8BA429876D0B00B36BB2 /* CurrentBleDevice.swift in Sources */,
+				A34C8BC22987BF7000B36BB2 /* BikeInfoVM.swift in Sources */,
+				A34C8BC42987BFF500B36BB2 /* MainViewModel.swift in Sources */,
 				A32935722978F6A30096D365 /* LogPrinter.mm in Sources */,
+				A34C8BC02987BF5C00B36BB2 /* SearchDevicesViewModel.swift in Sources */,
 				A329355B2978F6A30096D365 /* ActionScript.mm in Sources */,
 				A329355E2978F6A30096D365 /* Common.mm in Sources */,
 				A32935712978F6A30096D365 /* CAN_ISO_TP.mm in Sources */,

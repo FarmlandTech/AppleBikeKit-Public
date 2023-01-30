@@ -7,7 +7,7 @@ inhibit_all_warnings!
 
 def shared_pods
   pod 'BikeBLEKit', :path => '/Users/yves/Project/BLEManager_Mobile_SDK/BikeBLEKit', :inhibit_warnings => true
-  pod 'AppleDevKit', :path => '/Users/yves/Project/AppleDevKit', :inhibit_warnings => true
+  pod 'AppleDevKit/Common', :path => '/Users/yves/Project/AppleDevKit', :inhibit_warnings => true
 end
 
 target 'AppleBLEKit' do
