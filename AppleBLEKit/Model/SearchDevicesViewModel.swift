@@ -9,26 +9,26 @@ import Foundation
 import BikeBLEKit
 
 
-struct DeviceCell: Identifiable {
-    let id: String
+public struct DeviceCell: Identifiable {
+    public let id: String
     let name: String
     let rssi: String
     let devicePeripheral: BluetoothPeripheral
 }
 
-class SearchDevicesViewModel: ObservableObject {
-    @Published var searchedDevices: [DeviceCell] = []
-    @Published var isSearching: Bool = false
+public class SearchDevicesViewModel: ObservableObject {
+    @Published public var searchedDevices: [DeviceCell] = []
+    @Published public var isSearching: Bool = false
     
-    func onAppear() {
+    public init() {
         BluetoothService.sharedInstance.detectedDeviceDelegates.append(self)
     }
     
-    func onDisappear() {
+    deinit {
         BluetoothService.sharedInstance.removeDetectedDeviceDelegate(delegate: self)
     }
     
-    func scan() throws {
+    public func scan() throws {
         if searchedDevices.count != 0 {
             searchedDevices.removeAll()
         }
@@ -43,14 +43,14 @@ class SearchDevicesViewModel: ObservableObject {
         }
     }
     
-    func stopScanning() {
+    public func stopScanning() {
         BluetoothService.sharedInstance.stopScanning()
         isSearching = false
     }
 }
 
 extension SearchDevicesViewModel: BluetoothServiceDetectedDeviceDelegate {
-    func discoveredDevice(devices: [BluetoothPeripheral]) {
+    public func discoveredDevice(devices: [BluetoothPeripheral]) {
         searchedDevices = devices.map { device -> DeviceCell in
             var deviceName = ""
             if let name = device.deviceName {
