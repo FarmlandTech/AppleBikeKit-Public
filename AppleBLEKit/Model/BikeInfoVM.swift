@@ -8,36 +8,38 @@
 import Foundation
 import AppleDevKit
 
-enum DiagnosisStatus {
+public enum DiagnosisStatus {
     case notChecked
     case pass
     case error
 }
 
-class BikeInfoViewModel: ObservableObject {
+public class BikeInfoViewModel: ObservableObject {
     //MARK: bikeInfo from bike
     var tripTimeSec: UInt32?
     var hmiErrorCodesFromBike: [Int]?
     var controllerErrorCodesFromBike: [Int]?
     var batteryErrorCodesFromBike: [Int]?
     //MARK: for auto diagnosis
-    @Published var progressTimer: Timer?
-    @Published var progressValue: Float = 0
-    @Published var hmiStatus: DiagnosisStatus = .notChecked
-    @Published var controllerStatus: DiagnosisStatus = .notChecked
-    @Published var batteryStatus: DiagnosisStatus = .notChecked
-    @Published var hmiErrorToShow: String?
-    @Published var controllerErrorToShow: String?
-    @Published var batteryErrorToShow: String?
-    @Published var autoDiagnosisFinish: Bool = false
-    @Published var isDiagnosing: Bool = false
+    @Published public var progressTimer: Timer?
+    @Published public var progressValue: Float = 0
+    @Published public var hmiStatus: DiagnosisStatus = .notChecked
+    @Published public var controllerStatus: DiagnosisStatus = .notChecked
+    @Published public var batteryStatus: DiagnosisStatus = .notChecked
+    @Published public var hmiErrorToShow: String?
+    @Published public var controllerErrorToShow: String?
+    @Published public var batteryErrorToShow: String?
+    @Published public var autoDiagnosisFinish: Bool = false
+    @Published public var isDiagnosing: Bool = false
     
     
-    init() {
+    public init() {
         CoreSdkService.sharedInstance.deviceInfoDataDelegate = self
     }
     
-    
+    deinit {
+        CoreSdkService.sharedInstance.deviceInfoDataDelegate = nil
+    }
 }
 
 // Diagnosis func
