@@ -9,15 +9,15 @@ import Foundation
 import BikeBLEKit
 import CoreBluetooth
 
-class CurrentBleDevice: NSObject {
-    static var currentPeripheral: BluetoothPeripheral? = nil
-    static var writeCharacteristic: CBCharacteristic? = nil
-    static var writeWithoutResponseCharacteristic: CBCharacteristic? = nil
-    static var notifyCharacteristic: CBCharacteristic? = nil
+public class CurrentBleDevice: NSObject {
+    static public var currentPeripheral: BluetoothPeripheral? = nil
+    static public var writeCharacteristic: CBCharacteristic? = nil
+    static public var writeWithoutResponseCharacteristic: CBCharacteristic? = nil
+    static public var notifyCharacteristic: CBCharacteristic? = nil
 }
 
 // 斷線時摳這個
-func resetCurrentDevice() {
+public func resetCurrentDevice() {
     CurrentBleDevice.currentPeripheral = nil
     CurrentBleDevice.writeCharacteristic = nil
     CurrentBleDevice.writeWithoutResponseCharacteristic = nil

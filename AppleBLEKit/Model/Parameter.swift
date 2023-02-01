@@ -24,7 +24,7 @@ enum CommPartType: Int {
     case Unknown = 255
 }
 
-enum ConnectStatus {
+public enum ConnectStatus {
     case connecting
     case rescueDFU // 救援 dfu
     case updateFW // 更新 FW
@@ -47,14 +47,14 @@ struct ParameterData {
 }
 
 // 全局 part state 來存放 data
-class PartDataViewModel: ObservableObject {
+public class PartDataViewModel: ObservableObject {
     let device: BluetoothPeripheral
     let networkManager = NetworkManager()
     let userDefaults = UserDefaults.standard
     var currentBikeSmidData: SmidData? = nil
     var currentBikeSsnData: SsnData? = nil
     
-    @Published var connectStatus: ConnectStatus = .connecting
+    @Published public var connectStatus: ConnectStatus = .connecting
     @Published var connectErrorMessage: String = ""
     @Published var currentReadParameterIndex: Int = 0
     
@@ -132,7 +132,7 @@ class PartDataViewModel: ObservableObject {
         ParameterData(name: "P_AST_STOP_DEC", partType: .Controller, bank: 2, address: 199, length: 1, type: "int", value: nil),
     ]
     
-    init(device: BluetoothPeripheral) {
+    public init(device: BluetoothPeripheral) {
         self.device = device
         print("currentDevice： \(device)")
         CoreSdkService.sharedInstance.paramsDelegate = self
@@ -159,7 +159,7 @@ class PartDataViewModel: ObservableObject {
                 parameters[i].length == length)
             {
                 DispatchQueue.main.async {
-                    self.parameters[i].value = (value as! String)
+                    self.parameters[i].value = "\(value)"
                 }
             }
         }
@@ -216,7 +216,7 @@ class PartDataViewModel: ObservableObject {
     }
     
     // 因無法連續讀取參數，所以使用 index 的方式來記錄要讀取的下個參數
-    var readParamsIndex = 0
+    public var readParamsIndex = 0
     
     // 會先從 0 開始讀取
     func readParamSchedule() {
@@ -636,9 +636,13 @@ class PartDataViewModel: ObservableObject {
     }
     
     // MARK: 進行腳踏車配對比對本地與雲端 SMID, DMID
-    func connectDevice() {
+    public func connectDevice() {
         BluetoothService.sharedInstance.connectedDeviceDelegates.append((device.bluetoothDevice.identifier, self))
         BluetoothService.sharedInstance.connect(bluetoothPeripheral: device)
+    }
+    
+    public func disconnectDevice() {
+        BluetoothService.sharedInstance.disconnect(bluetoothPeripheral: device)
     }
 }
 
@@ -662,7 +666,7 @@ extension PartDataViewModel: CoreSdkParamsDelegate {
             CoreSdkService.sharedInstance.stopReadWriteChannel()
             NSLog("timeeee")
             // 比對腳踏車是否合規
-            self.isLocalBikeValid()
+//            self.isLocalBikeValid()
             NSLog("timeeee")
         }
     }
@@ -688,14 +692,14 @@ extension PartDataViewModel: CoreSdkParamsDelegate {
 }
 
 extension PartDataViewModel: BluetoothServiceConnectedDeviceDelegate {
-    func connectedDevice(device: BluetoothPeripheral) {
+    public func connectedDevice(device: BluetoothPeripheral) {
         
     }
     
-    func updateRemoteRssi(rssi: Float) {}
+    public func updateRemoteRssi(rssi: Float) {}
     
     // 找到 ble 的 characteristic 並儲存起來，在讀寫時會使用到
-    func discoveredService() {
+    public func discoveredService() {
         guard let services = device.bluetoothDevice.services else { return }
         
         services.forEach { service in

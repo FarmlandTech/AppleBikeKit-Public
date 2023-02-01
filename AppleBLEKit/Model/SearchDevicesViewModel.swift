@@ -9,11 +9,11 @@ import Foundation
 import BikeBLEKit
 
 
-public struct DeviceCell: Identifiable {
+public struct DeviceCell: Identifiable, Hashable {
     public let id: String
-    let name: String
-    let rssi: String
-    let devicePeripheral: BluetoothPeripheral
+    public let name: String
+    public let rssi: String
+    public let devicePeripheral: BluetoothPeripheral
 }
 
 public class SearchDevicesViewModel: ObservableObject {
@@ -32,7 +32,7 @@ public class SearchDevicesViewModel: ObservableObject {
         if searchedDevices.count != 0 {
             searchedDevices.removeAll()
         }
-        
+        self.stopScanning()
         // 這裡要做 try catch 以防沒有開啟藍芽
         do {
             try BluetoothService.sharedInstance.scan()
