@@ -52,6 +52,48 @@
 		A34C8BC82987C03600B36BB2 /* SSNData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BC62987C03600B36BB2 /* SSNData.swift */; };
 		A34C8BCA2987C05B00B36BB2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BC92987C05B00B36BB2 /* NetworkManager.swift */; };
 		A34C8BCC2987C07900B36BB2 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BCB2987C07900B36BB2 /* BaseResponse.swift */; };
+		A3B8EFB72988DEE1002EB6F2 /* FL_Device_HMI.h in Headers */ = {isa = PBXBuildFile; fileRef = A329353E2978F6A30096D365 /* FL_Device_HMI.h */; };
+		A3B8EFB82988DEE1002EB6F2 /* CppTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = A32935482978F6A30096D365 /* CppTimer.h */; };
+		A3B8EFB92988DEE1002EB6F2 /* AppleBLEKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A329351F2978F68D0096D365 /* AppleBLEKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3B8EFBA2988DEE1002EB6F2 /* UnixTime.h in Headers */ = {isa = PBXBuildFile; fileRef = A32935562978F6A30096D365 /* UnixTime.h */; };
+		A3B8EFBB2988DEE1002EB6F2 /* FL_CANProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A329354F2978F6A30096D365 /* FL_CANProtocol.h */; };
+		A3B8EFBC2988DEE1002EB6F2 /* Common.h in Headers */ = {isa = PBXBuildFile; fileRef = A32935462978F6A30096D365 /* Common.h */; };
+		A3B8EFBD2988DEE1002EB6F2 /* ActionScript.h in Headers */ = {isa = PBXBuildFile; fileRef = A32935552978F6A30096D365 /* ActionScript.h */; };
+		A3B8EFBE2988DEE1002EB6F2 /* lib_fifo_buff.h in Headers */ = {isa = PBXBuildFile; fileRef = A329354A2978F6A30096D365 /* lib_fifo_buff.h */; };
+		A3B8EFBF2988DEE1002EB6F2 /* CoreSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A32935542978F6A30096D365 /* CoreSDK.h */; };
+		A3B8EFC02988DEE1002EB6F2 /* FL_CANInfoStruct.h in Headers */ = {isa = PBXBuildFile; fileRef = A32935492978F6A30096D365 /* FL_CANInfoStruct.h */; };
+		A3B8EFC12988DEE1002EB6F2 /* FL_Device_MainBatt.h in Headers */ = {isa = PBXBuildFile; fileRef = A32935422978F6A30096D365 /* FL_Device_MainBatt.h */; };
+		A3B8EFC22988DEE1002EB6F2 /* lib_event_scheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = A329353D2978F6A30096D365 /* lib_event_scheduler.h */; };
+		A3B8EFC32988DEE1002EB6F2 /* FL_Device_Controller.h in Headers */ = {isa = PBXBuildFile; fileRef = A32935502978F6A30096D365 /* FL_Device_Controller.h */; };
+		A3B8EFC42988DEE1002EB6F2 /* LogPrinter.h in Headers */ = {isa = PBXBuildFile; fileRef = A329354E2978F6A30096D365 /* LogPrinter.h */; };
+		A3B8EFC52988DEE1002EB6F2 /* FL_Logs.h in Headers */ = {isa = PBXBuildFile; fileRef = A32935472978F6A30096D365 /* FL_Logs.h */; };
+		A3B8EFC62988DEE1002EB6F2 /* CAN_ISO_TP.h in Headers */ = {isa = PBXBuildFile; fileRef = A329354B2978F6A30096D365 /* CAN_ISO_TP.h */; };
+		A3B8EFC82988DEE1002EB6F2 /* FL_Device_HMI.mm in Sources */ = {isa = PBXBuildFile; fileRef = A32935402978F6A30096D365 /* FL_Device_HMI.mm */; };
+		A3B8EFC92988DEE1002EB6F2 /* FL_Logs.mm in Sources */ = {isa = PBXBuildFile; fileRef = A329353B2978F6A30096D365 /* FL_Logs.mm */; };
+		A3B8EFCA2988DEE1002EB6F2 /* FL_CanProtocol.mm in Sources */ = {isa = PBXBuildFile; fileRef = A329354D2978F6A30096D365 /* FL_CanProtocol.mm */; };
+		A3B8EFCB2988DEE1002EB6F2 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BBD2987BF4700B36BB2 /* Parameter.swift */; };
+		A3B8EFCC2988DEE1002EB6F2 /* BluetoothService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32935372978F6A30096D365 /* BluetoothService.swift */; };
+		A3B8EFCD2988DEE1002EB6F2 /* FL_Device_Controller.mm in Sources */ = {isa = PBXBuildFile; fileRef = A329354C2978F6A30096D365 /* FL_Device_Controller.mm */; };
+		A3B8EFCE2988DEE1002EB6F2 /* FL_Device_MainBatt.mm in Sources */ = {isa = PBXBuildFile; fileRef = A32935452978F6A30096D365 /* FL_Device_MainBatt.mm */; };
+		A3B8EFCF2988DEE1002EB6F2 /* CoreSdkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32935382978F6A30096D365 /* CoreSdkService.swift */; };
+		A3B8EFD02988DEE1002EB6F2 /* lib_event_scheduler.mm in Sources */ = {isa = PBXBuildFile; fileRef = A32935412978F6A30096D365 /* lib_event_scheduler.mm */; };
+		A3B8EFD12988DEE1002EB6F2 /* SSNData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BC62987C03600B36BB2 /* SSNData.swift */; };
+		A3B8EFD22988DEE1002EB6F2 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BCB2987C07900B36BB2 /* BaseResponse.swift */; };
+		A3B8EFD32988DEE1002EB6F2 /* UnixTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = A32935512978F6A30096D365 /* UnixTime.mm */; };
+		A3B8EFD42988DEE1002EB6F2 /* SMIDData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BC52987C03600B36BB2 /* SMIDData.swift */; };
+		A3B8EFD52988DEE1002EB6F2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BC92987C05B00B36BB2 /* NetworkManager.swift */; };
+		A3B8EFD62988DEE1002EB6F2 /* CoreSDK.mm in Sources */ = {isa = PBXBuildFile; fileRef = A32935432978F6A30096D365 /* CoreSDK.mm */; };
+		A3B8EFD72988DEE1002EB6F2 /* lib_fifo_buff.mm in Sources */ = {isa = PBXBuildFile; fileRef = A32935442978F6A30096D365 /* lib_fifo_buff.mm */; };
+		A3B8EFD82988DEE1002EB6F2 /* CurrentBleDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BA329876D0B00B36BB2 /* CurrentBleDevice.swift */; };
+		A3B8EFD92988DEE1002EB6F2 /* BikeInfoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BC12987BF7000B36BB2 /* BikeInfoVM.swift */; };
+		A3B8EFDA2988DEE1002EB6F2 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BC32987BFF500B36BB2 /* MainViewModel.swift */; };
+		A3B8EFDB2988DEE1002EB6F2 /* LogPrinter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A32935532978F6A30096D365 /* LogPrinter.mm */; };
+		A3B8EFDC2988DEE1002EB6F2 /* SearchDevicesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8BBF2987BF5C00B36BB2 /* SearchDevicesViewModel.swift */; };
+		A3B8EFDD2988DEE1002EB6F2 /* ActionScript.mm in Sources */ = {isa = PBXBuildFile; fileRef = A329353C2978F6A30096D365 /* ActionScript.mm */; };
+		A3B8EFDE2988DEE1002EB6F2 /* Common.mm in Sources */ = {isa = PBXBuildFile; fileRef = A329353F2978F6A30096D365 /* Common.mm */; };
+		A3B8EFDF2988DEE1002EB6F2 /* CAN_ISO_TP.mm in Sources */ = {isa = PBXBuildFile; fileRef = A32935522978F6A30096D365 /* CAN_ISO_TP.mm */; };
+		A3B8EFE02988DEE1002EB6F2 /* AppleBLEKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = A32935202978F68D0096D365 /* AppleBLEKit.docc */; };
+		A3B8EFE22988DEE1002EB6F2 /* Pods_AppleBLEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E0351D6CC3752E01CD22D2 /* Pods_AppleBLEKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +154,8 @@
 		A34C8BC62987C03600B36BB2 /* SSNData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNData.swift; sourceTree = "<group>"; };
 		A34C8BC92987C05B00B36BB2 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A34C8BCB2987C07900B36BB2 /* BaseResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
+		A3B8EFE72988DEE1002EB6F2 /* AppleBLEKit_Simulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppleBLEKit_Simulator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3B8EFE82988DF5C002EB6F2 /* AppleBLEKit_Simulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = AppleBLEKit_Simulator.modulemap; sourceTree = "<group>"; };
 		A5B50CAB7C1DD75B096B576E /* Pods-AppleBLEKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit.debug.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit/Pods-AppleBLEKit.debug.xcconfig"; sourceTree = "<group>"; };
 		B535D691ED3FFD72DBCC78EC /* Pods-AppleBLEKit-AppleBLEKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit-AppleBLEKitTests.debug.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit-AppleBLEKitTests/Pods-AppleBLEKit-AppleBLEKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E669F3A09233563C0452596A /* Pods-AppleBLEKit-AppleBLEKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit-AppleBLEKitTests.release.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit-AppleBLEKitTests/Pods-AppleBLEKit-AppleBLEKitTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -136,6 +180,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A3B8EFE12988DEE1002EB6F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3B8EFE22988DEE1002EB6F2 /* Pods_AppleBLEKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -155,6 +207,7 @@
 			children = (
 				A329351C2978F68D0096D365 /* AppleBLEKit.framework */,
 				A32935262978F68D0096D365 /* AppleBLEKitTests.xctest */,
+				A3B8EFE72988DEE1002EB6F2 /* AppleBLEKit_Simulator.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,6 +220,7 @@
 				A34C8BB02987B2C200B36BB2 /* Model */,
 				A329351F2978F68D0096D365 /* AppleBLEKit.h */,
 				A32935392978F6A30096D365 /* AppleBLEKit.modulemap */,
+				A3B8EFE82988DF5C002EB6F2 /* AppleBLEKit_Simulator.modulemap */,
 				A32935202978F68D0096D365 /* AppleBLEKit.docc */,
 			);
 			path = AppleBLEKit;
@@ -286,6 +340,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A3B8EFB62988DEE1002EB6F2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3B8EFB72988DEE1002EB6F2 /* FL_Device_HMI.h in Headers */,
+				A3B8EFB82988DEE1002EB6F2 /* CppTimer.h in Headers */,
+				A3B8EFB92988DEE1002EB6F2 /* AppleBLEKit.h in Headers */,
+				A3B8EFBA2988DEE1002EB6F2 /* UnixTime.h in Headers */,
+				A3B8EFBB2988DEE1002EB6F2 /* FL_CANProtocol.h in Headers */,
+				A3B8EFBC2988DEE1002EB6F2 /* Common.h in Headers */,
+				A3B8EFBD2988DEE1002EB6F2 /* ActionScript.h in Headers */,
+				A3B8EFBE2988DEE1002EB6F2 /* lib_fifo_buff.h in Headers */,
+				A3B8EFBF2988DEE1002EB6F2 /* CoreSDK.h in Headers */,
+				A3B8EFC02988DEE1002EB6F2 /* FL_CANInfoStruct.h in Headers */,
+				A3B8EFC12988DEE1002EB6F2 /* FL_Device_MainBatt.h in Headers */,
+				A3B8EFC22988DEE1002EB6F2 /* lib_event_scheduler.h in Headers */,
+				A3B8EFC32988DEE1002EB6F2 /* FL_Device_Controller.h in Headers */,
+				A3B8EFC42988DEE1002EB6F2 /* LogPrinter.h in Headers */,
+				A3B8EFC52988DEE1002EB6F2 /* FL_Logs.h in Headers */,
+				A3B8EFC62988DEE1002EB6F2 /* CAN_ISO_TP.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -328,6 +405,25 @@
 			productReference = A32935262978F68D0096D365 /* AppleBLEKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		A3B8EFB42988DEE1002EB6F2 /* AppleBLEKit_Simulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3B8EFE42988DEE1002EB6F2 /* Build configuration list for PBXNativeTarget "AppleBLEKit_Simulator" */;
+			buildPhases = (
+				A3B8EFB52988DEE1002EB6F2 /* [CP] Check Pods Manifest.lock */,
+				A3B8EFB62988DEE1002EB6F2 /* Headers */,
+				A3B8EFC72988DEE1002EB6F2 /* Sources */,
+				A3B8EFE12988DEE1002EB6F2 /* Frameworks */,
+				A3B8EFE32988DEE1002EB6F2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AppleBLEKit_Simulator;
+			productName = AppleBLEKit;
+			productReference = A3B8EFE72988DEE1002EB6F2 /* AppleBLEKit_Simulator.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -360,6 +456,7 @@
 			projectRoot = "";
 			targets = (
 				A329351B2978F68D0096D365 /* AppleBLEKit */,
+				A3B8EFB42988DEE1002EB6F2 /* AppleBLEKit_Simulator */,
 				A32935252978F68D0096D365 /* AppleBLEKitTests */,
 			);
 		};
@@ -374,6 +471,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A32935242978F68D0096D365 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3B8EFE32988DEE1002EB6F2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -444,6 +548,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A3B8EFB52988DEE1002EB6F2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AppleBLEKit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -484,6 +610,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				A329352C2978F68D0096D365 /* AppleBLEKitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3B8EFC72988DEE1002EB6F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3B8EFC82988DEE1002EB6F2 /* FL_Device_HMI.mm in Sources */,
+				A3B8EFC92988DEE1002EB6F2 /* FL_Logs.mm in Sources */,
+				A3B8EFCA2988DEE1002EB6F2 /* FL_CanProtocol.mm in Sources */,
+				A3B8EFCB2988DEE1002EB6F2 /* Parameter.swift in Sources */,
+				A3B8EFCC2988DEE1002EB6F2 /* BluetoothService.swift in Sources */,
+				A3B8EFCD2988DEE1002EB6F2 /* FL_Device_Controller.mm in Sources */,
+				A3B8EFCE2988DEE1002EB6F2 /* FL_Device_MainBatt.mm in Sources */,
+				A3B8EFCF2988DEE1002EB6F2 /* CoreSdkService.swift in Sources */,
+				A3B8EFD02988DEE1002EB6F2 /* lib_event_scheduler.mm in Sources */,
+				A3B8EFD12988DEE1002EB6F2 /* SSNData.swift in Sources */,
+				A3B8EFD22988DEE1002EB6F2 /* BaseResponse.swift in Sources */,
+				A3B8EFD32988DEE1002EB6F2 /* UnixTime.mm in Sources */,
+				A3B8EFD42988DEE1002EB6F2 /* SMIDData.swift in Sources */,
+				A3B8EFD52988DEE1002EB6F2 /* NetworkManager.swift in Sources */,
+				A3B8EFD62988DEE1002EB6F2 /* CoreSDK.mm in Sources */,
+				A3B8EFD72988DEE1002EB6F2 /* lib_fifo_buff.mm in Sources */,
+				A3B8EFD82988DEE1002EB6F2 /* CurrentBleDevice.swift in Sources */,
+				A3B8EFD92988DEE1002EB6F2 /* BikeInfoVM.swift in Sources */,
+				A3B8EFDA2988DEE1002EB6F2 /* MainViewModel.swift in Sources */,
+				A3B8EFDB2988DEE1002EB6F2 /* LogPrinter.mm in Sources */,
+				A3B8EFDC2988DEE1002EB6F2 /* SearchDevicesViewModel.swift in Sources */,
+				A3B8EFDD2988DEE1002EB6F2 /* ActionScript.mm in Sources */,
+				A3B8EFDE2988DEE1002EB6F2 /* Common.mm in Sources */,
+				A3B8EFDF2988DEE1002EB6F2 /* CAN_ISO_TP.mm in Sources */,
+				A3B8EFE02988DEE1002EB6F2 /* AppleBLEKit.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,7 +785,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
@@ -636,7 +794,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				MODULEMAP_FILE = "$(SRCROOT)/AppleBLEKit/AppleBLEKit.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = tw.farmland.AppleBLEKit;
@@ -664,7 +822,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
@@ -673,7 +831,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				MODULEMAP_FILE = "$(SRCROOT)/AppleBLEKit/AppleBLEKit.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = tw.farmland.AppleBLEKit;
@@ -731,6 +889,80 @@
 			};
 			name = Release;
 		};
+		A3B8EFE52988DEE1002EB6F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A5B50CAB7C1DD75B096B576E /* Pods-AppleBLEKit.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 728LBXSHW4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				MODULEMAP_FILE = "$(SRCROOT)/AppleBLEKit/AppleBLEKit_Simulator.modulemap";
+				PRODUCT_BUNDLE_IDENTIFIER = tw.farmland.AppleBLEKit.simulator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A3B8EFE62988DEE1002EB6F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E46717CD4F249ACA74C6CE5 /* Pods-AppleBLEKit.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 728LBXSHW4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				MODULEMAP_FILE = "$(SRCROOT)/AppleBLEKit/AppleBLEKit_Simulator.modulemap";
+				PRODUCT_BUNDLE_IDENTIFIER = tw.farmland.AppleBLEKit.simulator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -757,6 +989,15 @@
 			buildConfigurations = (
 				A32935342978F68D0096D365 /* Debug */,
 				A32935352978F68D0096D365 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3B8EFE42988DEE1002EB6F2 /* Build configuration list for PBXNativeTarget "AppleBLEKit_Simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3B8EFE52988DEE1002EB6F2 /* Debug */,
+				A3B8EFE62988DEE1002EB6F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

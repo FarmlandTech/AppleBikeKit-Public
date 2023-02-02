@@ -17,9 +17,12 @@ public enum DiagnosisStatus {
 public class BikeInfoViewModel: ObservableObject {
     //MARK: bikeInfo from bike
     var tripTimeSec: UInt32?
-    var hmiErrorCodesFromBike: [Int]?
-    var controllerErrorCodesFromBike: [Int]?
-    var batteryErrorCodesFromBike: [Int]?
+    public var hmiErrorCodesFromBike: [Int]?
+    public var controllerErrorCodesFromBike: [Int]?
+    public var batteryErrorCodesFromBike: [Int]?
+    @Published public var batteryTemperature: Int8?
+    @Published public var batteryRelativeStateOfCharge: UInt32?
+    @Published public var batteryRelativeStateOfHealth: UInt32?
     //MARK: for auto diagnosis
     @Published public var progressTimer: Timer?
     @Published public var progressValue: Float = 0
@@ -135,6 +138,10 @@ extension Array {
 
 extension BikeInfoViewModel: CoreSdkDataDelegate {
     func updateDeviceInfo(deviceInfo: FL_Info_st) {
+        self.batteryTemperature = deviceInfo.battery_temperature
+        self.batteryRelativeStateOfCharge = deviceInfo.battery_rsoc
+        self.batteryRelativeStateOfHealth = deviceInfo.battery_rsoh
+        
         let hmiErrorListByteArray = withUnsafeBytes(of: deviceInfo.HMI_error_list) { buf in
             [UInt8](buf)
         }.chunked(into: 4)
