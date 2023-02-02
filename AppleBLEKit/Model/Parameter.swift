@@ -36,14 +36,14 @@ func getCommPartTypeRawValue(is commpartType: CommPartType) -> Int {
     return commpartType.rawValue
 }
 
-struct ParameterData {
+public struct ParameterData {
     var name: String
     var partType: CommPartType
     var bank: UInt8
     var address: UInt16
     var length: UInt16
     var type: String
-    var value: String?
+    public var value: String?
 }
 
 // 全局 part state 來存放 data
@@ -139,7 +139,7 @@ public class PartDataViewModel: ObservableObject {
     }
     
     // 用來找到特定 Parameter
-    func from(name: String) -> ParameterData? {
+    public func from(name: String) -> ParameterData? {
         for i in parameters.indices {
             if parameters[i].name == name {
                 return parameters[i]
