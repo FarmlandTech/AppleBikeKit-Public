@@ -1,11 +1,11 @@
 framework module AppleBLEKit_Simulator {
     umbrella header "AppleBLEKit.h"
-    header "/Users/yves/Project/AppleBLEKit/AppleBLEKit/Core_SDK/CoreSDK.h"
-    header "/Users/yves/Project/AppleBLEKit/AppleBLEKit/Core_SDK/lib_event_scheduler.h"
-    header "/Users/yves/Project/AppleBLEKit/AppleBLEKit/Core_SDK/FL_CANInfoStruct.h"
-    header "/Users/yves/Project/AppleBLEKit/AppleBLEKit/Core_SDK/Common.h"
-    header "/Users/yves/Project/AppleBLEKit/AppleBLEKit/Core_SDK/CAN_ISO_TP.h"
-    header "/Users/yves/Project/AppleBLEKit/AppleBLEKit/Core_SDK/FL_Logs.h"
+    header "CoreSDK.h"
+    header "lib_event_scheduler.h"
+    header "FL_CANInfoStruct.h"
+    header "Common.h"
+    header "CAN_ISO_TP.h"
+    header "FL_Logs.h"
     export *
     module * { export * }
 }
