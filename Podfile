@@ -18,9 +18,14 @@ target 'AppleBLEKit' do
 
   # Pods for AppleBLEKit
   shared_pods
+end
 
-  target 'AppleBLEKitTests' do
-    # Pods for testing
-  end
+target 'AppleBLEKit_Simulator' do
+  platform :ios, '14.1'
 
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for AppleBLEKit
+  shared_pods
 end

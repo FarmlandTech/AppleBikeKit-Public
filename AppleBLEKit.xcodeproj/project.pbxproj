@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4BA30D010E50688D9EFAA571 /* Pods_AppleBLEKit_AppleBLEKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5AE347411D99E66AC01ABE6 /* Pods_AppleBLEKit_AppleBLEKitTests.framework */; };
-		8D6ECFEA241F8A27583F2FC0 /* Pods_AppleBLEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E0351D6CC3752E01CD22D2 /* Pods_AppleBLEKit.framework */; };
+		2F4F3049FA4EE4A34F5167FC /* Pods_AppleBLEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F018CC703C86D5B825145E82 /* Pods_AppleBLEKit.framework */; };
+		46A0D52AAF19691E07514D9C /* Pods_AppleBLEKit_Simulator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2B65E12F96EF3BCFBB81A0 /* Pods_AppleBLEKit_Simulator.framework */; };
+		8D6ECFEA241F8A27583F2FC0 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		A32935212978F68D0096D365 /* AppleBLEKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = A32935202978F68D0096D365 /* AppleBLEKit.docc */; };
 		A32935272978F68D0096D365 /* AppleBLEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A329351C2978F68D0096D365 /* AppleBLEKit.framework */; };
 		A329352C2978F68D0096D365 /* AppleBLEKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A329352B2978F68D0096D365 /* AppleBLEKitTests.swift */; };
@@ -93,7 +94,6 @@
 		A3B8EFDE2988DEE1002EB6F2 /* Common.mm in Sources */ = {isa = PBXBuildFile; fileRef = A329353F2978F6A30096D365 /* Common.mm */; };
 		A3B8EFDF2988DEE1002EB6F2 /* CAN_ISO_TP.mm in Sources */ = {isa = PBXBuildFile; fileRef = A32935522978F6A30096D365 /* CAN_ISO_TP.mm */; };
 		A3B8EFE02988DEE1002EB6F2 /* AppleBLEKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = A32935202978F68D0096D365 /* AppleBLEKit.docc */; };
-		A3B8EFE22988DEE1002EB6F2 /* Pods_AppleBLEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E0351D6CC3752E01CD22D2 /* Pods_AppleBLEKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,7 +108,7 @@
 
 /* Begin PBXFileReference section */
 		1E46717CD4F249ACA74C6CE5 /* Pods-AppleBLEKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit.release.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit/Pods-AppleBLEKit.release.xcconfig"; sourceTree = "<group>"; };
-		A0E0351D6CC3752E01CD22D2 /* Pods_AppleBLEKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppleBLEKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C2B65E12F96EF3BCFBB81A0 /* Pods_AppleBLEKit_Simulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppleBLEKit_Simulator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A329351C2978F68D0096D365 /* AppleBLEKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppleBLEKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A329351F2978F68D0096D365 /* AppleBLEKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppleBLEKit.h; sourceTree = "<group>"; };
 		A32935202978F68D0096D365 /* AppleBLEKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = AppleBLEKit.docc; sourceTree = "<group>"; };
@@ -157,9 +157,9 @@
 		A3B8EFE72988DEE1002EB6F2 /* AppleBLEKit_Simulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppleBLEKit_Simulator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3B8EFE82988DF5C002EB6F2 /* AppleBLEKit_Simulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = AppleBLEKit_Simulator.modulemap; sourceTree = "<group>"; };
 		A5B50CAB7C1DD75B096B576E /* Pods-AppleBLEKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit.debug.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit/Pods-AppleBLEKit.debug.xcconfig"; sourceTree = "<group>"; };
-		B535D691ED3FFD72DBCC78EC /* Pods-AppleBLEKit-AppleBLEKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit-AppleBLEKitTests.debug.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit-AppleBLEKitTests/Pods-AppleBLEKit-AppleBLEKitTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E669F3A09233563C0452596A /* Pods-AppleBLEKit-AppleBLEKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit-AppleBLEKitTests.release.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit-AppleBLEKitTests/Pods-AppleBLEKit-AppleBLEKitTests.release.xcconfig"; sourceTree = "<group>"; };
-		F5AE347411D99E66AC01ABE6 /* Pods_AppleBLEKit_AppleBLEKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppleBLEKit_AppleBLEKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC483798B13C0B66E62E7AEE /* Pods-AppleBLEKit_Simulator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit_Simulator.debug.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit_Simulator/Pods-AppleBLEKit_Simulator.debug.xcconfig"; sourceTree = "<group>"; };
+		E8B6A1A9395B481F608F6D2F /* Pods-AppleBLEKit_Simulator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit_Simulator.release.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit_Simulator/Pods-AppleBLEKit_Simulator.release.xcconfig"; sourceTree = "<group>"; };
+		F018CC703C86D5B825145E82 /* Pods_AppleBLEKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppleBLEKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,7 +167,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D6ECFEA241F8A27583F2FC0 /* Pods_AppleBLEKit.framework in Frameworks */,
+				8D6ECFEA241F8A27583F2FC0 /* (null) in Frameworks */,
+				2F4F3049FA4EE4A34F5167FC /* Pods_AppleBLEKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,7 +177,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A32935272978F68D0096D365 /* AppleBLEKit.framework in Frameworks */,
-				4BA30D010E50688D9EFAA571 /* Pods_AppleBLEKit_AppleBLEKitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3B8EFE22988DEE1002EB6F2 /* Pods_AppleBLEKit.framework in Frameworks */,
+				46A0D52AAF19691E07514D9C /* Pods_AppleBLEKit_Simulator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,8 +297,8 @@
 		F395BA6DF1F2B583F5790757 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A0E0351D6CC3752E01CD22D2 /* Pods_AppleBLEKit.framework */,
-				F5AE347411D99E66AC01ABE6 /* Pods_AppleBLEKit_AppleBLEKitTests.framework */,
+				6C2B65E12F96EF3BCFBB81A0 /* Pods_AppleBLEKit_Simulator.framework */,
+				F018CC703C86D5B825145E82 /* Pods_AppleBLEKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -308,8 +308,8 @@
 			children = (
 				A5B50CAB7C1DD75B096B576E /* Pods-AppleBLEKit.debug.xcconfig */,
 				1E46717CD4F249ACA74C6CE5 /* Pods-AppleBLEKit.release.xcconfig */,
-				B535D691ED3FFD72DBCC78EC /* Pods-AppleBLEKit-AppleBLEKitTests.debug.xcconfig */,
-				E669F3A09233563C0452596A /* Pods-AppleBLEKit-AppleBLEKitTests.release.xcconfig */,
+				DC483798B13C0B66E62E7AEE /* Pods-AppleBLEKit_Simulator.debug.xcconfig */,
+				E8B6A1A9395B481F608F6D2F /* Pods-AppleBLEKit_Simulator.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -389,11 +389,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A32935332978F68D0096D365 /* Build configuration list for PBXNativeTarget "AppleBLEKitTests" */;
 			buildPhases = (
-				9BDE954B7CDAB15F19901C51 /* [CP] Check Pods Manifest.lock */,
 				A32935222978F68D0096D365 /* Sources */,
 				A32935232978F68D0096D365 /* Frameworks */,
 				A32935242978F68D0096D365 /* Resources */,
-				15C1DDD073B9E5618BBC50FE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -432,7 +430,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					A329351B2978F68D0096D365 = {
 						CreatedOnToolsVersion = 14.1;
@@ -487,23 +485,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		15C1DDD073B9E5618BBC50FE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AppleBLEKit-AppleBLEKitTests/Pods-AppleBLEKit-AppleBLEKitTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AppleBLEKit-AppleBLEKitTests/Pods-AppleBLEKit-AppleBLEKitTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AppleBLEKit-AppleBLEKitTests/Pods-AppleBLEKit-AppleBLEKitTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3CCD173B655D74640669288A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -526,28 +507,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9BDE954B7CDAB15F19901C51 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AppleBLEKit-AppleBLEKitTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A3B8EFB52988DEE1002EB6F2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -563,7 +522,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AppleBLEKit-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-AppleBLEKit_Simulator-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -690,6 +649,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -751,6 +711,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -777,6 +738,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 728LBXSHW4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -797,6 +759,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				MODULEMAP_FILE = "$(SRCROOT)/AppleBLEKit/AppleBLEKit.modulemap";
+				"MODULEMAP_FILE[sdk=iphoneos*]" = "$(SRCROOT)/AppleBLEKit/AppleBLEKit.modulemap";
+				"MODULEMAP_FILE[sdk=iphonesimulator*]" = "$(SRCROOT)/AppleBLEKit/AppleBLEKit_Simulator.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = tw.farmland.AppleBLEKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
@@ -814,6 +778,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 728LBXSHW4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -847,11 +812,11 @@
 		};
 		A32935342978F68D0096D365 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B535D691ED3FFD72DBCC78EC /* Pods-AppleBLEKit-AppleBLEKitTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 728LBXSHW4;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
@@ -869,11 +834,11 @@
 		};
 		A32935352978F68D0096D365 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E669F3A09233563C0452596A /* Pods-AppleBLEKit-AppleBLEKitTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 728LBXSHW4;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
@@ -891,10 +856,15 @@
 		};
 		A3B8EFE52988DEE1002EB6F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A5B50CAB7C1DD75B096B576E /* Pods-AppleBLEKit.debug.xcconfig */;
+			baseConfigurationReference = DC483798B13C0B66E62E7AEE /* Pods-AppleBLEKit_Simulator.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					x86_64,
+				);
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 728LBXSHW4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -909,7 +879,7 @@
 					"@loader_path/Frameworks",
 				);
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
-					"@executable_path/../Frameworks",
+					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
@@ -919,7 +889,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = iphonesimulator;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -928,10 +898,15 @@
 		};
 		A3B8EFE62988DEE1002EB6F2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1E46717CD4F249ACA74C6CE5 /* Pods-AppleBLEKit.release.xcconfig */;
+			baseConfigurationReference = E8B6A1A9395B481F608F6D2F /* Pods-AppleBLEKit_Simulator.release.xcconfig */;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					x86_64,
+				);
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 728LBXSHW4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -946,17 +921,17 @@
 					"@loader_path/Frameworks",
 				);
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
-					"@executable_path/../Frameworks",
+					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
-				MODULEMAP_FILE = "$(SRCROOT)/AppleBLEKit/AppleBLEKit_Simulator.modulemap";
+				MODULEMAP_FILE = "$(SRCROOT)/AppleBLEKit/AppleBLEKit.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = tw.farmland.AppleBLEKit.simulator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = iphonesimulator;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

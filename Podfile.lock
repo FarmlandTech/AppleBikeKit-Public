@@ -1,5 +1,5 @@
 PODS:
-  - AppleDevKit/Common (0.0.1)
+  - AppleDevKit/Common (0.0.3)
   - BikeBLEKit (1.0.0)
 
 DEPENDENCIES:
@@ -13,9 +13,9 @@ EXTERNAL SOURCES:
     :path: "/Users/yves/Project/BLEManager_Mobile_SDK/BikeBLEKit"
 
 SPEC CHECKSUMS:
-  AppleDevKit: 03093f7754c36ef9d805290948eb2515d313f6c1
+  AppleDevKit: 4e30d5febf7ade2aeb585cb8166ccfcd1ad9ba73
   BikeBLEKit: 3638ecda626d68165e1bb6b427a9a2f7ebde3a34
 
-PODFILE CHECKSUM: 9c13fd15b4c2050675052574ccc56fb7d10ad1eb
+PODFILE CHECKSUM: b09f36297d571ef35da25b19e13907fe9e3f7862
 
 COCOAPODS: 1.11.3
