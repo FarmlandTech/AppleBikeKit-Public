@@ -19,12 +19,12 @@ CHECKOUT OPTIONS:
     :commit: 965c8eb2b99443c59a8c95a8d56e19e9643a217d
     :git: "git@github.com:FarmlandTech/AppleDevKit.git"
   BikeBLEKit:
-    :commit: 76f6a3a47b4eefb559deef895f94a28b59e5e561
+    :commit: d92c5b322cec1fc4c082a49fd9aa47639642b706
     :git: "git@github.com:FarmlandTech/BLEManager_Mobile_SDK.git"
 
 SPEC CHECKSUMS:
   AppleDevKit: 9815849c605fa236c094a0bce33bd4464f2dd4aa
-  BikeBLEKit: e6e234013803ca08b28652aa598fb9bb6cc88a58
+  BikeBLEKit: e77878e606dde329ae702198bd272fdf016f8a0a
 
 PODFILE CHECKSUM: b9bc20e09c2aac7adb4ccddcf19ffed8d41f57c3
 
