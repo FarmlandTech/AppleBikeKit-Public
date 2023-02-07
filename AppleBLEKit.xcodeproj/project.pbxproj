@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		18DA4C0230C49DBC3702F2F0 /* Pods_AppleBLEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D73C672D608556CC90DEF34F /* Pods_AppleBLEKit.framework */; };
 		A32935212978F68D0096D365 /* AppleBLEKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = A32935202978F68D0096D365 /* AppleBLEKit.docc */; };
 		A32935272978F68D0096D365 /* AppleBLEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A329351C2978F68D0096D365 /* AppleBLEKit.framework */; };
 		A329352C2978F68D0096D365 /* AppleBLEKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A329352B2978F68D0096D365 /* AppleBLEKitTests.swift */; };
@@ -92,7 +91,8 @@
 		A3B8EFDE2988DEE1002EB6F2 /* Common.mm in Sources */ = {isa = PBXBuildFile; fileRef = A329353F2978F6A30096D365 /* Common.mm */; };
 		A3B8EFDF2988DEE1002EB6F2 /* CAN_ISO_TP.mm in Sources */ = {isa = PBXBuildFile; fileRef = A32935522978F6A30096D365 /* CAN_ISO_TP.mm */; };
 		A3B8EFE02988DEE1002EB6F2 /* AppleBLEKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = A32935202978F68D0096D365 /* AppleBLEKit.docc */; };
-		CAF6E92795E741FB690687F4 /* Pods_AppleBLEKit_Simulator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2311B8D0CC215A628C59B65C /* Pods_AppleBLEKit_Simulator.framework */; };
+		D53A947E9A05CE66A7296603 /* Pods_AppleBLEKit_Simulator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1605C8E292E3F0D348D38B78 /* Pods_AppleBLEKit_Simulator.framework */; };
+		EE2A96C5DC6ACEA18FE94723 /* Pods_AppleBLEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA49A599B748BD6855F25F6A /* Pods_AppleBLEKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,8 +106,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2311B8D0CC215A628C59B65C /* Pods_AppleBLEKit_Simulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppleBLEKit_Simulator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		89BFD2F72B299BA67A518BBA /* Pods-AppleBLEKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit.debug.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit/Pods-AppleBLEKit.debug.xcconfig"; sourceTree = "<group>"; };
+		1605C8E292E3F0D348D38B78 /* Pods_AppleBLEKit_Simulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppleBLEKit_Simulator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B478055EA11AD707E244AB9 /* Pods-AppleBLEKit_Simulator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit_Simulator.debug.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit_Simulator/Pods-AppleBLEKit_Simulator.debug.xcconfig"; sourceTree = "<group>"; };
+		2BC9C983F84F969227172725 /* Pods-AppleBLEKit_Simulator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit_Simulator.release.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit_Simulator/Pods-AppleBLEKit_Simulator.release.xcconfig"; sourceTree = "<group>"; };
+		96E7F85182C65694E3AA746C /* Pods-AppleBLEKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit.release.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit/Pods-AppleBLEKit.release.xcconfig"; sourceTree = "<group>"; };
 		A329351C2978F68D0096D365 /* AppleBLEKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppleBLEKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A329351F2978F68D0096D365 /* AppleBLEKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppleBLEKit.h; sourceTree = "<group>"; };
 		A32935202978F68D0096D365 /* AppleBLEKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = AppleBLEKit.docc; sourceTree = "<group>"; };
@@ -155,10 +157,8 @@
 		A34C8BCB2987C07900B36BB2 /* BaseResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		A3B8EFE72988DEE1002EB6F2 /* AppleBLEKit_Simulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppleBLEKit_Simulator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3B8EFE82988DF5C002EB6F2 /* AppleBLEKit_Simulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = AppleBLEKit_Simulator.modulemap; sourceTree = "<group>"; };
-		ACE72A002153B413BD4AFADE /* Pods-AppleBLEKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit.release.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit/Pods-AppleBLEKit.release.xcconfig"; sourceTree = "<group>"; };
-		D73C672D608556CC90DEF34F /* Pods_AppleBLEKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppleBLEKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D981976F48F90D09696806DF /* Pods-AppleBLEKit_Simulator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit_Simulator.release.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit_Simulator/Pods-AppleBLEKit_Simulator.release.xcconfig"; sourceTree = "<group>"; };
-		DCA457DFA34E5B578E6C0BAA /* Pods-AppleBLEKit_Simulator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit_Simulator.debug.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit_Simulator/Pods-AppleBLEKit_Simulator.debug.xcconfig"; sourceTree = "<group>"; };
+		AD3D7D4CFDE2C260572E2083 /* Pods-AppleBLEKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit.debug.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit/Pods-AppleBLEKit.debug.xcconfig"; sourceTree = "<group>"; };
+		EA49A599B748BD6855F25F6A /* Pods_AppleBLEKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppleBLEKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18DA4C0230C49DBC3702F2F0 /* Pods_AppleBLEKit.framework in Frameworks */,
+				EE2A96C5DC6ACEA18FE94723 /* Pods_AppleBLEKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,18 +182,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAF6E92795E741FB690687F4 /* Pods_AppleBLEKit_Simulator.framework in Frameworks */,
+				D53A947E9A05CE66A7296603 /* Pods_AppleBLEKit_Simulator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		69A5C480A01B66623827A8CA /* Frameworks */ = {
+		75ABF715C2B4BC839C3F6F81 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D73C672D608556CC90DEF34F /* Pods_AppleBLEKit.framework */,
-				2311B8D0CC215A628C59B65C /* Pods_AppleBLEKit_Simulator.framework */,
+				EA49A599B748BD6855F25F6A /* Pods_AppleBLEKit.framework */,
+				1605C8E292E3F0D348D38B78 /* Pods_AppleBLEKit_Simulator.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -205,7 +205,7 @@
 				A329352A2978F68D0096D365 /* AppleBLEKitTests */,
 				A329351D2978F68D0096D365 /* Products */,
 				FCD32AFF0FA66AAAF9DD6C34 /* Pods */,
-				69A5C480A01B66623827A8CA /* Frameworks */,
+				75ABF715C2B4BC839C3F6F81 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -304,10 +304,10 @@
 		FCD32AFF0FA66AAAF9DD6C34 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				89BFD2F72B299BA67A518BBA /* Pods-AppleBLEKit.debug.xcconfig */,
-				ACE72A002153B413BD4AFADE /* Pods-AppleBLEKit.release.xcconfig */,
-				DCA457DFA34E5B578E6C0BAA /* Pods-AppleBLEKit_Simulator.debug.xcconfig */,
-				D981976F48F90D09696806DF /* Pods-AppleBLEKit_Simulator.release.xcconfig */,
+				AD3D7D4CFDE2C260572E2083 /* Pods-AppleBLEKit.debug.xcconfig */,
+				96E7F85182C65694E3AA746C /* Pods-AppleBLEKit.release.xcconfig */,
+				1B478055EA11AD707E244AB9 /* Pods-AppleBLEKit_Simulator.debug.xcconfig */,
+				2BC9C983F84F969227172725 /* Pods-AppleBLEKit_Simulator.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -368,7 +368,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A32935302978F68D0096D365 /* Build configuration list for PBXNativeTarget "AppleBLEKit" */;
 			buildPhases = (
-				C526D7CA27AD314CFAE851D8 /* [CP] Check Pods Manifest.lock */,
+				60F233508F15635264121323 /* [CP] Check Pods Manifest.lock */,
 				A32935172978F68D0096D365 /* Headers */,
 				A32935182978F68D0096D365 /* Sources */,
 				A32935192978F68D0096D365 /* Frameworks */,
@@ -405,7 +405,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A3B8EFE42988DEE1002EB6F2 /* Build configuration list for PBXNativeTarget "AppleBLEKit_Simulator" */;
 			buildPhases = (
-				9DE614BFE3D9A76B60AA9305 /* [CP] Check Pods Manifest.lock */,
+				B801C7E008AE1425079A2CC3 /* [CP] Check Pods Manifest.lock */,
 				A3B8EFB62988DEE1002EB6F2 /* Headers */,
 				A3B8EFC72988DEE1002EB6F2 /* Sources */,
 				A3B8EFE12988DEE1002EB6F2 /* Frameworks */,
@@ -483,29 +483,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9DE614BFE3D9A76B60AA9305 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AppleBLEKit_Simulator-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C526D7CA27AD314CFAE851D8 /* [CP] Check Pods Manifest.lock */ = {
+		60F233508F15635264121323 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -521,6 +499,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-AppleBLEKit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B801C7E008AE1425079A2CC3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AppleBLEKit_Simulator-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -732,7 +732,7 @@
 		};
 		A32935312978F68D0096D365 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89BFD2F72B299BA67A518BBA /* Pods-AppleBLEKit.debug.xcconfig */;
+			baseConfigurationReference = AD3D7D4CFDE2C260572E2083 /* Pods-AppleBLEKit.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -781,7 +781,7 @@
 		};
 		A32935322978F68D0096D365 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACE72A002153B413BD4AFADE /* Pods-AppleBLEKit.release.xcconfig */;
+			baseConfigurationReference = 96E7F85182C65694E3AA746C /* Pods-AppleBLEKit.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -872,7 +872,7 @@
 		};
 		A3B8EFE52988DEE1002EB6F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DCA457DFA34E5B578E6C0BAA /* Pods-AppleBLEKit_Simulator.debug.xcconfig */;
+			baseConfigurationReference = 1B478055EA11AD707E244AB9 /* Pods-AppleBLEKit_Simulator.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = (
 					"$(ARCHS_STANDARD)",
@@ -925,7 +925,7 @@
 		};
 		A3B8EFE62988DEE1002EB6F2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D981976F48F90D09696806DF /* Pods-AppleBLEKit_Simulator.release.xcconfig */;
+			baseConfigurationReference = 2BC9C983F84F969227172725 /* Pods-AppleBLEKit_Simulator.release.xcconfig */;
 			buildSettings = {
 				ARCHS = (
 					"$(ARCHS_STANDARD)",
