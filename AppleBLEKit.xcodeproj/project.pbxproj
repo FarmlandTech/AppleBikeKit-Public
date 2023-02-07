@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F4F3049FA4EE4A34F5167FC /* Pods_AppleBLEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F018CC703C86D5B825145E82 /* Pods_AppleBLEKit.framework */; };
-		46A0D52AAF19691E07514D9C /* Pods_AppleBLEKit_Simulator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2B65E12F96EF3BCFBB81A0 /* Pods_AppleBLEKit_Simulator.framework */; };
-		8D6ECFEA241F8A27583F2FC0 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		50191EB31D1C6067DAFAC0D7 /* Pods_AppleBLEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB279BB63C2F2804B4F20F4A /* Pods_AppleBLEKit.framework */; };
+		562B73858A7B1AC6AC4559C8 /* Pods_AppleBLEKit_Simulator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39ECDEA5FE6A5276E3D1624 /* Pods_AppleBLEKit_Simulator.framework */; };
 		A32935212978F68D0096D365 /* AppleBLEKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = A32935202978F68D0096D365 /* AppleBLEKit.docc */; };
 		A32935272978F68D0096D365 /* AppleBLEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A329351C2978F68D0096D365 /* AppleBLEKit.framework */; };
 		A329352C2978F68D0096D365 /* AppleBLEKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A329352B2978F68D0096D365 /* AppleBLEKitTests.swift */; };
@@ -107,8 +106,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1E46717CD4F249ACA74C6CE5 /* Pods-AppleBLEKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit.release.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit/Pods-AppleBLEKit.release.xcconfig"; sourceTree = "<group>"; };
-		6C2B65E12F96EF3BCFBB81A0 /* Pods_AppleBLEKit_Simulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppleBLEKit_Simulator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1077B47147098875112FD74C /* Pods-AppleBLEKit_Simulator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit_Simulator.release.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit_Simulator/Pods-AppleBLEKit_Simulator.release.xcconfig"; sourceTree = "<group>"; };
+		5EC30EB44804A7F289E697BC /* Pods-AppleBLEKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit.release.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit/Pods-AppleBLEKit.release.xcconfig"; sourceTree = "<group>"; };
 		A329351C2978F68D0096D365 /* AppleBLEKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppleBLEKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A329351F2978F68D0096D365 /* AppleBLEKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppleBLEKit.h; sourceTree = "<group>"; };
 		A32935202978F68D0096D365 /* AppleBLEKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = AppleBLEKit.docc; sourceTree = "<group>"; };
@@ -156,10 +155,10 @@
 		A34C8BCB2987C07900B36BB2 /* BaseResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		A3B8EFE72988DEE1002EB6F2 /* AppleBLEKit_Simulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppleBLEKit_Simulator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3B8EFE82988DF5C002EB6F2 /* AppleBLEKit_Simulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = AppleBLEKit_Simulator.modulemap; sourceTree = "<group>"; };
-		A5B50CAB7C1DD75B096B576E /* Pods-AppleBLEKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit.debug.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit/Pods-AppleBLEKit.debug.xcconfig"; sourceTree = "<group>"; };
-		DC483798B13C0B66E62E7AEE /* Pods-AppleBLEKit_Simulator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit_Simulator.debug.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit_Simulator/Pods-AppleBLEKit_Simulator.debug.xcconfig"; sourceTree = "<group>"; };
-		E8B6A1A9395B481F608F6D2F /* Pods-AppleBLEKit_Simulator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit_Simulator.release.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit_Simulator/Pods-AppleBLEKit_Simulator.release.xcconfig"; sourceTree = "<group>"; };
-		F018CC703C86D5B825145E82 /* Pods_AppleBLEKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppleBLEKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0E8EC8DEB5B12CD2CF6CB57 /* Pods-AppleBLEKit_Simulator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit_Simulator.debug.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit_Simulator/Pods-AppleBLEKit_Simulator.debug.xcconfig"; sourceTree = "<group>"; };
+		CB279BB63C2F2804B4F20F4A /* Pods_AppleBLEKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppleBLEKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E41DF1D84E16F4DD418EB99F /* Pods-AppleBLEKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBLEKit.debug.xcconfig"; path = "Target Support Files/Pods-AppleBLEKit/Pods-AppleBLEKit.debug.xcconfig"; sourceTree = "<group>"; };
+		F39ECDEA5FE6A5276E3D1624 /* Pods_AppleBLEKit_Simulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppleBLEKit_Simulator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,8 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D6ECFEA241F8A27583F2FC0 /* (null) in Frameworks */,
-				2F4F3049FA4EE4A34F5167FC /* Pods_AppleBLEKit.framework in Frameworks */,
+				50191EB31D1C6067DAFAC0D7 /* Pods_AppleBLEKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,13 +182,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46A0D52AAF19691E07514D9C /* Pods_AppleBLEKit_Simulator.framework in Frameworks */,
+				562B73858A7B1AC6AC4559C8 /* Pods_AppleBLEKit_Simulator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		75959C32C0F6C7DA44F23A4F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CB279BB63C2F2804B4F20F4A /* Pods_AppleBLEKit.framework */,
+				F39ECDEA5FE6A5276E3D1624 /* Pods_AppleBLEKit_Simulator.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A32935122978F68D0096D365 = {
 			isa = PBXGroup;
 			children = (
@@ -198,7 +205,7 @@
 				A329352A2978F68D0096D365 /* AppleBLEKitTests */,
 				A329351D2978F68D0096D365 /* Products */,
 				FCD32AFF0FA66AAAF9DD6C34 /* Pods */,
-				F395BA6DF1F2B583F5790757 /* Frameworks */,
+				75959C32C0F6C7DA44F23A4F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -294,22 +301,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		F395BA6DF1F2B583F5790757 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6C2B65E12F96EF3BCFBB81A0 /* Pods_AppleBLEKit_Simulator.framework */,
-				F018CC703C86D5B825145E82 /* Pods_AppleBLEKit.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		FCD32AFF0FA66AAAF9DD6C34 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A5B50CAB7C1DD75B096B576E /* Pods-AppleBLEKit.debug.xcconfig */,
-				1E46717CD4F249ACA74C6CE5 /* Pods-AppleBLEKit.release.xcconfig */,
-				DC483798B13C0B66E62E7AEE /* Pods-AppleBLEKit_Simulator.debug.xcconfig */,
-				E8B6A1A9395B481F608F6D2F /* Pods-AppleBLEKit_Simulator.release.xcconfig */,
+				E41DF1D84E16F4DD418EB99F /* Pods-AppleBLEKit.debug.xcconfig */,
+				5EC30EB44804A7F289E697BC /* Pods-AppleBLEKit.release.xcconfig */,
+				C0E8EC8DEB5B12CD2CF6CB57 /* Pods-AppleBLEKit_Simulator.debug.xcconfig */,
+				1077B47147098875112FD74C /* Pods-AppleBLEKit_Simulator.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -370,7 +368,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A32935302978F68D0096D365 /* Build configuration list for PBXNativeTarget "AppleBLEKit" */;
 			buildPhases = (
-				3CCD173B655D74640669288A /* [CP] Check Pods Manifest.lock */,
+				9E2E51FACF5E6861A3EE7808 /* [CP] Check Pods Manifest.lock */,
 				A32935172978F68D0096D365 /* Headers */,
 				A32935182978F68D0096D365 /* Sources */,
 				A32935192978F68D0096D365 /* Frameworks */,
@@ -407,7 +405,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A3B8EFE42988DEE1002EB6F2 /* Build configuration list for PBXNativeTarget "AppleBLEKit_Simulator" */;
 			buildPhases = (
-				A3B8EFB52988DEE1002EB6F2 /* [CP] Check Pods Manifest.lock */,
+				6C95AEDB3B34EFD356139345 /* [CP] Check Pods Manifest.lock */,
 				A3B8EFB62988DEE1002EB6F2 /* Headers */,
 				A3B8EFC72988DEE1002EB6F2 /* Sources */,
 				A3B8EFE12988DEE1002EB6F2 /* Frameworks */,
@@ -485,29 +483,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3CCD173B655D74640669288A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AppleBLEKit-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A3B8EFB52988DEE1002EB6F2 /* [CP] Check Pods Manifest.lock */ = {
+		6C95AEDB3B34EFD356139345 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -523,6 +499,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-AppleBLEKit_Simulator-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9E2E51FACF5E6861A3EE7808 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AppleBLEKit-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -734,7 +732,7 @@
 		};
 		A32935312978F68D0096D365 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A5B50CAB7C1DD75B096B576E /* Pods-AppleBLEKit.debug.xcconfig */;
+			baseConfigurationReference = E41DF1D84E16F4DD418EB99F /* Pods-AppleBLEKit.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -745,6 +743,11 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AppleDevKit\"",
+					"\"${PODS_ROOT}/../../BLEManager_Mobile_SDK/BikeBLEKit/build/cocoapods/framework\"",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -766,7 +769,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -776,7 +781,7 @@
 		};
 		A32935322978F68D0096D365 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1E46717CD4F249ACA74C6CE5 /* Pods-AppleBLEKit.release.xcconfig */;
+			baseConfigurationReference = 5EC30EB44804A7F289E697BC /* Pods-AppleBLEKit.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -787,6 +792,11 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AppleDevKit\"",
+					"\"${PODS_ROOT}/../../BLEManager_Mobile_SDK/BikeBLEKit/build/cocoapods/framework\"",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -806,7 +816,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -860,7 +872,7 @@
 		};
 		A3B8EFE52988DEE1002EB6F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DC483798B13C0B66E62E7AEE /* Pods-AppleBLEKit_Simulator.debug.xcconfig */;
+			baseConfigurationReference = C0E8EC8DEB5B12CD2CF6CB57 /* Pods-AppleBLEKit_Simulator.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = (
 					"$(ARCHS_STANDARD)",
@@ -874,6 +886,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AppleDevKit\"",
+					"\"${PODS_ROOT}/../../BLEManager_Mobile_SDK/BikeBLEKit/build/cocoapods/framework\"",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -908,7 +925,7 @@
 		};
 		A3B8EFE62988DEE1002EB6F2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E8B6A1A9395B481F608F6D2F /* Pods-AppleBLEKit_Simulator.release.xcconfig */;
+			baseConfigurationReference = 1077B47147098875112FD74C /* Pods-AppleBLEKit_Simulator.release.xcconfig */;
 			buildSettings = {
 				ARCHS = (
 					"$(ARCHS_STANDARD)",
@@ -922,6 +939,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AppleDevKit\"",
+					"\"${PODS_ROOT}/../../BLEManager_Mobile_SDK/BikeBLEKit/build/cocoapods/framework\"",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

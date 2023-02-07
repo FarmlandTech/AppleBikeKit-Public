@@ -1,21 +1,31 @@
 PODS:
-  - AppleDevKit/Common (0.0.3)
+  - AppleDevKit/Common (0.0.4)
   - BikeBLEKit (1.0.0)
 
 DEPENDENCIES:
-  - AppleDevKit/Common (from `/Users/yves/Project/AppleDevKit`)
-  - BikeBLEKit (from `/Users/yves/Project/BLEManager_Mobile_SDK/BikeBLEKit`)
+  - "AppleDevKit/Common (from `git@github.com:FarmlandTech/AppleDevKit.git`, branch `dev`)"
+  - "BikeBLEKit (from `git@github.com:FarmlandTech/BLEManager_Mobile_SDK.git`, branch `feature-jeff`)"
 
 EXTERNAL SOURCES:
   AppleDevKit:
-    :path: "/Users/yves/Project/AppleDevKit"
+    :branch: dev
+    :git: "git@github.com:FarmlandTech/AppleDevKit.git"
   BikeBLEKit:
-    :path: "/Users/yves/Project/BLEManager_Mobile_SDK/BikeBLEKit"
+    :branch: feature-jeff
+    :git: "git@github.com:FarmlandTech/BLEManager_Mobile_SDK.git"
+
+CHECKOUT OPTIONS:
+  AppleDevKit:
+    :commit: 965c8eb2b99443c59a8c95a8d56e19e9643a217d
+    :git: "git@github.com:FarmlandTech/AppleDevKit.git"
+  BikeBLEKit:
+    :commit: 76f6a3a47b4eefb559deef895f94a28b59e5e561
+    :git: "git@github.com:FarmlandTech/BLEManager_Mobile_SDK.git"
 
 SPEC CHECKSUMS:
-  AppleDevKit: 4e30d5febf7ade2aeb585cb8166ccfcd1ad9ba73
-  BikeBLEKit: 3638ecda626d68165e1bb6b427a9a2f7ebde3a34
+  AppleDevKit: 9815849c605fa236c094a0bce33bd4464f2dd4aa
+  BikeBLEKit: e6e234013803ca08b28652aa598fb9bb6cc88a58
 
-PODFILE CHECKSUM: b09f36297d571ef35da25b19e13907fe9e3f7862
+PODFILE CHECKSUM: b9bc20e09c2aac7adb4ccddcf19ffed8d41f57c3
 
 COCOAPODS: 1.11.3
