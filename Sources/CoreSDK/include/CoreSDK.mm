@@ -1,4 +1,4 @@
-﻿
+
 #include <string>
 
 #include "CoreSDK.h"
@@ -430,7 +430,7 @@ void parse_loop(void)
         }
         else
         {
-            read_packet = { };
+//            read_packet = { };
         }
 
         ISOTP_Process(&CoreSDK_ISOTP,
@@ -1458,7 +1458,7 @@ int FarmLandCoreSDK_Init(CoreSDKInst_T* SDK_Inst)
 
         memcpy(SDK_Inst->Version, SDK_Version_Str, sizeof(SDK_Version_Str));
 
-        DeviceInfoInst = { 0 };
+//        DeviceInfoInst = { 0 };
 
         FL_CAN_Init(&DeviceInfoInst, SendToCANBUS, &CoreSDK_ISOTP);
 
