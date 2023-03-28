@@ -6,6 +6,6 @@ final class AppleBikeKitTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(AppleBikeKit().text, "Hello, World!")
+//        XCTAssertEqual(AppleBikeKit().text, "Hello, World!")
     }
 }

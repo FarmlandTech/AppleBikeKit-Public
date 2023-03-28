@@ -13,7 +13,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "AppleBikeKit",
-            targets: ["AppleBikeKit", "CoreSDK"]),
+            targets: ["CoreSDK", "CoreSDKService", "CoreBLEService", "AppleBikeKit"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -26,8 +26,15 @@ let package = Package(
             name: "CoreSDK",
             path: "Sources/CoreSDK"),
         .target(
-            name: "AppleBikeKit",
+            name: "CoreSDKService",
             dependencies: ["CoreSDK"],
+            path: "Sources/CoreSDKService"),
+        .target(
+            name: "CoreBLEService",
+            path: "Sources/CoreBLEService"),
+        .target(
+            name: "AppleBikeKit",
+            dependencies: ["CoreSDK", "CoreSDKService", "CoreBLEService"],
             path: "Sources/AppleBikeKit",
             linkerSettings: [
                 .linkedFramework("SwiftUI", .when(platforms: [.iOS])),

@@ -1,9 +1,8 @@
-import CoreSDK
+//
+//  File.swift
+//  
+//
+//  Created by Yves Tsai on 2023/3/28.
+//
 
-public struct AppleBikeKit {
-    public private(set) var text = "Hello, World!"
-
-    public init() {
-        print(SDK_FL_HMI)
-    }
-}
+import Foundation
