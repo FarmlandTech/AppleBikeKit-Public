@@ -8,7 +8,7 @@
 import Foundation
 import CoreBluetooth
 
-struct BluetoothPeripheral {
+public struct BluetoothPeripheral {
     
     let device: CBPeripheral
     
