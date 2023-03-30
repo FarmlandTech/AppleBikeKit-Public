@@ -6,8 +6,7 @@
 //
 
 import Foundation
-import BikeBLEKit
-import AppleDevKit
+import CoreSDK
 
 struct RawData {
     var returnState: Int32
@@ -16,6 +15,15 @@ struct RawData {
     var addrs: UInt16
     var leng: UInt16
     var bank: UInt8
+    
+    init(returnState: Int32, targetDevice: DeviceType_enum, readBuff: [UInt8], addrs: UInt16, leng: UInt16, bank: UInt8) {
+        self.returnState = returnState
+        self.targetDevice = targetDevice
+        self.readBuff = readBuff
+        self.addrs = addrs
+        self.leng = leng
+        self.bank = bank
+    }
 }
 
 // boss
@@ -32,6 +40,11 @@ protocol CoreSdkFirmwareUpgradeDelegate: AnyObject {
     func upgradeFinished(returnState: Int32)
 }
 
+protocol CoreSDKServiceEventDelegate: AnyObject {
+    func didWriteParameter(state: Int)
+    func didRestartDevice(state: Int)
+}
+
 enum SdkReturnCode {
     case success
     case timeout
@@ -45,13 +58,14 @@ enum SdkReturnCode {
     case alreadyExist
 }
 
-class CoreSdkService: NSObject {
+public final class CoreSdkService: NSObject {
     
-    static let sharedInstance = CoreSdkService()
+    public static let sharedInstance = CoreSdkService()
     
     weak var deviceInfoDataDelegate: CoreSdkDataDelegate?
     weak var paramsDelegate: CoreSdkParamsDelegate?
     weak var firmwareUpgradeDelegate: CoreSdkFirmwareUpgradeDelegate?
+    weak var sdkEventDelegate: CoreSDKServiceEventDelegate?
     
     var coreSDKInst = CoreSDKInst_T()
     var version: String?
@@ -149,7 +163,10 @@ class CoreSdkService: NSObject {
             print("commandPacketData0: \(self.commandPacketOutData)")
             print("commandPacketLeng0: \(self.commandPacketOutDataLeng)")
             
-            BluetoothService.sharedInstance.writeCharacteristic(bluetoothCharacteristic: BluetoothCharacteristic(characteristic: CurrentBleDevice.writeCharacteristic!), value: newDataAry)
+//            if let writeCharacteristic = CurrentBleDevice.writeCharacteristic {
+//                let bluetoothCharacteristic = BluetoothCharacteristic(characteristic: writeCharacteristic)
+//                BluetoothService.sharedInstance.writeCharacteristic(bluetoothCharacteristic: bluetoothCharacteristic, value: newDataAry)
+//            }
         }
         
         if dataPacketOutResult == SDK_RETURN_SUCCESS.rawValue {
@@ -159,18 +176,11 @@ class CoreSdkService: NSObject {
                 newDataAry.append(self.dataPacketOutData[Int(index)])
             }
             print("dataPacketOutResult newDataAry: \(newDataAry)")
-            BluetoothService.sharedInstance.writeCharacteristic(bluetoothCharacteristic: BluetoothCharacteristic(characteristic: CurrentBleDevice.writeWithoutResponseCharacteristic!), value: newDataAry)
+            
+//            if let writeWithoutResponseCharacteristic = CurrentBleDevice.writeWithoutResponseCharacteristic {
+//                let bluetoothCharacteristic = BluetoothCharacteristic(characteristic: writeWithoutResponseCharacteristic)
+//                BluetoothService.sharedInstance.writeCharacteristic(bluetoothCharacteristic: bluetoothCharacteristic, value: newDataAry)
+//            }
         }
     }
-    
-    // MARK: Unsigned Int Byte Array Convert To Int Array
-    func convertErrorList(errorList: [[UInt8]]) -> [Int] {
-        var ary:[Int] = []
-        for bytesAry in errorList {
-            let errorCode = bytesAry.convert2Int(length: 4)
-            ary.append(errorCode)
-        }
-        return ary
-    }
-
 }
