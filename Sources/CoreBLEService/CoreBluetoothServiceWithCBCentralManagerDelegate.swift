@@ -80,8 +80,13 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
         device.deviceName = usedAdvertisementData.localName
         device.uuid = usedAdvertisementData.uuids?.first
         
-        for delegate in self.delegates {
-            delegate.didDiscoverDevice(peripheral: device, data: usedAdvertisementData)
+        if let foundDevice = self.foundDevicesPublisher.value.first(where: { $0.address == device.address }) {
+            for index in stride(from: 0, through: self.foundDevicesPublisher.value.count - 1, by: 1) {
+                guard self.foundDevicesPublisher.value[index].address == device.address else { continue }
+                self.foundDevicesPublisher.value[index] = foundDevice
+            }
+        } else {
+            self.foundDevicesPublisher.value.append(device)
         }
     }
     
@@ -91,18 +96,14 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
         peripheral.delegate = self
         peripheral.discoverServices(nil)
         
-        let device: BluetoothPeripheral = .init(device: peripheral)
-        for delegate in self.delegates {
-            delegate.didConnect(peripheral: device)
-        }
+        let bluetoothPeripheral: BluetoothPeripheral = .init(device: peripheral)
+        self.peripheralPublisher.value = (.didConnect, bluetoothPeripheral)
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Swift.Error?) {
         print("AppleBikeKit[DisconnectPeripheral]: \(String(describing: peripheral.name))")
         
-        let device: BluetoothPeripheral = .init(device: peripheral)
-        for delegate in self.delegates {
-            delegate.didDisconnect(peripheral: device)
-        }
+        let bluetoothPeripheral: BluetoothPeripheral = .init(device: peripheral)
+        self.peripheralPublisher.value = (.didDisconnect, bluetoothPeripheral)
     }
 }

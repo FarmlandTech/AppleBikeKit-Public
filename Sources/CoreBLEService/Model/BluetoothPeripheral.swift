@@ -14,7 +14,7 @@ public struct BluetoothPeripheral {
     
     var rssi: Float?
     
-    var deviceName: String?
+    public var deviceName: String?
     
     var localName: String?
     
