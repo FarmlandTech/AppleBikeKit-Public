@@ -20,12 +20,6 @@ public protocol CoreBluetoothServiceDelegate {
     
     typealias BluetoothCharacteristicDescriptor = CBDescriptor
     
-    func didDiscoverDevice(peripheral: BluetoothPeripheral, data: [AdvertisementDataRetrievalKey: Any])
-    
-    func didConnect(peripheral: BluetoothPeripheral)
-    
-    func didDisconnect(peripheral: BluetoothPeripheral)
-    
     func didDiscoverServices(peripheral: BluetoothPeripheral)
     
     func didDiscoverCharacteristics(peripheral: BluetoothPeripheral)
@@ -49,6 +43,10 @@ public class CoreBluetoothService: NSObject {
         case wrongManagerState(CBManagerState)
     }
     
+    public enum PeripheralStatus {
+        case didConnect, didDisconnect
+    }
+    
     private var servuceUUID: String?
     
     private lazy var centralManager: CBCentralManager = {
@@ -60,6 +58,10 @@ public class CoreBluetoothService: NSObject {
     public let statePublisher: CurrentValueSubject<CBManagerState, Never> = .init(.unknown)
     
     public let scanningPublisher: CurrentValueSubject<Bool, Never> = .init(false)
+    
+    public let foundDevicesPublisher: CurrentValueSubject<Array<BluetoothPeripheral>, Never> = .init(.init())
+    
+    public let peripheralPublisher: CurrentValueSubject<(PeripheralStatus, BluetoothPeripheral)?, Never> = .init(nil)
     
     public func initCentralManager() -> CoreBluetoothService {
         _ = self.centralManager
