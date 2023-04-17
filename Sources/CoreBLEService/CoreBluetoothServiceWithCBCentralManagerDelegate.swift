@@ -68,11 +68,11 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
     
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         print("AppleBikeKit[UpdateState]: \(central.state)")
-        self.statePublisher.send(central.state)
+        self.stateSubject.send(central.state)
     }
     
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        guard self.scanningPublisher.value, peripheral.name != nil else { return }
+        guard self.scanningSubject.value, peripheral.name != nil else { return }
         
         let usedAdvertisementData: [AdvertisementDataRetrievalKey: Any] = advertisementData.used
         
@@ -80,13 +80,13 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
         device.deviceName = usedAdvertisementData.localName
         device.uuid = usedAdvertisementData.uuids?.first
         
-        if let foundDevice = self.foundDevicesPublisher.value.first(where: { $0.address == device.address }) {
-            for index in stride(from: 0, through: self.foundDevicesPublisher.value.count - 1, by: 1) {
-                guard self.foundDevicesPublisher.value[index].address == device.address else { continue }
-                self.foundDevicesPublisher.value[index] = foundDevice
+        if let foundDevice = self.foundDevicesSubject.value.first(where: { $0.address == device.address }) {
+            for index in stride(from: 0, through: self.foundDevicesSubject.value.count - 1, by: 1) {
+                guard self.foundDevicesSubject.value[index].address == device.address else { continue }
+                self.foundDevicesSubject.value[index] = foundDevice
             }
         } else {
-            self.foundDevicesPublisher.value.append(device)
+            self.foundDevicesSubject.value.append(device)
         }
     }
     
@@ -97,13 +97,13 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
         peripheral.discoverServices(nil)
         
         let bluetoothPeripheral: BluetoothPeripheral = .init(device: peripheral)
-        self.peripheralPublisher.value = (.didConnect, bluetoothPeripheral)
+        self.peripheralSubject.value = (.didConnect, bluetoothPeripheral)
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Swift.Error?) {
         print("AppleBikeKit[DisconnectPeripheral]: \(String(describing: peripheral.name))")
         
         let bluetoothPeripheral: BluetoothPeripheral = .init(device: peripheral)
-        self.peripheralPublisher.value = (.didDisconnect, bluetoothPeripheral)
+        self.peripheralSubject.value = (.didDisconnect, bluetoothPeripheral)
     }
 }

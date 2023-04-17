@@ -16,19 +16,6 @@ extension CoreBluetoothService: CBPeripheralDelegate {
             return
         }
         
-        let device: BluetoothPeripheral = .init(device: peripheral)
-        
-        device.services.forEach { service in
-            service.characteristics.forEach { characteristic in
-                let uuid: String = characteristic.characteristic.uuid.uuidString
-                print("AppleBikeKit[DiscoverServices]: \(uuid)")
-            }
-        }
-        
-        for delegate in self.delegates {
-            delegate.didDiscoverServices(peripheral: device)
-        }
-        
         peripheral.services?.forEach { service in
             peripheral.discoverCharacteristics(nil, for: service)
         }
@@ -40,35 +27,17 @@ extension CoreBluetoothService: CBPeripheralDelegate {
             return
         }
         
-        let device: BluetoothPeripheral = .init(device: peripheral)
-        
-        for delegate in self.delegates {
-            delegate.didDiscoverCharacteristics(peripheral: device)
+        BluetoothPeripheral(device: peripheral).services.forEach { service in
+            service.characteristics.forEach { characteristic in
+                let uuid: String = characteristic.characteristic.uuid.uuidString
+                print("AppleBikeKit[DiscoverCharacteristics]: \(uuid)")
+            }
         }
+        
+        self.characteristicsSubject.send(peripheral)
         
         BluetoothService(service: service).characteristics.forEach { characteristic in
             peripheral.discoverDescriptors(for: characteristic.characteristic)
-        }
-    }
-    
-    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Swift.Error?) {
-        if let error: Swift.Error {
-            print("AppleBikeKit[UpdateValueForCharacteristic]: \(error)")
-            return
-        }
-        
-        let device: BluetoothPeripheral = .init(device: peripheral)
-        let _characteristic: BluetoothCharacteristic = .init(characteristic: characteristic)
-        
-        for delegate in self.delegates {
-            delegate.didCharacteristicsValueChanged(peripheral: device, characteristic: _characteristic)
-        }
-    }
-    
-    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: Swift.Error?) {
-        if let error: Swift.Error {
-            print("AppleBikeKit[UpdateValueForDescriptor]: \(error)")
-            return
         }
     }
     
@@ -79,12 +48,26 @@ extension CoreBluetoothService: CBPeripheralDelegate {
         }
     }
     
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Swift.Error?) {
+        if let error: Swift.Error {
+            print("AppleBikeKit[UpdateValueForCharacteristic]: \(error)")
+            return
+        }
+    }
+    
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: Swift.Error?) {
+        if let error: Swift.Error {
+            print("AppleBikeKit[UpdateValueForDescriptor]: \(error)")
+            return
+        }
+    }
+    
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Swift.Error?) {
         if let error: Swift.Error {
             print("AppleBikeKit[WriteValueForCharacteristic]: \(error)")
             return
         }
-        
+#warning("寫入參數時會使用，未驗證！")
         let device: BluetoothPeripheral = .init(device: peripheral)
         let _characteristic: BluetoothCharacteristic = .init(characteristic: characteristic)
         
@@ -99,10 +82,6 @@ extension CoreBluetoothService: CBPeripheralDelegate {
             return
         }
         
-        let device: BluetoothPeripheral = .init(device: peripheral, rssi: RSSI.floatValue)
-        
-        for delegate in self.delegates {
-            delegate.didRssiUpdate(peripheral: device)
-        }
+        self.rssiSubject.send(RSSI)
     }
 }

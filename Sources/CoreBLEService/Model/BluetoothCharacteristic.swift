@@ -23,4 +23,8 @@ public struct BluetoothCharacteristic {
     public var descriptors: [CBDescriptor]? {
         self.characteristic.descriptors
     }
+    
+    public init(characteristic: CBCharacteristic) {
+        self.characteristic = characteristic
+    }
 }

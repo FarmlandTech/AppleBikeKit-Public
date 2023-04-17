@@ -10,7 +10,7 @@ import CoreBluetooth
 
 public struct BluetoothPeripheral {
     
-    let device: CBPeripheral
+    public let device: CBPeripheral
     
     var rssi: Float?
     
