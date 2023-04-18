@@ -8,8 +8,11 @@
 import Foundation
 import CoreBluetooth
 
+// MARK: - CBPeripheralDelegate
+
 extension CoreBluetoothService: CBPeripheralDelegate {
     
+    // 監聽掃描到的藍牙服務。
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Swift.Error?) {
         if let error: Swift.Error {
             print("AppleBikeKit[DiscoverServices]: \(error)")
@@ -21,11 +24,13 @@ extension CoreBluetoothService: CBPeripheralDelegate {
         }
     }
     
+    // 監聽掃描到的藍牙服務特徵。
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Swift.Error?) {
         if let error: Swift.Error {
             print("AppleBikeKit[DiscoverCharacteristics]: \(error)")
             return
         }
+
         self.characteristicsSubject.send(peripheral)
         
         BluetoothService(service: service).characteristics.forEach { characteristic in
@@ -33,6 +38,7 @@ extension CoreBluetoothService: CBPeripheralDelegate {
         }
     }
     
+    // 監聽對於藍牙裝置寫入參數的事件。
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Swift.Error?) {
         if let error: Swift.Error {
             print("AppleBikeKit[WriteValueForCharacteristic]: \(error)")
@@ -47,6 +53,8 @@ extension CoreBluetoothService: CBPeripheralDelegate {
         }
     }
     
+    // 監聽特定藍牙裝置的訊號強度。
+    // 在此基本上是指連線的藍牙裝置，並且要呼叫 AppleBikeKit 的 readRSSI() 方法，才會在此讀取到數值。
     public func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Swift.Error?) {
         if let error: Swift.Error {
             print("AppleBikeKit[ReadRSSI]: \(error)")

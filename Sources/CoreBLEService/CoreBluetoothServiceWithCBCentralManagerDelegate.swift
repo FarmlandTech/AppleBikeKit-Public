@@ -9,13 +9,20 @@ import Foundation
 import CoreBluetooth
 
 extension String {
+    
+    /// 對於 AdvertisementData 存取的鍵值的枚舉。
     public enum AdvertisementDataRetrievalKey {
+        /// 廣播名稱。
         case localName
+        /// 製造商相關的數據。
         case manufacturerData
+        /// 裝置的服務的 UUID 。
         case serviceUUIDsKey
+        /// 裝置是否可被連接。
         case isConnectable
     }
     
+    /// 從 CBCentralManagerDelegate 掃描到的裝置，存取廣播參數的鍵值。
     fileprivate var advertisementDataRetrievalKey: AdvertisementDataRetrievalKey? {
         switch self {
         case "kCBAdvDataIsConnectable":
@@ -34,6 +41,7 @@ extension String {
 
 extension Dictionary where Key == String, Value == Any {
     
+    /// 從 CBCentralManagerDelegate 掃描到的裝置廣播，轉換為可以直接使用的型態。
     fileprivate var used: [String.AdvertisementDataRetrievalKey: Any] {
         var results: [String.AdvertisementDataRetrievalKey: Any] = .init()
         
@@ -62,22 +70,28 @@ extension Dictionary where Key == String, Value == Any {
 
 extension Dictionary where Key == String.AdvertisementDataRetrievalKey, Value == Any {
     
+    /// 掃描到的藍牙裝置，取得其廣播名稱。
     fileprivate var localName: String? {
         self[.localName] as? String
     }
     
+    /// 掃描到的藍牙裝置，取得其服務的 UUID 的值。
     fileprivate var uuids: [String]? {
         self[.serviceUUIDsKey] as? [String]
     }
 }
 
+// MARK: - CBCentralManagerDelegate
+
 extension CoreBluetoothService: CBCentralManagerDelegate {
     
+    // 監聽行動裝置的藍牙狀態改變。
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         print("AppleBikeKit[UpdateState]: \(central.state)")
         self.stateSubject.send(central.state)
     }
     
+    // 監聽掃描到的藍牙裝置。
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         guard self.scanningSubject.value, peripheral.name != nil else { return }
         
@@ -98,6 +112,7 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
         }
     }
     
+    // 監聽藍牙裝置的連線。
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("AppleBikeKit[ConnectPeripheral]: \(String(describing: peripheral.name))")
         
@@ -108,6 +123,7 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
         self.peripheralSubject.value = (.didConnect, bluetoothPeripheral)
     }
     
+    // 監聽藍牙裝置的斷線。
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Swift.Error?) {
         print("AppleBikeKit[DisconnectPeripheral]: \(String(describing: peripheral.name))")
         
