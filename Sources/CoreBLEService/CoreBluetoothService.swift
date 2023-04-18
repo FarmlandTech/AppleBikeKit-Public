@@ -15,13 +15,6 @@ public enum CharacteristicWriteType: String {
     case writeWithoutResponse = "46610020-726D-6C61-6E64-546563685457"
 }
 
-public enum AdvertisementDataRetrievalKey {
-    case localName
-    case manufacturerData
-    case serviceUUIDsKey
-    case isConnectable
-}
-
 public protocol CoreBluetoothServiceDelegate {
     
     typealias BluetoothCharacteristicDescriptor = CBDescriptor
@@ -98,7 +91,6 @@ public class CoreBluetoothService: NSObject {
         } else {
             self.centralManager.scanForPeripherals(withServices: nil, options: options)
         }
-        
     }
     
     public func stopScanning() {

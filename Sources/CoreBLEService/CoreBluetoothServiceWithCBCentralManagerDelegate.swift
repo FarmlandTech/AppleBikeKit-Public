@@ -9,6 +9,13 @@ import Foundation
 import CoreBluetooth
 
 extension String {
+    public enum AdvertisementDataRetrievalKey {
+        case localName
+        case manufacturerData
+        case serviceUUIDsKey
+        case isConnectable
+    }
+    
     fileprivate var advertisementDataRetrievalKey: AdvertisementDataRetrievalKey? {
         switch self {
         case "kCBAdvDataIsConnectable":
@@ -27,8 +34,8 @@ extension String {
 
 extension Dictionary where Key == String, Value == Any {
     
-    fileprivate var used: [AdvertisementDataRetrievalKey: Any] {
-        var results: [AdvertisementDataRetrievalKey: Any] = .init()
+    fileprivate var used: [String.AdvertisementDataRetrievalKey: Any] {
+        var results: [String.AdvertisementDataRetrievalKey: Any] = .init()
         
         for (key, value) in self {
             switch key.advertisementDataRetrievalKey {
@@ -53,7 +60,7 @@ extension Dictionary where Key == String, Value == Any {
     }
 }
 
-extension Dictionary where Key == AdvertisementDataRetrievalKey, Value == Any {
+extension Dictionary where Key == String.AdvertisementDataRetrievalKey, Value == Any {
     
     fileprivate var localName: String? {
         self[.localName] as? String
@@ -74,7 +81,7 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         guard self.scanningSubject.value, peripheral.name != nil else { return }
         
-        let usedAdvertisementData: [AdvertisementDataRetrievalKey: Any] = advertisementData.used
+        let usedAdvertisementData: [String.AdvertisementDataRetrievalKey: Any] = advertisementData.used
         
         let device: BluetoothPeripheral = .init(device: peripheral,
                                                 rssi: RSSI.floatValue,
