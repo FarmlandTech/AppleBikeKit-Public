@@ -113,15 +113,3 @@ public class CoreBluetoothService: NSObject {
         self.centralManager.cancelPeripheralConnection(peripheral.device)
     }
 }
-
-public extension BluetoothPeripheral {
-    func setNotifyValue(_ enabled: Bool, for characteristic: CBCharacteristic) {
-        self.device.setNotifyValue(enabled, for: characteristic)
-    }
-    
-#warning("寫入參數時會使用，未調用！")
-    func writeValue(_ data: Data, for characteristic: CBCharacteristic) {
-        guard let type: CharacteristicWriteType = .init(rawValue: characteristic.uuid.uuidString) else { return }
-        self.device.writeValue(data, for: characteristic, type: type == .write ? .withResponse : .withoutResponse)
-    }
-}
