@@ -73,16 +73,8 @@ public final class AppleBikeKit {
     public private(set) lazy var rssiPublisher: AnyPublisher<NSNumber?, Never> = {
         self.coreBluetoothService.rssiSubject.eraseToAnyPublisher()
     }()
-}
-
-extension AppleBikeKit {
-    
-    public func startScan() {
-        do {
-            try self.coreBluetoothService.startScanning()
-        } catch {
-            print("👻👻👻 \(error)")
-        }
+    public func startScan() throws {
+        try self.coreBluetoothService.startScanning()
     }
     
     public func stopScan() {

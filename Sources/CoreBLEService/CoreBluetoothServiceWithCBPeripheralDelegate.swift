@@ -26,39 +26,10 @@ extension CoreBluetoothService: CBPeripheralDelegate {
             print("AppleBikeKit[DiscoverCharacteristics]: \(error)")
             return
         }
-        
-        BluetoothPeripheral(device: peripheral).services.forEach { service in
-            service.characteristics.forEach { characteristic in
-                let uuid: String = characteristic.characteristic.uuid.uuidString
-                print("AppleBikeKit[DiscoverCharacteristics]: \(uuid)")
-            }
-        }
-        
         self.characteristicsSubject.send(peripheral)
         
         BluetoothService(service: service).characteristics.forEach { characteristic in
             peripheral.discoverDescriptors(for: characteristic.characteristic)
-        }
-    }
-    
-    public func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: Swift.Error?) {
-        if let error: Swift.Error {
-            print("AppleBikeKit[DiscoverDescriptors]: \(error)")
-            return
-        }
-    }
-    
-    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Swift.Error?) {
-        if let error: Swift.Error {
-            print("AppleBikeKit[UpdateValueForCharacteristic]: \(error)")
-            return
-        }
-    }
-    
-    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: Swift.Error?) {
-        if let error: Swift.Error {
-            print("AppleBikeKit[UpdateValueForDescriptor]: \(error)")
-            return
         }
     }
     

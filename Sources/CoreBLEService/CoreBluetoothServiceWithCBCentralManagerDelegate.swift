@@ -12,13 +12,13 @@ extension String {
     fileprivate var advertisementDataRetrievalKey: AdvertisementDataRetrievalKey? {
         switch self {
         case "kCBAdvDataIsConnectable":
-            return AdvertisementDataRetrievalKey.isConnectable
+            return .isConnectable
         case "kCBAdvDataLocalName":
-            return AdvertisementDataRetrievalKey.localName
+            return .localName
         case "kCBAdvDataManufacturerData":
-            return AdvertisementDataRetrievalKey.manufacturerData
+            return .manufacturerData
         case "kCBAdvDataServiceUUIDs":
-            return AdvertisementDataRetrievalKey.serviceUUIDsKey
+            return .serviceUUIDsKey
         default:
             return nil
         }
@@ -76,9 +76,10 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
         
         let usedAdvertisementData: [AdvertisementDataRetrievalKey: Any] = advertisementData.used
         
-        var device: BluetoothPeripheral = .init(device: peripheral, rssi: RSSI.floatValue)
-        device.deviceName = usedAdvertisementData.localName
-        device.uuid = usedAdvertisementData.uuids?.first
+        let device: BluetoothPeripheral = .init(device: peripheral,
+                                                rssi: RSSI.floatValue,
+                                                deviceName: usedAdvertisementData.localName,
+                                                uuid: usedAdvertisementData.uuids?.first)
         
         if let foundDevice = self.foundDevicesSubject.value.first(where: { $0.address == device.address }) {
             for index in stride(from: 0, through: self.foundDevicesSubject.value.count - 1, by: 1) {
