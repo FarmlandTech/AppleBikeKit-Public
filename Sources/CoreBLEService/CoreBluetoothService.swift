@@ -9,6 +9,12 @@ import Foundation
 import CoreBluetooth
 import Combine
 
+public enum CharacteristicWriteType: String {
+    case write = "46610010-726D-6C61-6E64-546563685457"
+    case notify = "46610011-726D-6C61-6E64-546563685457"
+    case writeWithoutResponse = "46610020-726D-6C61-6E64-546563685457"
+}
+
 public enum AdvertisementDataRetrievalKey {
     case localName
     case manufacturerData
@@ -92,6 +98,7 @@ public class CoreBluetoothService: NSObject {
         } else {
             self.centralManager.scanForPeripherals(withServices: nil, options: options)
         }
+        
     }
     
     public func stopScanning() {
@@ -110,6 +117,19 @@ public class CoreBluetoothService: NSObject {
     }
     
     public func disconnect(peripheral: BluetoothPeripheral) {
+        self.serviceUUID = nil
         self.centralManager.cancelPeripheralConnection(peripheral.device)
+    }
+}
+
+public extension BluetoothPeripheral {
+    func setNotifyValue(_ enabled: Bool, for characteristic: CBCharacteristic) {
+        self.device.setNotifyValue(enabled, for: characteristic)
+    }
+    
+#warning("寫入參數時會使用，未調用！")
+    func writeValue(_ data: Data, for characteristic: CBCharacteristic) {
+        guard let type: CharacteristicWriteType = .init(rawValue: characteristic.uuid.uuidString) else { return }
+        self.device.writeValue(data, for: characteristic, type: type == .write ? .withResponse : .withoutResponse)
     }
 }

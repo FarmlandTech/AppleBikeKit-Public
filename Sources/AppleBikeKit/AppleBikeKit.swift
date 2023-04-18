@@ -26,18 +26,26 @@ public final class AppleBikeKit {
             self.connectedPeripheral.currentPeripheral.value?.device.services?.forEach({ [weak self] service in
                 guard let self: AppleBikeKit else { return }
                 guard let characteristics: [CBCharacteristic] = service.characteristics else { return }
-                if let characteristic: CBCharacteristic = characteristics.first(where: { $0.uuid.uuidString == "46610010-726D-6C61-6E64-546563685457" }) {
-                    self.connectedPeripheral.writeCharacteristic.value = BluetoothCharacteristic(characteristic: characteristic)
-                }
-                if let characteristic: CBCharacteristic = characteristics.first(where: { $0.uuid.uuidString == "46610011-726D-6C61-6E64-546563685457" }) {
-                    self.connectedPeripheral.notifyCharacteristic.value = BluetoothCharacteristic(characteristic: characteristic)
-                }
-                if let characteristic: CBCharacteristic = characteristics.first(where: { $0.uuid.uuidString == "46610020-726D-6C61-6E64-546563685457" }) {
-                    self.connectedPeripheral.writeWithoutResponseCharacteristic.value = BluetoothCharacteristic(characteristic: characteristic)
+                characteristics.forEach { [weak self] characteristic in
+                    guard let self: AppleBikeKit else { return }
+                    guard let type: CharacteristicWriteType = .init(rawValue: characteristic.uuid.uuidString) else { return }
+                    switch type {
+                    case .write:
+                        self.connectedPeripheral.writeCharacteristic.value = BluetoothCharacteristic(characteristic: characteristic)
+                    case .notify:
+                        self.connectedPeripheral.notifyCharacteristic.value = BluetoothCharacteristic(characteristic: characteristic)
+                        self.connectedPeripheral.currentPeripheral.value?.setNotifyValue(true, for: characteristic)
+                    case .writeWithoutResponse:
+                        self.connectedPeripheral.writeWithoutResponseCharacteristic.value = BluetoothCharacteristic(characteristic: characteristic)
+                    }
                 }
             })
             
         }).store(in: &self.subscriptions)
+    }
+    
+    deinit {
+        self.subscriptions.forEach { $0.cancel() }
     }
     
     private let coreBluetoothService: CoreBluetoothService = .init()
