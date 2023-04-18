@@ -35,37 +35,12 @@ protocol CoreSdkParamsDelegate: AnyObject {
     func readParam(rawData: RawData)
 }
 
-protocol CoreSdkFirmwareUpgradeDelegate: AnyObject {
-    func progressStateMsg(outMessage: String, progressValue: Int32)
-    func upgradeFinished(returnState: Int32)
-}
-
-protocol CoreSDKServiceEventDelegate: AnyObject {
-    func didWriteParameter(state: Int)
-    func didRestartDevice(state: Int)
-}
-
-enum SdkReturnCode {
-    case success
-    case timeout
-    case invalidAddress
-    case invalidSize
-    case invalidParam
-    case crcFail
-    case null
-    case noInit
-    case noMem
-    case alreadyExist
-}
-
 public final class CoreSdkService: NSObject {
     
     public static let sharedInstance = CoreSdkService()
     
     weak var deviceInfoDataDelegate: CoreSdkDataDelegate?
     weak var paramsDelegate: CoreSdkParamsDelegate?
-    weak var firmwareUpgradeDelegate: CoreSdkFirmwareUpgradeDelegate?
-    weak var sdkEventDelegate: CoreSDKServiceEventDelegate?
     
     var coreSDKInst = CoreSDKInst_T()
     var version: String?

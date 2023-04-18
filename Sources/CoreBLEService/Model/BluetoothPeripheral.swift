@@ -10,7 +10,7 @@ import CoreBluetooth
 
 public struct BluetoothPeripheral {
     
-    let device: CBPeripheral
+    public let device: CBPeripheral
     
     var rssi: Float?
     
@@ -26,5 +26,15 @@ public struct BluetoothPeripheral {
     
     var address: String {
         self.device.identifier.uuidString
+    }
+    
+    public func setNotifyValue(_ enabled: Bool, for characteristic: CBCharacteristic) {
+        self.device.setNotifyValue(enabled, for: characteristic)
+    }
+    
+#warning("寫入參數時會使用，未調用！")
+    public func writeValue(_ data: Data, for characteristic: CBCharacteristic) {
+        guard let type: CharacteristicWriteType = .init(rawValue: characteristic.uuid.uuidString) else { return }
+        self.device.writeValue(data, for: characteristic, type: type == .write ? .withResponse : .withoutResponse)
     }
 }

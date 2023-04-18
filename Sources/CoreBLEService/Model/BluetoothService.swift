@@ -12,10 +12,6 @@ struct BluetoothService {
     
     let service: CBService
     
-    var name: String {
-        self.service.uuid.uuidString
-    }
-    
     var characteristics: [BluetoothCharacteristic] {
         self.service.characteristics?.map({ .init(characteristic: $0) }) ?? .init()
     }

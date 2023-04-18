@@ -12,15 +12,7 @@ public struct BluetoothCharacteristic {
     
     public let characteristic: CBCharacteristic
     
-    public var name: String? {
-        self.characteristic.uuid.uuidString
-    }
-    
-    public var value: Data? {
-        self.characteristic.value
-    }
-    
-    public var descriptors: [CBDescriptor]? {
-        self.characteristic.descriptors
+    public init(characteristic: CBCharacteristic) {
+        self.characteristic = characteristic
     }
 }

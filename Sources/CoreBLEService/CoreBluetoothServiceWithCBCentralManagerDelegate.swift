@@ -9,16 +9,30 @@ import Foundation
 import CoreBluetooth
 
 extension String {
+    
+    /// 對於 AdvertisementData 存取的鍵值的枚舉。
+    public enum AdvertisementDataRetrievalKey {
+        /// 廣播名稱。
+        case localName
+        /// 製造商相關的數據。
+        case manufacturerData
+        /// 裝置的服務的 UUID 。
+        case serviceUUIDsKey
+        /// 裝置是否可被連接。
+        case isConnectable
+    }
+    
+    /// 從 CBCentralManagerDelegate 掃描到的裝置，存取廣播參數的鍵值。
     fileprivate var advertisementDataRetrievalKey: AdvertisementDataRetrievalKey? {
         switch self {
         case "kCBAdvDataIsConnectable":
-            return AdvertisementDataRetrievalKey.isConnectable
+            return .isConnectable
         case "kCBAdvDataLocalName":
-            return AdvertisementDataRetrievalKey.localName
+            return .localName
         case "kCBAdvDataManufacturerData":
-            return AdvertisementDataRetrievalKey.manufacturerData
+            return .manufacturerData
         case "kCBAdvDataServiceUUIDs":
-            return AdvertisementDataRetrievalKey.serviceUUIDsKey
+            return .serviceUUIDsKey
         default:
             return nil
         }
@@ -27,8 +41,9 @@ extension String {
 
 extension Dictionary where Key == String, Value == Any {
     
-    fileprivate var used: [AdvertisementDataRetrievalKey: Any] {
-        var results: [AdvertisementDataRetrievalKey: Any] = .init()
+    /// 從 CBCentralManagerDelegate 掃描到的裝置廣播，轉換為可以直接使用的型態。
+    fileprivate var used: [String.AdvertisementDataRetrievalKey: Any] {
+        var results: [String.AdvertisementDataRetrievalKey: Any] = .init()
         
         for (key, value) in self {
             switch key.advertisementDataRetrievalKey {
@@ -53,43 +68,51 @@ extension Dictionary where Key == String, Value == Any {
     }
 }
 
-extension Dictionary where Key == AdvertisementDataRetrievalKey, Value == Any {
+extension Dictionary where Key == String.AdvertisementDataRetrievalKey, Value == Any {
     
+    /// 掃描到的藍牙裝置，取得其廣播名稱。
     fileprivate var localName: String? {
         self[.localName] as? String
     }
     
+    /// 掃描到的藍牙裝置，取得其服務的 UUID 的值。
     fileprivate var uuids: [String]? {
         self[.serviceUUIDsKey] as? [String]
     }
 }
 
+// MARK: - CBCentralManagerDelegate
+
 extension CoreBluetoothService: CBCentralManagerDelegate {
     
+    // 監聽行動裝置的藍牙狀態改變。
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         print("AppleBikeKit[UpdateState]: \(central.state)")
-        self.statePublisher.send(central.state)
+        self.stateSubject.send(central.state)
     }
     
+    // 監聽掃描到的藍牙裝置。
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        guard self.scanningPublisher.value, peripheral.name != nil else { return }
+        guard self.scanningSubject.value, peripheral.name != nil else { return }
         
-        let usedAdvertisementData: [AdvertisementDataRetrievalKey: Any] = advertisementData.used
+        let usedAdvertisementData: [String.AdvertisementDataRetrievalKey: Any] = advertisementData.used
         
-        var device: BluetoothPeripheral = .init(device: peripheral, rssi: RSSI.floatValue)
-        device.deviceName = usedAdvertisementData.localName
-        device.uuid = usedAdvertisementData.uuids?.first
+        let device: BluetoothPeripheral = .init(device: peripheral,
+                                                rssi: RSSI.floatValue,
+                                                deviceName: usedAdvertisementData.localName,
+                                                uuid: usedAdvertisementData.uuids?.first)
         
-        if let foundDevice = self.foundDevicesPublisher.value.first(where: { $0.address == device.address }) {
-            for index in stride(from: 0, through: self.foundDevicesPublisher.value.count - 1, by: 1) {
-                guard self.foundDevicesPublisher.value[index].address == device.address else { continue }
-                self.foundDevicesPublisher.value[index] = foundDevice
+        if let foundDevice = self.foundDevicesSubject.value.first(where: { $0.address == device.address }) {
+            for index in stride(from: 0, through: self.foundDevicesSubject.value.count - 1, by: 1) {
+                guard self.foundDevicesSubject.value[index].address == device.address else { continue }
+                self.foundDevicesSubject.value[index] = foundDevice
             }
         } else {
-            self.foundDevicesPublisher.value.append(device)
+            self.foundDevicesSubject.value.append(device)
         }
     }
     
+    // 監聽藍牙裝置的連線。
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("AppleBikeKit[ConnectPeripheral]: \(String(describing: peripheral.name))")
         
@@ -97,13 +120,14 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
         peripheral.discoverServices(nil)
         
         let bluetoothPeripheral: BluetoothPeripheral = .init(device: peripheral)
-        self.peripheralPublisher.value = (.didConnect, bluetoothPeripheral)
+        self.peripheralSubject.value = (.didConnect, bluetoothPeripheral)
     }
     
+    // 監聽藍牙裝置的斷線。
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Swift.Error?) {
         print("AppleBikeKit[DisconnectPeripheral]: \(String(describing: peripheral.name))")
         
         let bluetoothPeripheral: BluetoothPeripheral = .init(device: peripheral)
-        self.peripheralPublisher.value = (.didDisconnect, bluetoothPeripheral)
+        self.peripheralSubject.value = (.didDisconnect, bluetoothPeripheral)
     }
 }

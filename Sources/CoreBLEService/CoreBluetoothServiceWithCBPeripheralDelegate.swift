@@ -8,25 +8,15 @@
 import Foundation
 import CoreBluetooth
 
+// MARK: - CBPeripheralDelegate
+
 extension CoreBluetoothService: CBPeripheralDelegate {
     
+    // 監聽掃描到的藍牙服務。
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Swift.Error?) {
         if let error: Swift.Error {
             print("AppleBikeKit[DiscoverServices]: \(error)")
             return
-        }
-        
-        let device: BluetoothPeripheral = .init(device: peripheral)
-        
-        device.services.forEach { service in
-            service.characteristics.forEach { characteristic in
-                let uuid: String = characteristic.characteristic.uuid.uuidString
-                print("AppleBikeKit[DiscoverServices]: \(uuid)")
-            }
-        }
-        
-        for delegate in self.delegates {
-            delegate.didDiscoverServices(peripheral: device)
         }
         
         peripheral.services?.forEach { service in
@@ -34,57 +24,27 @@ extension CoreBluetoothService: CBPeripheralDelegate {
         }
     }
     
+    // 監聽掃描到的藍牙服務特徵。
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Swift.Error?) {
         if let error: Swift.Error {
             print("AppleBikeKit[DiscoverCharacteristics]: \(error)")
             return
         }
-        
-        let device: BluetoothPeripheral = .init(device: peripheral)
-        
-        for delegate in self.delegates {
-            delegate.didDiscoverCharacteristics(peripheral: device)
-        }
+
+        self.characteristicsSubject.send(peripheral)
         
         BluetoothService(service: service).characteristics.forEach { characteristic in
             peripheral.discoverDescriptors(for: characteristic.characteristic)
         }
     }
     
-    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Swift.Error?) {
-        if let error: Swift.Error {
-            print("AppleBikeKit[UpdateValueForCharacteristic]: \(error)")
-            return
-        }
-        
-        let device: BluetoothPeripheral = .init(device: peripheral)
-        let _characteristic: BluetoothCharacteristic = .init(characteristic: characteristic)
-        
-        for delegate in self.delegates {
-            delegate.didCharacteristicsValueChanged(peripheral: device, characteristic: _characteristic)
-        }
-    }
-    
-    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: Swift.Error?) {
-        if let error: Swift.Error {
-            print("AppleBikeKit[UpdateValueForDescriptor]: \(error)")
-            return
-        }
-    }
-    
-    public func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: Swift.Error?) {
-        if let error: Swift.Error {
-            print("AppleBikeKit[DiscoverDescriptors]: \(error)")
-            return
-        }
-    }
-    
+    // 監聽對於藍牙裝置寫入參數的事件。
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Swift.Error?) {
         if let error: Swift.Error {
             print("AppleBikeKit[WriteValueForCharacteristic]: \(error)")
             return
         }
-        
+#warning("寫入參數時會使用，未驗證！")
         let device: BluetoothPeripheral = .init(device: peripheral)
         let _characteristic: BluetoothCharacteristic = .init(characteristic: characteristic)
         
@@ -93,16 +53,14 @@ extension CoreBluetoothService: CBPeripheralDelegate {
         }
     }
     
+    // 監聽特定藍牙裝置的訊號強度。
+    // 在此基本上是指連線的藍牙裝置，並且要呼叫 AppleBikeKit 的 readRSSI() 方法，才會在此讀取到數值。
     public func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Swift.Error?) {
         if let error: Swift.Error {
             print("AppleBikeKit[ReadRSSI]: \(error)")
             return
         }
         
-        let device: BluetoothPeripheral = .init(device: peripheral, rssi: RSSI.floatValue)
-        
-        for delegate in self.delegates {
-            delegate.didRssiUpdate(peripheral: device)
-        }
+        self.rssiSubject.send(RSSI)
     }
 }
