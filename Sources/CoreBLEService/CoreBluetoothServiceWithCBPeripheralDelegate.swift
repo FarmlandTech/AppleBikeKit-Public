@@ -38,19 +38,26 @@ extension CoreBluetoothService: CBPeripheralDelegate {
         }
     }
     
-    // 監聽對於藍牙裝置寫入參數的事件。
+    // 監聽對於藍牙裝置寫入參數的事件。(有回應)
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Swift.Error?) {
+        if let error: Swift.Error {
+            print("AppleBikeKit[UpdateValueForCharacteristic]: \(error)")
+            return
+        }
+        
+        let _characteristic: BluetoothCharacteristic = .init(characteristic: characteristic)
+        self.didUpdateValueForCharacteristicsSubject.send(_characteristic)
+    }
+    
+    // 監聽對於藍牙裝置寫入參數的事件。(無論有回應或無回應)
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Swift.Error?) {
         if let error: Swift.Error {
             print("AppleBikeKit[WriteValueForCharacteristic]: \(error)")
             return
         }
-#warning("寫入參數時會使用，未驗證！")
-        let device: BluetoothPeripheral = .init(device: peripheral)
-        let _characteristic: BluetoothCharacteristic = .init(characteristic: characteristic)
         
-        for delegate in self.delegates {
-            delegate.didWriteCharacteristic(peripheral: device, characteristic: _characteristic)
-        }
+        let _characteristic: BluetoothCharacteristic = .init(characteristic: characteristic)
+        self.didWriteValueForCharacteristicsSubject.send(_characteristic)
     }
     
     // 監聽特定藍牙裝置的訊號強度。

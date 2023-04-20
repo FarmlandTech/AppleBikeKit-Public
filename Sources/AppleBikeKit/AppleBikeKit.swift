@@ -9,6 +9,8 @@ import Foundation
 import Combine
 import CoreBluetooth
 
+import CoreSDK
+import CoreSDKService
 import CoreBLEService
 
 /// 藍牙連線統一的對外接口，整合 CoreSDK 與 CoreBLEService 的調用。
@@ -40,16 +42,22 @@ public final class AppleBikeKit {
                     // 判斷特徵型態，並緩存。
                     switch type {
                     case .write:
-                        self.connectedPeripheral.writeCharacteristic.value = BluetoothCharacteristic(characteristic: characteristic)
+                        self.connectedPeripheral.writeCharacteristic.value = .init(characteristic: characteristic)
                     case .notify:
-                        self.connectedPeripheral.notifyCharacteristic.value = BluetoothCharacteristic(characteristic: characteristic)
+                        self.connectedPeripheral.notifyCharacteristic.value = .init(characteristic: characteristic)
                         self.connectedPeripheral.currentPeripheral.value?.setNotifyValue(true, for: characteristic)
                     case .writeWithoutResponse:
-                        self.connectedPeripheral.writeWithoutResponseCharacteristic.value = BluetoothCharacteristic(characteristic: characteristic)
+                        self.connectedPeripheral.writeWithoutResponseCharacteristic.value = .init(characteristic: characteristic)
                     }
                 }
             })
-            
+        }).store(in: &self.subscriptions)
+        
+        // 監聽寫入事件，處理廣播參數。
+        self.didUpdateValueForCharacteristicsPublisher.sink(receiveValue: { [weak self] characteristic in
+            guard let self: AppleBikeKit else { return }
+            guard let value: Data = characteristic?.characteristic.value else { return }
+            self.coreSDKService.commandPacketIn(dataPacket: Array(value))
         }).store(in: &self.subscriptions)
     }
     
@@ -57,6 +65,23 @@ public final class AppleBikeKit {
     deinit {
         self.subscriptions.forEach { $0.cancel() }
     }
+    
+    // MARK: - CoreSDKService
+    
+    /// 操作 CoreSDK 的物件實例。
+    private let coreSDKService: CoreSDKService = .init()
+    
+    /// 腳踏車裝置資訊。(最後一次)
+    public var deviceInfo: FL_Info_st? {
+        self.coreSDKService.deviceInfoSubject.value
+    }
+    
+    /// 腳踏車裝置資訊的發佈者。
+    public private(set) lazy var deviceInfoPublisher: AnyPublisher<FL_Info_st?, Never> = {
+        self.coreSDKService.deviceInfoSubject
+            .throttle(for: .milliseconds(700), scheduler: RunLoop.main, latest: true)
+            .eraseToAnyPublisher()
+    }()
     
     // MARK: - CoreBluetoothService
     
@@ -81,6 +106,7 @@ public final class AppleBikeKit {
                     $0.deviceName != nil && ($0.deviceName!.hasPrefix("FL") || $0.deviceName!.hasPrefix("Farmland"))
                 })
             })
+            .throttle(for: .milliseconds(700), scheduler: RunLoop.main, latest: true)
             .eraseToAnyPublisher()
     }()
     
@@ -94,6 +120,16 @@ public final class AppleBikeKit {
         self.coreBluetoothService.characteristicsSubject
             .filter({ $0?.identifier == self.connectedPeripheral.currentPeripheral.value?.device.identifier })
             .eraseToAnyPublisher()
+    }()
+    
+    /// 更新特徵時的發佈者。
+    public private(set) lazy var didUpdateValueForCharacteristicsPublisher: AnyPublisher<BluetoothCharacteristic?, Never> = {
+        self.coreBluetoothService.didUpdateValueForCharacteristicsSubject.eraseToAnyPublisher()
+    }()
+    
+    /// 寫入特徵時的發佈者。
+    public private(set) lazy var didWriteValueForCharacteristicsPublisher: AnyPublisher<BluetoothCharacteristic?, Never> = {
+        self.coreBluetoothService.didWriteValueForCharacteristicsSubject.eraseToAnyPublisher()
     }()
     
     /**
@@ -129,6 +165,7 @@ public final class AppleBikeKit {
     public func connect(_ bluetoothPeripheral: BluetoothPeripheral) {
         self.connectedPeripheral.currentPeripheral.value = bluetoothPeripheral
         self.coreBluetoothService.connect(peripheral: bluetoothPeripheral)
+        self.coreSDKService.startReadWriteChannel()
     }
     
     /**
@@ -139,6 +176,8 @@ public final class AppleBikeKit {
     public func disconnect(_ bluetoothPeripheral: BluetoothPeripheral) {
         self.connectedPeripheral.reset()
         self.coreBluetoothService.disconnect(peripheral: bluetoothPeripheral)
+        self.coreSDKService.stopReadWriteChannel()
+        self.coreSDKService.deviceInfoSubject.send(nil)
     }
     
     /**
@@ -151,5 +190,8 @@ public final class AppleBikeKit {
         self.connectedPeripheral.currentPeripheral.value?.device.readRSSI()
     }
     
-    // MARK: - CoreSDKService
+#warning("寫入參數時會使用，未實作。")
+    func writeCharacteristic(bluetoothCharacteristic: BluetoothCharacteristic, value: [UInt8]) {
+        self.connectedPeripheral.currentPeripheral.value
+    }
 }
