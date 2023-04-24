@@ -15,13 +15,6 @@ public enum CharacteristicWriteType: String {
     case writeWithoutResponse = "46610020-726D-6C61-6E64-546563685457"
 }
 
-public protocol CoreBluetoothServiceDelegate {
-    
-    typealias BluetoothCharacteristicDescriptor = CBDescriptor
-    
-    func didWriteCharacteristic(peripheral: BluetoothPeripheral, characteristic: BluetoothCharacteristic)
-}
-
 public class CoreBluetoothService: NSObject {
     
     enum Error: Swift.Error {
@@ -34,6 +27,13 @@ public class CoreBluetoothService: NSObject {
     
     private var serviceUUID: String?
     
+#warning("第一版先發布後，再找另外找時間弄吧...")
+//    private var timerSubscription: AnyCancellable?
+//
+//    lazy private var foundDeviceResetTimer = {
+//        Timer.publish(every: 1, tolerance: 0.1, on: .main, in: .common).autoconnect()
+//    }()
+//
     private lazy var centralManager: CBCentralManager = {
         .init(delegate: self, queue: .main)
     }()
@@ -41,10 +41,16 @@ public class CoreBluetoothService: NSObject {
     public override init() {
         super.init()
         _ = self.centralManager
+#warning("第一版先發布後，再找另外找時間弄吧...")
+//        self.timerSubscription = self.foundDeviceResetTimer.sink(receiveValue: { [weak self] date in
+//            guard let self: CoreBluetoothService else { return }
+//            self.foundDevicesSubject.value = []
+//        })
     }
     
-#warning("以 Combine 框架改寫，並移除！")
-    public var delegates: [CoreBluetoothServiceDelegate] = .init()
+//    deinit {
+//        self.timerSubscription?.cancel()
+//    }
     
     public private(set) lazy var stateSubject: CurrentValueSubject<CBManagerState, Never> = {
         .init(.unknown)
@@ -64,6 +70,14 @@ public class CoreBluetoothService: NSObject {
     }()
     
     public private(set) lazy var characteristicsSubject: CurrentValueSubject<CBPeripheral?, Never> = {
+        .init(nil)
+    }()
+    
+    public private(set) lazy var didUpdateValueForCharacteristicsSubject: CurrentValueSubject<BluetoothCharacteristic?, Never> = {
+        .init(nil)
+    }()
+    
+    public private(set) lazy var didWriteValueForCharacteristicsSubject: CurrentValueSubject<BluetoothCharacteristic?, Never> = {
         .init(nil)
     }()
     
