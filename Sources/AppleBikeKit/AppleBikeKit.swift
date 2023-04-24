@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  AppleBikeKit.swift
 //  
 //
 //  Created by Yves Tsai on 2023/3/28.
@@ -15,10 +15,6 @@ import CoreBLEService
 
 /// 藍牙連線統一的對外接口，整合 CoreSDK 與 CoreBLEService 的調用。
 public final class AppleBikeKit {
-    
-    enum Error: Swift.Error {
-        case readParamterWithUnexpectedType
-    }
     
     /// 資料流的訂閱。
     private var subscriptions: Set<AnyCancellable> = .init()
@@ -59,7 +55,7 @@ public final class AppleBikeKit {
             })
             .store(in: &self.subscriptions)
         
-        // 監聽寫入事件，處理廣播參數。
+        // 監聽特徵寫入事件，處理廣播參數。
         self.didUpdateValueForCharacteristicsPublisher
             .sink(receiveValue: { [weak self] characteristic in
                 guard let self: AppleBikeKit else { return }
@@ -68,7 +64,7 @@ public final class AppleBikeKit {
             })
             .store(in: &self.subscriptions)
         
-        //
+        // 監聽參數寫入的事件處理。
         self.coreSDKService.commandPacketSubject
             .sink(receiveValue: { output in
                 guard let characteristic: BluetoothCharacteristic = self.connectedPeripheral.writeCharacteristic.value else { return }
@@ -76,7 +72,7 @@ public final class AppleBikeKit {
             })
             .store(in: &self.subscriptions)
         
-        //
+        // 監聽更新韌體的事件處理。
         self.coreSDKService.dataPacketSubject
             .sink(receiveValue: { output in
                 guard let characteristic: BluetoothCharacteristic = self.connectedPeripheral.writeWithoutResponseCharacteristic.value else { return }
@@ -84,6 +80,7 @@ public final class AppleBikeKit {
             })
             .store(in: &self.subscriptions)
         
+        // 監聽參數讀取的事件處理。
         self.coreSDKService.rawDataSubject
             .compactMap({ $0 })
             .sink(receiveValue: { rawData in
@@ -125,6 +122,7 @@ public final class AppleBikeKit {
         self.coreSDKService.deviceInfoSubject.value
     }
     
+    /// 用於 CoreSDK 的參數倉庫，包括定義與緩存，也實作部分的邏輯。
     public var parameterDataRepository: ParameterDataRepository {
         self.coreSDKService.parameterDataRepository
     }
@@ -143,17 +141,51 @@ public final class AppleBikeKit {
         self.parameterDataSubject.eraseToAnyPublisher()
     }()
     
+    /// 寫入參數時，執行狀態的發佈者。
+    public private(set) lazy var writingParameterStatePublisher: AnyPublisher<Bool?, Never> = {
+        self.coreSDKService.writingParameterStateSubject.eraseToAnyPublisher()
+    }()
+    
+    /// 重啟部件時，執行狀態的發佈者。
+    public private(set) lazy var restartDeviceStatePublisher: AnyPublisher<Bool?, Never> = {
+        self.coreSDKService.restartDeviceStateSubject.eraseToAnyPublisher()
+    }()
+    
+    /**
+     讀取部件參數的方法。
+     
+     - parameter name: 部件參數的名稱。
+     - Throws: 未定義的部件名稱，將會導致錯誤的拋出。
+     - Throws: 來自 CoreSDK 判定的錯誤，應該是肇因於參數的錯誤。
+     */
     public func readParameter(name: ParameterData.Name) throws {
         let repository: ParameterDataRepository = self.coreSDKService.parameterDataRepository
         let parameterData: ParameterData = try repository.findParameterData(name: name)
         try self.coreSDKService.read(parameter: parameterData)
     }
     
+    /**
+     寫入部件參數的方法。
+     
+     - parameter name: 部件參數的名稱。
+     - Returns: 未定義的部件名稱，將會導致錯誤的拋出。
+     - Throws: 參數的型別或數值等各分面可能導致的錯誤。
+     */
     public func writeParameter(name: ParameterData.Name, value: Any) throws {
         let repository: ParameterDataRepository = self.coreSDKService.parameterDataRepository
         var parameterData: ParameterData = try repository.findParameterData(name: name)
         parameterData.value = value
         try self.coreSDKService.write(parameter: parameterData)
+    }
+    
+    /**
+     重啟部件的方法。
+     
+     - parameter partType: 部件類別。
+     - Throws: 來自 CoreSDK 判定的錯誤，應該是肇因於參數的錯誤。
+     */
+    public func restartDevice(partType: CommunicationPartType) throws {
+        try self.coreSDKService.restartDevice(partType: partType)
     }
     
     // MARK: - CoreBluetoothService

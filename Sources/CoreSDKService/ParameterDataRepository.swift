@@ -9,14 +9,20 @@ import Foundation
 
 import CoreSDK
 
+/// 部件參數模型的倉庫，包括定義與緩存，以及小部分的邏輯。
 public class ParameterDataRepository {
     
+    /// 自定義的錯誤枚舉。
     public enum Error: Swift.Error {
+        /// 透過名稱枚舉查詢部件參數時，搜尋失敗。
         case parameterDataNotFoundByName(ParameterData.Name)
+        /// 透過相關資訊查詢部件參數時，搜尋失敗。
         case parameterDataNotFoundByArguments(DeviceType_enum, UInt8, UInt16, UInt16)
+        /// 來自系統定義的例外，非自定義的錯誤。
         case exception(Swift.Error)
     }
     
+    /// 基礎部件的關鍵參數陣列。(應再根據類別再次拆分)
     public let normalParameters: [ParameterData] = [
         .init(name: .HmiSMID, partType: .HMI, bank: 0, address: 0, length: 15, type: String.self),
         .init(name: .HmiDMID, partType: .HMI, bank: 0, address: 15, length: 17, type: String.self),
@@ -35,6 +41,7 @@ public class ParameterDataRepository {
         .init(name: .BattSSN, partType: .MainBatt, bank: 0, address: 64, length: 32, type: String.self)
     ]
     
+    /// 助力方案相關的參數陣列。
     public let assistLevelParameters:[ParameterData] = [
         .init(name: .AST_LV1_STR_RANG, partType: .Controller, bank: 2, address: 131, length: 2, type: Int.self),
         .init(name: .AST_LV1_STR_ACC, partType: .Controller, bank: 2, address: 175, length: 1, type: Int.self),
@@ -71,6 +78,7 @@ public class ParameterDataRepository {
         .init(name: .AST_STOP_DEC, partType: .Controller, bank: 2, address: 199, length: 1, type: Int.self),
     ]
     
+    /// 里程相關的參數陣列。
     public let mileageRecordParameters: [ParameterData] = [
         .init(name: .UNIX_TIME_DAY1, partType: .MainBatt, bank: 2, address: 0, length: 4, type: Int.self),
         .init(name: .RECORD_ODO_DAY1, partType: .MainBatt, bank: 2, address: 4, length: 4, type: Int.self),
@@ -136,27 +144,25 @@ public class ParameterDataRepository {
         .init(name: .RECORD_ODO_DAY31, partType: .MainBatt, bank: 2, address: 244, length: 4, type: Int.self),
     ]
     
+    /// 整合型的參數陣列。(基本上用於片段讀取參數)
     public private(set) lazy var integratedParameters: [ParameterData] = {
         .init([
             .init(name: .INTEGRATED_MILEAGE_RECORD, partType: .MainBatt, bank: 2, address: 0, length: 248, type: Any.self, dividedParameters: self.mileageRecordParameters)
         ])
     }()
     
+    /// 此為宇集合陣列，整合目前已定義部件參數陣列。
     public private(set) lazy var univeralParameters: [ParameterData] = {
         self.normalParameters + self.assistLevelParameters + self.mileageRecordParameters + self.integratedParameters
     }()
     
-    public func findParameterData(type: DeviceType_enum, bank: UInt8, address: UInt16, length: UInt16) throws -> ParameterData {
-        let parameterData: ParameterData? = self.univeralParameters.first {
-            $0.partType.coreType == type && $0.bank == bank && $0.address == address && $0.length == length
-        }
-        if let parameterData: ParameterData {
-            return parameterData
-        } else {
-            throw Self.Error.parameterDataNotFoundByArguments(type, bank, address, length)
-        }
-    }
-    
+    /**
+     透過名稱枚舉查詢部件參數。
+     
+     - parameter name: 名稱枚舉。
+     - Returns: 目標部件的數據模型。
+     - Throws: 搜尋的部件尚未定義，則拋出錯誤。
+     */
     public func findParameterData(name: ParameterData.Name) throws -> ParameterData {
         let parameterData: ParameterData? = self.univeralParameters.first(where: { $0.name == name })
         if let parameterData: ParameterData {
@@ -165,4 +171,25 @@ public class ParameterDataRepository {
             throw Self.Error.parameterDataNotFoundByName(name)
         }
     }
+    
+    /**
+     透過相關資訊查詢部件參數。
+     
+     - parameter type: 部件參數的分類。
+     - parameter bank: 部件參數的分組。
+     - parameter address: 部件參數的起始位址。
+     - parameter length: 部件參數的長度。
+     - Returns: 目標部件的數據模型。
+     - Throws: 搜尋的部件尚未定義，則拋出錯誤。
+     */
+    public func findParameterData(type: DeviceType_enum, bank: UInt8, address: UInt16, length: UInt16) throws -> ParameterData {
+            let parameterData: ParameterData? = self.univeralParameters.first {
+                $0.partType.coreType == type && $0.bank == bank && $0.address == address && $0.length == length
+            }
+            if let parameterData: ParameterData {
+                return parameterData
+            } else {
+                throw Self.Error.parameterDataNotFoundByArguments(type, bank, address, length)
+            }
+        }
 }

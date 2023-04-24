@@ -15,6 +15,10 @@ protocol CoreSDKDataSource: AnyObject {
     func updateDeviceInfo(deviceInfo: FL_Info_st)
     
     func readParameter(rawData: RawData)
+    
+    func writeParameter(state: Bool)
+    
+    func restartDevice(state: Bool)
 }
 
 public final class CoreSDKService: NSObject {
@@ -25,16 +29,18 @@ public final class CoreSDKService: NSObject {
         case accessParameterWithNoValue
         case accessParameterWithWrongType
         case writeTextOutOfRange
+        case restartDeviceFail(CommunicationPartType)
     }
     
     fileprivate static weak var dataSource: CoreSDKDataSource?
-    private static var writingData: [UInt8] = .init()
     
     private typealias UpdateDeviceInfoEvent = @convention(c) (DeviceInformation_T) -> Void
     
     private typealias ReadParameterEvent = @convention(c) (Int32, DeviceType_enum, Optional<UnsafeMutablePointer<UInt8>>, UInt16, UInt16, UInt8) -> Void
     
     private typealias WriteParameterEvent = @convention(c) (Int32) -> Void
+    
+    private typealias RestartDeviceEvent = @convention(c) (Int32) -> Void
     
     private let updateDeviceInfoEvent: UpdateDeviceInfoEvent = { deviceInfo in
         CoreSDKService.dataSource?.updateDeviceInfo(deviceInfo: deviceInfo.FL)
@@ -54,7 +60,11 @@ public final class CoreSDKService: NSObject {
     }
     
     private let writeParameterEvent: WriteParameterEvent = { state in
-        
+        CoreSDKService.dataSource?.writeParameter(state: state == 0)
+    }
+    
+    private let restartDeviceEvent: RestartDeviceEvent = { state in
+        CoreSDKService.dataSource?.restartDevice(state: state == 0)
     }
     
     public private(set) lazy var deviceInfoSubject: CurrentValueSubject<FL_Info_st?, Never> = {
@@ -71,6 +81,14 @@ public final class CoreSDKService: NSObject {
     
     public private(set) lazy var dataPacketSubject: CurrentValueSubject<[UInt8], Never> = {
         .init(.init())
+    }()
+    
+    public private(set) lazy var writingParameterStateSubject: CurrentValueSubject<Bool?, Never> = {
+        .init(nil)
+    }()
+    
+    public private(set) lazy var restartDeviceStateSubject: CurrentValueSubject<Bool?, Never> = {
+        .init(nil)
     }()
     
     public var sdkVersion: String {
@@ -91,13 +109,22 @@ public final class CoreSDKService: NSObject {
     
     private let outputDataTimer = Timer.publish(every: 0.01, tolerance: 0.5, on: .main, in: .common).autoconnect()
     
+    private static var writingData: [UInt8] = .init()
     // 產生原始陣列建議 255 長度，丟給 bleSDK 可接受最大長度為 244 (遵從 hmi ble portocol)
     // Write w response
-    private var commandPacketOutData: [UInt8] = [UInt8](repeating: 0x00, count: 244)
-    private var commandPacketOutDataLeng: UInt32 = 255
+    lazy private var commandPacketOutData: [UInt8] = {
+        .init(repeating: 0x00, count: 244)
+    }()
+    lazy private var commandPacketOutDataLeng: UInt32 = {
+        255
+    }()
     // Write w/o response
-    private var dataPacketOutData: [UInt8] = [UInt8](repeating: 0x00, count: 244)
-    private var dataPacketOutDataLeng: UInt32 = 255
+    lazy private var dataPacketOutData: [UInt8] = {
+        .init(repeating: 0x00, count: 244)
+    }()
+    lazy private var dataPacketOutDataLeng: UInt32 = {
+        255
+    }()
     
     public override init() {
         super.init()
@@ -216,6 +243,13 @@ public final class CoreSDKService: NSObject {
             throw Self.Error.accessParameterWithUnexpectedType
         }
     }
+    
+    public func restartDevice(partType: CommunicationPartType) throws {
+        let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.RestartDevice(SDK_ROUTER_BLE, partType.coreType, self.restartDeviceEvent)
+        guard isCoreSDKCompleteTask == 0 else {
+            throw Self.Error.restartDeviceFail(partType)
+        }
+    }
 }
 
 extension CoreSDKService: CoreSDKDataSource {
@@ -226,5 +260,13 @@ extension CoreSDKService: CoreSDKDataSource {
     
     func readParameter(rawData: RawData) {
         self.rawDataSubject.send(rawData)
+    }
+    
+    func writeParameter(state: Bool) {
+        self.writingParameterStateSubject.send(state)
+    }
+    
+    func restartDevice(state: Bool) {
+        self.restartDeviceStateSubject.send(state)
     }
 }
