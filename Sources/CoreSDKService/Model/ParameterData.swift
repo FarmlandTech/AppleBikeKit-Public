@@ -1,0 +1,148 @@
+//
+//  ParameterData.swift
+//  
+//
+//  Created by Yves Tsai on 2023/4/20.
+//
+
+import Foundation
+
+public struct ParameterData {
+    public enum Name {
+        case INTEGRATED_MILEAGE_RECORD
+        
+        case HmiSMID
+        case HmiDMID
+        case HmiSSN
+        case HmiDSN
+        case PRO_BT_DEV_NAME
+        
+        case ControllerSMID
+        case ControllerDMID
+        case ControllerSSN
+        case ControllerDSN
+        
+        case BattSMID
+        case BattDMID
+        case BattSSN
+        case BattDSN
+        
+        case UNIX_TIME_DAY1
+        case RECORD_ODO_DAY1
+        case UNIX_TIME_DAY2
+        case RECORD_ODO_DAY2
+        case UNIX_TIME_DAY3
+        case RECORD_ODO_DAY3
+        case UNIX_TIME_DAY4
+        case RECORD_ODO_DAY4
+        case UNIX_TIME_DAY5
+        case RECORD_ODO_DAY5
+        case UNIX_TIME_DAY6
+        case RECORD_ODO_DAY6
+        case UNIX_TIME_DAY7
+        case RECORD_ODO_DAY7
+        case UNIX_TIME_DAY8
+        case RECORD_ODO_DAY8
+        case UNIX_TIME_DAY9
+        case RECORD_ODO_DAY9
+        case UNIX_TIME_DAY10
+        case RECORD_ODO_DAY10
+        case UNIX_TIME_DAY11
+        case RECORD_ODO_DAY11
+        case UNIX_TIME_DAY12
+        case RECORD_ODO_DAY12
+        case UNIX_TIME_DAY13
+        case RECORD_ODO_DAY13
+        case UNIX_TIME_DAY14
+        case RECORD_ODO_DAY14
+        case UNIX_TIME_DAY15
+        case RECORD_ODO_DAY15
+        case UNIX_TIME_DAY16
+        case RECORD_ODO_DAY16
+        case UNIX_TIME_DAY17
+        case RECORD_ODO_DAY17
+        case UNIX_TIME_DAY18
+        case RECORD_ODO_DAY18
+        case UNIX_TIME_DAY19
+        case RECORD_ODO_DAY19
+        case UNIX_TIME_DAY20
+        case RECORD_ODO_DAY20
+        case UNIX_TIME_DAY21
+        case RECORD_ODO_DAY21
+        case UNIX_TIME_DAY22
+        case RECORD_ODO_DAY22
+        case UNIX_TIME_DAY23
+        case RECORD_ODO_DAY23
+        case UNIX_TIME_DAY24
+        case RECORD_ODO_DAY24
+        case UNIX_TIME_DAY25
+        case RECORD_ODO_DAY25
+        case UNIX_TIME_DAY26
+        case RECORD_ODO_DAY26
+        case UNIX_TIME_DAY27
+        case RECORD_ODO_DAY27
+        case UNIX_TIME_DAY28
+        case RECORD_ODO_DAY28
+        case UNIX_TIME_DAY29
+        case RECORD_ODO_DAY29
+        case UNIX_TIME_DAY30
+        case RECORD_ODO_DAY30
+        case UNIX_TIME_DAY31
+        case RECORD_ODO_DAY31
+        
+        case AST_LV1_STR_RANG
+        case AST_LV1_STR_ACC
+        case AST_LV1_STR_DEC
+        case AST_LV2_STR_RANG
+        case AST_LV2_STR_ACC
+        case AST_LV2_STR_DEC
+        case AST_LV3_STR_RANG
+        case AST_LV3_STR_ACC
+        case AST_LV3_STR_DEC
+        
+        case LV1_MAX_AST_RATIO
+        case LV1_MIN_AST_RATIO
+        case LV1_AST_RATIO_STR_SPD
+        case LV1_AST_RATIO_END_SPD
+        case LV2_MAX_AST_RATIO
+        case LV2_MIN_AST_RATIO
+        case LV2_AST_RATIO_STR_SPD
+        case LV2_AST_RATIO_END_SPD
+        case LV3_MAX_AST_RATIO
+        case LV3_MIN_AST_RATIO
+        case LV3_AST_RATIO_STR_SPD
+        case LV3_AST_RATIO_END_SPD
+        case AST_LV1_MAX_CUR
+        case AST_LV2_MAX_CUR
+        case AST_LV3_MAX_CUR
+        case AST_LV1_ACC
+        case AST_LV1_DEC
+        case AST_LV2_ACC
+        case AST_LV2_DEC
+        case AST_LV3_ACC
+        case AST_LV3_DEC
+        case AST_OSP_DEC
+        case AST_OCP_DEC
+        case AST_STOP_DEC
+    }
+    
+    public private(set) var name: ParameterData.Name
+    public private(set) var partType: CommunicationPartType
+    public private(set) var bank: UInt8
+    public private(set) var address: UInt16
+    public private(set) var length: UInt16
+    public private(set) var type: Any
+    public var value: Any?
+    public private(set) var dividedParameters: [ParameterData]?
+    
+    public init(name: ParameterData.Name, partType: CommunicationPartType, bank: UInt8, address: UInt16, length: UInt16, type: Any, value: Any? = nil, dividedParameters: [ParameterData]? = nil) {
+        self.name = name
+        self.partType = partType
+        self.bank = bank
+        self.address = address
+        self.length = length
+        self.type = type
+        self.value = value
+        self.dividedParameters = dividedParameters
+    }
+}

@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  ConnectedPeripheral.swift
 //  
 //
 //  Created by Yves Tsai on 2023/4/14.
