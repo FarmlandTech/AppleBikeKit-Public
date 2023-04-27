@@ -38,7 +38,7 @@ public class ParameterDataRepository {
         .init(name: .BattSMID, partType: .MainBatt, bank: 0, address: 0, length: 15, type: String.self),
         .init(name: .BattDMID, partType: .MainBatt, bank: 0, address: 15, length: 17, type: String.self),
         .init(name: .BattSSN, partType: .MainBatt, bank: 0, address: 32, length: 32, type: String.self),
-        .init(name: .BattSSN, partType: .MainBatt, bank: 0, address: 64, length: 32, type: String.self)
+        .init(name: .BattDSN, partType: .MainBatt, bank: 0, address: 64, length: 32, type: String.self)
     ]
     
     /// 助力方案相關的參數陣列。
@@ -88,17 +88,17 @@ public class ParameterDataRepository {
         .init(name: .RECORD_ODO_DAY3, partType: .MainBatt, bank: 2, address: 20, length: 4, type: Int.self),
         .init(name: .UNIX_TIME_DAY4, partType: .MainBatt, bank: 2, address: 24, length: 4, type: Int.self),
         .init(name: .RECORD_ODO_DAY4, partType: .MainBatt, bank: 2, address: 28, length: 4, type: Int.self),
-        .init(name: .RECORD_ODO_DAY4, partType: .MainBatt, bank: 2, address: 32, length: 4, type: Int.self),
-        .init(name: .RECORD_ODO_DAY4, partType: .MainBatt, bank: 2, address: 36, length: 4, type: Int.self),
+        .init(name: .UNIX_TIME_DAY5, partType: .MainBatt, bank: 2, address: 32, length: 4, type: Int.self),
+        .init(name: .RECORD_ODO_DAY5, partType: .MainBatt, bank: 2, address: 36, length: 4, type: Int.self),
         .init(name: .UNIX_TIME_DAY6, partType: .MainBatt, bank: 2, address: 40, length: 4, type: Int.self),
         .init(name: .RECORD_ODO_DAY6, partType: .MainBatt, bank: 2, address: 44, length: 4, type: Int.self),
         .init(name: .UNIX_TIME_DAY7, partType: .MainBatt, bank: 2, address: 48, length: 4, type: Int.self),
-        .init(name: .UNIX_TIME_DAY7, partType: .MainBatt, bank: 2, address: 52, length: 4, type: Int.self),
+        .init(name: .RECORD_ODO_DAY7, partType: .MainBatt, bank: 2, address: 52, length: 4, type: Int.self),
         .init(name: .UNIX_TIME_DAY8, partType: .MainBatt, bank: 2, address: 56, length: 4, type: Int.self),
         .init(name: .RECORD_ODO_DAY8, partType: .MainBatt, bank: 2, address: 60, length: 4, type: Int.self),
-        .init(name: .RECORD_ODO_DAY8, partType: .MainBatt, bank: 2, address: 64, length: 4, type: Int.self),
+        .init(name: .UNIX_TIME_DAY9, partType: .MainBatt, bank: 2, address: 64, length: 4, type: Int.self),
         .init(name: .RECORD_ODO_DAY9, partType: .MainBatt, bank: 2, address: 68, length: 4, type: Int.self),
-        .init(name: .RECORD_ODO_DAY9, partType: .MainBatt, bank: 2, address: 72, length: 4, type: Int.self),
+        .init(name: .UNIX_TIME_DAY10, partType: .MainBatt, bank: 2, address: 72, length: 4, type: Int.self),
         .init(name: .RECORD_ODO_DAY10, partType: .MainBatt, bank: 2, address: 76, length: 4, type: Int.self),
         .init(name: .UNIX_TIME_DAY11, partType: .MainBatt, bank: 2, address: 80, length: 4, type: Int.self),
         .init(name: .RECORD_ODO_DAY11, partType: .MainBatt, bank: 2, address: 84, length: 4, type: Int.self),
