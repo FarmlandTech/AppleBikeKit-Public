@@ -22,7 +22,6 @@ public class ParameterDataRepository {
         case exception(Swift.Error)
     }
     
-    /// 基礎部件的關鍵參數陣列。(應再根據類別再次拆分)
     public let hmiBank0Parameters: [ParameterData] = [
         .init(name: .HmiSMID, partType: .HMI, bank: 0, address: 0, length: 15, type: String.self),
         .init(name: .HmiDMID, partType: .HMI, bank: 0, address: 15, length: 17, type: String.self),
@@ -44,6 +43,7 @@ public class ParameterDataRepository {
         .init(name: .BattDSN, partType: .MainBatt, bank: 0, address: 64, length: 32, type: String.self)
     ]
     
+    /// 基礎部件的關鍵參數陣列。(應再根據類別再次拆分)
     public private(set) lazy var normalParameters: [ParameterData] = {
         self.hmiBank0Parameters +
         [.init(name: .PRO_BT_DEV_NAME, partType: .HMI, bank: 0, address: 180, length: 22, type: String.self)] +

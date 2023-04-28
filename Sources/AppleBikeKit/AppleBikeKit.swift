@@ -134,6 +134,7 @@ public final class AppleBikeKit {
             .eraseToAnyPublisher()
     }()
     
+    /// 讀取參數時，電控回傳數據的發佈者。
     private let parameterDataSubject: PassthroughSubject<ParameterData, Swift.Error> = .init()
     
     /// 腳踏車裝置讀取來的參數的發佈者。
