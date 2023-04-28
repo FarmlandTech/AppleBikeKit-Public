@@ -23,23 +23,33 @@ public class ParameterDataRepository {
     }
     
     /// 基礎部件的關鍵參數陣列。(應再根據類別再次拆分)
-    public let normalParameters: [ParameterData] = [
+    public let hmiBank0Parameters: [ParameterData] = [
         .init(name: .HmiSMID, partType: .HMI, bank: 0, address: 0, length: 15, type: String.self),
         .init(name: .HmiDMID, partType: .HMI, bank: 0, address: 15, length: 17, type: String.self),
         .init(name: .HmiSSN, partType: .HMI, bank: 0, address: 32, length: 32, type: String.self),
-        .init(name: .HmiDSN, partType: .HMI, bank: 0, address: 64, length: 32, type: String.self),
-        .init(name: .PRO_BT_DEV_NAME, partType: .HMI, bank: 0, address: 180, length: 22, type: String.self),
-        
+        .init(name: .HmiDSN, partType: .HMI, bank: 0, address: 64, length: 32, type: String.self)
+    ]
+    
+    public let controllerBank0Parameters: [ParameterData] = [
         .init(name: .ControllerSMID, partType: .Controller, bank: 0, address: 0, length: 15, type: String.self),
         .init(name: .ControllerDMID, partType: .Controller, bank: 0, address: 15, length: 17, type: String.self),
         .init(name: .ControllerSSN, partType: .Controller, bank: 0, address: 32, length: 32, type: String.self),
-        .init(name: .ControllerDSN, partType: .Controller, bank: 0, address: 64, length: 32, type: String.self),
-        
+        .init(name: .ControllerDSN, partType: .Controller, bank: 0, address: 64, length: 32, type: String.self)
+    ]
+    
+    public let batteryBank0Parameters: [ParameterData] = [
         .init(name: .BattSMID, partType: .MainBatt, bank: 0, address: 0, length: 15, type: String.self),
         .init(name: .BattDMID, partType: .MainBatt, bank: 0, address: 15, length: 17, type: String.self),
         .init(name: .BattSSN, partType: .MainBatt, bank: 0, address: 32, length: 32, type: String.self),
         .init(name: .BattDSN, partType: .MainBatt, bank: 0, address: 64, length: 32, type: String.self)
     ]
+    
+    public private(set) lazy var normalParameters: [ParameterData] = {
+        self.hmiBank0Parameters +
+        [.init(name: .PRO_BT_DEV_NAME, partType: .HMI, bank: 0, address: 180, length: 22, type: String.self)] +
+        self.controllerBank0Parameters +
+        self.batteryBank0Parameters
+    }()
     
     /// 助力方案相關的參數陣列。
     public let assistLevelParameters:[ParameterData] = [
@@ -147,7 +157,10 @@ public class ParameterDataRepository {
     /// 整合型的參數陣列。(基本上用於片段讀取參數)
     public private(set) lazy var integratedParameters: [ParameterData] = {
         .init([
-            .init(name: .INTEGRATED_MILEAGE_RECORD, partType: .MainBatt, bank: 2, address: 0, length: 248, type: Any.self, dividedParameters: self.mileageRecordParameters)
+            .init(name: .INTEGRATED_MILEAGE_RECORD, partType: .MainBatt, bank: 2, address: 0, length: 248, type: Any.self, dividedParameters: self.mileageRecordParameters),
+            .init(name: .INTEGRATED_HMI_BANK0, partType: .HMI, bank: 0, address: 0, length: 96, type: Any.self, dividedParameters: self.hmiBank0Parameters),
+            .init(name: .INTEGRATED_CONTROLLER_BANK0, partType: .Controller, bank: 0, address: 0, length: 96, type: Any.self, dividedParameters: self.controllerBank0Parameters),
+            .init(name: .INTEGRATED_BATTERY_BANK0, partType: .MainBatt, bank: 0, address: 0, length: 96, type: Any.self, dividedParameters: self.batteryBank0Parameters)
         ])
     }()
     

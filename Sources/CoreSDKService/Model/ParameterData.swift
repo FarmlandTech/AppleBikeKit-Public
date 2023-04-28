@@ -10,6 +10,9 @@ import Foundation
 public struct ParameterData {
     public enum Name {
         case INTEGRATED_MILEAGE_RECORD
+        case INTEGRATED_HMI_BANK0
+        case INTEGRATED_BATTERY_BANK0
+        case INTEGRATED_CONTROLLER_BANK0
         
         case HmiSMID
         case HmiDMID
