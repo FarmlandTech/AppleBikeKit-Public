@@ -94,7 +94,6 @@ public final class AppleBikeKit {
                         let parameterDataList: [ParameterData] = try parameterData.dividIntoMultiParameters(rawData: rawData)
                         for parameterData in parameterDataList {
                             self.parameterDataSubject.send(parameterData)
-                            try self.coreSDKService.parameterDataRepository.findParameterData(name: parameterData.name).subject.send(parameterData.value)
                         }
                     } else {
                         parameterData.value = try rawData.bytes.convert2Value(type: parameterData.type,
