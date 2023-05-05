@@ -154,6 +154,10 @@ public final class AppleBikeKit {
         self.coreSDKService.restartDeviceStateSubject.eraseToAnyPublisher()
     }()
     
+    public private(set) lazy var resetParameterStatePublisher: AnyPublisher<Bool?, Never> = {
+        self.coreSDKService.resetParameterStateSubject.eraseToAnyPublisher()
+    }()
+    
     /**
      讀取部件參數的方法。
      

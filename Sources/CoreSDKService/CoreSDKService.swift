@@ -19,6 +19,8 @@ protocol CoreSDKDataSource: AnyObject {
     func writeParameter(state: Bool)
     
     func restartDevice(state: Bool)
+    
+    func resetParameter(state: Bool)
 }
 
 public final class CoreSDKService: NSObject {
@@ -41,6 +43,8 @@ public final class CoreSDKService: NSObject {
     private typealias WriteParameterEvent = @convention(c) (Int32) -> Void
     
     private typealias RestartDeviceEvent = @convention(c) (Int32) -> Void
+    
+    private typealias ResetParameterEvent = @convention(c) (Int32) -> Void
     
     private let updateDeviceInfoEvent: UpdateDeviceInfoEvent = { deviceInfo in
         CoreSDKService.dataSource?.updateDeviceInfo(deviceInfo: deviceInfo.FL)
@@ -67,6 +71,10 @@ public final class CoreSDKService: NSObject {
         CoreSDKService.dataSource?.restartDevice(state: state == 0)
     }
     
+    private let resetParameterEvent: ResetParameterEvent = { state in
+        CoreSDKService.dataSource?.resetParameter(state: state == 0)
+    }
+    
     public private(set) lazy var deviceInfoSubject: CurrentValueSubject<FL_Info_st?, Never> = {
         .init(nil)
     }()
@@ -88,6 +96,10 @@ public final class CoreSDKService: NSObject {
     }()
     
     public private(set) lazy var restartDeviceStateSubject: CurrentValueSubject<Bool?, Never> = {
+        .init(nil)
+    }()
+    
+    public private(set) lazy var resetParameterStateSubject: CurrentValueSubject<Bool?, Never> = {
         .init(nil)
     }()
     
@@ -250,6 +262,13 @@ public final class CoreSDKService: NSObject {
             throw Self.Error.restartDeviceFail(partType)
         }
     }
+    
+    public func resetParameters(partType: CommunicationPartType, bank: Int) throws {
+        let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.ResetParameters(SDK_ROUTER_BLE, partType.coreType, UInt8(bank), self.resetParameterEvent)
+        guard isCoreSDKCompleteTask == 0 else {
+            throw Self.Error.readSingleParameterFail
+        }
+    }
 }
 
 extension CoreSDKService: CoreSDKDataSource {
@@ -268,5 +287,9 @@ extension CoreSDKService: CoreSDKDataSource {
     
     func restartDevice(state: Bool) {
         self.restartDeviceStateSubject.send(state)
+    }
+    
+    func resetParameter(state: Bool) {
+        self.resetParameterStateSubject.send(state)
     }
 }
