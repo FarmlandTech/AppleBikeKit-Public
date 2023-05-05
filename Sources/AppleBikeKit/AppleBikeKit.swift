@@ -295,9 +295,4 @@ public final class AppleBikeKit {
     public func readRSSI() {
         self.connectedPeripheral.currentPeripheral.value?.device.readRSSI()
     }
-    
-#warning("寫入參數時會使用，未實作。")
-    func writeCharacteristic(bluetoothCharacteristic: BluetoothCharacteristic, value: [UInt8]) {
-        self.connectedPeripheral.currentPeripheral.value
-    }
 }
