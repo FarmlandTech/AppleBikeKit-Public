@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import Combine
 
-public struct ParameterData {
+public class ParameterData {
     public enum Name {
         case INTEGRATED_MILEAGE_RECORD
         case INTEGRATED_HMI_BANK0
@@ -135,7 +136,10 @@ public struct ParameterData {
     public private(set) var address: UInt16
     public private(set) var length: UInt16
     public private(set) var type: Any
+    // 目前 var value: Any? 與 var subject: CurrentValueSubject<Any?, Never> 的存在，有相當程度的重複性
+    // ，但因為早期規劃，暫時先保留，後面的版本在優化參數架構。
     public var value: Any?
+    public private(set) var subject: CurrentValueSubject<Any?, Never> = .init(nil)
     public private(set) var dividedParameters: [ParameterData]?
     
     public init(name: ParameterData.Name, partType: CommunicationPartType, bank: UInt8, address: UInt16, length: UInt16, type: Any, value: Any? = nil, dividedParameters: [ParameterData]? = nil) {

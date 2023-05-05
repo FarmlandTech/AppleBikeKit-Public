@@ -86,7 +86,7 @@ public final class AppleBikeKit {
             .sink(receiveValue: { rawData in
                 do {
                     let repository: ParameterDataRepository = self.coreSDKService.parameterDataRepository
-                    var parameterData: ParameterData = try repository.findParameterData(type: rawData.targetDevice,
+                    let parameterData: ParameterData = try repository.findParameterData(type: rawData.targetDevice,
                                                                                         bank: rawData.bank,
                                                                                         address: rawData.address,
                                                                                         length: rawData.length)
@@ -94,11 +94,13 @@ public final class AppleBikeKit {
                         let parameterDataList: [ParameterData] = try parameterData.dividIntoMultiParameters(rawData: rawData)
                         for parameterData in parameterDataList {
                             self.parameterDataSubject.send(parameterData)
+                            try self.coreSDKService.parameterDataRepository.findParameterData(name: parameterData.name).subject.send(parameterData.value)
                         }
                     } else {
                         parameterData.value = try rawData.bytes.convert2Value(type: parameterData.type,
                                                                               length: Int(parameterData.length))
                         self.parameterDataSubject.send(parameterData)
+                        try self.coreSDKService.parameterDataRepository.findParameterData(name: parameterData.name).subject.send(parameterData.value)
                     }
                 } catch {
                     self.parameterDataSubject.send(completion: .failure(error))
