@@ -86,7 +86,7 @@ public final class AppleBikeKit {
             .sink(receiveValue: { rawData in
                 do {
                     let repository: ParameterDataRepository = self.coreSDKService.parameterDataRepository
-                    var parameterData: ParameterData = try repository.findParameterData(type: rawData.targetDevice,
+                    let parameterData: ParameterData = try repository.findParameterData(type: rawData.targetDevice,
                                                                                         bank: rawData.bank,
                                                                                         address: rawData.address,
                                                                                         length: rawData.length)
@@ -99,6 +99,7 @@ public final class AppleBikeKit {
                         parameterData.value = try rawData.bytes.convert2Value(type: parameterData.type,
                                                                               length: Int(parameterData.length))
                         self.parameterDataSubject.send(parameterData)
+                        try self.coreSDKService.parameterDataRepository.findParameterData(name: parameterData.name).subject.send(parameterData.value)
                     }
                 } catch {
                     self.parameterDataSubject.send(completion: .failure(error))
@@ -150,6 +151,10 @@ public final class AppleBikeKit {
     /// 重啟部件時，執行狀態的發佈者。
     public private(set) lazy var restartDeviceStatePublisher: AnyPublisher<Bool?, Never> = {
         self.coreSDKService.restartDeviceStateSubject.eraseToAnyPublisher()
+    }()
+    
+    public private(set) lazy var resetParameterStatePublisher: AnyPublisher<Bool?, Never> = {
+        self.coreSDKService.resetParameterStateSubject.eraseToAnyPublisher()
     }()
     
     /**
@@ -294,10 +299,5 @@ public final class AppleBikeKit {
      */
     public func readRSSI() {
         self.connectedPeripheral.currentPeripheral.value?.device.readRSSI()
-    }
-    
-#warning("寫入參數時會使用，未實作。")
-    func writeCharacteristic(bluetoothCharacteristic: BluetoothCharacteristic, value: [UInt8]) {
-        self.connectedPeripheral.currentPeripheral.value
     }
 }
