@@ -12,20 +12,20 @@ public struct BluetoothPeripheral {
     
     public let device: CBPeripheral
     
-    var rssi: Float?
+    public var rssi: Float?
     
     public var deviceName: String?
     
-    var localName: String?
+    public var localName: String?
     
-    var uuid: String?
+    public var uuid: String?
+    
+    public var address: String {
+        self.device.identifier.uuidString
+    }
     
     var services: [BluetoothService] {
         self.device.services?.map({ .init(service: $0) }) ?? .init()
-    }
-    
-    var address: String {
-        self.device.identifier.uuidString
     }
     
     public func setNotifyValue(_ enabled: Bool, for characteristic: CBCharacteristic) {
