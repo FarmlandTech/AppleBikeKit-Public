@@ -113,12 +113,13 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
             peripherals.append((device, Date()))
         }
         
-        for (index, element) in peripherals.enumerated() {
-            guard Date().timeIntervalSince1970 - element.date.timeIntervalSince1970 >= 2 else { continue }
-            peripherals.remove(at: index)
+        var results: [(peripheral: BluetoothPeripheral, date: Date)] = .init()
+        for element in peripherals {
+            guard Date().timeIntervalSince1970 - element.date.timeIntervalSince1970 < 2 else { continue }
+            results.append(element)
         }
         
-        self.foundDevicesSubject.send(peripherals)
+        self.foundDevicesSubject.send(results)
     }
     
     // 監聽藍牙裝置的連線。
