@@ -29,6 +29,13 @@ public final class AppleBikeKit {
     
     /// 建構子。
     private init() {
+        self.coreBluetoothService.peripheralSubject
+            .sink(receiveValue: { (status, peripheral) in
+                guard case .didDisconnect = status else { return }
+                self.coreBluetoothService.foundDevicesSubject.value = .init()
+            })
+            .store(in: &self.subscriptions)
+        
         // 監聽特徵，確認連線狀態。
         self.characteristicsPublisher
             .sink(receiveValue: { peripheral in
@@ -212,6 +219,9 @@ public final class AppleBikeKit {
     /// 掃描到的裝置的發佈者。
     public private(set) lazy var foundDevicesPublisher: AnyPublisher<Array<BluetoothPeripheral>, Never> = {
         self.coreBluetoothService.foundDevicesSubject
+            .map({ elements in
+                elements.map({ $0.peripheral })
+            })
             .map({ peripherals in
                 peripherals.filter({
                     $0.deviceName != nil && ($0.deviceName!.hasPrefix("FL") || $0.deviceName!.hasPrefix("Farmland"))

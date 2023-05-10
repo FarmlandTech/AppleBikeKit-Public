@@ -27,14 +27,6 @@ public class CoreBluetoothService: NSObject {
     
     private var serviceUUID: String?
     
-    // TODO: 第一版先發布後，再找另外找時間弄吧...
-    // FIXME: 第一版先發布後，再找另外找時間弄吧...
-//    private var timerSubscription: AnyCancellable?
-//
-//    lazy private var foundDeviceResetTimer = {
-//        Timer.publish(every: 1, tolerance: 0.1, on: .main, in: .common).autoconnect()
-//    }()
-//
     private lazy var centralManager: CBCentralManager = {
         .init(delegate: self, queue: .main)
     }()
@@ -42,17 +34,7 @@ public class CoreBluetoothService: NSObject {
     public override init() {
         super.init()
         _ = self.centralManager
-        // TODO: 第一版先發布後，再找另外找時間弄吧...
-        // FIXME: 第一版先發布後，再找另外找時間弄吧...
-//        self.timerSubscription = self.foundDeviceResetTimer.sink(receiveValue: { [weak self] date in
-//            guard let self: CoreBluetoothService else { return }
-//            self.foundDevicesSubject.value = []
-//        })
     }
-    
-//    deinit {
-//        self.timerSubscription?.cancel()
-//    }
     
     public private(set) lazy var stateSubject: CurrentValueSubject<CBManagerState, Never> = {
         .init(.unknown)
@@ -62,7 +44,7 @@ public class CoreBluetoothService: NSObject {
         .init(false)
     }()
     
-    public private(set) lazy var foundDevicesSubject: CurrentValueSubject<Array<BluetoothPeripheral>, Never> = {
+    public private(set) lazy var foundDevicesSubject: CurrentValueSubject<Array<(peripheral: BluetoothPeripheral, date: Date)>, Never> = {
         .init(.init())
     }()
     
