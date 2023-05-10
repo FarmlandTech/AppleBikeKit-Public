@@ -179,7 +179,7 @@ public final class AppleBikeKit {
      */
     public func writeParameter(name: ParameterData.Name, value: Any) throws {
         let repository: ParameterDataRepository = self.coreSDKService.parameterDataRepository
-        var parameterData: ParameterData = try repository.findParameterData(name: name)
+        let parameterData: ParameterData = try repository.findParameterData(name: name)
         parameterData.value = value
         try self.coreSDKService.write(parameter: parameterData)
     }

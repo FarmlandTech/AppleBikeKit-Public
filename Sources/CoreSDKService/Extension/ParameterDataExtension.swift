@@ -15,7 +15,7 @@ extension ParameterData {
     }
     
     public func dividIntoMultiParameters(rawData: RawData) throws -> [ParameterData] {
-        guard var parameterDataList: [ParameterData] = self.dividedParameters else {
+        guard let parameterDataList: [ParameterData] = self.dividedParameters else {
             throw Self.Error.dividedParametersNotExist
         }
 
@@ -31,7 +31,7 @@ extension ParameterData {
             let end: Int = Int(parameterData.address + parameterData.length - 1)
             let bytes: [UInt8] = Array(rawData.bytes[start...end])
             
-            var element: ParameterData = parameterData
+            let element: ParameterData = parameterData
             element.subject.value = try bytes.convert2Value(type: parameterData.type, length: Int(parameterData.length))
             
             result.append(element)

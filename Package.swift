@@ -25,22 +25,23 @@ let package = Package(
         .target(
             name: "CoreSDK",
             path: "Sources/CoreSDK",
-            publicHeadersPath: "include",
-            swiftSettings: [.unsafeFlags(["-suppress-warnings"])]),
+//            exclude: ["include/ActionScript.h", "include/FL_Device_HMI.h", "include/FL_Device_Controller.h"],
+//            publicHeadersPath: "include",
+            cSettings: [.unsafeFlags(["-w"])]
+//            cxxSettings: [.unsafeFlags(["-w"])]
+//            cxxSettings: [.unsafeFlags(["-w"]), .headerSearchPath("include"), .define("ENABLE_CPP"), .unsafeFlags(["-std=c++11"])]
+        ),
         .target(
             name: "CoreSDKService",
             dependencies: ["CoreSDK"],
-            path: "Sources/CoreSDKService",
-            swiftSettings: [.unsafeFlags(["-suppress-warnings"])]),
+            path: "Sources/CoreSDKService"),
         .target(
             name: "CoreBLEService",
-            path: "Sources/CoreBLEService",
-            swiftSettings: [.unsafeFlags(["-suppress-warnings"])]),
+            path: "Sources/CoreBLEService"),
         .target(
             name: "AppleBikeKit",
             dependencies: ["CoreSDK", "CoreSDKService", "CoreBLEService"],
             path: "Sources/AppleBikeKit",
-            swiftSettings: [.unsafeFlags(["-suppress-warnings"])],
             linkerSettings: [
                 .linkedFramework("SwiftUI", .when(platforms: [.iOS])),
                 .linkedFramework("AppKit", .when(platforms: [.macOS]))
