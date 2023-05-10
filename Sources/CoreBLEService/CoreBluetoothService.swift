@@ -27,7 +27,8 @@ public class CoreBluetoothService: NSObject {
     
     private var serviceUUID: String?
     
-#warning("第一版先發布後，再找另外找時間弄吧...")
+    // TODO: 第一版先發布後，再找另外找時間弄吧...
+    // FIXME: 第一版先發布後，再找另外找時間弄吧...
 //    private var timerSubscription: AnyCancellable?
 //
 //    lazy private var foundDeviceResetTimer = {
@@ -41,7 +42,8 @@ public class CoreBluetoothService: NSObject {
     public override init() {
         super.init()
         _ = self.centralManager
-#warning("第一版先發布後，再找另外找時間弄吧...")
+        // TODO: 第一版先發布後，再找另外找時間弄吧...
+        // FIXME: 第一版先發布後，再找另外找時間弄吧...
 //        self.timerSubscription = self.foundDeviceResetTimer.sink(receiveValue: { [weak self] date in
 //            guard let self: CoreBluetoothService else { return }
 //            self.foundDevicesSubject.value = []

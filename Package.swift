@@ -24,7 +24,13 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "CoreSDK",
-            path: "Sources/CoreSDK"),
+            path: "Sources/CoreSDK",
+//            exclude: ["include/ActionScript.h", "include/FL_Device_HMI.h", "include/FL_Device_Controller.h"],
+//            publicHeadersPath: "include",
+            cSettings: [.unsafeFlags(["-w"])]
+//            cxxSettings: [.unsafeFlags(["-w"])]
+//            cxxSettings: [.unsafeFlags(["-w"]), .headerSearchPath("include"), .define("ENABLE_CPP"), .unsafeFlags(["-std=c++11"])]
+        ),
         .target(
             name: "CoreSDKService",
             dependencies: ["CoreSDK"],
@@ -42,7 +48,8 @@ let package = Package(
             ]),
         .testTarget(
             name: "AppleBikeKitTests",
-            dependencies: ["AppleBikeKit"]),
+            dependencies: ["AppleBikeKit"],
+            swiftSettings: [.unsafeFlags(["-suppress-warnings"])]),
     ],
     swiftLanguageVersions: [.v5]
 )
