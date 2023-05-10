@@ -105,7 +105,7 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
         if let foundDevice = self.foundDevicesSubject.value.first(where: { $0.address == device.address }) {
             for index in stride(from: 0, through: self.foundDevicesSubject.value.count - 1, by: 1) {
                 guard self.foundDevicesSubject.value[index].address == device.address else { continue }
-                self.foundDevicesSubject.value[index] = foundDevice
+                self.foundDevicesSubject.value[index] = device
             }
         } else {
             self.foundDevicesSubject.value.append(device)
