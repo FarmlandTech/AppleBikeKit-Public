@@ -24,25 +24,31 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "CoreSDK",
-            path: "Sources/CoreSDK"),
+            path: "Sources/CoreSDK",
+            publicHeadersPath: "include",
+            swiftSettings: [.unsafeFlags(["-suppress-warnings"])]),
         .target(
             name: "CoreSDKService",
             dependencies: ["CoreSDK"],
-            path: "Sources/CoreSDKService"),
+            path: "Sources/CoreSDKService",
+            swiftSettings: [.unsafeFlags(["-suppress-warnings"])]),
         .target(
             name: "CoreBLEService",
-            path: "Sources/CoreBLEService"),
+            path: "Sources/CoreBLEService",
+            swiftSettings: [.unsafeFlags(["-suppress-warnings"])]),
         .target(
             name: "AppleBikeKit",
             dependencies: ["CoreSDK", "CoreSDKService", "CoreBLEService"],
             path: "Sources/AppleBikeKit",
+            swiftSettings: [.unsafeFlags(["-suppress-warnings"])],
             linkerSettings: [
                 .linkedFramework("SwiftUI", .when(platforms: [.iOS])),
                 .linkedFramework("AppKit", .when(platforms: [.macOS]))
             ]),
         .testTarget(
             name: "AppleBikeKitTests",
-            dependencies: ["AppleBikeKit"]),
+            dependencies: ["AppleBikeKit"],
+            swiftSettings: [.unsafeFlags(["-suppress-warnings"])]),
     ],
     swiftLanguageVersions: [.v5]
 )
