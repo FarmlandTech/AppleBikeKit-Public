@@ -102,14 +102,24 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
                                                 deviceName: usedAdvertisementData.localName,
                                                 uuid: usedAdvertisementData.uuids?.first)
         
-        if let _ = self.foundDevicesSubject.value.first(where: { $0.address == device.address }) {
-            for index in stride(from: 0, through: self.foundDevicesSubject.value.count - 1, by: 1) {
-                guard self.foundDevicesSubject.value[index].address == device.address else { continue }
-                self.foundDevicesSubject.value[index] = device
+        var peripherals: [(peripheral: BluetoothPeripheral, date: Date)] = self.foundDevicesSubject.value
+        
+        if let _ = peripherals.first(where: { $0.peripheral.address == device.address }) {
+            for index in stride(from: 0, through: peripherals.count - 1, by: 1) {
+                guard peripherals[index].peripheral.address == device.address else { continue }
+                peripherals[index] = (device, Date())
             }
         } else {
-            self.foundDevicesSubject.value.append(device)
+            peripherals.append((device, Date()))
         }
+        
+        var results: [(peripheral: BluetoothPeripheral, date: Date)] = .init()
+        for element in peripherals {
+            guard Date().timeIntervalSince1970 - element.date.timeIntervalSince1970 < 2 else { continue }
+            results.append(element)
+        }
+        
+        self.foundDevicesSubject.send(results)
     }
     
     // 監聽藍牙裝置的連線。
