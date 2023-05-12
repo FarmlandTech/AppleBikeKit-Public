@@ -20,6 +20,7 @@ public class ParameterData {
         case HmiSSN
         case HmiDSN
         case PRO_BT_DEV_NAME
+        case DISP_UNIT_SW
         
         case ControllerSMID
         case ControllerDMID

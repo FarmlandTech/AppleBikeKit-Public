@@ -26,7 +26,11 @@ public class ParameterDataRepository {
         .init(name: .HmiSMID, partType: .HMI, bank: 0, address: 0, length: 15, type: String.self),
         .init(name: .HmiDMID, partType: .HMI, bank: 0, address: 15, length: 17, type: String.self),
         .init(name: .HmiSSN, partType: .HMI, bank: 0, address: 32, length: 32, type: String.self),
-        .init(name: .HmiDSN, partType: .HMI, bank: 0, address: 64, length: 32, type: String.self)
+        .init(name: .HmiDSN, partType: .HMI, bank: 0, address: 64, length: 32, type: String.self),
+    ]
+    
+    public let hmiBank2Parameters: [ParameterData] = [
+        .init(name: .DISP_UNIT_SW, partType: .HMI, bank: 2, address: 153, length: 1, type: Int.self)
     ]
     
     public let controllerBank0Parameters: [ParameterData] = [
@@ -47,6 +51,7 @@ public class ParameterDataRepository {
     public private(set) lazy var normalParameters: [ParameterData] = {
         self.hmiBank0Parameters +
         [.init(name: .PRO_BT_DEV_NAME, partType: .HMI, bank: 0, address: 180, length: 22, type: String.self)] +
+        self.hmiBank2Parameters +
         self.controllerBank0Parameters +
         self.batteryBank0Parameters
     }()
