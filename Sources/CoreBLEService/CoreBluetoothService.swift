@@ -21,8 +21,16 @@ public class CoreBluetoothService: NSObject {
         case wrongManagerState(CBManagerState)
     }
     
+    /// 藍牙連線狀態。
     public enum PeripheralStatus {
-        case unknown, didConnect, didDisconnect
+        /// 未知。
+        case unknown
+        /// 未連線。
+        case didConnect
+        /// 已連線。
+        case didDisconnect
+        /// 已進入準備狀態。(可被操作)
+        case prepared
     }
     
     private var serviceUUID: String?
