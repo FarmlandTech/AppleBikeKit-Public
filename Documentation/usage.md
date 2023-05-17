@@ -29,6 +29,8 @@ AppleBikeKit.shared.stopScan()
 import Combine
 import AppleBikeKit
 
+var subscriptions: Set<AnyCancellable> = .init()
+
 AppleBikeKit.shared.scanningPublisher.sink(receiveValue: { isScanning in
     // 監聽掃描狀態。(正在掃描？或者終止掃描？)
 }).store(in: &self.subscriptions)
@@ -56,6 +58,34 @@ AppleBikeKit.shared.connect(peripheral!)
 
 // 斷線
 AppleBikeKit.shared.disconnect(peripheral!)
+```
+
+- 可透過下列方式監聽連線狀態。
+
+```
+import AppleBikeKit
+
+var subscriptions: Set<AnyCancellable> = .init()
+
+AppleBikeKit.shared.peripheralPublisher.sink(receiveValue: { status, peripheral in
+    <#code#>
+}).store(in: &self.subscriptions)
+```
+
+> 連線狀態為枚舉。
+
+```
+/// 藍牙連線狀態。
+public enum PeripheralStatus {
+    /// 未知。
+    case unknown
+    /// 未連線。
+    case didConnect
+    /// 已連線。
+    case didDisconnect
+    /// 已進入準備狀態。(可被操作)
+    case prepared
+}
 ```
 
 ### 讀取部件

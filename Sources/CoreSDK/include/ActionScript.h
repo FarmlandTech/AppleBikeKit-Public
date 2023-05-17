@@ -159,6 +159,10 @@ extern "C" {
 
 	void AS_FL_BLE_ConfigSysTime(struct FunctionParameterDefine* paras);
 
+	void AS_FL_BLE_SetELock_DEV(struct FunctionParameterDefine* paras);
+
+	void AS_FL_BLE_GetELock_DEV(struct FunctionParameterDefine* paras);
+
 	void ActionScriptInit(void);
 	int ActionScriptCreate(ACTION_DEFINE_T new_action);
 	void ActionScriptRun(void);

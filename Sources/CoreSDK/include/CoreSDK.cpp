@@ -1,4 +1,4 @@
-
+﻿
 #include <string>
 
 #include "CoreSDK.h"
@@ -18,6 +18,8 @@
 #include <thread>
 #include <ctime>
 
+#include "LogPrinter.h"
+
 #ifdef _WIN32
 #include <windows.h>
 #else
@@ -28,8 +30,8 @@ using namespace std;
 using namespace std::chrono;
 using namespace std::this_thread;
 
-
-#define SDK_Version_Str "b.0.20"
+// SDK 版本號
+#define SDK_Version_Str "1.0.2"
 
 
 typedef struct CANPacket_st
@@ -69,7 +71,7 @@ ISOTP_INST_T CoreSDK_ISOTP;
 ISOTP_INST_T FL_HMI_ISOTP;
 LIB_EVENT_SCHED_INST_T sched_inst;
 
-
+// CAN Bus封包輸入處理函式
 int __stdcall CANBusPacket_IN(unsigned int can_id, bool is_extender_id, unsigned char* raw_data, unsigned int leng)
 {
     CANPacket_T raw = {0};
@@ -82,27 +84,31 @@ int __stdcall CANBusPacket_IN(unsigned int can_id, bool is_extender_id, unsigned
 
     if (can_id > 0 && raw_data != NULL)
     {
+        // Can ID
         raw.can_id = can_id;
+        // 是否為拓展型ID定義
         raw.is_extender_id = is_extender_id;
+        // 封包長度
         raw.leng = leng;
 
         if (is_extender_id)
         {
-            LogD("CAN[RX] ExtID:0x%05x Leng:%d Data[", can_id, leng);
+            LOG_PUSH("CAN[RX] ExtID:0x%05x Leng:%d Data[", can_id, leng);
         }
         else
         {
-            LogD("CAN[RX] StdID:0x%03x Leng:%d Data[", can_id, leng);
+            LOG_PUSH("CAN[RX] StdID:0x%03x Leng:%d Data[", can_id, leng);
         }
         
-
+        // 複製封包內容
         for ( index=0;index < leng;index++)
         {
             raw.data[index] = raw_data[index];
-            LogD("0x%02x ", raw_data[index]);
+            LOG_PUSH("0x%02x ", raw_data[index]);
         }
-        LogD("]\n");
-
+        LOG_PUSH("]\n");
+        LOG_FLUSH;
+        // 寫入FIFO
         lib_fifo_write(&can_rx_queue, &raw);
 
         return SDK_RETURN_SUCCESS;
@@ -154,17 +160,18 @@ int __stdcall BLECommandPacket_IN(unsigned char* data, unsigned int leng)
 
         if (opc == FL_BLE_OPC_CAN_PASS_DATA_RES)
         {
-            LogD("BLE[RX]->");
+            LOG_PUSH("BLE[RX]->");
         }
         else
         {
-            LogD("BLE[RX] %d-%d OPC:%d Target:%d Res:%d Data[", frame_size, frame_index, opc, target_device, response_code);
-
+            LOG_PUSH("BLE[RX] %d-%d OPC:%d Target:%d Res:%d Data[", frame_size, frame_index, opc, target_device, response_code);
             for (uint8_t index = 6; index < leng; index++)
             {
-                LogD("0x%02x ", data[index]);
+                LOG_PUSH("0x%02x ", data[index]);
             }
-            LogD("]\n");
+            LOG_PUSH("]\n");
+
+            LOG_FLUSH;
         }
 
         
@@ -252,18 +259,21 @@ int __stdcall BLECommandPacket_OUT(unsigned char* data, unsigned int* leng)
             can_id &= 0x7FFFFFFF;
             if (is_extender)
             {
-                LogD("BLE[TX]->CAN[TX] ExtID:0x%05x Leng:%d Data[", can_id, packet_leng);
+                LOG_PUSH("BLE[TX]->CAN[TX] ExtID:0x%05x Leng:%d Data[", can_id, packet_leng);
             }
             else
             {
-                LogD("BLE[TX]->CAN[TX] StdID:0x%03x Leng:%d Data[", can_id, packet_leng);
+                LOG_PUSH("BLE[TX]->CAN[TX] StdID:0x%03x Leng:%d Data[", can_id, packet_leng);
             }
+
 
             for (uint8_t index = 10; index < ble_common_leng; index++)
             {
-                LogD("0x%02x ", data[index]);
+                LOG_PUSH("0x%02x ", data[index]);
             }
-            LogD("]\n");
+            
+            LOG_PUSH("]\n");
+            LOG_FLUSH;
         }
         else
         {
@@ -273,23 +283,25 @@ int __stdcall BLECommandPacket_OUT(unsigned char* data, unsigned int* leng)
             uint8_t target = data[4];
             uint8_t resp = data[5];
 
-            LogD("BLE[TX] %d-%d OPC:%d Target:%d Res:%d Data[", frame_size, frame_index, opc, target, resp);
+            LOG_PUSH("BLE[TX] %d-%d OPC:%d Target:%d Res:%d Data[", frame_size, frame_index, opc, target, resp);
 
             if (ble_common_leng > 20)
             {
-                LogD("\n");
+                LOG_PUSH("\n");
             }
 
             for (uint8_t index = 6; index < ble_common_leng; index++)
             {
-                LogD("0x%02x ", data[index]);
+                LOG_PUSH("0x%02x ", data[index]);
 
                 if ((index-6)%20 == 0 && index > 6)
                 {
-                    LogD("\n");
+                    LOG_PUSH("\n");
                 }
             }
-            LogD("]\n");
+            LOG_PUSH("]\n");
+
+            LOG_FLUSH;
         }
         
 
@@ -323,22 +335,23 @@ int __stdcall BLEDataPacket_OUT(unsigned char* data, unsigned int* leng)
         uint8_t target = ble_common_buff[4];
         uint8_t resp = ble_common_buff[5];
 
-        LogD("BLE[TX] %d-%d OPC:%d Target:%d Res:%d With-out Respose Data[\n", frame_size, frame_index, opc, target, resp);
+        LOG_PUSH("BLE[TX] %d-%d OPC:%d Target:%d Res:%d With-out Respose Data[", frame_size, frame_index, opc, target, resp);
              
 
         for (copy_index = 0; copy_index < ble_common_leng; copy_index++)
         {
             data[copy_index] = ble_common_buff[copy_index];
 
-            LogD("0x%02x ", data[(copy_index+6)]);
+            LOG_PUSH("0x%02x ", data[(copy_index+6)]);
 
             if ((copy_index % 20) == 0 && copy_index > 0)
             {
-                LogD("\n");
+                LOG_PUSH("\n");
             }
         }
 
-        LogD("]\n");
+        LOG_PUSH("]\n");
+        LOG_FLUSH;
 
         *leng = ble_common_leng;
         return SDK_RETURN_SUCCESS;
@@ -370,42 +383,54 @@ int SendToCANBUS(unsigned int can_id, bool is_extender_id, unsigned char* raw_da
     return 0;
 }
 
+// 啟用CoreSDK執行緒
 int __stdcall Enable(void)
 {
+    // 判斷是否已執行初始化
     if (!SDK_BeInit)
     {
+        // 尚未初始化 回傳錯誤代碼
         return SDK_RETURN_NO_INIT;
     }
-
+    // ISO TP 發送封包程式重新定義
     CoreSDK_ISOTP.send_packet = SendToCANBUS;
-
+    // ISO TP 相關程式初始化參數
     ISOTP_Init(&CoreSDK_ISOTP);
 
-    LogD("SDK Thread Enable\n");
-
-
+    LOG_PUSH("SDK Thread Enable\n");
+    LOG_FLUSH;
+    // 執行緒狀態轉為執行中
     is_thread_dispose = false;
+    // 啟用執行緒 => parse_loop
     parse_thread_p = new thread(parse_loop);
+    // 背景執行
     parse_thread_p->detach();
-
+    // 啟用執行緒 => timer_1ms_tick
     timer_thread_p = new thread(timer_1ms_tick);
+    // 背景執行
     timer_thread_p->detach();
 
     return SDK_RETURN_SUCCESS;
 }
 
 
-
+// 禁用CoreSDK執行緒
 int __stdcall Disable(void)
 {
+    // 判斷是否已執行初始化
     if (!SDK_BeInit)
     {
+        // 尚未初始化 回傳錯誤代碼
         return SDK_RETURN_NO_INIT;
     }
 
-    LogD("SDK Thread Disable\n");
+    LOG_PUSH("SDK Thread Disable\n");
+    LOG_FLUSH;
+
+    // 檢查執行緒是否存在
     if (parse_thread_p)
     {
+        // 翻轉執行緒狀態, 讓執行緒自行中止
         is_thread_dispose = true;
     }
 
@@ -417,22 +442,23 @@ void parse_loop(void)
 {
     uint32_t do_nothing_cnt = 0;
     CANPacket_T read_packet = {0};
-
+    // 檢查是否需要中止執行緒旗標
     while (is_thread_dispose == false)
     {
+        // 委派用腳本運行
         ActionScriptRun();
-
-        
+        // 檢查CAN RX是否有待處理資料        
         if (lib_fifo_length(&can_rx_queue) > 0)
         {
+            // 讀取FIFO內容 並複製到暫存區塊
             lib_fifo_read(&can_rx_queue, &read_packet);
-
         }
         else
         {
-//            read_packet = { };
+            // 清空暫存區塊
+            read_packet = { };
         }
-
+        // ISO TP解析程式
         ISOTP_Process(&CoreSDK_ISOTP,
             read_packet.can_id,
             read_packet.is_extender_id,
@@ -445,7 +471,7 @@ void parse_loop(void)
             read_packet.data,
             read_packet.leng);
         */
-
+        // 嘗試使用農田CAN-Bus通訊協議解析暫存資料
         if (FL_CAN_TryPaser(read_packet.can_id,
             read_packet.is_extender_id,
             read_packet.data,
@@ -453,6 +479,7 @@ void parse_loop(void)
         {
             if (sdk.Inst.InfoUpdateEvent)
             {
+                // 通知狀態更新
                 sdk.Inst.InfoUpdateEvent(DeviceInfoInst);
             }
         }
@@ -473,27 +500,44 @@ void parse_loop(void)
             can_rx_queue.pop();
         }
         */
-
+        // 排程器執行
         lib_event_sched_run();
+        // 執行緒休眠
+#ifdef _WIN32
+        Sleep(0);
+#else
+        usleep(sdk.Inst.ThreadSleepInterval_us);
+#endif // _WIN32
     }
 
-    LogD("SDK Thread Exit\n");
+    LOG_PUSH("SDK Thread Exit\n");
+    LOG_FLUSH;
 }
 
+// 1 ms 計時器
+// 所有與時間相關函式的基礎
 void timer_1ms_tick(void)
 {
     while (is_thread_dispose == false)
     {
 #ifdef _WIN32
-        Sleep(1);
+        // _WIN32
+        static clock_t now = clock();
+        now = clock();
+
+        while (now >= clock())
+        {
+            Sleep(0);
+        }
 #else
         usleep(1000);
-#endif // _WIN32
-
+#endif 
+        // ISO TP 計時
         ISOTP_timer_1ms_tick(&CoreSDK_ISOTP);
         ISOTP_timer_1ms_tick(&FL_HMI_ISOTP);
-        
+        // 委派計時
         ActionScript_timer_1ms_tick();
+        // 排程器計時
         lib_event_sched_1ms_timer_callback();
     }
 }
@@ -675,6 +719,7 @@ void ReadParameter_Finally(struct FunctionParameterDefine* action_param)
         GetActionParam(&action_param[3], &temp_val);
         bank_index = (uint8_t)temp_val;
         FL_CAN_ReadParameter((SDKDeviceType_e)device, bank_index, addr, leng, sdk.param_mem);
+        // 委派成功, 回傳讀取到的參數值
         ReadParameters_callback(SDK_RETURN_SUCCESS, (SDKDeviceType_e)device, sdk.param_mem, addr, leng, bank_index);
     }
 }
@@ -685,14 +730,19 @@ void ReadParameter_Error(uint32_t err_code)
     if (ReadParameters_callback)
     {
         /*
+        uint64_t temp_val;
         uint32_t addr;
         uint16_t leng;
         uint8_t bank_index, device;
         
-        GetActionParam(&action_param[0], &device);
-        GetActionParam(&action_param[1], &addr);
-        GetActionParam(&action_param[2], &leng);
-        GetActionParam(&action_param[3], &bank_index);
+        GetActionParam(&action_param[0], &temp_val);
+        device = (uint8_t)temp_val;
+        GetActionParam(&action_param[1], &temp_val);
+        addr = (uint32_t)temp_val;
+        GetActionParam(&action_param[2], &temp_val);
+        leng = (uint16_t)temp_val;
+        GetActionParam(&action_param[3], &temp_val);
+        bank_index = (uint8_t)temp_val;
         
         ReadParameters_callback(err_code, (SDKDeviceType_e)device, sdk.param_mem, addr, leng, bank_index);
         */
@@ -708,27 +758,35 @@ int __stdcall ReadParameters(RouterType router,
     fpCallback_ReadParameters callback)
 {
     ACTION_DEFINE_T new_action = {};
-
+    // 參數[0]:目標裝置
     SetActionParam(&new_action.paras[0], PARA_TYPE_DEVICE_TYPE, &target_device);
+    // 參數[1]:位址
     SetActionParam(&new_action.paras[1], PARA_TYPE_UINT16, &addr);
+    // 參數[2]:長度
     SetActionParam(&new_action.paras[2], PARA_TYPE_UINT16, &leng);
+    // 參數[3]:區塊索引
     SetActionParam(&new_action.paras[3], PARA_TYPE_UINT8, &bank_index);
+    // 儲存執行完畢後回呼指標
     ReadParameters_callback = callback;
-
+    // 判斷是發送BLE封包或是CAN-Bus封包
     switch (router)
     {
     case SDK_ROUTER_CANBUS:
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_CANBus_ReadParameter;
         break;
 
     default:
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_BLE_ReadParameter;
         break;
     }
 
-    
+    // 指定Action Script完成時的回呼指標
     new_action.finally_callback = ReadParameter_Finally;
+    // 指定Action Script錯誤時的回呼指標
     new_action.error_callback = ReadParameter_Error;
+    // 將新Action推送至等待處理的腳本中
     ActionScriptCreate(new_action);
 
     return SDK_RETURN_SUCCESS;
@@ -767,28 +825,37 @@ int __stdcall WriteParameters(RouterType router,
     fpCallback_WriteParameters callback)
 {
     ACTION_DEFINE_T new_action = {};
-
+    // 參數[0]:目標裝置
     SetActionParam(&new_action.paras[0], PARA_TYPE_DEVICE_TYPE, &target_device);
+    // 參數[1]:位址
     SetActionParam(&new_action.paras[1], PARA_TYPE_UINT16, &addr);
+    // 參數[2]:長度
     SetActionParam(&new_action.paras[2], PARA_TYPE_UINT16, &leng);
+    // 參數[3]:區塊索引
     SetActionParam(&new_action.paras[3], PARA_TYPE_UINT8, &bank_index);
+    // 參數[4]:寫入資料區塊指針
     SetActionParam(&new_action.paras[4], PARA_TYPE_BYTE_ARRAY, data);
+    // 儲存執行完畢後回呼指標
     WriteParameters_callback = callback;
 
-
+    // 判斷是發送BLE封包或是CAN-Bus封包
     switch (router)
     {
     case SDK_ROUTER_CANBUS:
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_CANBus_WriteParameter;
         break;
 
     default:
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_BLE_WriteParameter;
         break;
     }
-
+    // 指定Action Script完成時的回呼指標
     new_action.finally_callback = WriteParameter_Finally;
+    // 指定Action Script錯誤時的回呼指標
     new_action.error_callback = WriteParameter_Error;
+    // 將新Action推送至等待處理的腳本中
     ActionScriptCreate(new_action);
 
     return SDK_RETURN_SUCCESS;
@@ -828,25 +895,30 @@ int __stdcall ResetParameters(RouterType router,
     fpCallback_ResetParameters callback)
 {
     ACTION_DEFINE_T new_action = { };
-
+    // 參數[0]:功能碼
     SetActionParam(&new_action.paras[0], PARA_TYPE_DEVICE_TYPE, &target_device);
+    // 參數[1]:ID清單長度
     SetActionParam(&new_action.paras[1], PARA_TYPE_UINT8, &bank_index);
+    // 儲存執行完畢後回呼指標
     WriteParameters_callback = callback;
-
-
+    // 判斷發送封包路由類型
     switch (router)
     {
     case SDK_ROUTER_CANBUS:
+        // 指定腳本運行的功能名稱
         //new_action.run_script = AS_FL_CANBus_ResetParameter;
         break;
 
     default:
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_BLE_ResetParameter;
         break;
     }
-
+    // 指定Action Script完成時的回呼指標
     new_action.finally_callback = ResetParameters_Finally;
+    // 指定Action Script錯誤時的回呼指標
     new_action.error_callback = ResetParameters_Error;
+    // 將新Action推送至等待處理的腳本中
     ActionScriptCreate(new_action);
 
     return SDK_RETURN_SUCCESS;
@@ -885,24 +957,32 @@ int __stdcall UpgradeFirmware(RouterType router,
     fpCallback_UpgradeFirmware callback)
 {
     ACTION_DEFINE_T new_action = { };
-
+    // 綁定狀態更新回呼
     AS_FL_UpgradeStateMsgBinding(upgrade_msg_callback);
+    // 檢查並設置更新參數
     if (AS_FL_UpgradeSetting(target_device, device_MID, data, data_size) == false)
     {
+        // 參數內容異常回傳錯誤碼
         return SDK_RETURN_INVALID_PARAM;
     }
+    // 儲存執行完畢後回呼指標
     UpgradeFirmware_callback = callback;
-    
+    // 判斷發送封包路由類型
     if (router == SDK_ROUTER_BLE)
     {
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_BLEUpgradeFirmware;
     }
     else
     {
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_CANBusUpgradeFirmware;
-    }    
+    }
+    // 指定Action Script完成時的回呼指標
     new_action.finally_callback = UpgradeFirmware_Finally;
+    // 指定Action Script錯誤時的回呼指標
     new_action.error_callback = UpgradeFirmware_Error;
+    // 將新Action推送至等待處理的腳本中
     ActionScriptCreate(new_action);
 
     return SDK_RETURN_SUCCESS;
@@ -941,27 +1021,34 @@ int __stdcall SetDebugMode(RouterType router,
     fpCallback_SetDebugMode callback)
 {
     ACTION_DEFINE_T new_action = {};
-
+    // 參數[0]:目標裝置
     SetActionParam(&new_action.paras[0], PARA_TYPE_DEVICE_TYPE, &target_device);
+    // 參數[0]:模式
     SetActionParam(&new_action.paras[1], PARA_TYPE_UINT8, &mode);
+    // 參數[0]:重複次數
     SetActionParam(&new_action.paras[2], PARA_TYPE_UINT8, &repet_cnt);
+    // 參數[0]:重複發送間隔
     SetActionParam(&new_action.paras[3], PARA_TYPE_UINT16, &interval_time);
+    // 儲存執行完畢後回呼指標
     SetDebugMode_callback = callback;
-
-
+    // 判斷發送封包路由類型
     switch (router)
     {
     case SDK_ROUTER_CANBUS:
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_CANBus_SetDebugMode;
         break;
 
     default:
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_BLE_SetDebugMode;
         break;
     }
-    
+    // 指定Action Script完成時的回呼指標
     new_action.finally_callback = SetDebugMode_Finally;
+    // 指定Action Script錯誤時的回呼指標
     new_action.error_callback = SetDebugMode_Error;
+    // 將新Action推送至等待處理的腳本中
     ActionScriptCreate(new_action);
 
     return SDK_RETURN_SUCCESS;
@@ -998,26 +1085,32 @@ int __stdcall SetTestMode(RouterType router,
     fpCallback_SetTestMode callback)
 {
     ACTION_DEFINE_T new_action = { };
-
+    // 參數[0]:目標裝置
     SetActionParam(&new_action.paras[0], PARA_TYPE_DEVICE_TYPE, &target_device);
+    // 參數[1]:模式
     SetActionParam(&new_action.paras[1], PARA_TYPE_UINT8, &mode);
+    // 參數[2]:數值
     SetActionParam(&new_action.paras[2], PARA_TYPE_UINT32, &value);
+    // 儲存執行完畢後回呼指標
     SetTestMode_callback = callback;
-
-
+    // 判斷是發送BLE封包或是CAN-Bus封包
     switch (router)
     {
     case SDK_ROUTER_CANBUS:
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_CANBus_SetTestMode;
         break;
 
     default:
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_BLE_SetTestMode;
         break;
     }
-
+    // 指定Action Script完成時的回呼指標
     new_action.finally_callback = SetTestMode_Finally;
+    // 指定Action Script錯誤時的回呼指標
     new_action.error_callback = SetTestMode_Error;
+    // 將新Action推送至等待處理的腳本中
     ActionScriptCreate(new_action);
 
     return SDK_RETURN_SUCCESS;
@@ -1034,8 +1127,11 @@ void GetCanIdBypassList_Finally(struct FunctionParameterDefine* action_param)
 {
     if (GetCanIdBypassList_callback)
     {
+
         struct CANBypass_IdList id_list;
         AS_FL_BLE_Copy_CanIdBytpassList(&id_list);
+
+        // 委派成功,回呼傳送ID清單
         GetCanIdBypassList_callback(SDK_RETURN_SUCCESS, id_list.mode, id_list.count, &id_list.list->Bytes[0]);
     }
 }
@@ -1045,6 +1141,7 @@ void GetCanIdBypassList_Error(uint32_t err_code)
 {
     if (GetCanIdBypassList_callback)
     {
+        // 委派異常,回呼失敗並傳送失敗代碼
         GetCanIdBypassList_callback(err_code, 0, 0, NULL);
     }
 }
@@ -1053,9 +1150,9 @@ int __stdcall GetCanIdBypassList(RouterType router,
     fpCallback_GetCanIdBypassList callback)
 {
     ACTION_DEFINE_T new_action = {};
-
+    // 儲存執行完畢後回呼指標
     GetCanIdBypassList_callback = callback;
-
+    // 判斷是發送BLE封包或是CAN-Bus封包
     switch (router)
     {
     case SDK_ROUTER_CANBUS:
@@ -1063,12 +1160,15 @@ int __stdcall GetCanIdBypassList(RouterType router,
         break;
 
     default:
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_BLE_GetCanIdBypassList;
         break;
     }
-
+    // 指定Action Script完成時的回呼指標
     new_action.finally_callback = GetCanIdBypassList_Finally;
+    // 指定Action Script錯誤時的回呼指標
     new_action.error_callback = GetCanIdBypassList_Error;
+    // 將新Action推送至等待處理的腳本中
     ActionScriptCreate(new_action);
 
     return SDK_RETURN_SUCCESS;
@@ -1105,13 +1205,15 @@ int __stdcall SetCanIdBypassAllowList(RouterType router,
     fpCallback_SetCanIdBypassAllowList callback)
 {
     ACTION_DEFINE_T new_action = {};
-
+    // 參數[0]:功能碼
     SetActionParam(&new_action.paras[0], PARA_TYPE_UINT8, &function_code);
+    // 參數[1]:ID清單長度
     SetActionParam(&new_action.paras[1], PARA_TYPE_UINT8, &id_list_count);
+    // 參數[2]:ID清單指針
     SetActionParam(&new_action.paras[2], PARA_TYPE_BYTE_ARRAY, id_list_data);
+    // 儲存執行完畢後回呼指標
     SetCanIdBypassAllowList_callback = callback;
-
-
+    // 判斷發送封包路由類型
     switch (router)
     {
     case SDK_ROUTER_CANBUS:
@@ -1119,12 +1221,15 @@ int __stdcall SetCanIdBypassAllowList(RouterType router,
         break;
 
     default:
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_BLE_SetCanIdBypassAllowList;
         break;
     }
-
+    // 指定Action Script完成時的回呼指標
     new_action.finally_callback = SetCanIdBypassAllowList_Finally;
+    // 指定Action Script錯誤時的回呼指標
     new_action.error_callback = SetCanIdBypassAllowList_Error;
+    // 將新Action推送至等待處理的腳本中
     ActionScriptCreate(new_action);
 
     return SDK_RETURN_SUCCESS;
@@ -1162,13 +1267,15 @@ int __stdcall SetCanIdBypassBlockList(RouterType router,
     fpCallback_SetCanIdBypassBlockList callback)
 {
     ACTION_DEFINE_T new_action = { };
-
+    // 參數[0]:功能碼
     SetActionParam(&new_action.paras[0], PARA_TYPE_UINT8, &function_code);
+    // 參數[1]:ID清單數量
     SetActionParam(&new_action.paras[1], PARA_TYPE_UINT8, &id_list_count);
+    // 參數[2]:ID清單指針
     SetActionParam(&new_action.paras[2], PARA_TYPE_BYTE_ARRAY, id_list_data);
+    // 儲存執行完畢後回呼指標
     SetCanIdBypassBlockList_callback = callback;
-
-
+    // 判斷是發送BLE封包或是CAN-Bus封包
     switch (router)
     {
     case SDK_ROUTER_CANBUS:
@@ -1176,12 +1283,15 @@ int __stdcall SetCanIdBypassBlockList(RouterType router,
         break;
 
     default:
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_BLE_SetCanIdBypassBlockList;
         break;
     }
-
+    // 指定Action Script完成時的回呼指標
     new_action.finally_callback = SetCanIdBypassBlockList_Finally;
+    // 指定Action Script錯誤時的回呼指標
     new_action.error_callback = SetCanIdBypassBlockList_Error;
+    // 將新Action推送至等待處理的腳本中
     ActionScriptCreate(new_action);
 
     return SDK_RETURN_SUCCESS;
@@ -1201,6 +1311,7 @@ void RestartDevice_Finally(struct FunctionParameterDefine* action_param)
 {
     if (RestartDevice_callback)
     {
+        // 調用回呼傳送操作成功
         RestartDevice_callback(SDK_RETURN_SUCCESS);
     }
 }
@@ -1210,6 +1321,7 @@ void RestartDevice_Error(uint32_t err_code)
 {
     if (RestartDevice_callback)
     {
+        // 調用回呼傳送錯誤碼
         RestartDevice_callback(err_code);
     }
 }
@@ -1219,11 +1331,11 @@ int __stdcall RestartDevice(RouterType router,
     fpCallback_RestartDevice callback)
 {
     ACTION_DEFINE_T new_action = { };
-
+    // 參數[0]:目標裝置
     SetActionParam(&new_action.paras[0], PARA_TYPE_DEVICE_TYPE, &target_device);
+    // 儲存執行完畢後回呼指標
     RestartDevice_callback = callback;
-
-
+    // 判斷是發送BLE封包或是CAN-Bus封包
     switch (router)
     {
     case SDK_ROUTER_CANBUS:
@@ -1231,12 +1343,15 @@ int __stdcall RestartDevice(RouterType router,
         break;
 
     default:
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_BLE_RestartDevice;
         break;
     }
-
+    // 指定Action Script完成時的回呼指標
     new_action.finally_callback = RestartDevice_Finally;
+    // 指定Action Script錯誤時的回呼指標
     new_action.error_callback = RestartDevice_Error;
+    // 將新Action推送至等待處理的腳本中
     ActionScriptCreate(new_action);
 
     return SDK_RETURN_SUCCESS;
@@ -1279,11 +1394,11 @@ int __stdcall ReadDeviceLogs(RouterType router,
     fpCallback_ReadDeviceLogs callback)
 {
     ACTION_DEFINE_T new_action = {};
-
+    // 參數[0]:目標裝置
     SetActionParam(&new_action.paras[0], PARA_TYPE_DEVICE_TYPE, &target_device);
+    // 儲存執行完畢後回呼指標
     ReadDeviceLogs_callback = callback;
-
-
+    // 判斷是發送BLE封包或是CAN-Bus封包
     switch (router)
     {
     case SDK_ROUTER_CANBUS:
@@ -1314,6 +1429,7 @@ void ClearDeviceLogs_Finally(struct FunctionParameterDefine* action_param)
 {
     if (ClearDeviceLogs_callback)
     {
+        // 回呼成功
         ClearDeviceLogs_callback(SDK_RETURN_SUCCESS);
     }
 }
@@ -1323,6 +1439,7 @@ void ClearDeviceLogs_Error(uint32_t err_code)
 {
     if (ClearDeviceLogs_callback)
     {
+        // 回呼失敗並傳送失敗代碼
         ClearDeviceLogs_callback(err_code);
     }
 }
@@ -1332,10 +1449,10 @@ int __stdcall ClearDeviceLogs(RouterType router,
     fpCallback_ClearDeviceLogs callback)
 {
     ACTION_DEFINE_T new_action = { };
-
+    // 參數[0]:目標裝置
     SetActionParam(&new_action.paras[0], PARA_TYPE_DEVICE_TYPE, &target_device);
+    // 儲存執行完畢後回呼指標
     ClearDeviceLogs_callback = callback;
-
 
     switch (router)
     {
@@ -1344,12 +1461,15 @@ int __stdcall ClearDeviceLogs(RouterType router,
         break;
 
     default:
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_BLE_ClearDeviceLogs;
         break;
     }
-
+    // 指定Action Script完成時的回呼指標
     new_action.finally_callback = ClearDeviceLogs_Finally;
+    // 指定Action Script錯誤時的回呼指標
     new_action.error_callback = ClearDeviceLogs_Error;
+    // 將新Action推送至等待處理的腳本中
     ActionScriptCreate(new_action);
 
     return SDK_RETURN_SUCCESS;
@@ -1367,6 +1487,7 @@ void ConfigSysTime_Finally(struct FunctionParameterDefine* action_param)
 {
     if (ConfigSysTime_callback)
     {
+        // 回呼成功
         ConfigSysTime_callback(SDK_RETURN_SUCCESS);
     }
 }
@@ -1376,6 +1497,7 @@ void ConfigSysTime_Error(uint32_t err_code)
 {
     if (ConfigSysTime_callback)
     {
+        // 回呼失敗並傳送失敗代碼
         ConfigSysTime_callback(err_code);
     }
 }
@@ -1385,12 +1507,13 @@ int __stdcall ConfigSysTime(RouterType router,
     uint64_t unix_time, fpCallback_ConfigSysTime callback)
 {
     ACTION_DEFINE_T new_action = {};
-
+    // 參數[0]:目標裝置
     SetActionParam(&new_action.paras[0], PARA_TYPE_DEVICE_TYPE, &target_device);
+    // 參數[1]:設定的Unix時間
     SetActionParam(&new_action.paras[1], PARA_TYPE_UINT64, &unix_time);
+    // 儲存執行完畢後回呼指標
     ConfigSysTime_callback = callback;
-
-
+    // 判斷是發送BLE封包或是CAN-Bus封包
     switch (router)
     {
     case SDK_ROUTER_CANBUS:
@@ -1398,12 +1521,131 @@ int __stdcall ConfigSysTime(RouterType router,
         break;
 
     default:
+        // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_BLE_ConfigSysTime;
         break;
     }
-
+    // 指定Action Script完成時的回呼指標
     new_action.finally_callback = ConfigSysTime_Finally;
+    // 指定Action Script錯誤時的回呼指標
     new_action.error_callback = ConfigSysTime_Error;
+    // 將新Action推送至等待處理的腳本中
+    ActionScriptCreate(new_action);
+
+    return SDK_RETURN_SUCCESS;
+}
+
+
+
+/*
+    Delegate Method : E-Lock Operation command
+*/
+
+static fpCallback_SetELock_DEV SetELock_DEV_callback = NULL;
+
+void SetELock_DEV_Finally(struct FunctionParameterDefine* action_param)
+{
+    if (SetELock_DEV_callback)
+    {
+        // 回呼成功
+        SetELock_DEV_callback(SDK_RETURN_SUCCESS);
+    }
+}
+
+
+void SetELock_DEV_Error(uint32_t err_code)
+{
+    if (SetELock_DEV_callback)
+    {
+        // 回呼失敗並傳送失敗代碼
+        SetELock_DEV_callback(err_code);
+    }
+}
+
+int __stdcall SetELock_DEV(RouterType router,
+    bool release, bool unlocked,
+    fpCallback_SetELock_DEV callback)
+{
+    ACTION_DEFINE_T new_action = {};
+    // 參數[0]:解除定位閂鎖
+    SetActionParam(&new_action.paras[0], PARA_TYPE_UINT8, &release);
+    // 參數[1]:解除環形鎖
+    SetActionParam(&new_action.paras[1], PARA_TYPE_UINT8, &unlocked);
+    // 儲存執行完畢後回呼指標
+    SetELock_DEV_callback = callback;
+    // 判斷是發送BLE封包或是CAN-Bus封包
+    switch (router)
+    {
+    case SDK_ROUTER_CANBUS:
+        return SDK_RETURN_INVALID_PARAM;
+        break;
+
+    default:
+        // 指定腳本運行的功能名稱
+        new_action.run_script = AS_FL_BLE_SetELock_DEV;
+        break;
+    }
+    // 指定Action Script完成時的回呼指標
+    new_action.finally_callback = SetELock_DEV_Finally;
+    // 指定Action Script錯誤時的回呼指標
+    new_action.error_callback = SetELock_DEV_Error;
+    // 將新Action推送至等待處理的腳本中
+    ActionScriptCreate(new_action);
+
+    return SDK_RETURN_SUCCESS;
+}
+
+
+
+
+/*
+    Delegate Method : Get E-Lock Status
+*/
+
+static fpCallback_GetELock_DEV GetELock_DEV_callback = NULL;
+
+void GetELock_DEV_Finally(struct FunctionParameterDefine* action_param)
+{
+    if (GetELock_DEV_callback)
+    {
+        // 回呼成功
+        GetELock_DEV_callback(SDK_RETURN_SUCCESS, sdk.Inst.DeviceInfo.FL.e_lock_states);
+    }
+}
+
+
+void GetELock_DEV_Error(uint32_t err_code)
+{
+    if (GetELock_DEV_callback)
+    {
+        // 回呼失敗並傳送失敗代碼
+        GetELock_DEV_callback(err_code, ELOCK_STATES_UNKNOW);
+    }
+}
+
+int __stdcall GetELock_DEV(RouterType router,
+    fpCallback_GetELock_DEV callback)
+{
+    ACTION_DEFINE_T new_action = {};
+    // 儲存執行完畢後回呼指標
+    GetELock_DEV_callback = callback;
+    // 判斷是發送BLE封包或是CAN-Bus封包
+    switch (router)
+    {
+    case SDK_ROUTER_CANBUS:
+        return SDK_RETURN_INVALID_PARAM;
+        break;
+
+    default:
+        // 指定腳本運行的功能名稱
+        new_action.run_script = AS_FL_BLE_GetELock_DEV;
+        break;
+    }
+    // 指定Action Script完成時的回呼指標
+    new_action.finally_callback = GetELock_DEV_Finally;
+    // 指定Action Script錯誤時的回呼指標
+    new_action.error_callback = GetELock_DEV_Error;
+    // 將新Action推送至等待處理的腳本中
     ActionScriptCreate(new_action);
 
     return SDK_RETURN_SUCCESS;
@@ -1419,18 +1661,19 @@ int FarmLandCoreSDK_Init(CoreSDKInst_T* SDK_Inst)
 {
     if (SDK_Inst)
     {
+        // 初始化 Action Script並實例化相關的Buffer
         ActionScriptInit();
-
+        // 設定CAN-Bus接收封包Buffer透過Queue的方式實作
         can_rx_queue.buffer_size = 4096;
         can_rx_queue.buffer = (char*)&can_rx_queue_buff;
         can_rx_queue.is_full = false;
         can_rx_queue.item_size = sizeof(CANPacket_T);
-
+        // 設定CAN-Bus發送封包Buffer透過Queue的方式實作
         can_tx_queue.buffer_size = 4096;
         can_tx_queue.buffer = (char*)&can_tx_queue_buff;
         can_tx_queue.is_full = false;
         can_tx_queue.item_size = sizeof(CANPacket_T);
-
+        // 將SDK Inst內的程式指針重新指向實例目標位址
         SDK_Inst->Enable = Enable;
         SDK_Inst->Disable = Disable;
         
@@ -1446,6 +1689,8 @@ int FarmLandCoreSDK_Init(CoreSDKInst_T* SDK_Inst)
         SDK_Inst->DelegateMethod.ReadDeviceLogs = ReadDeviceLogs;
         SDK_Inst->DelegateMethod.ClearDeviceLogs = ClearDeviceLogs;
         SDK_Inst->DelegateMethod.ConfigSysTime = ConfigSysTime;
+        SDK_Inst->DelegateMethod.SetELock_DEV = SetELock_DEV;
+        SDK_Inst->DelegateMethod.GetELock_DEV = GetELock_DEV;
 
         SDK_Inst->Method.CANBusPacket_IN = CANBusPacket_IN;
         SDK_Inst->Method.CANBusPacket_OUT = CANBusPacket_OUT;
@@ -1454,20 +1699,33 @@ int FarmLandCoreSDK_Init(CoreSDKInst_T* SDK_Inst)
         SDK_Inst->Method.BLEDataPacket_IN = BLEDataPacket_IN;
         SDK_Inst->Method.BLEDataPacket_OUT = BLEDataPacket_OUT;
 
-        SDK_Inst->ParametersArray[0] = 0x12;
+        SDK_Inst->DeviceInfo.FL.e_lock_states = ELOCK_STATES_UNKNOW;
 
+        SDK_Inst->ParametersArray[0] = 0x12;
+        // 判斷迴圈休眠時間
+        if (SDK_Inst->ThreadSleepInterval_us == 0)
+        {
+            SDK_Inst->ThreadSleepInterval_us = 1000;
+        }
+        
+
+        // 複製現在版本號到指定記憶體, 供外部讀取
         memcpy(SDK_Inst->Version, SDK_Version_Str, sizeof(SDK_Version_Str));
 
-//        DeviceInfoInst = { 0 };
+        LOG_PUSH("SDK Version:%s\n", SDK_Version_Str);
+        LOG_FLUSH;
 
+        DeviceInfoInst = { 0 };
+
+        // 初始化農田專屬通訊協議解析器
         FL_CAN_Init(&DeviceInfoInst, SendToCANBUS, &CoreSDK_ISOTP);
 
         memcpy(&sdk.Inst, SDK_Inst, sizeof(CoreSDKInst_T));
-        
+        // 初始化排程運行模組
         lib_event_sched_init(&sched_inst);
-
-        FL_device_HML_Init(&FL_HMI_ISOTP, SendToCANBUS);
-
+        // 初始化虛擬HMI, 但目前尚未使用
+        FL_device_HMI_Init(&FL_HMI_ISOTP, SendToCANBUS);
+        // 確認SDK已被初始化, 避免重複初始化
         SDK_BeInit = true;
 
         return SDK_RETURN_SUCCESS;

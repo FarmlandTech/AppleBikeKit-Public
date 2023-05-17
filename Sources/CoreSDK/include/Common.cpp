@@ -83,4 +83,20 @@ unsigned int FarmlandCalCrc32(const unsigned char* buf, unsigned int len, unsign
 	return crc;
 }
 
+unsigned char ELockCalCheckSum(const unsigned char* buf, unsigned int len)
+{
+	unsigned char check_sum = *buf;
+	--len;
+	if (len)
+	{
+		++buf;
+		while (len--)
+		{
+			check_sum ^= *buf;
+			buf++;
+		}
+	}
+	
+	return check_sum;
+}
 

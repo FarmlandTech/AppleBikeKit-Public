@@ -22,6 +22,9 @@ extension CoreBluetoothService: CBPeripheralDelegate {
         peripheral.services?.forEach { service in
             peripheral.discoverCharacteristics(nil, for: service)
         }
+        
+        let bluetoothPeripheral: BluetoothPeripheral = .init(device: peripheral)
+        self.peripheralSubject.value = (.prepared, bluetoothPeripheral)
     }
     
     // 監聽掃描到的藍牙服務特徵。

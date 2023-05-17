@@ -55,6 +55,8 @@ extern "C" {
 
 	unsigned int FarmlandCalCrc32(const unsigned char* buf, unsigned int len, unsigned int init);
 
+
+	unsigned char ELockCalCheckSum(const unsigned char* buf, unsigned int len);
 #ifdef __cplusplus
 }
 #endif

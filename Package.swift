@@ -25,11 +25,12 @@ let package = Package(
         .target(
             name: "CoreSDK",
             path: "Sources/CoreSDK",
-//            exclude: ["include/ActionScript.h", "include/FL_Device_HMI.h", "include/FL_Device_Controller.h"],
-//            publicHeadersPath: "include",
-            cSettings: [.unsafeFlags(["-w"])]
-//            cxxSettings: [.unsafeFlags(["-w"])]
-//            cxxSettings: [.unsafeFlags(["-w"]), .headerSearchPath("include"), .define("ENABLE_CPP"), .unsafeFlags(["-std=c++11"])]
+            cxxSettings: [
+                .unsafeFlags(["-w"]),
+                .headerSearchPath("include"),
+                .define("ENABLE_CPP"),
+                .unsafeFlags(["-std=c++17"])
+            ]
         ),
         .target(
             name: "CoreSDKService",
