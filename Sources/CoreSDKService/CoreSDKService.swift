@@ -21,12 +21,15 @@ protocol CoreSDKDataSource: AnyObject {
     func restartDevice(state: Bool)
     
     func resetParameter(state: Bool)
+    
+    func configureSystemTime(state: Bool)
 }
 
 public final class CoreSDKService: NSObject {
     
     public enum Error: Swift.Error {
         case readSingleParameterFail
+        case configureSystemTimeFail
         case accessParameterWithUnexpectedType
         case accessParameterWithNoValue
         case accessParameterWithWrongType
@@ -75,6 +78,10 @@ public final class CoreSDKService: NSObject {
         CoreSDKService.dataSource?.resetParameter(state: state == 0)
     }
     
+    private let configureSystemTimeEvent: ResetParameterEvent = { state in
+        CoreSDKService.dataSource?.resetParameter(state: state == 0)
+    }
+    
     public private(set) lazy var deviceInfoSubject: CurrentValueSubject<FL_Info_st?, Never> = {
         .init(nil)
     }()
@@ -100,6 +107,10 @@ public final class CoreSDKService: NSObject {
     }()
     
     public private(set) lazy var resetParameterStateSubject: CurrentValueSubject<Bool?, Never> = {
+        .init(nil)
+    }()
+    
+    public private(set) lazy var configureSystemTimeStateSubject: CurrentValueSubject<Bool?, Never> = {
         .init(nil)
     }()
     
@@ -263,10 +274,18 @@ public final class CoreSDKService: NSObject {
         }
     }
     
-    public func resetParameters(partType: CommunicationPartType, bank: Int) throws {
+    public func resetParameter(partType: CommunicationPartType, bank: Int) throws {
         let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.ResetParameters(SDK_ROUTER_BLE, partType.coreType, UInt8(bank), self.resetParameterEvent)
         guard isCoreSDKCompleteTask == 0 else {
             throw Self.Error.readSingleParameterFail
+        }
+    }
+    
+    public func configureSystemTime() throws {
+        let time: UInt64 = .init(Date().timeIntervalSince1970)
+        let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.ConfigSysTime(SDK_ROUTER_BLE, SDK_FL_MAIN_BATT, time, self.configureSystemTimeEvent)
+        guard isCoreSDKCompleteTask == 0 else {
+            throw Self.Error.configureSystemTimeFail
         }
     }
 }
@@ -291,5 +310,9 @@ extension CoreSDKService: CoreSDKDataSource {
     
     func resetParameter(state: Bool) {
         self.resetParameterStateSubject.send(state)
+    }
+    
+    func configureSystemTime(state: Bool) {
+        self.configureSystemTimeStateSubject.send(state)
     }
 }
