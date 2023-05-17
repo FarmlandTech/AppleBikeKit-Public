@@ -6,6 +6,7 @@
 #include "lib_fifo_buff.h"
 #include <iostream>
 #include <ctime>
+#include "LogPrinter.h"
 
 using namespace std;
 
@@ -16,6 +17,11 @@ using namespace std;
 #define BLE_DFU_DATA_SIZE	238
 #define BLE_PARAM_DATA_SIZE	228
 
+typedef enum FirmwareUpdateStep_e
+{
+	DFU_IDLE = 0u,
+	DFU_WAIT_COMMAND
+} FirmwareUpdateStep_E;
 
 typedef struct BLE_packet_st
 {
@@ -58,6 +64,7 @@ struct UpgradeFirmwareSetting_st
 	uint8_t bin_file[BIN_FILE_MAX_SIZE];
 	struct FlashVerify_st flash_verify;
 	struct DFU_device_information_st deviceInfo;
+	FirmwareUpdateStep_E NowStep;
 };
 
 struct BLEUpgradeFirmwareState_st
@@ -118,6 +125,8 @@ struct LogsInfo_st
 struct LogsInfo_st deviceLogs;
 
 
+static void Recover_SilenceMode_Set(void);
+
 void print_time(void)
 {
 	time_t tmNow;
@@ -159,6 +168,8 @@ void ActionScript_timer_1ms_tick(void)
 			}
 			else
 			{
+				LOG_PUSH("Error :: Action Timeout\n");
+				LOG_FLUSH;
 				AS_Inst.status = ACTION_SCRITP_STATUS_TIMEOUT;
 			}
 			
@@ -243,7 +254,10 @@ void AS_FL_ActionErrorHandler(uint32_t error_code)
 
 void AS_FL_ActionStepNext(void)
 {
+	LOG_PUSH("Now Action Step[%d] ==> ", AS_Inst.run_step);
 	AS_Inst.run_step++;
+	LOG_PUSH("Next Action Step[%d]\n", AS_Inst.run_step);
+	LOG_FLUSH;
 	AS_Inst.timeout.count = 0;
 	AS_Inst.timeout.threshold = 0;
 	AS_Inst.retry_cnt = 0;
@@ -328,6 +342,8 @@ void ActionScriptRun(void)
 			AS_Inst.Runtime.error_callback(SDK_RETURN_TIMEOUT);
 		}
 		ActionScriptResetStatus();
+
+		Recover_SilenceMode_Set();
 	}
 	else
 	{
@@ -404,6 +420,7 @@ int AS_FL_GetBLECommon_TxQueue(uint8_t* out_data, uint16_t out_data_size, uint16
 	Functional command
 
 */
+static bool BLE_SilenceMode_ON = false;
 
 static void BLE_SilenceMode_Set(bool enable, uint8_t time_sec)
 {
@@ -425,9 +442,18 @@ static void BLE_SilenceMode_Set(bool enable, uint8_t time_sec)
 	AS_FL_BLE_DFU_CommonPackage_Send(1, 0,
 		FL_BLE_OPC_CAN_PASS_DATA_REQ,
 		DEVICE_OBJ_HMI,
-		0, post_data, post_leng);	
+		0, post_data, post_leng);
+
+	BLE_SilenceMode_ON = enable ? true : false;
 }
 
+static void Recover_SilenceMode_Set(void)
+{
+	if (BLE_SilenceMode_ON)
+	{
+		BLE_SilenceMode_Set(false, 0);
+	}
+}
 
 static void BLE_FilterMode_Set()
 {
@@ -1291,12 +1317,16 @@ void AS_FL_BLEUpgradeFirmware_GetRespond(uint8_t device, uint16_t opc, uint8_t r
 	static char return_str[1024] = { 0 };
 	memset(return_str, 0, 1024);
 
-	if (BLE_DFU_State.enable && (BLE_DFU_State.target_device == device))
+	if ((BLE_DFU_State.enable == true) && (BLE_DFU_State.target_device == device) && (DFU_Setting.NowStep == DFU_WAIT_COMMAND))
 	{
 		switch (opc)
 		{
 		case FL_BLE_OPC_DFU_READ_DEV_INFO_RES:
 		{
+			if (BLE_DFU_State.request_code != FL_BLE_OPC_DFU_READ_DEV_INFO_REQ)
+			{
+				break;
+			}
 			if (leng >= 12)
 			{
 				DFU_Setting.end_index = DFU_Setting.bin_size - 1;
@@ -1308,20 +1338,32 @@ void AS_FL_BLEUpgradeFirmware_GetRespond(uint8_t device, uint16_t opc, uint8_t r
 				DFU_Setting.deviceInfo.page_size = data[8] + ((uint16_t)data[9] << 8);
 				DFU_Setting.deviceInfo.cache_size = data[10] + ((uint16_t)data[11] << 8);
 				AS_FL_ActionStepNext();
+				DFU_Setting.NowStep = DFU_IDLE;
 			}
 		}
 		break;
 
 		case FL_BLE_OPC_DFU_WRITE_DEV_INFO_RES:
 		{
+			if (BLE_DFU_State.request_code != FL_BLE_OPC_DFU_WRITE_DEV_INFO_REQ)
+			{
+				break;
+			}
 			AS_FL_ActionStepNext();
+			DFU_Setting.NowStep = DFU_IDLE;
 		}
 		break;
 
 		case FL_BLE_OPC_DFU_WRITE_DATA_FLASH_RES:
 		{
+			if (BLE_DFU_State.request_code != FL_BLE_OPC_DFU_WRITE_DATA_FLASH_REQ)
+			{
+				break;
+			}
+
 			if (response_code == RESPONSE_SUCCESS)
 			{
+				DFU_Setting.NowStep = DFU_IDLE;
 				AS_FL_ActionStepNext();
 			}
 			else
@@ -1337,6 +1379,10 @@ void AS_FL_BLEUpgradeFirmware_GetRespond(uint8_t device, uint16_t opc, uint8_t r
 
 		case FL_BLE_OPC_DFU_VERIFY_FLASH_RES:
 		{
+			if (BLE_DFU_State.request_code != FL_BLE_OPC_DFU_VERIFY_FLASH_REQ)
+			{
+				break;
+			}
 			if (leng >= 4)
 			{
 				uint32_t get_crc = data[0] + ((uint32_t)data[1] << 8) + ((uint32_t)data[2] << 16) + ((uint32_t)data[3] << 24);
@@ -1372,7 +1418,12 @@ void AS_FL_BLEUpgradeFirmware_GetRespond(uint8_t device, uint16_t opc, uint8_t r
 
 				if (DFU_Setting.flash_verify.crc == get_crc)
 				{
+					DFU_Setting.NowStep = DFU_IDLE;
 					AS_FL_ActionStepNext();
+				}
+				else
+				{
+					DFU_Setting.NowStep = DFU_IDLE;
 				}
 				
 			}
@@ -1382,7 +1433,11 @@ void AS_FL_BLEUpgradeFirmware_GetRespond(uint8_t device, uint16_t opc, uint8_t r
 
 		case FL_BLE_OPC_DFU_JUMP_COMMOND_RES:
 		{
-			AS_FL_ActionStepNext();
+			if (BLE_DFU_State.request_code == FL_BLE_OPC_DFU_JUMP_COMMOND_REQ)
+			{
+				DFU_Setting.NowStep = DFU_IDLE;
+				AS_FL_ActionStepNext();
+			}
 		}
 		break;
 
@@ -1393,10 +1448,11 @@ void AS_FL_BLEUpgradeFirmware_GetRespond(uint8_t device, uint16_t opc, uint8_t r
 void AS_FL_BLEUpgradeFirmware(struct FunctionParameterDefine* paras)
 {
 	static char return_str[1024] = { 0 };
-	uint8_t post_data[4150] = {0};
+	static uint8_t post_data[4150] = {0};
 	uint16_t post_leng = 0;
 
 	memset(return_str, 0, 1024);
+	memset(post_data, 0, 4150);
 
 	switch (AS_Inst.run_step)
 	{
@@ -1406,6 +1462,7 @@ void AS_FL_BLEUpgradeFirmware(struct FunctionParameterDefine* paras)
 		BLE_DFU_State.enable = true;
 		BLE_DFU_State.request_code = FL_BLE_OPC_DFU_JUMP_COMMOND_REQ;
 		BLE_DFU_State.target_device = DFU_Setting.target_device;
+
 
 		post_data[0] = FL_BLE_JUMP_BOOTLOADER;
 
@@ -1417,6 +1474,8 @@ void AS_FL_BLEUpgradeFirmware(struct FunctionParameterDefine* paras)
 			0, post_data, 1);
 
 		ActionScriptRespondWaitAndRetry(1000, 3);
+
+		DFU_Setting.NowStep = DFU_WAIT_COMMAND;
 
 		if (AS_FL_UpgradeStateMsg)
 		{
@@ -1439,6 +1498,8 @@ void AS_FL_BLEUpgradeFirmware(struct FunctionParameterDefine* paras)
 			0, NULL, 0);
 
 		ActionScriptRespondWait(1000);
+
+		DFU_Setting.NowStep = DFU_WAIT_COMMAND;
 
 		if (AS_FL_UpgradeStateMsg)
 		{
@@ -1471,6 +1532,8 @@ void AS_FL_BLEUpgradeFirmware(struct FunctionParameterDefine* paras)
 			0, post_data, (uint8_t)post_leng);
 
 		ActionScriptRespondWait(8000);
+		DFU_Setting.NowStep = DFU_WAIT_COMMAND;
+
 		if (AS_FL_UpgradeStateMsg)
 		{
 			sprintf(return_str, "Earse device Flash from 0x%04x to 0x%04x.",0, end_addr);
@@ -1553,6 +1616,7 @@ void AS_FL_BLEUpgradeFirmware(struct FunctionParameterDefine* paras)
 		}
 		
 		ActionScriptRespondWait(3000);
+		DFU_Setting.NowStep = DFU_WAIT_COMMAND;
 
 		if (AS_FL_UpgradeStateMsg)
 		{
@@ -1599,6 +1663,7 @@ void AS_FL_BLEUpgradeFirmware(struct FunctionParameterDefine* paras)
 				0, post_data, (uint8_t)post_leng);
 
 			ActionScriptRespondWait(15000);
+			DFU_Setting.NowStep = DFU_WAIT_COMMAND;
 
 			if (AS_FL_UpgradeStateMsg)
 			{
@@ -1621,6 +1686,7 @@ void AS_FL_BLEUpgradeFirmware(struct FunctionParameterDefine* paras)
 			0, post_data, 1);		
 
 		ActionScriptRespondWaitAndRetry(1000,3);
+		DFU_Setting.NowStep = DFU_WAIT_COMMAND;
 
 		if (AS_FL_UpgradeStateMsg)
 		{
@@ -1809,7 +1875,7 @@ void AS_FL_BLE_SetTestMode(struct FunctionParameterDefine* paras)
 				0,
 				0, post_data, (uint8_t)post_leng);
 
-			ActionScriptRespondWait(5000);
+			ActionScriptRespondWait(500);
 		}
 		else
 		{
@@ -1844,6 +1910,7 @@ void AS_FL_BLE_RestartDevice(struct FunctionParameterDefine* paras)
 	switch (AS_Inst.run_step)
 	{
 	case 0:
+	default:
 	{
 		uint8_t post_data[32] = { 0 };
 		uint8_t post_leng = 0;
@@ -1868,7 +1935,7 @@ void AS_FL_BLE_RestartDevice(struct FunctionParameterDefine* paras)
 				FL_CANID_HOST_DEVICE_RESET_REQ, 
 				AS_FL_BLE_RestartDevice_GetRespond);
 
-			ActionScriptRespondWait(5000);
+			AS_Inst.status = ACTION_SCRITP_STATUS_DONE;
 		}
 		else
 		{
@@ -1877,11 +1944,6 @@ void AS_FL_BLE_RestartDevice(struct FunctionParameterDefine* paras)
 	}
 	break;
 
-	default:
-	{
-		AS_Inst.status = ACTION_SCRITP_STATUS_DONE;
-	}
-	break;
 	}
 }
 
@@ -1930,7 +1992,101 @@ void AS_FL_BLE_ConfigSysTime(struct FunctionParameterDefine* paras)
 }
 
 
+void AS_FL_BLE_SetELock_DEV(struct FunctionParameterDefine* paras)
+{
+	switch (AS_Inst.run_step)
+	{
+	case 0:
+	{
+		uint8_t post_data[32] = { 0 };
+		uint8_t post_leng = 0;
 
+		uint8_t release = ConverterToFlDeviceId(paras[0].num.uint8_val);
+		uint8_t unlock = ConverterToFlDeviceId(paras[1].num.uint8_val);
+
+		post_data[post_leng++] = (uint8_t)FL_CANID_ELOCK_COMMAND;
+		post_data[post_leng++] = (uint8_t)(FL_CANID_ELOCK_COMMAND >> 8);
+		post_data[post_leng++] = (uint8_t)(FL_CANID_ELOCK_COMMAND >> 16);
+		post_data[post_leng++] = (uint8_t)(FL_CANID_ELOCK_COMMAND >> 24);
+
+		if (release)
+		{
+			post_data[post_leng++] = 0x80; // Start Byte
+			post_data[post_leng++] = 0x10; // Release Command
+			post_data[post_leng++] = 0x00; // Data[0]
+			post_data[post_leng++] = 0x00; // Data[1]
+			post_data[post_leng++] = 0x00; // Data[2]
+			post_data[post_leng++] = 0x00; // Data[3]
+			post_data[post_leng++] = 0xFF; // Count
+			post_data[post_leng++] = ELockCalCheckSum(&post_data[4], 7);
+		}
+		else if (unlock)
+		{
+			post_data[post_leng++] = 0x80; // Start Byte
+			post_data[post_leng++] = 0x20; // Unlock Command
+			post_data[post_leng++] = 0x00; // Data[0]
+			post_data[post_leng++] = 0x00; // Data[1]
+			post_data[post_leng++] = 0x00; // Data[2]
+			post_data[post_leng++] = 0x00; // Data[3]
+			post_data[post_leng++] = 0xFF; // Count
+			post_data[post_leng++] = ELockCalCheckSum(&post_data[4], 7);
+		}
+		else
+		{
+			AS_Inst.status = ACTION_SCRITP_STATUS_TIMEOUT;
+			break;
+		}
+
+		AS_FL_BLE_DFU_CommonPackage_Send(1, 0,
+			FL_BLE_OPC_CAN_PASS_DATA_REQ,
+			0,
+			0, post_data, post_leng);
+
+		AS_Inst.status = ACTION_SCRITP_STATUS_DONE;
+	}
+	break;
+	}
+}
+
+
+
+void AS_FL_BLE_GetELock_DEV(struct FunctionParameterDefine* paras)
+{
+	switch (AS_Inst.run_step)
+	{
+	case 0:
+	{
+		uint8_t post_data[32] = { 0 };
+		uint8_t post_leng = 0;
+		post_data[post_leng++] = (uint8_t)FL_CANID_ELOCK_COMMAND;
+		post_data[post_leng++] = (uint8_t)(FL_CANID_ELOCK_COMMAND >> 8);
+		post_data[post_leng++] = (uint8_t)(FL_CANID_ELOCK_COMMAND >> 16);
+		post_data[post_leng++] = (uint8_t)(FL_CANID_ELOCK_COMMAND >> 24);
+
+		post_data[post_leng++] = 0x80; // Start Byte
+		post_data[post_leng++] = 0x30; // Read status Command
+		post_data[post_leng++] = 0x00; // Data[0]
+		post_data[post_leng++] = 0x00; // Data[1]
+		post_data[post_leng++] = 0x00; // Data[2]
+		post_data[post_leng++] = 0x00; // Data[3]
+		post_data[post_leng++] = 0xFF; // Count
+		post_data[post_leng++] = ELockCalCheckSum(&post_data[4], 7);
+
+		AS_FL_BLE_DFU_CommonPackage_Send(1, 0,
+			FL_BLE_OPC_CAN_PASS_DATA_REQ,
+			0,
+			0, post_data, post_leng);
+
+		FL_BLE_ReadELockStatus_Requset(AS_FL_ActionStepNext);
+		ActionScriptRespondWait(1000);
+	}
+	break;
+
+	default:
+		AS_Inst.status = ACTION_SCRITP_STATUS_DONE;
+		break;
+	}
+}
 
 uint32_t AS_FL_GetDeviceLogs_Inst(DeviceLogs_T* logs_list)
 {

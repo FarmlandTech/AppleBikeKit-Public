@@ -893,6 +893,39 @@ typedef union BAT_DebugInfo05_st
 #define FL_BLE_JUMP_APPLICATION			(uint8_t)2
 
 
+
+
+#define FL_CANID_ELOCK_COMMAND	(uint32_t)0x2C3
+typedef union ELock_Command_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+		int8_t start;
+		int8_t command;
+		int8_t data[6];
+	} bits;
+
+} ELOCK_COMMAND_T;
+
+
+
+#define FL_CANID_ELOCK_RESPONDS	(uint32_t)0x2C4
+typedef union ELock_Responds_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+		int8_t start;
+		int8_t command;
+		int8_t data[6];
+	} bits;
+
+} ELOCK_RESPONDS_T;
+
+
 #ifdef __cplusplus
 }
 #endif

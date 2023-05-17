@@ -126,7 +126,7 @@ void FL_CAN_DFU_VerifyFlash_Requset(
 	uint32_t end_addr,
 	RequestDoneCallback_t done_callback, ErrorCallback_t err_callback);
 
-
+void FL_BLE_ReadELockStatus_Requset(RequestDoneCallback_t done_callback);
 void FL_CAN_ReadParameter(SDKDeviceType_e device_id, uint8_t bank_index, uint32_t addr, uint16_t leng, uint8_t* out_data);
 
 void FL_CAN_HostCommon_TestReq_Send(DeviceObjTypes target_device, uint8_t test_mode, uint32_t test_val,

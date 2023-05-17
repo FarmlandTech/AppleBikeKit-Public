@@ -3,6 +3,7 @@
 #include "CoreSDK.h"
 #include <chrono>
 #include <iostream>
+#include "LogPrinter.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -58,6 +59,7 @@ int MainBattDebugInfo02Handler(uint8_t* data, uint32_t leng);
 int MainBattDebugInfo03Handler(uint8_t* data, uint32_t leng);
 int MainBattDebugInfo04Handler(uint8_t* data, uint32_t leng);
 int MainBattDebugInfo05Handler(uint8_t* data, uint32_t leng);
+int ELockRespondsHandler(uint8_t* data, uint32_t leng);
 
 uint8_t now_error_happen[ERROR_TABLE_SIZE] = { 0 };
 DeviceInfoDefine* FL_DeviceInfo;;
@@ -137,6 +139,8 @@ static struct CAN_ParseHandlerDefine_st vaild_id_list[] =
 	{ FL_CANID_MBAT_DEBUGINFO_03, true, MainBattDebugInfo03Handler},
 	{ FL_CANID_MBAT_DEBUGINFO_04, true, MainBattDebugInfo04Handler},
 	{ FL_CANID_MBAT_DEBUGINFO_05, true, MainBattDebugInfo05Handler},
+
+	{ FL_CANID_ELOCK_RESPONDS, false, ELockRespondsHandler},
 };
 
 CREATE_ISO_TP_BUFF(DFUSendBuff);
@@ -662,12 +666,14 @@ int HMIDebugInfo00Handler(uint8_t* data, uint32_t leng)
 	FL_DeviceInfo->FL.key_3_count = debugInfo.bits.key_3_count;
 	FL_DeviceInfo->FL.key_4_count = debugInfo.bits.key_4_count;
 
-	LogD("%s [KeyCnt:%d, KeyCnt:%d, KeyCnt:%d, KeyCnt:%d]\n",
+	LOG_PUSH("%s [KeyCnt:%d, KeyCnt:%d, KeyCnt:%d, KeyCnt:%d]\n",
 		__func__ ,
 		FL_DeviceInfo->FL.key_1_count,
 		FL_DeviceInfo->FL.key_2_count,
 		FL_DeviceInfo->FL.key_3_count,
 		FL_DeviceInfo->FL.key_4_count);
+
+	LOG_FLUSH;
 
 	return RESPONSE_SUCCESS;
 }
@@ -682,12 +688,14 @@ int HMIDebugInfo01Handler(uint8_t* data, uint32_t leng)
 	FL_DeviceInfo->FL.key_7_count = debugInfo.bits.key_7_count;
 	FL_DeviceInfo->FL.key_8_count = debugInfo.bits.key_8_count;
 
-	LogD("%s [KeyCnt:%d, KeyCnt:%d, KeyCnt:%d, KeyCnt:%d]\n",
+	LOG_PUSH("%s [KeyCnt:%d, KeyCnt:%d, KeyCnt:%d, KeyCnt:%d]\n",
 		__func__,
 		debugInfo.bits.key_5_count,
 		debugInfo.bits.key_6_count,
 		debugInfo.bits.key_7_count,
 		debugInfo.bits.key_8_count);
+
+	LOG_FLUSH;
 
 	return RESPONSE_SUCCESS;
 }
@@ -1145,6 +1153,47 @@ int MainBattDebugInfo05Handler(uint8_t* data, uint32_t leng)
 }
 
 
+int ELockRespondsHandler(uint8_t* data, uint32_t leng)
+{
+	ELOCK_RESPONDS_T responds_info = {0};
+	COPY_MIN_ARRAY(data, leng, &responds_info.bytes[0], sizeof(responds_info.bytes));
+
+	if (responds_info.bits.start == 0x08 && leng <= 8)
+	{
+		uint8_t check_sum = ELockCalCheckSum(responds_info.bytes, (leng-1));
+
+		if (check_sum == responds_info.bytes[(leng - 1)])
+		{
+			switch (responds_info.bits.command)
+			{
+			case 0x01:
+				//E-Lock 開機發送狀態
+				FL_DeviceInfo->FL.e_lock_states = responds_info.bits.data[0] <= 3 ? (ELockStates)responds_info.bits.data[0] : ELOCK_STATES_UNKNOW;
+				break;
+
+			case 0x30:
+				// 讀取狀態指令
+				FL_DeviceInfo->FL.e_lock_states = responds_info.bits.data[0] <= 3 ? (ELockStates)responds_info.bits.data[0] : ELOCK_STATES_UNKNOW;
+				if (RequestDoneCall)
+				{
+					RequestDoneCall();
+					RequestDoneCall = NULL;
+				}
+				break;
+
+			case 0x81:
+				//上鎖時間設定返回
+				break;
+			}
+		}
+
+		return RESPONSE_SUCCESS;
+	}
+	else
+	{
+		return RESPONSE_INVALID_PARAM;
+	}
+}
 
 /*
 	Parameter Operation function
@@ -1796,6 +1845,15 @@ void FL_CAN_DFU_VerifyFlash_Requset(
 
 		ISOTP_SenderDelegate(FL_ISOTP, Sender, Reciver);
 	}
+}
+
+
+
+
+void FL_BLE_ReadELockStatus_Requset(
+	RequestDoneCallback_t done_callback)
+{
+	RequestDoneCall = done_callback;
 }
 
 /*

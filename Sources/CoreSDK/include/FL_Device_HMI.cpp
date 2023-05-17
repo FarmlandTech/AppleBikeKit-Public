@@ -1030,7 +1030,7 @@ int FL_HMI_CAN_TryPaser(uint32_t can_id, bool is_extend, uint8_t* data, uint8_t 
 }
 
 
-uint32_t FL_device_HML_Init(ISOTP_INST_T * isotp_inst, canbus_send_handler_p sender)
+uint32_t FL_device_HMI_Init(ISOTP_INST_T * isotp_inst, canbus_send_handler_p sender)
 {
 	if (isotp_inst && sender)
 	{

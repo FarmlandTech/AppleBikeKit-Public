@@ -85,7 +85,7 @@ DllExport void __stdcall FL_device_HMI_add_error(uint8_t code);
 DllExport void __stdcall FL_device_HMI_remove_error(uint8_t code);
 
 int FL_HMI_CAN_TryPaser(uint32_t can_id, bool is_extend, uint8_t* data, uint8_t leng);
-uint32_t FL_device_HML_Init(ISOTP_INST_T* isotp_inst, canbus_send_handler_p send_hander);
+uint32_t FL_device_HMI_Init(ISOTP_INST_T* isotp_inst, canbus_send_handler_p send_hander);
 
 #ifdef __cplusplus
 }
