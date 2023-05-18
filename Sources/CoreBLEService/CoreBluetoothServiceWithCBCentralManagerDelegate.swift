@@ -130,7 +130,9 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
         peripheral.discoverServices(nil)
         
         let bluetoothPeripheral: BluetoothPeripheral = .init(device: peripheral)
-        self.peripheralSubject.value = (.didConnect, bluetoothPeripheral)
+        DispatchQueue.main.async {
+            self.peripheralSubject.value = (.didConnect, bluetoothPeripheral)
+        }
     }
     
     // 監聽藍牙裝置的斷線。
@@ -138,6 +140,8 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
         print("AppleBikeKit[DisconnectPeripheral]: \(String(describing: peripheral.name))")
         
         let bluetoothPeripheral: BluetoothPeripheral = .init(device: peripheral)
-        self.peripheralSubject.value = (.didDisconnect, bluetoothPeripheral)
+        DispatchQueue.main.async {
+            self.peripheralSubject.value = (.didDisconnect, bluetoothPeripheral)
+        }
     }
 }
