@@ -35,8 +35,8 @@ public class CoreBluetoothService: NSObject {
     
     private var serviceUUID: String?
     
-    private lazy var centralManager: CBCentralManager = {
-        .init(delegate: self, queue: .main)
+    lazy var centralManager: CBCentralManager = {
+        .init(delegate: self, queue: .global())
     }()
     
     public override init() {
