@@ -71,8 +71,14 @@ final public class DataLakeBikeKit: AppleBikeKit {
     public func disconnectCurrentBike() {
         guard let peripheral: BluetoothPeripheral = self.selectedPeripheralSubject.value else { return }
         self.disconnect(peripheral)
+<<<<<<< HEAD
         self.selectedPeripheralSubject.send(nil)
         self.batteryRSOCSubject.send(nil)
         self.delegate?.dataLakeBikeKitReadBatteryRSOC(nil)
+=======
+        self.batteryRSOCSubject.send(nil)
+        self.delegate?.dataLakeBikeKitReadBatteryRSOC(nil)
+        self.subscriptions.forEach { $0.cancel() }
+>>>>>>> 284256b4ee3d04766617855387bc6f16549a0e9a
     }
 }
