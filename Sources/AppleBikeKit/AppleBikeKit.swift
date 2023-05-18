@@ -28,7 +28,7 @@ public class AppleBikeKit {
     public static let shared: AppleBikeKit = .init()
     
     /// 建構子。
-    private init() {
+    internal init() {
         self.coreBluetoothService.peripheralSubject
             .sink(receiveValue: { (status, peripheral) in
                 guard case .didDisconnect = status else { return }

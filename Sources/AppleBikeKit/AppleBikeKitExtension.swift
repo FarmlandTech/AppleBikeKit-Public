@@ -20,14 +20,16 @@ public protocol DataLakeBikeKitDelegate {
     func dataLakeBikeKitReadBatteryRSOC(_ rsoc: UInt32?)
 }
 
-public class DataLakeBikeKit: AppleBikeKit {
+final public class DataLakeBikeKit: AppleBikeKit {
     
     public var delegate: DataLakeBikeKitDelegate?
     
     private var subscriptions: Set<AnyCancellable> = .init()
     
-    public static var instance: DataLakeBikeKit {
-        self.shared as! DataLakeBikeKit
+    public static let instance: DataLakeBikeKit = .init()
+    
+    private override init() {
+        super.init()
     }
     
     public private(set) lazy var selectedPeripheralSubject: CurrentValueSubject<BluetoothPeripheral?, Never> = {
