@@ -11,7 +11,7 @@ import CoreBLEService
 
 public protocol DataLakeBikeKitDelegate {
     
-    func dataLakeKikeKitConnection(_ peripheral: BluetoothPeripheral, status: CoreBluetoothService.PeripheralStatus)
+    func dataLakeKikeKitConnection(_ peripheral: BluetoothPeripheral?, status: CoreBluetoothService.PeripheralStatus)
     
     func dataLakeBikeKitFoundPeripheripherals(_ peripherals: [BluetoothPeripheral])
     
@@ -32,7 +32,6 @@ final public class DataLakeBikeKit: AppleBikeKit {
         // 監聽連線狀態。
         self.peripheralPublisher.sink(receiveValue: { [weak self] (status, peripheral) in
             guard let self: DataLakeBikeKit else { return }
-            guard let peripheral: BluetoothPeripheral else { return }
             self.delegate?.dataLakeKikeKitConnection(peripheral, status: status)
         }).store(in: &self.subscriptions)
         // 監聽裝置資訊？
@@ -73,6 +72,7 @@ final public class DataLakeBikeKit: AppleBikeKit {
         guard let peripheral: BluetoothPeripheral = self.selectedPeripheralSubject.value else { return }
         self.disconnect(peripheral)
         self.batteryRSOCSubject.send(nil)
+        self.delegate?.dataLakeBikeKitReadBatteryRSOC(nil)
         self.subscriptions.forEach { $0.cancel() }
     }
 }
