@@ -14,7 +14,7 @@ import CoreSDKService
 import CoreBLEService
 
 /// 藍牙連線統一的對外接口，整合 CoreSDK 與 CoreBLEService 的調用。
-public final class AppleBikeKit {
+public class AppleBikeKit {
     
     /// 資料流的訂閱。
     private var subscriptions: Set<AnyCancellable> = .init()
