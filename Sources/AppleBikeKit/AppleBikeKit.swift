@@ -88,7 +88,7 @@ public class AppleBikeKit {
             .store(in: &self.subscriptions)
         
         // 監聽參數讀取的事件處理。
-        self.coreSDKService.rawDataSubject
+        self.coreSDKService.readingRawDataSubject
             .compactMap({ $0 })
             .sink(receiveValue: { rawData in
                 do {
@@ -157,11 +157,11 @@ public class AppleBikeKit {
     
     /// 重啟部件時，執行狀態的發佈者。
     public private(set) lazy var restartDeviceStatePublisher: AnyPublisher<Bool?, Never> = {
-        self.coreSDKService.restartDeviceStateSubject.eraseToAnyPublisher()
+        self.coreSDKService.restartingPartStateSubject.eraseToAnyPublisher()
     }()
     
     public private(set) lazy var resetParameterStatePublisher: AnyPublisher<Bool?, Never> = {
-        self.coreSDKService.resetParameterStateSubject.eraseToAnyPublisher()
+        self.coreSDKService.resetingPartParameterStateSubject.eraseToAnyPublisher()
     }()
     
     /**
@@ -198,7 +198,7 @@ public class AppleBikeKit {
      - Throws: 來自 CoreSDK 判定的錯誤，應該是肇因於參數的錯誤。
      */
     public func restartDevice(partType: CommunicationPartType) throws {
-        try self.coreSDKService.restartDevice(partType: partType)
+        try self.coreSDKService.restartPart(partType)
     }
     
     // MARK: - CoreBluetoothService
