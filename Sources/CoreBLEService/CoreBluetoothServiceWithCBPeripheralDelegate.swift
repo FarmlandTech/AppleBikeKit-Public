@@ -38,7 +38,7 @@ extension CoreBluetoothService: CBPeripheralDelegate {
 
         self.characteristicsSubject.send(peripheral)
         
-        BluetoothService(service: service).service.characteristics?.forEach { characteristic in
+        service.characteristics?.forEach { characteristic in
             peripheral.discoverDescriptors(for: characteristic)
         }
     }

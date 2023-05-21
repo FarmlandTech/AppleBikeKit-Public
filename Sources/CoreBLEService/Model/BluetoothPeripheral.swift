@@ -24,16 +24,15 @@ public struct BluetoothPeripheral {
         self.device.identifier.uuidString
     }
     
-    var services: [BluetoothService] {
-        self.device.services?.map({ .init(service: $0) }) ?? .init()
-    }
-    
-    public func setNotifyValue(_ enabled: Bool, for characteristic: CBCharacteristic) {
-        self.device.setNotifyValue(enabled, for: characteristic)
-    }
-    
     public func writeValue(_ data: Data, for characteristic: CBCharacteristic) {
         guard let type: CharacteristicWriteType = .init(rawValue: characteristic.uuid.uuidString) else { return }
-        self.device.writeValue(data, for: characteristic, type: type == .write ? .withResponse : .withoutResponse)
+        switch type {
+        case .write:
+            self.device.writeValue(data, for: characteristic, type: .withResponse)
+        case .writeWithoutResponse:
+            self.device.writeValue(data, for: characteristic, type: .withoutResponse)
+        case .notify:
+            break
+        }
     }
 }

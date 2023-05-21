@@ -53,7 +53,7 @@ public class AppleBikeKit {
                             self.connectedPeripheral.writeCharacteristic.value = characteristic
                         case .notify:
                             self.connectedPeripheral.notifyCharacteristic.value = characteristic
-                            self.connectedPeripheral.currentPeripheral.value?.setNotifyValue(true, for: characteristic)
+                            self.connectedPeripheral.currentPeripheral.value?.device.setNotifyValue(true, for: characteristic)
                         case .writeWithoutResponse:
                             self.connectedPeripheral.writeWithoutResponseCharacteristic.value = characteristic
                         }
