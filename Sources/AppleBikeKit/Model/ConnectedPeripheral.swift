@@ -20,17 +20,17 @@ public struct ConnectedPeripheral {
     }()
     
     /// 寫入的特徵。
-    public private(set) lazy var writeCharacteristic: CurrentValueSubject<BluetoothCharacteristic?, Never> = {
+    public private(set) lazy var writeCharacteristic: CurrentValueSubject<CBCharacteristic?, Never> = {
         .init(nil)
     }()
     
     /// 寫入(但無回應)的特徵。
-    public private(set) lazy var writeWithoutResponseCharacteristic: CurrentValueSubject<BluetoothCharacteristic?, Never> = {
+    public private(set) lazy var writeWithoutResponseCharacteristic: CurrentValueSubject<CBCharacteristic?, Never> = {
         .init(nil)
     }()
     
     /// 廣播的特徵。
-    public private(set) lazy var notifyCharacteristic: CurrentValueSubject<BluetoothCharacteristic?, Never> = {
+    public private(set) lazy var notifyCharacteristic: CurrentValueSubject<CBCharacteristic?, Never> = {
         .init(nil)
     }()
     
