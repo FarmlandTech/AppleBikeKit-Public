@@ -25,7 +25,7 @@ public protocol DataLakeBikeKitDelegate {
 final public class DataLakeBikeKit: AppleBikeKit {
     
     public var delegate: DataLakeBikeKitDelegate?
-    public static let instance: DataLakeBikeKit = .init()
+    public static let demo: DataLakeBikeKit = .init()
     
     private var subscriptions: Set<AnyCancellable> = .init()
     
