@@ -1,5 +1,5 @@
 //
-//  AppleBikeKitExtension.swift
+//  DataLakeBikeKit.swift
 //  
 //
 //  Created by Yves Tsai on 2023/5/18.
@@ -8,6 +8,8 @@
 import Foundation
 import Combine
 import CoreBLEService
+
+import AppleBikeKit
 
 public protocol DataLakeBikeKitDelegate {
     
