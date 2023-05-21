@@ -25,13 +25,15 @@ public struct BluetoothPeripheral {
     }
     
     public func writeValue(_ data: Data, for characteristic: CBCharacteristic) {
-        guard let type: CharacteristicWriteType = .init(rawValue: characteristic.uuid.uuidString) else { return }
+        let type: CoreBluetoothService.CharacteristicWriteType? = .init(rawValue: characteristic.uuid.uuidString)
         switch type {
-        case .write:
+        case .none:
+            break
+        case .some(.write):
             self.device.writeValue(data, for: characteristic, type: .withResponse)
-        case .writeWithoutResponse:
+        case .some(.writeWithoutResponse):
             self.device.writeValue(data, for: characteristic, type: .withoutResponse)
-        case .notify:
+        case .some(.notify):
             break
         }
     }
