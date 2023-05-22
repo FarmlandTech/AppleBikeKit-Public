@@ -46,13 +46,14 @@ public class AppleBikeKit {
                     // 取得每個服務的所有特徵。
                     characteristics.forEach { [weak self] characteristic in
                         guard let self: AppleBikeKit else { return }
-                        guard let type: CharacteristicWriteType = .init(rawValue: characteristic.uuid.uuidString) else { return }
+                        guard let type: CoreBluetoothService.CharacteristicWriteType = .init(rawValue: characteristic.uuid.uuidString) else { return }
                         // 判斷特徵型態，並緩存。
                         switch type {
                         case .write:
                             self.connectedPeripheral.writeCharacteristic.value = characteristic
                         case .notify:
                             self.connectedPeripheral.notifyCharacteristic.value = characteristic
+                            // 訂閱通知。
                             self.connectedPeripheral.currentPeripheral.value?.device.setNotifyValue(true, for: characteristic)
                         case .writeWithoutResponse:
                             self.connectedPeripheral.writeWithoutResponseCharacteristic.value = characteristic
