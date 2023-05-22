@@ -97,12 +97,7 @@ extension CoreBluetoothService: CBPeripheralDelegate {
             return
         }
         
-<<<<<<< HEAD
         self.didWriteValueForCharacteristicsSubject.send(characteristic)
-=======
-        self.didWriteValueForCharacteristicsSubject.send(characteristic
-        )
->>>>>>> bd3cc87ffd269d8490304cddae79ef8f8ccadb0f
     }
     
     // 監聽特定藍牙裝置的訊號強度。
