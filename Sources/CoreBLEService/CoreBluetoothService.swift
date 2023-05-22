@@ -65,11 +65,11 @@ public class CoreBluetoothService: NSObject {
         .init(nil)
     }()
     
-    public private(set) lazy var didUpdateValueForCharacteristicsSubject: CurrentValueSubject<BluetoothCharacteristic?, Never> = {
+    public private(set) lazy var didUpdateValueForCharacteristicsSubject: CurrentValueSubject<CBCharacteristic?, Never> = {
         .init(nil)
     }()
     
-    public private(set) lazy var didWriteValueForCharacteristicsSubject: CurrentValueSubject<BluetoothCharacteristic?, Never> = {
+    public private(set) lazy var didWriteValueForCharacteristicsSubject: CurrentValueSubject<CBCharacteristic?, Never> = {
         .init(nil)
     }()
     

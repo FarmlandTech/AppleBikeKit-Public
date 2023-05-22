@@ -38,8 +38,8 @@ extension CoreBluetoothService: CBPeripheralDelegate {
 
         self.characteristicsSubject.send(peripheral)
         
-        BluetoothService(service: service).characteristics.forEach { characteristic in
-            peripheral.discoverDescriptors(for: characteristic.characteristic)
+        service.characteristics?.forEach { characteristic in
+            peripheral.discoverDescriptors(for: characteristic)
         }
     }
     
@@ -54,8 +54,7 @@ extension CoreBluetoothService: CBPeripheralDelegate {
             return
         }
         
-        let _characteristic: BluetoothCharacteristic = .init(characteristic: characteristic)
-        self.didUpdateValueForCharacteristicsSubject.send(_characteristic)
+        self.didUpdateValueForCharacteristicsSubject.send(characteristic)
     }
     
     // 監聽對於藍牙裝置寫入參數的事件。(無論有回應或無回應)
@@ -65,8 +64,8 @@ extension CoreBluetoothService: CBPeripheralDelegate {
             return
         }
         
-        let _characteristic: BluetoothCharacteristic = .init(characteristic: characteristic)
-        self.didWriteValueForCharacteristicsSubject.send(_characteristic)
+        self.didWriteValueForCharacteristicsSubject.send(characteristic
+        )
     }
     
     // 監聽特定藍牙裝置的訊號強度。

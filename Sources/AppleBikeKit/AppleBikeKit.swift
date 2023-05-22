@@ -50,12 +50,12 @@ public class AppleBikeKit {
                         // 判斷特徵型態，並緩存。
                         switch type {
                         case .write:
-                            self.connectedPeripheral.writeCharacteristic.value = .init(characteristic: characteristic)
+                            self.connectedPeripheral.writeCharacteristic.value = characteristic
                         case .notify:
-                            self.connectedPeripheral.notifyCharacteristic.value = .init(characteristic: characteristic)
-                            self.connectedPeripheral.currentPeripheral.value?.setNotifyValue(true, for: characteristic)
+                            self.connectedPeripheral.notifyCharacteristic.value = characteristic
+                            self.connectedPeripheral.currentPeripheral.value?.device.setNotifyValue(true, for: characteristic)
                         case .writeWithoutResponse:
-                            self.connectedPeripheral.writeWithoutResponseCharacteristic.value = .init(characteristic: characteristic)
+                            self.connectedPeripheral.writeWithoutResponseCharacteristic.value = characteristic
                         }
                     }
                 })
@@ -66,7 +66,7 @@ public class AppleBikeKit {
         self.didUpdateValueForCharacteristicsPublisher
             .sink(receiveValue: { [weak self] characteristic in
                 guard let self: AppleBikeKit else { return }
-                guard let value: Data = characteristic?.characteristic.value else { return }
+                guard let value: Data = characteristic?.value else { return }
                 self.coreSDKService.commandPacketIn(dataPacket: Array(value))
             })
             .store(in: &self.subscriptions)
@@ -74,21 +74,21 @@ public class AppleBikeKit {
         // 監聽參數寫入的事件處理。
         self.coreSDKService.commandPacketSubject
             .sink(receiveValue: { output in
-                guard let characteristic: BluetoothCharacteristic = self.connectedPeripheral.writeCharacteristic.value else { return }
-                self.connectedPeripheral.currentPeripheral.value?.writeValue(.init(output), for: characteristic.characteristic)
+                guard let characteristic: CBCharacteristic = self.connectedPeripheral.writeCharacteristic.value else { return }
+                self.connectedPeripheral.currentPeripheral.value?.writeValue(.init(output), for: characteristic)
             })
             .store(in: &self.subscriptions)
         
         // 監聽更新韌體的事件處理。
         self.coreSDKService.dataPacketSubject
             .sink(receiveValue: { output in
-                guard let characteristic: BluetoothCharacteristic = self.connectedPeripheral.writeWithoutResponseCharacteristic.value else { return }
-                self.connectedPeripheral.currentPeripheral.value?.writeValue(.init(output), for: characteristic.characteristic)
+                guard let characteristic: CBCharacteristic = self.connectedPeripheral.writeWithoutResponseCharacteristic.value else { return }
+                self.connectedPeripheral.currentPeripheral.value?.writeValue(.init(output), for: characteristic)
             })
             .store(in: &self.subscriptions)
         
         // 監聽參數讀取的事件處理。
-        self.coreSDKService.rawDataSubject
+        self.coreSDKService.readingRawDataSubject
             .compactMap({ $0 })
             .sink(receiveValue: { rawData in
                 do {
@@ -157,11 +157,11 @@ public class AppleBikeKit {
     
     /// 重啟部件時，執行狀態的發佈者。
     public private(set) lazy var restartDeviceStatePublisher: AnyPublisher<Bool?, Never> = {
-        self.coreSDKService.restartDeviceStateSubject.eraseToAnyPublisher()
+        self.coreSDKService.restartingPartStateSubject.eraseToAnyPublisher()
     }()
     
     public private(set) lazy var resetParameterStatePublisher: AnyPublisher<Bool?, Never> = {
-        self.coreSDKService.resetParameterStateSubject.eraseToAnyPublisher()
+        self.coreSDKService.resetingPartParameterStateSubject.eraseToAnyPublisher()
     }()
     
     /**
@@ -198,7 +198,7 @@ public class AppleBikeKit {
      - Throws: 來自 CoreSDK 判定的錯誤，應該是肇因於參數的錯誤。
      */
     public func restartDevice(partType: CommunicationPartType) throws {
-        try self.coreSDKService.restartDevice(partType: partType)
+        try self.coreSDKService.restartPart(partType)
     }
     
     // MARK: - CoreBluetoothService
@@ -244,12 +244,12 @@ public class AppleBikeKit {
     }()
     
     /// 更新特徵時的發佈者。
-    public private(set) lazy var didUpdateValueForCharacteristicsPublisher: AnyPublisher<BluetoothCharacteristic?, Never> = {
+    public private(set) lazy var didUpdateValueForCharacteristicsPublisher: AnyPublisher<CBCharacteristic?, Never> = {
         self.coreBluetoothService.didUpdateValueForCharacteristicsSubject.eraseToAnyPublisher()
     }()
     
     /// 寫入特徵時的發佈者。
-    public private(set) lazy var didWriteValueForCharacteristicsPublisher: AnyPublisher<BluetoothCharacteristic?, Never> = {
+    public private(set) lazy var didWriteValueForCharacteristicsPublisher: AnyPublisher<CBCharacteristic?, Never> = {
         self.coreBluetoothService.didWriteValueForCharacteristicsSubject.eraseToAnyPublisher()
     }()
     
