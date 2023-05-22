@@ -27,14 +27,26 @@ protocol CoreSDKDataSource: AnyObject {
 
 public final class CoreSDKService: NSObject {
     
+    /// CoreSDKService 操作 CoreSDK 時所遭遇的錯誤。
     public enum Error: Swift.Error {
-        case readSingleParameterFail
-        case configureSystemTimeFail
-        case accessParameterWithUnexpectedType
-        case accessParameterWithNoValue
-        case accessParameterWithWrongType
+        /// 讀取參數失敗。
+        case readParameterFail(ParameterData)
+        /// 寫入參數時，遭遇到未定義的解析型別。
+        case writeParameterWithUnexpectedType
+        /// 寫入參數時，欲寫入的內容為空。
+        case writeParameterWithNoValue
+        /// 寫入參數時，欲寫入的內容與定義的型別不匹配。
+        case writeParameterWithWrongType
+        /// 寫入參數時，欲寫入的字串，位元長度錯誤。
         case writeTextOutOfRange
-        case restartDeviceFail(CommunicationPartType)
+        /// 寫入參數失敗。
+        case writeParameterFail(ParameterData)
+        /// 重啟部件失敗。
+        case restartPartFail(CommunicationPartType)
+        /// 重置部件參數失敗。
+        case resetPartParameterFail(CommunicationPartType, Int)
+        /// 校正電控時間失敗。
+        case updateSystemTimeFail
     }
     
     fileprivate static weak var dataSource: CoreSDKDataSource?
@@ -219,17 +231,17 @@ public final class CoreSDKService: NSObject {
     public func read(parameter: ParameterData) throws {
         let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.ReadParameters(SDK_ROUTER_BLE, parameter.partType.coreType, parameter.address, parameter.length, parameter.bank, self.readParameterEvent)
         guard isCoreSDKCompleteTask == 0 else {
-            throw Self.Error.readSingleParameterFail
+            throw Self.Error.readParameterFail(parameter)
         }
     }
     
     public func write(parameter: ParameterData) throws {
         if let _ = parameter.type as? String.Type {
             guard let value: Any = parameter.value else {
-                throw Self.Error.accessParameterWithNoValue
+                throw Self.Error.writeParameterWithNoValue
             }
             guard let parameterValue: String = value as? String else {
-                throw Self.Error.accessParameterWithWrongType
+                throw Self.Error.writeParameterWithWrongType
             }
             
             Self.writingData = .init(repeating: 0, count: .init(parameter.length))
@@ -239,15 +251,19 @@ public final class CoreSDKService: NSObject {
                 }
                 Self.writingData[index] = char
             }
+            var isCoreSDKCompleteTask: Int32?
             withUnsafePointer(to: &Self.writingData) { pointer in
-                _ = self.coreSDKInst.DelegateMethod.WriteParameters(SDK_ROUTER_BLE, parameter.partType.coreType, parameter.address, parameter.length, parameter.bank, pointer.pointee, self.writeParameterEvent)
+                isCoreSDKCompleteTask = self.coreSDKInst.DelegateMethod.WriteParameters(SDK_ROUTER_BLE, parameter.partType.coreType, parameter.address, parameter.length, parameter.bank, pointer.pointee, self.writeParameterEvent)
+            }
+            guard let isCoreSDKCompleteTask: Int32, isCoreSDKCompleteTask == 0 else {
+                throw Self.Error.writeParameterFail(parameter)
             }
         } else if let _ = parameter.type as? Int.Type {
             guard let value: Any = parameter.value else {
-                throw Self.Error.accessParameterWithNoValue
+                throw Self.Error.writeParameterWithNoValue
             }
             guard let parameterValue: Int = value as? Int else {
-                throw Self.Error.accessParameterWithWrongType
+                throw Self.Error.writeParameterWithWrongType
             }
             
             let count = 2
@@ -260,24 +276,24 @@ public final class CoreSDKService: NSObject {
             
             let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.WriteParameters(SDK_ROUTER_BLE, parameter.partType.coreType, parameter.address, parameter.length, parameter.bank, unsafeMutableRawPointer, self.writeParameterEvent)
             guard isCoreSDKCompleteTask == 0 else {
-                throw Self.Error.readSingleParameterFail
+                throw Self.Error.writeParameterFail(parameter)
             }
         } else {
-            throw Self.Error.accessParameterWithUnexpectedType
+            throw Self.Error.writeParameterWithUnexpectedType
         }
     }
     
     public func restartDevice(partType: CommunicationPartType) throws {
         let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.RestartDevice(SDK_ROUTER_BLE, partType.coreType, self.restartDeviceEvent)
         guard isCoreSDKCompleteTask == 0 else {
-            throw Self.Error.restartDeviceFail(partType)
+            throw Self.Error.restartPartFail(partType)
         }
     }
     
     public func resetParameter(partType: CommunicationPartType, bank: Int) throws {
         let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.ResetParameters(SDK_ROUTER_BLE, partType.coreType, UInt8(bank), self.resetParameterEvent)
         guard isCoreSDKCompleteTask == 0 else {
-            throw Self.Error.readSingleParameterFail
+            throw Self.Error.resetPartParameterFail(partType, bank)
         }
     }
     
@@ -285,7 +301,7 @@ public final class CoreSDKService: NSObject {
         let time: UInt64 = .init(Date().timeIntervalSince1970)
         let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.ConfigSysTime(SDK_ROUTER_BLE, SDK_FL_MAIN_BATT, time, self.configureSystemTimeEvent)
         guard isCoreSDKCompleteTask == 0 else {
-            throw Self.Error.configureSystemTimeFail
+            throw Self.Error.updateSystemTimeFail
         }
     }
 }

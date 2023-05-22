@@ -24,7 +24,9 @@ extension CoreBluetoothService: CBPeripheralDelegate {
         }
         
         let bluetoothPeripheral: BluetoothPeripheral = .init(device: peripheral)
-        self.peripheralSubject.value = (.prepared, bluetoothPeripheral)
+        DispatchQueue.main.async {
+            self.peripheralSubject.value = (.prepared, bluetoothPeripheral)
+        }
     }
     
     // 監聽掃描到的藍牙服務特徵。
@@ -39,6 +41,10 @@ extension CoreBluetoothService: CBPeripheralDelegate {
         BluetoothService(service: service).characteristics.forEach { characteristic in
             peripheral.discoverDescriptors(for: characteristic.characteristic)
         }
+    }
+    
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: Swift.Error?) {
+        
     }
     
     // 監聽對於藍牙裝置寫入參數的事件。(有回應)
