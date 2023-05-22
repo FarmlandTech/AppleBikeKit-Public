@@ -46,12 +46,16 @@ AppleBikeKit.shared.parameterDataRepository.findParameterData(name: <#T##Paramet
 }).store(in: &self.subscriptions)
 ```
 
-> 或者針對特定的部件參數，進行一次性的讀取。(仍要執行上述的 readParameter 方法，不管成功與否，皆會取得當下最後一次的監聽到的值)
+> 或者針對特定的部件參數，進行一次性的讀取，特別要注意的是：仍要執行上述的 readParameter() 方法。
 
 ```
 import Combine
 import CoreSDKService
 import AppleBikeKit
 
+// 不管成功與否，皆會取得"當下"最後一次的監聽到的值，也就是說取值失敗的話，可能會取得無效的數值。
 AppleBikeKit.shared.parameterDataRepository.findParameterData(name: <#T##ParameterData.Name#>).subject.value
+
+// 如果改用這種寫法，也可取得"當下"最後一次監聽到的值，但如果取值失敗的話，則不會指派給此參數。
+AppleBikeKit.shared.parameterDataRepository.findParameterData(name: <#T##ParameterData.Name#>).value
 ```
