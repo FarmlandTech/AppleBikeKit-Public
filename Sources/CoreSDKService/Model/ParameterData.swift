@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-public class ParameterData {
+public class ParameterData: NSCopying  {
     public enum Name {
         case INTEGRATED_MILEAGE_RECORD
         case INTEGRATED_HMI_BANK0
@@ -152,5 +152,14 @@ public class ParameterData {
         self.type = type
         self.value = value
         self.dividedParameters = dividedParameters
+    }
+    
+    public func copy(with zone: NSZone? = nil) -> Any {
+        ParameterData(name: self.name,
+                      partType: self.partType,
+                      bank: self.bank,
+                      address: self.address,
+                      length: self.length,
+                      type: self.type)
     }
 }

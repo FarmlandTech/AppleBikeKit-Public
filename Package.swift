@@ -13,7 +13,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "AppleBikeKit",
-            targets: ["CoreSDK", "CoreSDKService", "CoreBLEService", "AppleBikeKit"]),
+            targets: ["CoreSDK", "CoreSDKService", "CoreBLEService", "AppleBikeKit", "DataLakeBikeKit", "FarmLandBikeKit"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -47,6 +47,14 @@ let package = Package(
                 .linkedFramework("SwiftUI", .when(platforms: [.iOS])),
                 .linkedFramework("AppKit", .when(platforms: [.macOS]))
             ]),
+        .target(
+            name: "DataLakeBikeKit",
+            dependencies: ["AppleBikeKit"],
+            path: "Sources/DataLakeBikeKit"),
+        .target(
+            name: "FarmLandBikeKit",
+            dependencies: ["AppleBikeKit"],
+            path: "Sources/FarmLandBikeKit"),
         .testTarget(
             name: "AppleBikeKitTests",
             dependencies: ["AppleBikeKit"],

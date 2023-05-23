@@ -14,7 +14,7 @@ import CoreSDKService
 import CoreBLEService
 
 /// 藍牙連線統一的對外接口，整合 CoreSDK 與 CoreBLEService 的調用。
-public class AppleBikeKit {
+open class AppleBikeKit {
     
     /// 資料流的訂閱。
     private var subscriptions: Set<AnyCancellable> = .init()
@@ -28,7 +28,7 @@ public class AppleBikeKit {
     public static let shared: AppleBikeKit = .init()
     
     /// 建構子。
-    internal init() {
+    public init() {
         self.coreBluetoothService.peripheralSubject
             .sink(receiveValue: { (status, peripheral) in
                 guard case .didDisconnect = status else { return }
@@ -102,12 +102,15 @@ public class AppleBikeKit {
                         let parameterDataList: [ParameterData] = try parameterData.dividIntoMultiParameters(rawData: rawData)
                         for parameterData in parameterDataList {
                             self.parameterDataSubject.send(parameterData)
+                            try self.coreSDKService.parameterDataRepository.findParameterData(name: parameterData.name).subject.send(parameterData.value)
+                            try self.coreSDKService.parameterDataRepository.findParameterData(name: parameterData.name).value = parameterData.value
                         }
                     } else {
                         parameterData.value = try rawData.bytes.convert2Value(type: parameterData.type,
                                                                               length: Int(parameterData.length))
                         self.parameterDataSubject.send(parameterData)
                         try self.coreSDKService.parameterDataRepository.findParameterData(name: parameterData.name).subject.send(parameterData.value)
+                        try self.coreSDKService.parameterDataRepository.findParameterData(name: parameterData.name).value = parameterData.value
                     }
                 } catch {
                     self.parameterDataSubject.send(completion: .failure(error))
