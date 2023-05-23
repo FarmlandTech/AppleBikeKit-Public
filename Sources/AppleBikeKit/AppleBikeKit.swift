@@ -105,6 +105,24 @@ open class AppleBikeKit {
             })
             .store(in: &self.subscriptions)
         
+        self.coreBluetoothService.stateSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreBluetoothService.scanningSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreBluetoothService.foundDevicesSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
         self.coreBluetoothService.peripheralSubject
             .sink(receiveValue: { (status, peripheral) in
                 guard case .didDisconnect = status else { return }
@@ -145,6 +163,18 @@ open class AppleBikeKit {
                 guard let self: AppleBikeKit else { return }
                 guard let value: Data = characteristic?.value else { return }
                 self.coreSDKService.commandPacketIn(dataPacket: Array(value))
+            })
+            .store(in: &self.subscriptions)
+        
+        self.didWriteValueForCharacteristicsPublisher
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreBluetoothService.rssiSubject
+            .sink(receiveValue: { _ in
+                
             })
             .store(in: &self.subscriptions)
     }
