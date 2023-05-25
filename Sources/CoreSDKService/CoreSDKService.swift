@@ -105,10 +105,6 @@ public final class CoreSDKService: NSObject {
         return String(describing: String(bytes: version, encoding: .utf8))
     }
     
-    public private(set) lazy var parameterDataRepository: ParameterDataRepository = {
-        .init()
-    }()
-    
     private var coreSDKInst = CoreSDKInst_T()
     
     private var timerSubscription: AnyCancellable?

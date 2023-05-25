@@ -24,7 +24,7 @@ public enum CommunicationPartType: Int {
     case Unknown = 255
     
     /// 由 swift 的 communication part type enum 去回推 CoreSDK 的 DeviceType_enum 。
-    var coreType: DeviceType_enum {
+    public var coreType: DeviceType_enum {
         switch self {
         case .HMI:
             return SDK_FL_HMI

@@ -8,6 +8,7 @@
 import Foundation
 
 import CoreSDK
+import CoreSDKService
 
 /// 部件參數模型的倉庫，包括定義與緩存，以及小部分的邏輯。
 public class ParameterDataRepository {
@@ -160,17 +161,16 @@ public class ParameterDataRepository {
     ]
     
     /// 整合型的參數陣列。(基本上用於片段讀取參數)
-    public private(set) lazy var integratedParameters: [ParameterData] = {
+    public var integratedParameters: [ParameterData] {
         .init([
             .init(name: .INTEGRATED_MILEAGE_RECORD, partType: .MainBatt, bank: 2, address: 0, length: 248, type: Any.self, dividedParameters: self.mileageRecordParameters),
             .init(name: .INTEGRATED_HMI_BANK0, partType: .HMI, bank: 0, address: 0, length: 96, type: Any.self, dividedParameters: self.hmiBank0Parameters),
             .init(name: .INTEGRATED_CONTROLLER_BANK0, partType: .Controller, bank: 0, address: 0, length: 96, type: Any.self, dividedParameters: self.controllerBank0Parameters),
             .init(name: .INTEGRATED_BATTERY_BANK0, partType: .MainBatt, bank: 0, address: 0, length: 96, type: Any.self, dividedParameters: self.batteryBank0Parameters)
         ])
-    }()
+    }
     
-    /// 此為宇集合陣列，整合目前已定義部件參數陣列。
-    public private(set) lazy var univeralParameters: [ParameterData] = {
+    public private(set) lazy var parameters: [ParameterData] = {
         self.normalParameters + self.assistLevelParameters + self.mileageRecordParameters + self.integratedParameters
     }()
     
@@ -182,7 +182,7 @@ public class ParameterDataRepository {
      - Throws: 搜尋的部件尚未定義，則拋出錯誤。
      */
     public func findParameterData(name: ParameterData.Name) throws -> ParameterData {
-        let parameterData: ParameterData? = self.univeralParameters.first(where: { $0.name == name })
+        let parameterData: ParameterData? = self.parameters.first(where: { $0.name == name })
         if let parameterData: ParameterData {
             return parameterData
         } else {
@@ -201,7 +201,7 @@ public class ParameterDataRepository {
      - Throws: 搜尋的部件尚未定義，則拋出錯誤。
      */
     public func findParameterData(type: DeviceType_enum, bank: UInt8, address: UInt16, length: UInt16) throws -> ParameterData {
-            let parameterData: ParameterData? = self.univeralParameters.first {
+            let parameterData: ParameterData? = self.parameters.first {
                 $0.partType.coreType == type && $0.bank == bank && $0.address == address && $0.length == length
             }
             if let parameterData: ParameterData {

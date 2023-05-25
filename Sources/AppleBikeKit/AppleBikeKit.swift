@@ -49,9 +49,9 @@ open class AppleBikeKit {
     }
     
     /// 用於 CoreSDK 的參數倉庫，包括定義與緩存，也實作部分的邏輯。
-    public var parameterDataRepository: ParameterDataRepository {
-        self.coreSDKService.parameterDataRepository
-    }
+    public private(set) lazy var parameterDataRepository: ParameterDataRepository = {
+        .init()
+    }()
     
     /// 腳踏車裝置資訊的發佈者。
     public private(set) lazy var deviceInfoPublisher: AnyPublisher<FL_Info_st?, Never> = {
@@ -90,8 +90,7 @@ open class AppleBikeKit {
      - Throws: 來自 CoreSDK 判定的錯誤，應該是肇因於參數的錯誤。
      */
     public func readParameter(name: ParameterData.Name) throws {
-        let repository: ParameterDataRepository = self.coreSDKService.parameterDataRepository
-        let parameterData: ParameterData = try repository.findParameterData(name: name)
+        let parameterData: ParameterData = try self.parameterDataRepository.findParameterData(name: name)
         try self.coreSDKService.read(parameter: parameterData)
     }
     
@@ -103,8 +102,7 @@ open class AppleBikeKit {
      - Throws: 參數的型別或數值等各分面可能導致的錯誤。
      */
     public func writeParameter(name: ParameterData.Name, value: Any) throws {
-        let repository: ParameterDataRepository = self.coreSDKService.parameterDataRepository
-        let parameterData: ParameterData = try repository.findParameterData(name: name)
+        let parameterData: ParameterData = try self.parameterDataRepository.findParameterData(name: name)
         parameterData.value = value
         try self.coreSDKService.write(parameter: parameterData)
     }
@@ -262,25 +260,28 @@ extension AppleBikeKit {
         self.coreSDKService.readingRawDataSubject
             .compactMap({ $0 })
             .sink(receiveValue: { rawData in
+                func setParameterValue(_ parameterData: ParameterData) {
+                    guard let index: Int = self.parameterDataRepository.parameters.firstIndex(where: { $0.name == parameterData.name }) else { return }
+                    self.parameterDataRepository.parameters[index].subject.send(parameterData.value)
+                    self.parameterDataRepository.parameters[index].value = parameterData.value
+                }
+                
                 do {
-                    let repository: ParameterDataRepository = self.coreSDKService.parameterDataRepository
-                    let parameterData: ParameterData = try repository.findParameterData(type: rawData.targetDevice,
-                                                                                        bank: rawData.bank,
-                                                                                        address: rawData.address,
-                                                                                        length: rawData.length)
+                    let parameterData: ParameterData = try self.parameterDataRepository.findParameterData(type: rawData.targetDevice,
+                                                                                                          bank: rawData.bank,
+                                                                                                          address: rawData.address,
+                                                                                                          length: rawData.length)
                     if self.parameterDataRepository.integratedParameters.contains(where: { $0.name == parameterData.name }) {
                         let parameterDataList: [ParameterData] = try parameterData.dividIntoMultiParameters(rawData: rawData)
                         for parameterData in parameterDataList {
                             self.parameterDataSubject.send(parameterData)
-                            try self.coreSDKService.parameterDataRepository.findParameterData(name: parameterData.name).subject.send(parameterData.value)
-                            try self.coreSDKService.parameterDataRepository.findParameterData(name: parameterData.name).value = parameterData.value
+                            setParameterValue(parameterData)
                         }
                     } else {
                         parameterData.value = try rawData.bytes.convert2Value(type: parameterData.type,
                                                                               length: Int(parameterData.length))
                         self.parameterDataSubject.send(parameterData)
-                        try self.coreSDKService.parameterDataRepository.findParameterData(name: parameterData.name).subject.send(parameterData.value)
-                        try self.coreSDKService.parameterDataRepository.findParameterData(name: parameterData.name).value = parameterData.value
+                        setParameterValue(parameterData)
                     }
                 } catch {
                     self.parameterDataSubject.send(completion: .failure(error))
