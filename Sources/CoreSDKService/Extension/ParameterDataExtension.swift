@@ -31,8 +31,10 @@ extension ParameterData {
             let end: Int = Int(parameterData.address + parameterData.length - 1)
             let bytes: [UInt8] = Array(rawData.bytes[start...end])
             
+            let value = try bytes.convert2Value(type: parameterData.type, length: Int(parameterData.length))
             let element: ParameterData = parameterData
-            element.subject.value = try bytes.convert2Value(type: parameterData.type, length: Int(parameterData.length))
+            element.value = value
+            element.subject.send(value)
             
             result.append(element)
         }
