@@ -43,6 +43,10 @@ let package = Package(
             name: "AppleBikeKit",
             dependencies: ["CoreSDK", "CoreSDKService", "CoreBLEService"],
             path: "Sources/AppleBikeKit",
+            swiftSettings: [
+                .define("APPLICATION_EXTENSION_API_ONLY=YES"),
+                .unsafeFlags(["-application-extension"])
+            ],
             linkerSettings: [
                 .linkedFramework("SwiftUI", .when(platforms: [.iOS])),
                 .linkedFramework("AppKit", .when(platforms: [.macOS]))
