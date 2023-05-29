@@ -41,9 +41,8 @@ public class CoreBluetoothService: NSObject {
         .init(.init())
     }()
     
-    public private(set) lazy var peripheralSubject: CurrentValueSubject<(PeripheralStatus, BluetoothPeripheral?), Never> = {
-        let defaultValue: (PeripheralStatus, BluetoothPeripheral?) = (.unknown, nil)
-        return .init(defaultValue)
+    public private(set) lazy var peripheralSubject: CurrentValueSubject<PeripheralStatus, Never> = {
+        .init(.unknown)
     }()
     
     public private(set) lazy var characteristicsSubject: CurrentValueSubject<CBPeripheral?, Never> = {
@@ -115,9 +114,9 @@ extension CoreBluetoothService {
         /// 未知。
         case unknown
         /// 未連線。
-        case didConnect
+        case didConnect(BluetoothPeripheral)
         /// 已連線。
-        case didDisconnect
+        case didDisconnect(BluetoothPeripheral)
         /// 已進入準備狀態。(可被操作)
         case prepared
     }

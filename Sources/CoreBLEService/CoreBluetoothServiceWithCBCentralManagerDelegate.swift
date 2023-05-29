@@ -59,7 +59,7 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
         
         let bluetoothPeripheral: BluetoothPeripheral = .init(device: peripheral)
         DispatchQueue.main.async {
-            self.peripheralSubject.value = (.didConnect, bluetoothPeripheral)
+            self.peripheralSubject.send(.didConnect(bluetoothPeripheral))
         }
     }
     
@@ -71,7 +71,7 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
         
         let bluetoothPeripheral: BluetoothPeripheral = .init(device: peripheral)
         DispatchQueue.main.async {
-            self.peripheralSubject.value = (.didDisconnect, bluetoothPeripheral)
+            self.peripheralSubject.send(.didDisconnect(bluetoothPeripheral))
         }
     }
     
@@ -83,7 +83,7 @@ extension CoreBluetoothService: CBCentralManagerDelegate {
         
         let bluetoothPeripheral: BluetoothPeripheral = .init(device: peripheral)
         DispatchQueue.main.async {
-            self.peripheralSubject.value = (.didDisconnect, bluetoothPeripheral)
+            self.peripheralSubject.send(.didDisconnect(bluetoothPeripheral))
         }
     }
 }

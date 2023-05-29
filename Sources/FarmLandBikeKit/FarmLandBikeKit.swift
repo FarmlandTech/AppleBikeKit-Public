@@ -17,47 +17,40 @@ final public class FarmLandBikeKit: AppleBikeKit {
     
     private var subscriptions: Set<AnyCancellable> = .init()
     
-    public private(set) lazy var selectedPeripheralSubject: CurrentValueSubject<BluetoothPeripheral?, Never> = {
-        .init(nil)
+    public private(set) lazy var connectionMetaReadingHelper: ConnectionMetaReadingHelper = {
+        .init()
     }()
     
-    public private(set) lazy var batteryRSOCSubject: CurrentValueSubject<UInt32?, Never> = {
-        .init(nil)
-    }()
-    
-    public func connect(bikeName: String) throws {
+    private override init() {
+        super.init()
         // 監聽連線狀態。
-        self.peripheralPublisher.sink(receiveValue: { [weak self] (status, peripheral) in
-            guard let self: FarmLandBikeKit else { return }
-            if case .didDisconnect = status {
-                self.subscriptions.forEach { $0.cancel() }
-                self.subscriptions = .init()
+        self.peripheralPublisher.sink(receiveValue: { status in
+            switch status {
+            case .unknown, .didConnect(_):
+                break
+            case .didDisconnect(_):
+                // TODO: 把緩存的參數重置！！！
+                break
+            case .prepared:
+                try? self.connectionMetaReadingHelper.doTask()
             }
         }).store(in: &self.subscriptions)
-        // 監聽裝置資訊？
+        // 監聽裝置資訊。
         self.deviceInfoPublisher.sink(receiveValue: { deviceInfo in
-            self.batteryRSOCSubject.send(deviceInfo?.battery_rsoc)
-        }).store(in: &self.subscriptions)
-        // 開始掃描。
-        try self.startScan()
-        // 監聽掃描。
-        self.foundDevicesPublisher.sink(receiveValue: { [weak self] foundDevices in
-            guard let self: FarmLandBikeKit else { return }
-            // 篩選。
-            guard let selectedPeripheral: BluetoothPeripheral = foundDevices.first(where: { $0.deviceName == bikeName }) else { return }
-            self.selectedPeripheralSubject.send(selectedPeripheral)
-            // 停止掃描。
-            self.stopScan()
-            // 連線。
-            self.connect(selectedPeripheral)
-            // 監聽電池電量。
+            
         }).store(in: &self.subscriptions)
     }
     
-    public func disconnectCurrentBike() {
-        guard let peripheral: BluetoothPeripheral = self.selectedPeripheralSubject.value else { return }
+    deinit {
+        self.subscriptions.forEach({ $0.cancel() })
+    }
+    
+    public func connectBike(_ peripheral: BluetoothPeripheral) {
+        self.connect(peripheral)
+    }
+    
+    public func disconnectBike() {
+        guard let peripheral: BluetoothPeripheral = self.connectedPeripheral.currentPeripheral else { return }
         self.disconnect(peripheral)
-        self.selectedPeripheralSubject.send(nil)
-        self.batteryRSOCSubject.send(nil)
     }
 }

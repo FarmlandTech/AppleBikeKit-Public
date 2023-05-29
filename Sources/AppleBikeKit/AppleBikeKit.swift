@@ -82,6 +82,10 @@ open class AppleBikeKit {
         self.coreSDKService.resetingPartParameterStateSubject.eraseToAnyPublisher()
     }()
     
+    public private(set) lazy var aPublisher: AnyPublisher<Bool?, Never> = {
+        self.coreSDKService.updatingSystemTimeStateSubject.eraseToAnyPublisher()
+    }()
+    
     /**
      讀取部件參數的方法。
      
@@ -148,14 +152,14 @@ open class AppleBikeKit {
     }()
     
     /// 已連線裝置的發佈者。(包含其連線狀態與斷線狀態)
-    public private(set) lazy var peripheralPublisher: AnyPublisher<(CoreBluetoothService.PeripheralStatus, BluetoothPeripheral?), Never> = {
+    public private(set) lazy var peripheralPublisher: AnyPublisher<CoreBluetoothService.PeripheralStatus, Never> = {
         self.coreBluetoothService.peripheralSubject.eraseToAnyPublisher()
     }()
     
     /// 已搜尋到特徵的發佈者。
     public private(set) lazy var characteristicsPublisher: AnyPublisher<CBPeripheral?, Never> = {
         self.coreBluetoothService.characteristicsSubject
-            .filter({ $0?.identifier == self.connectedPeripheral.currentPeripheral.value?.device.identifier })
+            .filter({ $0?.identifier == self.connectedPeripheral.currentPeripheralSubject.value?.device.identifier })
             .eraseToAnyPublisher()
     }()
     
@@ -200,7 +204,7 @@ open class AppleBikeKit {
      - parameter bluetoothPeripheral: 欲進行連結的目標藍牙裝置。
      */
     public func connect(_ bluetoothPeripheral: BluetoothPeripheral) {
-        self.connectedPeripheral.currentPeripheral.value = bluetoothPeripheral
+        self.connectedPeripheral.currentPeripheralSubject.value = bluetoothPeripheral
         self.coreBluetoothService.connect(peripheral: bluetoothPeripheral)
         self.coreSDKService.startReadWriteChannel()
     }
@@ -224,7 +228,11 @@ open class AppleBikeKit {
      - Precondition: 此方法，呼叫一次，僅會得到一次回傳值，並非連續性的監聽。
      */
     public func readRSSI() {
-        self.connectedPeripheral.currentPeripheral.value?.device.readRSSI()
+        self.connectedPeripheral.currentPeripheralSubject.value?.device.readRSSI()
+    }
+    
+    public func updateSystemTime() throws {
+        try self.coreSDKService.updateSystemTime()
     }
 }
 
@@ -237,16 +245,16 @@ extension AppleBikeKit {
         // 監聽參數寫入的事件處理。
         self.coreSDKService.commandPacketSubject
             .sink(receiveValue: { output in
-                guard let characteristic: CBCharacteristic = self.connectedPeripheral.writeCharacteristic.value else { return }
-                self.connectedPeripheral.currentPeripheral.value?.writeValue(.init(output), for: characteristic)
+                guard let characteristic: CBCharacteristic = self.connectedPeripheral.writeCharacteristicSubject.value else { return }
+                self.connectedPeripheral.currentPeripheralSubject.value?.writeValue(.init(output), for: characteristic)
             })
             .store(in: &self.subscriptions)
         
         // 監聽更新韌體的事件處理。
         self.coreSDKService.dataPacketSubject
             .sink(receiveValue: { output in
-                guard let characteristic: CBCharacteristic = self.connectedPeripheral.writeWithoutResponseCharacteristic.value else { return }
-                self.connectedPeripheral.currentPeripheral.value?.writeValue(.init(output), for: characteristic)
+                guard let characteristic: CBCharacteristic = self.connectedPeripheral.writeWithoutResponseCharacteristicSubject.value else { return }
+                self.connectedPeripheral.currentPeripheralSubject.value?.writeValue(.init(output), for: characteristic)
             })
             .store(in: &self.subscriptions)
         
@@ -332,7 +340,7 @@ extension AppleBikeKit {
             .store(in: &self.subscriptions)
         
         self.coreBluetoothService.peripheralSubject
-            .sink(receiveValue: { (status, peripheral) in
+            .sink(receiveValue: { status in
                 guard case .didDisconnect = status else { return }
                 self.coreBluetoothService.foundDevicesSubject.value = .init()
             })
@@ -345,7 +353,7 @@ extension AppleBikeKit {
         self.characteristicsPublisher
             .sink(receiveValue: { peripheral in
                 // 取得每個服務。
-                self.connectedPeripheral.currentPeripheral.value?.device.services?.forEach({ [weak self] service in
+                self.connectedPeripheral.currentPeripheralSubject.value?.device.services?.forEach({ [weak self] service in
                     guard let self: AppleBikeKit else { return }
                     guard let characteristics: [CBCharacteristic] = service.characteristics else { return }
                     // 取得每個服務的所有特徵。
@@ -355,13 +363,13 @@ extension AppleBikeKit {
                         // 判斷特徵型態，並緩存。
                         switch type {
                         case .write:
-                            self.connectedPeripheral.writeCharacteristic.value = characteristic
+                            self.connectedPeripheral.writeCharacteristicSubject.value = characteristic
                         case .notify:
-                            self.connectedPeripheral.notifyCharacteristic.value = characteristic
+                            self.connectedPeripheral.notifyCharacteristicSubject.value = characteristic
                             // 訂閱通知。
-                            self.connectedPeripheral.currentPeripheral.value?.device.setNotifyValue(true, for: characteristic)
+                            self.connectedPeripheral.currentPeripheralSubject.value?.device.setNotifyValue(true, for: characteristic)
                         case .writeWithoutResponse:
-                            self.connectedPeripheral.writeWithoutResponseCharacteristic.value = characteristic
+                            self.connectedPeripheral.writeWithoutResponseCharacteristicSubject.value = characteristic
                         }
                     }
                 })
