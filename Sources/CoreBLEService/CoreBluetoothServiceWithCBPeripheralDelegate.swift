@@ -24,7 +24,7 @@ extension CoreBluetoothService: CBPeripheralDelegate {
         }
         
         DispatchQueue.main.async {
-            self.peripheralSubject.value = (.prepared, .init(device: peripheral))
+            self.peripheralSubject.send(.prepared)
         }
     }
     
