@@ -15,10 +15,16 @@ final public class FarmLandBikeKit: AppleBikeKit {
     
     public static let sleipnir: FarmLandBikeKit = .init()
     
-    private var subscriptions: Set<AnyCancellable> = .init()
-    
-    public private(set) lazy var connectionMetaReadingHelper: ConnectionMetaReadingHelper = {
+    private lazy var subscriptions: Set<AnyCancellable> = {
         .init()
+    }()
+    
+    private lazy var connectionMetaReadingHelper: ConnectionMetaReadingHelper = {
+        .init()
+    }()
+    
+    public private(set) lazy var metaPublisher: AnyPublisher<MetaParameter, Never> = {
+        self.connectionMetaReadingHelper.metaSubject.removeDuplicates().eraseToAnyPublisher()
     }()
     
     private override init() {
@@ -51,6 +57,7 @@ final public class FarmLandBikeKit: AppleBikeKit {
     
     public func disconnectBike() {
         guard let peripheral: BluetoothPeripheral = self.connectedPeripheral.currentPeripheral else { return }
+        self.connectionMetaReadingHelper.metaSubject.send(.init())
         self.disconnect(peripheral)
     }
 }
