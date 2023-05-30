@@ -144,15 +144,7 @@ final public class ConnectionMetaReadingHelper {
     }
     
     func doTask() throws {
-        // 校正電控時間
-        self.recurUpdateClock()
-        // 取得參數
         try self.recurFetchMeta()
-    }
-    
-    private func recurUpdateClock() {
-        // TODO: 未實作！
-        
     }
     
     private func recurFetchMeta() throws {
@@ -163,7 +155,7 @@ final public class ConnectionMetaReadingHelper {
             if name == .INTEGRATED_CONTROLLER_BANK0, !self.metaSubject.value.isControllerOmit { continue }
             try FarmLandBikeKit.sleipnir.readParameter(name: name)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
             guard self.metaSubject.value.isOmit else { return }
             try? self.recurFetchMeta()
         }

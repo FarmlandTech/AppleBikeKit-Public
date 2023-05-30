@@ -19,12 +19,20 @@ final public class FarmLandBikeKit: AppleBikeKit {
         .init()
     }()
     
+    public var metaParameter: MetaParameter {
+        self.connectionMetaReadingHelper.metaSubject.value
+    }
+    
+    public private(set) lazy var metaPublisher: AnyPublisher<MetaParameter, Never> = {
+        self.connectionMetaReadingHelper.metaSubject.removeDuplicates().eraseToAnyPublisher()
+    }()
+    
     private lazy var connectionMetaReadingHelper: ConnectionMetaReadingHelper = {
         .init()
     }()
     
-    public private(set) lazy var metaPublisher: AnyPublisher<MetaParameter, Never> = {
-        self.connectionMetaReadingHelper.metaSubject.removeDuplicates().eraseToAnyPublisher()
+    private lazy var systemTimeUpdateHelper: SystemTimeUpdateHelper = {
+        .init()
     }()
     
     private override init() {
@@ -34,11 +42,17 @@ final public class FarmLandBikeKit: AppleBikeKit {
             switch status {
             case .unknown, .didConnect(_):
                 break
-            case .didDisconnect(_):
-                // TODO: 把緩存的參數重置！！！
-                break
-            case .prepared:
-                try? self.connectionMetaReadingHelper.doTask()
+            case .didDisconnect(_):  // 清空緩存數據。
+                self.connectionMetaReadingHelper.metaSubject.send(.init())
+                self.systemTimeUpdateHelper.stateSubject.send(nil)
+            case .prepared:  // 取得關鍵參數。
+                do {
+                    try self.connectionMetaReadingHelper.doTask()
+                    try self.systemTimeUpdateHelper.doTask()
+                } catch {
+                    // TODO: 錯誤處理？
+                    assertionFailure("\(error)")
+                }
             }
         }).store(in: &self.subscriptions)
         // 監聽裝置資訊。
@@ -57,7 +71,6 @@ final public class FarmLandBikeKit: AppleBikeKit {
     
     public func disconnectBike() {
         guard let peripheral: BluetoothPeripheral = self.connectedPeripheral.currentPeripheral else { return }
-        self.connectionMetaReadingHelper.metaSubject.send(.init())
         self.disconnect(peripheral)
     }
 }
