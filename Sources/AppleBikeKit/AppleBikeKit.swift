@@ -270,7 +270,9 @@ extension AppleBikeKit {
             .sink(receiveValue: { rawData in
                 func setParameterValue(_ parameterData: ParameterData) {
                     guard let index: Int = self.parameterDataRepository.parameters.firstIndex(where: { $0.name == parameterData.name }) else { return }
-                    self.parameterDataRepository.parameters[index].subject.send(parameterData.value)
+                    DispatchQueue.main.async {
+                        self.parameterDataRepository.parameters[index].subject.send(parameterData.value)
+                    }
                     self.parameterDataRepository.parameters[index].value = parameterData.value
                 }
                 

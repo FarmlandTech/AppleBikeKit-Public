@@ -51,7 +51,7 @@ extension MetaParameter: Equatable {
         if lhs.isOmit || rhs.isOmit {
             return false
         }
-        let isHmiEqual: Bool = lhs.hmiSSN == rhs.batterySSN && lhs.hmiDMID == rhs.hmiDMID && lhs.hmiDSN == rhs.hmiDSN && lhs.hmiSMID == rhs.hmiSMID && lhs.hmiDistanceUint == rhs.hmiDistanceUint
+        let isHmiEqual: Bool = lhs.hmiSSN == rhs.hmiSSN && lhs.hmiDMID == rhs.hmiDMID && lhs.hmiDSN == rhs.hmiDSN && lhs.hmiSMID == rhs.hmiSMID && lhs.hmiDistanceUint == rhs.hmiDistanceUint
         let isBatteryEqual: Bool = lhs.batterySSN == rhs.batterySSN && lhs.batteryDMID == rhs.batteryDMID && lhs.batteryDSN == rhs.batteryDSN && lhs.batterySMID == rhs.batterySMID
         let isControllerEqual: Bool = lhs.controllerSSN == rhs.controllerSSN && lhs.controllerDMID == rhs.controllerDMID && lhs.controllerDSN == rhs.controllerDSN && lhs.controllerSMID == rhs.controllerSMID
         return isHmiEqual && isBatteryEqual && isControllerEqual
@@ -139,7 +139,6 @@ final public class ConnectionMetaReadingHelper {
             default:
                 return
             }
-            guard !self.metaSubject.value.isOmit else { return }
         }).store(in: &self.subscriptions)
     }
     
