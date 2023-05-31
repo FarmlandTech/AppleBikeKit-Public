@@ -82,7 +82,7 @@ open class AppleBikeKit {
         self.coreSDKService.resetingPartParameterStateSubject.eraseToAnyPublisher()
     }()
     
-    public private(set) lazy var aPublisher: AnyPublisher<Bool?, Never> = {
+    public private(set) lazy var updatingSystemTimeStatePublisher: AnyPublisher<Bool?, Never> = {
         self.coreSDKService.updatingSystemTimeStateSubject.eraseToAnyPublisher()
     }()
     
