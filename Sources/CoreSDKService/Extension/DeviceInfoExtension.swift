@@ -136,3 +136,32 @@ public extension FL_Info_st {
         !self.hasError
     }
 }
+
+public extension FL_Info_st {
+    var ableRideRange: Double {
+        switch self.battery_rsoc {
+        case 0..<10:
+            return 2.2
+        case 10..<20:
+            return 4.4
+        case 20..<30:
+            return 6.6
+        case 30..<40:
+            return 8.8
+        case 40..<50:
+            return 11
+        case 50..<60:
+            return 13.2
+        case 60..<70:
+            return 15.4
+        case 70..<80:
+            return 17.6
+        case 80..<90:
+            return 19.8
+        case 90..<100:
+            return 22
+        default :
+            return 0
+        }
+    }
+}
