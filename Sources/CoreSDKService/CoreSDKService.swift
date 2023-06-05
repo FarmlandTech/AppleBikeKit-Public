@@ -226,7 +226,7 @@ public final class CoreSDKService: NSObject {
     public func read(parameter: ParameterData) throws {
         let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.ReadParameters(SDK_ROUTER_BLE, parameter.partType.coreType, parameter.address, parameter.length, parameter.bank, self.readParameterEvent)
         guard isCoreSDKCompleteTask == 0 else {
-            throw Self.Error.readParameterFail(parameter)
+            throw CoreSDKService.Error.readParameterFail(parameter)
         }
     }
     
