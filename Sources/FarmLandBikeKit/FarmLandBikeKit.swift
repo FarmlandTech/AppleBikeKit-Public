@@ -13,28 +13,37 @@ import AppleBikeKit
 
 final public class FarmLandBikeKit: AppleBikeKit {
     
+    /// 單例。
     public static let sleipnir: FarmLandBikeKit = .init()
     
-    private lazy var subscriptions: Set<AnyCancellable> = {
-        .init()
-    }()
-    
-    public var metaParameter: MetaParameter {
-        self.connectionMetaReadingHelper.metaSubject.value
-    }
-    
+    /// 關鍵參數的 Publisher 。
     public private(set) lazy var metaPublisher: AnyPublisher<MetaParameter, Never> = {
         self.connectionMetaReadingHelper.metaSubject.removeDuplicates().eraseToAnyPublisher()
     }()
     
+    /// 關鍵參數(ssn或dmid等)的緩存值。
+    public var metaParameter: MetaParameter {
+        self.connectionMetaReadingHelper.metaSubject.value
+    }
+    
+    /// 訂閱實例。
+    private lazy var subscriptions: Set<AnyCancellable> = {
+        .init()
+    }()
+    
+    /// 取得關鍵參數(ssn或dmid等)的處理物件實例。
     private lazy var connectionMetaReadingHelper: ConnectionMetaReadingHelper = {
         .init()
     }()
     
+    /// 更新電控時間的處理物件實例。
     private lazy var systemTimeUpdateHelper: SystemTimeUpdateHelper = {
         .init()
     }()
     
+    /**
+     建構子。
+     */
     private override init() {
         super.init()
         // 監聽連線狀態。
@@ -61,14 +70,23 @@ final public class FarmLandBikeKit: AppleBikeKit {
         }).store(in: &self.subscriptions)
     }
     
+    /**
+     解構子。
+     */
     deinit {
         self.subscriptions.forEach({ $0.cancel() })
     }
     
+    /**
+     執行藍牙連線。
+     */
     public func connectBike(_ peripheral: BluetoothPeripheral) {
         self.connect(peripheral)
     }
     
+    /**
+     執行藍牙斷線。
+     */
     public func disconnectBike() {
         guard let peripheral: BluetoothPeripheral = self.connectedPeripheral.currentPeripheral else { return }
         self.disconnect(peripheral)

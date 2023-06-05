@@ -186,7 +186,7 @@ public class ParameterDataRepository {
         if let parameterData: ParameterData {
             return parameterData
         } else {
-            throw Self.Error.parameterDataNotFoundByName(name)
+            throw ParameterDataRepository.Error.parameterDataNotFoundByName(name)
         }
     }
     

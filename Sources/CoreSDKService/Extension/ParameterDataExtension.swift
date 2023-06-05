@@ -34,7 +34,9 @@ extension ParameterData {
             let value = try bytes.convert2Value(type: parameterData.type, length: Int(parameterData.length))
             let element: ParameterData = parameterData
             element.value = value
-            element.subject.send(value)
+            DispatchQueue.main.async {
+                element.subject.send(value)
+            }
             
             result.append(element)
         }
