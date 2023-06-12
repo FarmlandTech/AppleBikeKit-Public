@@ -432,7 +432,7 @@ int HostControlInfoHandler(uint8_t* data, uint32_t leng)
 	FL_DeviceInfo->FL.current_assist_lv = ctl_info.bits.set_assist_level;
 	FL_DeviceInfo->FL.system_power_control = ctl_info.bits.system_power_control;
 	FL_DeviceInfo->FL.walk_assist_control = ctl_info.bits.walk_assist_control;
-	FL_DeviceInfo->FL.light_control = ctl_info.bits.light_control;
+	FL_DeviceInfo->FL.light_control = ctl_info.bits.front_light_control;
 
 	return RESPONSE_SUCCESS;
 }
@@ -772,6 +772,7 @@ int ControllerInfo05Handler(uint8_t* data, uint32_t leng)
 	FL_DeviceInfo->FL.assist_on = info.bits.assist_on;
 	FL_DeviceInfo->FL.front_light_on = info.bits.front_light_on;
 	FL_DeviceInfo->FL.rear_light_on = info.bits.rear_light_on;
+	FL_DeviceInfo->FL.break_light_on = info.bits.break_light_on;
 	FL_DeviceInfo->FL.activate_light_ctrl = info.bits.activate_light_ctrl;
 	FL_DeviceInfo->FL.brake_on = info.bits.brake_on;
 	FL_DeviceInfo->FL.candence_direction = info.bits.candence_direction;
@@ -1869,7 +1870,7 @@ void FL_CAN_HostCommon_Info_00_Create( uint8_t assist_lv, bool sys_power_on, boo
 	info.bits.set_assist_level = assist_lv;
 	info.bits.system_power_control = sys_power_on;
 	info.bits.walk_assist_control = walk_assit_on;
-	info.bits.light_control = light_on;
+	info.bits.front_light_control = light_on;
 
 	if (CAN_sender)
 	{

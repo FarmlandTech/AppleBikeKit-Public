@@ -119,17 +119,19 @@ typedef enum DEVICE_OBJ_TYPE_E
 #define FL_CANID_HOST_INFO_00	(uint32_t)0x80
 typedef union HOST_ControlInfo_00_st
 {
-	uint8_t bytes[2];
+	uint8_t bytes[3];
 
 	struct
 	{
 		//Byte 0
-		uint8_t set_assist_level;
+		uint8_t set_assist_level:4;
+		uint8_t system_power_control : 4;
 		//Byte 1
-		uint8_t system_power_control : 1;
-		uint8_t walk_assist_control : 1;
-		uint8_t light_control : 1;
-		uint8_t reserved_0 : 5;
+		uint8_t walk_assist_control : 4;
+		uint8_t front_light_control : 4;
+		//Byte 2
+		uint8_t rear_light_control : 4;
+		uint8_t reserved_0 : 4;
 	} bits;
 
 } HOST_CONTROLINFO_00_T;
@@ -526,11 +528,12 @@ typedef union CTRL_Info05_st
 
 		uint8_t front_light_on:1;
 		uint8_t rear_light_on:1;
+		uint8_t break_light_on : 1;
 		uint8_t activate_light_ctrl :1;
 		uint8_t brake_on:1;
 		uint8_t candence_direction : 1;
 		uint8_t motor_direction:1;
-		uint8_t reserved_1 : 2;
+		uint8_t reserved_1 : 1;
 	} bits;
 
 } CTRL_INFO05_T;

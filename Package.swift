@@ -29,7 +29,7 @@ let package = Package(
                 .unsafeFlags(["-w"]),
                 .headerSearchPath("include"),
                 .define("ENABLE_CPP"),
-                .unsafeFlags(["-std=c++17"])
+                .unsafeFlags(["-std=c++20"])
             ]
         ),
         .target(

@@ -1,11 +1,11 @@
 #pragma once
 #pragma warning(disable:4996)
 #pragma warning(disable:26812)
-
+//
 #ifndef _FL_CORE_SDK_H // include guard
 #define _FL_CORE_SDK_H
 
-
+  
 
 #include "lib_event_scheduler.h"
 #include "FL_CANInfoStruct.h"
@@ -189,6 +189,8 @@ struct DllExport FL_Info_st
 	bool front_light_on;
 	//當前尾燈輸出狀態
 	bool rear_light_on;
+	//當剎車燈輸出狀態
+	bool break_light_on;
 	//是否可控燈
 	bool activate_light_ctrl;
 	//當前煞車感測觸發狀態
@@ -361,6 +363,15 @@ struct DllExport FL_Info_st
 		SDK_ROUTER_CANBUS,
 	} RouterType;
 
+	typedef DllExport enum light_control_enum
+	{
+		//前燈
+		LIGHT_CONTROL_FRONT = 0,
+		//後燈
+		LIGHT_CONTROL_REAR
+	} light_control_parts;
+	 
+
 	// ReadParameter讀取回傳結構定義
 	typedef DllExport struct fReadParameter_Params_st
 	{
@@ -449,6 +460,8 @@ struct DllExport FL_Info_st
 	typedef void(__stdcall* fpCallback_GetELock_DEV)(int return_state, ELockStates now_states);
 	//UpgradeStateMsg Callback調用函數類型定義,當更新(DFU)進度刷新時自動呼叫
 	typedef void (__stdcall *UpgradeStateMsg_p)(const char* out_msg, int progress_value);
+	//Light control Callback調用函數類型定義
+	typedef void(__stdcall* fpCallback_LightControl)(int return_state);
 
 	typedef struct DllExport DelegateFuncDefine_st
 	{
@@ -484,6 +497,8 @@ struct DllExport FL_Info_st
 		int(__stdcall* SetELock_DEV)(RouterType router,  bool release, bool unlocked, fpCallback_SetELock_DEV callback);
 		// 電子鎖當前狀態查詢
 		int(__stdcall* GetELock_DEV)(RouterType router, fpCallback_GetELock_DEV callback);
+		// 車燈控制
+		int(__stdcall* LightControl)(RouterType router, light_control_parts parts, bool on_off, fpCallback_LightControl callback);
 	} DelegateFuncDefine_T;
 
 	//SDK接收及發送外部封包指令集
