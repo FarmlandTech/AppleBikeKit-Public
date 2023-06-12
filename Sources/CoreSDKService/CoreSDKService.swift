@@ -55,6 +55,10 @@ public final class CoreSDKService: NSObject {
         CoreSDKService.dataSource?.updateSystemTime(state: $0 == 0)
     }
     
+    private let lightControlEvent: LightControlEvent = {
+        CoreSDKService.dataSource?.lightControl(state: $0 == 0)
+    }
+    
     // MARK: 數據流
     
     // TODO: 找時間改以 Result Type 來改寫傳入值，以免數據為空值時，造成訂閱的終結。
@@ -94,6 +98,11 @@ public final class CoreSDKService: NSObject {
     
     /// 校正電控時間時，命令執行狀態的數據流。
     public private(set) lazy var updatingSystemTimeStateSubject: CurrentValueSubject<Bool?, Never> = {
+        .init(nil)
+    }()
+    
+    /// 控制車燈開關時，命令執行狀態的數據流。
+    public private(set) lazy var lightControlStateSubject: CurrentValueSubject<Bool?, Never> = {
         .init(nil)
     }()
     
@@ -315,6 +324,20 @@ public final class CoreSDKService: NSObject {
             throw Self.Error.updateSystemTimeFail
         }
     }
+    
+    /**
+     控制車燈開關。
+     
+     - parameter part: 前燈或後燈。
+     - parameter isOn: 開或關。
+     - Throws: CoreSDK 執行失敗。
+     */
+    public func lightControl(part: light_control_parts = LIGHT_CONTROL_FRONT, isOn: Bool) throws {
+        let isCoreSDKCompleteTask: Int32 =  self.coreSDKInst.DelegateMethod.LightControl(SDK_ROUTER_BLE, part, isOn, self.lightControlEvent)
+        guard isCoreSDKCompleteTask == 0 else {
+            throw Self.Error.lightControlFail
+        }
+    }
 }
 
 // MARK: - CoreSDK Protocol
@@ -344,6 +367,10 @@ extension CoreSDKService: CoreSDKDataSource {
     func updateSystemTime(state: Bool) {
         self.updatingSystemTimeStateSubject.send(state)
     }
+    
+    func lightControl(state: Bool) {
+        self.lightControlStateSubject.send(state)
+    }
 }
 
 // MARK: - 操作 CoreSDK 時所遭遇的錯誤
@@ -370,6 +397,9 @@ extension CoreSDKService {
         case resetPartParameterFail(CommunicationPartType, Int)
         /// 校正電控時間失敗。
         case updateSystemTimeFail
+        /// 控制車燈開關失敗。
+        case lightControlFail
+        
     }
 }
 
@@ -390,6 +420,8 @@ private protocol CoreSDKDataSource: AnyObject {
     func resetPartParameter(state: Bool)
     /// 校正電控時間時，回調的資訊。
     func updateSystemTime(state: Bool)
+    /// 控制車燈開關，回調的資訊。
+    func lightControl(state: Bool)
 }
 
 // MARK: - 取得 CoreSDK 回調的方法別名
@@ -408,4 +440,6 @@ extension CoreSDKService {
     private typealias ResetPartParameterEvent = @convention(c) (Int32) -> Void
     /// 校正電控時間時，回調的別名。
     private typealias UpdateSystemTimeEvent = @convention(c) (Int32) -> Void
+    /// 控制車燈開關，回調的別名。
+    private typealias LightControlEvent = @convention(c) (Int32) -> Void
 }
