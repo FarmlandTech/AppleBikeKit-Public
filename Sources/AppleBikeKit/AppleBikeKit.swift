@@ -86,6 +86,10 @@ open class AppleBikeKit {
         self.coreSDKService.updatingSystemTimeStateSubject.eraseToAnyPublisher()
     }()
     
+    public private(set) lazy var lightControlStatePublisher: AnyPublisher<Bool?, Never> = {
+        self.coreSDKService.lightControlStateSubject.eraseToAnyPublisher()
+    }()
+    
     /**
      讀取部件參數的方法。
      
@@ -234,6 +238,17 @@ open class AppleBikeKit {
     public func updateSystemTime() throws {
         try self.coreSDKService.updateSystemTime()
     }
+    
+    /**
+     控制車燈開關。
+     
+     - parameter part: 前燈或後燈。
+     - parameter isOn: 開或關。
+     - Throws: CoreSDK 執行失敗。
+     */
+    public func lightControl(part: light_control_parts = LIGHT_CONTROL_FRONT, isOn: Bool) throws {
+        try self.coreSDKService.lightControl(part: part, isOn: isOn)
+    }
 }
 
 extension AppleBikeKit {
@@ -323,28 +338,9 @@ extension AppleBikeKit {
             })
             .store(in: &self.subscriptions)
         
-        self.coreBluetoothService.stateSubject
+        self.coreSDKService.lightControlStateSubject
             .sink(receiveValue: { _ in
                 
-            })
-            .store(in: &self.subscriptions)
-        
-        self.coreBluetoothService.scanningSubject
-            .sink(receiveValue: { _ in
-                
-            })
-            .store(in: &self.subscriptions)
-        
-        self.coreBluetoothService.foundDevicesSubject
-            .sink(receiveValue: { _ in
-                
-            })
-            .store(in: &self.subscriptions)
-        
-        self.coreBluetoothService.peripheralSubject
-            .sink(receiveValue: { status in
-                guard case .didDisconnect = status else { return }
-                self.coreBluetoothService.foundDevicesSubject.value = .init()
             })
             .store(in: &self.subscriptions)
     }
@@ -396,6 +392,31 @@ extension AppleBikeKit {
         self.coreBluetoothService.rssiSubject
             .sink(receiveValue: { _ in
                 
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreBluetoothService.stateSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreBluetoothService.scanningSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreBluetoothService.foundDevicesSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreBluetoothService.peripheralSubject
+            .sink(receiveValue: { status in
+                guard case .didDisconnect = status else { return }
+                self.coreBluetoothService.foundDevicesSubject.value = .init()
             })
             .store(in: &self.subscriptions)
     }

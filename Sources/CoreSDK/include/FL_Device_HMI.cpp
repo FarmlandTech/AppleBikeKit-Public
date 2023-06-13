@@ -396,7 +396,7 @@ static int HostControlInfoHandler(uint8_t* data, uint32_t leng)
 	COPY_MIN_ARRAY(data, leng, &info.bytes[0], sizeof(info.bytes));
 	device_inst.info.current_assist_level = info.bits.set_assist_level;
 	device_inst.info.power_key_on = info.bits.system_power_control;
-	device_inst.info.light_on = info.bits.light_control;
+	device_inst.info.light_on = info.bits.front_light_control;
 	device_inst.info.walk_assist_on = info.bits.walk_assist_control;
 
 	return RESPONSE_SUCCESS;

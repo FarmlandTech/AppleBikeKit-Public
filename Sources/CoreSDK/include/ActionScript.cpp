@@ -267,7 +267,7 @@ void AS_FL_ActionStepNext(void)
 
 void ActionScriptResetStatus(void)
 {	
-	lib_fifo_drop(&AS_Inst.action_queue);
+	//lib_fifo_drop(&AS_Inst.action_queue); ¤£¥Î
 
 	AS_Inst.run_step = 0;
 	AS_Inst.timeout.count = 0;
@@ -1947,6 +1947,50 @@ void AS_FL_BLE_RestartDevice(struct FunctionParameterDefine* paras)
 	}
 }
 
+ void BLE_light_control(struct FunctionParameterDefine* paras)
+{
+	switch (AS_Inst.run_step)
+	{
+	case 0:
+	{
+		uint8_t post_data[10] = { 0 };
+		uint8_t post_leng = 0;
+		HOST_CONTROLINFO_00_T info = { 0 };
+
+		light_control_parts parts = (light_control_enum)paras[0].num.uint8_val;
+		bool on_off = paras[1].num.uint8_val;
+
+		info.bits.set_assist_level = 0xF;
+		info.bits.system_power_control = 0xF;
+		info.bits.walk_assist_control = 0xF;
+		info.bits.front_light_control = parts == LIGHT_CONTROL_FRONT ? on_off : 0xF;
+		info.bits.rear_light_control = parts == LIGHT_CONTROL_REAR ? on_off : 0xF;
+
+		post_data[post_leng++] = FL_CANID_HOST_INFO_00;
+		post_data[post_leng++] = (uint8_t)(FL_CANID_HOST_INFO_00 >> 8);
+		post_data[post_leng++] = (uint8_t)(FL_CANID_HOST_INFO_00 >> 16);
+		post_data[post_leng++] = (uint8_t)(FL_CANID_HOST_INFO_00 >> 24);
+
+		post_data[post_leng++] = info.bytes[0];
+		post_data[post_leng++] = info.bytes[1];
+		post_data[post_leng++] = info.bytes[2];
+
+		AS_FL_BLE_DFU_CommonPackage_Send(1, 0,
+			FL_BLE_OPC_CAN_PASS_DATA_REQ,
+			DEVICE_OBJ_CONTROLLER, 
+			0, post_data, post_leng);
+		AS_Inst.status = ACTION_SCRITP_STATUS_DONE;
+	}
+	default:
+	{
+	}
+	break;
+
+	}
+	 
+
+}
+
 
 
 void AS_FL_BLE_ConfigSysTime(struct FunctionParameterDefine* paras)
@@ -2087,6 +2131,8 @@ void AS_FL_BLE_GetELock_DEV(struct FunctionParameterDefine* paras)
 		break;
 	}
 }
+
+
 
 uint32_t AS_FL_GetDeviceLogs_Inst(DeviceLogs_T* logs_list)
 {

@@ -142,6 +142,7 @@ extern "C" {
 	void AS_FL_CANBus_RestartDevice(struct FunctionParameterDefine* paras);
 	void AS_FL_BLE_RestartDevice(struct FunctionParameterDefine* paras);
 
+	void BLE_light_control(struct FunctionParameterDefine* paras);
 
 
 	//void AS_FL_CANBus_ReadDeviceLogs(struct FunctionParameterDefine* paras);
@@ -162,6 +163,8 @@ extern "C" {
 	void AS_FL_BLE_SetELock_DEV(struct FunctionParameterDefine* paras);
 
 	void AS_FL_BLE_GetELock_DEV(struct FunctionParameterDefine* paras);
+
+	void BLE_light_control(struct FunctionParameterDefine* paras);
 
 	void ActionScriptInit(void);
 	int ActionScriptCreate(ACTION_DEFINE_T new_action);

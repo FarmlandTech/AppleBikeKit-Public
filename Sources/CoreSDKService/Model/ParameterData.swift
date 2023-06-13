@@ -19,18 +19,44 @@ public class ParameterData: NSCopying  {
         case HmiDMID
         case HmiSSN
         case HmiDSN
-        case PRO_BT_DEV_NAME
+        case HmiFrame
+        case HmiSaleDate
+        case HmiFWAppVer
+        case HmiFWBtlVer
+        case HmiFWSdkVer
+        case HmiHWVer
+        case HmiParaVer
+        case HmiProtocolVer
+        case HmiBtDevName
         case DISP_UNIT_SW
         
         case ControllerSMID
         case ControllerDMID
         case ControllerSSN
         case ControllerDSN
+        case ControllerFrame
+        case ControllerSaleDate
+        case ControllerFWAppVer
+        case ControllerFWBtlVer
+        case ControllerFWSdkVer
+        case ControllerHWVer
+        case ControllerParaVer
+        case ControllerProtocolVer
+        case ControllerBtDevName
         
         case BattSMID
         case BattDMID
         case BattSSN
         case BattDSN
+        case BattFrame
+        case BattSaleDate
+        case BattFWAppVer
+        case BattFWBtlVer
+        case BattFWSdkVer
+        case BattHWVer
+        case BattParaVer
+        case BattProtocolVer
+        case BattBtDevName
         
         case UNIX_TIME_DAY1
         case RECORD_ODO_DAY1

@@ -31,7 +31,7 @@ using namespace std::chrono;
 using namespace std::this_thread;
 
 // SDK 版本號
-#define SDK_Version_Str "1.0.2"
+#define SDK_Version_Str "1.0.3"
 
 
 typedef struct CANPacket_st
@@ -1651,6 +1651,64 @@ int __stdcall GetELock_DEV(RouterType router,
     return SDK_RETURN_SUCCESS;
 }
 
+/*
+    Delegate Method : light control
+*/
+
+static fpCallback_LightControl  Light_control_callback = NULL;
+
+void Light_control_Finally(struct FunctionParameterDefine* action_param)
+{
+    if (Light_control_callback)
+    {
+        // 調用回呼傳送操作成功
+        Light_control_callback(SDK_RETURN_SUCCESS);
+    }
+}
+
+
+void Light_control_Error(uint32_t err_code)
+{
+    if (Light_control_callback)
+    {
+        // 調用回呼傳送錯誤碼
+        Light_control_callback(err_code);
+    }
+}
+
+int __stdcall  Light_control(RouterType router,
+    light_control_enum  parts,
+    bool on_off,
+    fpCallback_LightControl callback)
+{
+    ACTION_DEFINE_T new_action = { };
+   
+    SetActionParam(&new_action.paras[0], PARA_TYPE_UINT8, &parts);
+    SetActionParam(&new_action.paras[1], PARA_TYPE_UINT8, &on_off);
+    // 儲存執行完畢後回呼指標
+    Light_control_callback = callback; 
+    // 判斷是發送BLE封包或是CAN-Bus封包
+    switch (router)
+    {
+    case SDK_ROUTER_CANBUS:
+        return SDK_RETURN_INVALID_PARAM;
+        break;
+
+    default:
+        // 指定腳本運行的功能名稱
+        new_action.run_script = BLE_light_control;
+        break;
+    } 
+    // 指定Action Script完成時的回呼指標
+    new_action.finally_callback = Light_control_Finally;
+    // 指定Action Script錯誤時的回呼指標
+    new_action.error_callback = Light_control_Error;
+    // 將新Action推送至等待處理的腳本中
+    ActionScriptCreate(new_action);
+
+    return SDK_RETURN_SUCCESS;
+}
+
 
 /*
     Init Method : Init CoreSDK
@@ -1691,6 +1749,7 @@ int FarmLandCoreSDK_Init(CoreSDKInst_T* SDK_Inst)
         SDK_Inst->DelegateMethod.ConfigSysTime = ConfigSysTime;
         SDK_Inst->DelegateMethod.SetELock_DEV = SetELock_DEV;
         SDK_Inst->DelegateMethod.GetELock_DEV = GetELock_DEV;
+        SDK_Inst->DelegateMethod.LightControl = Light_control;
 
         SDK_Inst->Method.CANBusPacket_IN = CANBusPacket_IN;
         SDK_Inst->Method.CANBusPacket_OUT = CANBusPacket_OUT;
