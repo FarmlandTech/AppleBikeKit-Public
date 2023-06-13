@@ -16,16 +16,46 @@ public struct MetaParameter {
     public fileprivate(set) var hmiDMID: String?
     public fileprivate(set) var hmiDSN: String?
     public fileprivate(set) var hmiSMID: String?
+    public fileprivate(set) var hmiFrame: String?
+    public fileprivate(set) var hmiSaleDate: String?
+    public fileprivate(set) var hmiFWAppVer: String?
+    public fileprivate(set) var hmiFWBtlVer: String?
+    public fileprivate(set) var hmiFWSdkVer: String?
+    public fileprivate(set) var hmiHWVer: String?
+    public fileprivate(set) var hmiParaVer: String?
+    public fileprivate(set) var hmiProtocolVer: String?
+    public fileprivate(set) var hmiBtDevName: String?
+    
     /// 距離單位為公制或英制。
     public fileprivate(set) var hmiDistanceUint: Bool?
+    
     public fileprivate(set) var batterySSN: String?
     public fileprivate(set) var batteryDMID: String?
     public fileprivate(set) var batteryDSN: String?
     public fileprivate(set) var batterySMID: String?
+    public fileprivate(set) var batteryFrame: String?
+    public fileprivate(set) var batterySaleDate: String?
+    public fileprivate(set) var batteryFWAppVer: String?
+    public fileprivate(set) var batteryFWBtlVer: String?
+    public fileprivate(set) var batteryFWSdkVer: String?
+    public fileprivate(set) var batteryHWVer: String?
+    public fileprivate(set) var batteryParaVer: String?
+    public fileprivate(set) var batteryProtocolVer: String?
+    public fileprivate(set) var batteryBtDevName: String?
+    
     public fileprivate(set) var controllerSSN: String?
     public fileprivate(set) var controllerDMID: String?
     public fileprivate(set) var controllerDSN: String?
     public fileprivate(set) var controllerSMID: String?
+    public fileprivate(set) var controllerFrame: String?
+    public fileprivate(set) var controllerSaleDate: String?
+    public fileprivate(set) var controllerFWAppVer: String?
+    public fileprivate(set) var controllerFWBtlVer: String?
+    public fileprivate(set) var controllerFWSdkVer: String?
+    public fileprivate(set) var controllerHWVer: String?
+    public fileprivate(set) var controllerParaVer: String?
+    public fileprivate(set) var controllerProtocolVer: String?
+    public fileprivate(set) var controllerBtDevName: String?
 }
 
 extension MetaParameter: Equatable {
@@ -145,6 +175,24 @@ final public class ConnectionMetaReadingHelper {
                 self.metaSubject.value.hmiDSN = output as? String
             case .HmiSMID:
                 self.metaSubject.value.hmiSMID = output as? String
+            case .HmiFrame:
+                self.metaSubject.value.hmiFrame = output as? String
+            case .HmiSaleDate:
+                self.metaSubject.value.hmiSaleDate = output as? String
+            case .HmiFWAppVer:
+                self.metaSubject.value.hmiFWAppVer = output as? String
+            case .HmiFWBtlVer:
+                self.metaSubject.value.hmiFWBtlVer = output as? String
+            case .HmiFWSdkVer:
+                self.metaSubject.value.hmiFWSdkVer = output as? String
+            case .HmiHWVer:
+                self.metaSubject.value.hmiHWVer = output as? String
+            case .HmiParaVer:
+                self.metaSubject.value.hmiParaVer = output as? String
+            case .HmiProtocolVer:
+                self.metaSubject.value.hmiProtocolVer = output as? String
+            case .HmiBtDevName:
+                self.metaSubject.value.hmiBtDevName = output as? String
             case .DISP_UNIT_SW:
                 guard let value: Int = output as? Int else { return }
                 var isMetricSystem: Bool?
@@ -163,6 +211,24 @@ final public class ConnectionMetaReadingHelper {
                 self.metaSubject.value.batteryDSN = output as? String
             case .BattSMID:
                 self.metaSubject.value.batterySMID = output as? String
+            case .BattFrame:
+                self.metaSubject.value.batteryFrame = output as? String
+            case .BattSaleDate:
+                self.metaSubject.value.batterySaleDate = output as? String
+            case .BattFWAppVer:
+                self.metaSubject.value.batteryFWAppVer = output as? String
+            case .BattFWBtlVer:
+                self.metaSubject.value.batteryFWBtlVer = output as? String
+            case .BattFWSdkVer:
+                self.metaSubject.value.batteryFWSdkVer = output as? String
+            case .BattHWVer:
+                self.metaSubject.value.batteryHWVer = output as? String
+            case .BattParaVer:
+                self.metaSubject.value.batteryParaVer = output as? String
+            case .BattProtocolVer:
+                self.metaSubject.value.batteryProtocolVer = output as? String
+            case .BattBtDevName:
+                self.metaSubject.value.batteryBtDevName = output as? String
             case .ControllerSSN:
                 self.metaSubject.value.controllerSSN = output as? String
             case .ControllerDMID:
@@ -171,6 +237,24 @@ final public class ConnectionMetaReadingHelper {
                 self.metaSubject.value.controllerDSN = output as? String
             case .ControllerSMID:
                 self.metaSubject.value.controllerSMID = output as? String
+            case .ControllerFrame:
+                self.metaSubject.value.controllerFrame = output as? String
+            case .ControllerSaleDate:
+                self.metaSubject.value.controllerSaleDate = output as? String
+            case .ControllerFWAppVer:
+                self.metaSubject.value.controllerFWAppVer = output as? String
+            case .ControllerFWBtlVer:
+                self.metaSubject.value.controllerFWBtlVer = output as? String
+            case .ControllerFWSdkVer:
+                self.metaSubject.value.controllerFWSdkVer = output as? String
+            case .ControllerHWVer:
+                self.metaSubject.value.controllerHWVer = output as? String
+            case .ControllerParaVer:
+                self.metaSubject.value.controllerParaVer = output as? String
+            case .ControllerProtocolVer:
+                self.metaSubject.value.controllerProtocolVer = output as? String
+            case .ControllerBtDevName:
+                self.metaSubject.value.controllerBtDevName = output as? String
             default:
                 return
             }

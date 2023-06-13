@@ -28,6 +28,15 @@ public class ParameterDataRepository {
         .init(name: .HmiDMID, partType: .HMI, bank: 0, address: 15, length: 17, type: String.self),
         .init(name: .HmiSSN, partType: .HMI, bank: 0, address: 32, length: 32, type: String.self),
         .init(name: .HmiDSN, partType: .HMI, bank: 0, address: 64, length: 32, type: String.self),
+        .init(name: .HmiFrame, partType: .HMI, bank: 0, address: 96, length: 32, type: String.self),
+        .init(name: .HmiSaleDate, partType: .HMI, bank: 0, address: 128, length: 6, type: String.self),
+        .init(name: .HmiFWAppVer, partType: .HMI, bank: 0, address: 134, length: 6, type: String.self),
+        .init(name: .HmiFWBtlVer, partType: .HMI, bank: 0, address: 140, length: 6, type: String.self),
+        .init(name: .HmiFWSdkVer, partType: .HMI, bank: 0, address: 146, length: 6, type: String.self),
+        .init(name: .HmiHWVer, partType: .HMI, bank: 0, address: 152, length: 11, type: String.self),
+        .init(name: .HmiParaVer, partType: .HMI, bank: 0, address: 163, length: 6, type: String.self),
+        .init(name: .HmiProtocolVer, partType: .HMI, bank: 0, address: 169, length: 11, type: String.self),
+        .init(name: .HmiBtDevName, partType: .HMI, bank: 0, address: 180, length: 22, type: String.self),
     ]
     
     public let hmiBank2Parameters: [ParameterData] = [
@@ -38,20 +47,37 @@ public class ParameterDataRepository {
         .init(name: .ControllerSMID, partType: .Controller, bank: 0, address: 0, length: 15, type: String.self),
         .init(name: .ControllerDMID, partType: .Controller, bank: 0, address: 15, length: 17, type: String.self),
         .init(name: .ControllerSSN, partType: .Controller, bank: 0, address: 32, length: 32, type: String.self),
-        .init(name: .ControllerDSN, partType: .Controller, bank: 0, address: 64, length: 32, type: String.self)
+        .init(name: .ControllerDSN, partType: .Controller, bank: 0, address: 64, length: 32, type: String.self),
+        .init(name: .ControllerFrame, partType: .Controller, bank: 0, address: 96, length: 32, type: String.self),
+        .init(name: .ControllerSaleDate, partType: .Controller, bank: 0, address: 128, length: 6, type: String.self),
+        .init(name: .ControllerFWAppVer, partType: .Controller, bank: 0, address: 134, length: 6, type: String.self),
+        .init(name: .ControllerFWBtlVer, partType: .Controller, bank: 0, address: 140, length: 6, type: String.self),
+        .init(name: .ControllerFWSdkVer, partType: .Controller, bank: 0, address: 146, length: 6, type: String.self),
+        .init(name: .ControllerHWVer, partType: .Controller, bank: 0, address: 152, length: 11, type: String.self),
+        .init(name: .ControllerParaVer, partType: .Controller, bank: 0, address: 163, length: 6, type: String.self),
+        .init(name: .ControllerProtocolVer, partType: .Controller, bank: 0, address: 169, length: 11, type: String.self),
+        .init(name: .ControllerBtDevName, partType: .Controller, bank: 0, address: 180, length: 22, type: String.self),
     ]
     
     public let batteryBank0Parameters: [ParameterData] = [
         .init(name: .BattSMID, partType: .MainBatt, bank: 0, address: 0, length: 15, type: String.self),
         .init(name: .BattDMID, partType: .MainBatt, bank: 0, address: 15, length: 17, type: String.self),
         .init(name: .BattSSN, partType: .MainBatt, bank: 0, address: 32, length: 32, type: String.self),
-        .init(name: .BattDSN, partType: .MainBatt, bank: 0, address: 64, length: 32, type: String.self)
+        .init(name: .BattDSN, partType: .MainBatt, bank: 0, address: 64, length: 32, type: String.self),
+        .init(name: .BattFrame, partType: .MainBatt, bank: 0, address: 96, length: 32, type: String.self),
+        .init(name: .BattSaleDate, partType: .MainBatt, bank: 0, address: 128, length: 6, type: String.self),
+        .init(name: .BattFWAppVer, partType: .MainBatt, bank: 0, address: 134, length: 6, type: String.self),
+        .init(name: .BattFWBtlVer, partType: .MainBatt, bank: 0, address: 140, length: 6, type: String.self),
+        .init(name: .BattFWSdkVer, partType: .MainBatt, bank: 0, address: 146, length: 6, type: String.self),
+        .init(name: .BattHWVer, partType: .MainBatt, bank: 0, address: 152, length: 11, type: String.self),
+        .init(name: .BattParaVer, partType: .MainBatt, bank: 0, address: 163, length: 6, type: String.self),
+        .init(name: .BattProtocolVer, partType: .MainBatt, bank: 0, address: 169, length: 11, type: String.self),
+        .init(name: .BattBtDevName, partType: .MainBatt, bank: 0, address: 180, length: 22, type: String.self),
     ]
     
     /// 基礎部件的關鍵參數陣列。(應再根據類別再次拆分)
     public private(set) lazy var normalParameters: [ParameterData] = {
         self.hmiBank0Parameters +
-        [.init(name: .PRO_BT_DEV_NAME, partType: .HMI, bank: 0, address: 180, length: 22, type: String.self)] +
         self.hmiBank2Parameters +
         self.controllerBank0Parameters +
         self.batteryBank0Parameters
@@ -164,9 +190,9 @@ public class ParameterDataRepository {
     public var integratedParameters: [ParameterData] {
         .init([
             .init(name: .INTEGRATED_MILEAGE_RECORD, partType: .MainBatt, bank: 2, address: 0, length: 248, type: Any.self, dividedParameters: self.mileageRecordParameters),
-            .init(name: .INTEGRATED_HMI_BANK0, partType: .HMI, bank: 0, address: 0, length: 96, type: Any.self, dividedParameters: self.hmiBank0Parameters),
-            .init(name: .INTEGRATED_CONTROLLER_BANK0, partType: .Controller, bank: 0, address: 0, length: 96, type: Any.self, dividedParameters: self.controllerBank0Parameters),
-            .init(name: .INTEGRATED_BATTERY_BANK0, partType: .MainBatt, bank: 0, address: 0, length: 96, type: Any.self, dividedParameters: self.batteryBank0Parameters)
+            .init(name: .INTEGRATED_HMI_BANK0, partType: .HMI, bank: 0, address: 0, length: 202, type: Any.self, dividedParameters: self.hmiBank0Parameters),
+            .init(name: .INTEGRATED_CONTROLLER_BANK0, partType: .Controller, bank: 0, address: 0, length: 202, type: Any.self, dividedParameters: self.controllerBank0Parameters),
+            .init(name: .INTEGRATED_BATTERY_BANK0, partType: .MainBatt, bank: 0, address: 0, length: 202, type: Any.self, dividedParameters: self.batteryBank0Parameters)
         ])
     }
     
