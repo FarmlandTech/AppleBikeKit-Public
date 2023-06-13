@@ -41,6 +41,10 @@ final public class FarmLandBikeKit: AppleBikeKit {
         .init()
     }()
     
+    private lazy var metricSystemManipulateHelper: MetricSystemManipulateHelper = {
+        .init()
+    }()
+    
     /**
      建構子。
      */
@@ -90,5 +94,9 @@ final public class FarmLandBikeKit: AppleBikeKit {
     public func disconnectBike() {
         guard let peripheral: BluetoothPeripheral = self.connectedPeripheral.currentPeripheral else { return }
         self.disconnect(peripheral)
+    }
+    
+    public func writeMetricSystem(_ isMetricSystem: Bool) throws {
+        try self.metricSystemManipulateHelper.write(isMetricSystem)
     }
 }
