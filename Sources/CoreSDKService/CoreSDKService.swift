@@ -353,7 +353,7 @@ extension CoreSDKService: CoreSDKDataSource {
     }
     
     func writeParameter(state: Bool) {
-        self.writingParameterStateSubject.send(state)
+//        self.writingParameterStateSubject.send(state)
     }
     
     func restartPart(state: Bool) {
