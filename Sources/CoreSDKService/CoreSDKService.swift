@@ -353,6 +353,7 @@ extension CoreSDKService: CoreSDKDataSource {
     }
     
     func writeParameter(state: Bool) {
+#warning("目前研判是線程問題導致藍牙斷線(crash?)，反正目前用不到，暫時先註解吧...")
 //        self.writingParameterStateSubject.send(state)
     }
     
