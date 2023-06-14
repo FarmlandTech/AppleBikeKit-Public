@@ -11,33 +11,6 @@ import CoreSDK
 
 public extension FL_Info_st {
     
-    var tripTimeSec: Int {
-        self.trip_time_sec.toInt
-    }
-    
-    var tripAvgSpeed: Float {
-        self.trip_avg_speed
-    }
-    
-    var totalOdo: Float {
-        self.total_odo
-    }
-    
-    var batteryTemperature: Int {
-        self.battery_temperature.toInt
-    }
-
-    var batteryRelativeStateOfCharge: Int {
-        self.battery_rsoc.toInt
-    }
-    
-    var batteryRelativeStateOfHealth: Int {
-        self.battery_rsoh.toInt
-    }
-}
-
-public extension FL_Info_st {
-    
     var hmiWarningLength: Int {
         self.HMI_warning_leng.toInt
     }
@@ -138,6 +111,14 @@ public extension FL_Info_st {
 }
 
 public extension FL_Info_st {
+    var warningCodes: [Int] {
+        self.hmiWarningCodes + self.batteryWarningCodes + self.controllerWarningCodes
+    }
+    
+    var errorCodes: [Int] {
+        self.hmiErrorCodes + self.batteryErrorCodes + self.controllerErrorCodes
+    }
+    
     var ableRideRange: Double {
         switch self.battery_rsoc {
         case 0..<10:
