@@ -298,10 +298,20 @@ extension AppleBikeKit {
                                                                                                           length: rawData.length)
                     if self.parameterDataRepository.integratedParameters.contains(where: { $0.name == parameterData.name }) {
                         let parameterDataList: [ParameterData] = try parameterData.dividIntoMultiParameters(rawData: rawData)
+                        // 將讀取到的內容，分別存到個別參數內緩存，並透過 subject 傳遞出去。
                         for parameterData in parameterDataList {
                             self.parameterDataSubject.send(parameterData)
                             setParameterValue(parameterData)
                         }
+                        // 將讀取到的內容，封裝起來，且透過 subject 傳遞出去。
+                        let result: ParameterData = .init(name: parameterData.name,
+                                                          partType: parameterData.partType,
+                                                          bank: parameterData.bank,
+                                                          address: parameterData.address,
+                                                          length: parameterData.length,
+                                                          type: parameterData.type,
+                                                          dividedParameters: parameterDataList)
+                        self.parameterDataSubject.send(result)
                     } else {
                         parameterData.value = try rawData.bytes.convert2Value(type: parameterData.type,
                                                                               length: Int(parameterData.length))

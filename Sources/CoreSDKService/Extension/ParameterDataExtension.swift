@@ -27,8 +27,8 @@ extension ParameterData {
 
         var result: [ParameterData] = .init()
         for parameterData in parameterDataList {
-            let start: Int = Int(parameterData.address)
-            let end: Int = Int(parameterData.address + parameterData.length - 1)
+            let start: Int = Int(parameterData.address - firstParameterData.address)
+            let end: Int = Int(parameterData.address + parameterData.length - 1 - firstParameterData.address)
             let bytes: [UInt8] = Array(rawData.bytes[start...end])
             
             let value = try bytes.convert2Value(type: parameterData.type, length: Int(parameterData.length))

@@ -90,15 +90,6 @@ public class ParameterDataRepository {
     
     /// 助力方案相關的參數陣列。
     public let assistLevelParameters:[ParameterData] = [
-        .init(name: .AST_LV1_STR_RANG, partType: .Controller, bank: 2, address: 131, length: 2, type: Int.self),
-        .init(name: .AST_LV1_STR_ACC, partType: .Controller, bank: 2, address: 175, length: 1, type: Int.self),
-        .init(name: .AST_LV1_STR_DEC, partType: .Controller, bank: 2, address: 176, length: 1, type: Int.self),
-        .init(name: .AST_LV2_STR_RANG, partType: .Controller, bank: 2, address: 200, length: 2, type: Int.self),
-        .init(name: .AST_LV2_STR_ACC, partType: .Controller, bank: 2, address: 208, length: 1, type: Int.self),
-        .init(name: .AST_LV2_STR_DEC, partType: .Controller, bank: 2, address: 209, length: 1, type: Int.self),
-        .init(name: .AST_LV2_STR_DEC, partType: .Controller, bank: 2, address: 202, length: 2, type: Int.self),
-        .init(name: .AST_LV3_STR_ACC, partType: .Controller, bank: 2, address: 210, length: 1, type: Int.self),
-        .init(name: .AST_LV3_STR_DEC, partType: .Controller, bank: 2, address: 211, length: 1, type: Int.self),
         .init(name: .LV1_MAX_AST_RATIO, partType: .Controller, bank: 2, address: 133, length: 2, type: Int.self),
         .init(name: .LV1_MIN_AST_RATIO, partType: .Controller, bank: 2, address: 135, length: 2, type: Int.self),
         .init(name: .LV1_AST_RATIO_STR_SPD, partType: .Controller, bank: 2, address: 137, length: 2, type: Int.self),
@@ -111,18 +102,6 @@ public class ParameterDataRepository {
         .init(name: .LV3_MIN_AST_RATIO, partType: .Controller, bank: 2, address: 151, length: 2, type: Int.self),
         .init(name: .LV3_AST_RATIO_STR_SPD, partType: .Controller, bank: 2, address: 153, length: 2, type: Int.self),
         .init(name: .LV3_AST_RATIO_END_SPD, partType: .Controller, bank: 2, address: 155, length: 2, type: Int.self),
-        .init(name: .AST_LV1_MAX_CUR, partType: .Controller, bank: 2, address: 177, length: 2, type: Int.self),
-        .init(name: .AST_LV1_MAX_CUR, partType: .Controller, bank: 2, address: 181, length: 2, type: Int.self),
-        .init(name: .AST_LV1_MAX_CUR, partType: .Controller, bank: 2, address: 185, length: 2, type: Int.self),
-        .init(name: .AST_LV1_ACC, partType: .Controller, bank: 2, address: 179, length: 1, type: Int.self),
-        .init(name: .AST_LV1_DEC, partType: .Controller, bank: 2, address: 180, length: 1, type: Int.self),
-        .init(name: .AST_LV1_DEC, partType: .Controller, bank: 2, address: 183, length: 1, type: Int.self),
-        .init(name: .AST_LV2_DEC, partType: .Controller, bank: 2, address: 184, length: 1, type: Int.self),
-        .init(name: .AST_LV3_ACC, partType: .Controller, bank: 2, address: 187, length: 1, type: Int.self),
-        .init(name: .AST_LV3_DEC, partType: .Controller, bank: 2, address: 188, length: 1, type: Int.self),
-        .init(name: .AST_OSP_DEC, partType: .Controller, bank: 2, address: 197, length: 1, type: Int.self),
-        .init(name: .AST_OCP_DEC, partType: .Controller, bank: 2, address: 198, length: 1, type: Int.self),
-        .init(name: .AST_STOP_DEC, partType: .Controller, bank: 2, address: 199, length: 1, type: Int.self),
     ]
     
     /// 里程相關的參數陣列。
@@ -197,7 +176,8 @@ public class ParameterDataRepository {
             .init(name: .INTEGRATED_MILEAGE_RECORD, partType: .MainBatt, bank: 2, address: 0, length: 248, type: Any.self, dividedParameters: self.mileageRecordParameters),
             .init(name: .INTEGRATED_HMI_BANK0, partType: .HMI, bank: 0, address: 0, length: 202, type: Any.self, dividedParameters: self.hmiBank0Parameters),
             .init(name: .INTEGRATED_CONTROLLER_BANK0, partType: .Controller, bank: 0, address: 0, length: 202, type: Any.self, dividedParameters: self.controllerBank0Parameters),
-            .init(name: .INTEGRATED_BATTERY_BANK0, partType: .MainBatt, bank: 0, address: 0, length: 202, type: Any.self, dividedParameters: self.batteryBank0Parameters)
+            .init(name: .INTEGRATED_BATTERY_BANK0, partType: .MainBatt, bank: 0, address: 0, length: 202, type: Any.self, dividedParameters: self.batteryBank0Parameters),
+            .init(name: .INTEGRATED_ASSIST_LEVEL, partType: .Controller, bank: 2, address: 133, length: 24, type: Any.self, dividedParameters: self.assistLevelParameters)
         ])
     }
     
