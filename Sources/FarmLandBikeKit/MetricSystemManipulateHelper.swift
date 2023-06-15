@@ -22,6 +22,8 @@ final public class MetricSystemManipulateHelper {
     
     private lazy var subscribe: AnyCancellable? = { nil }()
     
+    private let writingRecursivelyCountBoundary: Int = 3
+    
     private lazy var writingRecursivelyCount: Int = { 0 }()
     
     private lazy var isWriteRecursively: Bool = { false }() {
@@ -63,7 +65,7 @@ final public class MetricSystemManipulateHelper {
                     self.isWriteRecursively = false
                     return
                 }
-                guard self.writingRecursivelyCount < 3 else {
+                guard self.writingRecursivelyCount < self.writingRecursivelyCountBoundary else {
                     self.isWriteRecursively = false
                     return
                 }
