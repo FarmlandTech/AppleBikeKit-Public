@@ -50,6 +50,7 @@ extension Int {
         }
     }
     
+    @available(*, deprecated, message: "經過會議，已重新定義診斷流程，所以完全不應該使用到此方法！")
     public var tranfer2DismaWarningCodeType: StatusCodeType {
         switch self {
         case 1, 151...152:
@@ -86,6 +87,7 @@ extension Int {
         }
     }
     
+    @available(*, deprecated, message: "經過會議，已重新定義診斷流程，所以完全不應該使用到此方法！")
     public var tranfer2DismatchErrorCodeType: StatusCodeType {
         switch self {
         case 1, 22...23, 42...52, 61...66, 81...83, 91...92, 101...102, 131:
