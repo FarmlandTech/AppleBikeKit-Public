@@ -77,7 +77,7 @@ public extension FL_Info_st {
             .filter({ $0 != 0 })
     }
     
-    private var hasWarning: Bool {
+    var hasWarning: Bool {
         if self.hmiWarningLength > 0 {
             return true
         } else if self.controllerWarningLength > 0 {
@@ -89,7 +89,7 @@ public extension FL_Info_st {
         }
     }
     
-    private var hasError: Bool {
+    var hasError: Bool {
         if self.hmiErrorLength > 0 {
             return true
         } else if self.controllerErrorLength > 0 {
@@ -101,7 +101,7 @@ public extension FL_Info_st {
         }
     }
     
-    private var hasWrongStatus: Bool {
+    var hasWrongStatus: Bool {
         self.hasWarning || self.hasError
     }
     
