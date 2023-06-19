@@ -33,6 +33,18 @@ extension Array where Element == UInt8 {
         } else if let _ = type as? Int.Type, let length: Int {
             let length: Int = .init(length)
             return self.convert2Number(length: length)
+        } else if let _ = type as? [UInt8].Type {
+            return self.map({
+                String($0, radix: 2).split(separator: "")
+            }).map({
+                $0.map({ UInt8($0) ?? 0 })
+            }).map({
+                var target = Array($0.reversed())
+                while target.count < 8 {
+                    target.append(0)
+                }
+                return target
+            }).flatMap({ $0 })
         } else {
             throw Self.Error.readParamterWithUnexpectedType
         }

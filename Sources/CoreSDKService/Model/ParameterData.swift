@@ -43,6 +43,7 @@ public class ParameterData: NSCopying  {
         case ControllerParaVer
         case ControllerProtocolVer
         case ControllerBtDevName
+        case SYS_PART_EN
         
         case BattSMID
         case BattDMID

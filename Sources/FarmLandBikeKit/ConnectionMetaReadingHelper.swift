@@ -8,10 +8,104 @@
 import Foundation
 import Combine
 
+import CoreSDK
 import CoreSDKService
 
 /// 緩存關鍵參數的物件。
 public struct MetaParameter {
+    
+    public enum EnablePart {
+        case hmi
+        case controller
+        case battery
+        case display
+        case motor
+        case cadenceSensor
+        case torqueSensor
+        case charger
+        case frontLight
+        case rearLight
+        case throttle
+        case eBrake
+        case eLock
+        case frontDerailleur
+        case rearDerailleur
+        case IoT
+        case undefined(Int)
+        
+        public var warningCodes: [Int] {
+            guard let deviceInfo: FL_Info_st = FarmLandBikeKit.sleipnir.deviceInfo else {
+                return .init()
+            }
+            switch self {
+            case .hmi:
+                return deviceInfo.warningCodes.filter({ $0.tranfer2WarningCodeType == .hmi })
+            case .controller:
+                return deviceInfo.warningCodes.filter({ $0.tranfer2WarningCodeType == .controller })
+            case .display:
+                return .init()
+            case .motor:
+                return deviceInfo.warningCodes.filter({ $0.tranfer2WarningCodeType == .motor })
+            case .cadenceSensor:
+                return .init()
+            case .torqueSensor:
+                return deviceInfo.warningCodes.filter({ $0.tranfer2WarningCodeType == .torque })
+            case .charger:
+                return .init()
+            case .frontLight, .rearLight:
+                return deviceInfo.warningCodes.filter({ $0.tranfer2WarningCodeType == .light })
+            case .throttle:
+                return deviceInfo.warningCodes.filter({ $0.tranfer2WarningCodeType == .throttle })
+            case .eBrake:
+                return .init()
+            case .eLock:
+                return .init()
+            case .frontDerailleur, .rearDerailleur:
+                return deviceInfo.warningCodes.filter({ $0.tranfer2WarningCodeType == .derailleur })
+            case .IoT:
+                return .init()
+            default:
+                return deviceInfo.warningCodes.filter({ $0.tranfer2WarningCodeType == .unknown })
+            }
+        }
+        
+        public var errorCodes: [Int] {
+            guard let deviceInfo: FL_Info_st = FarmLandBikeKit.sleipnir.deviceInfo else {
+                return .init()
+            }
+            switch self {
+            case .hmi:
+                return deviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .hmi })
+            case .controller:
+                return deviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .controller })
+            case .display:
+                return .init()
+            case .motor:
+                return deviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .motor })
+            case .cadenceSensor:
+                return .init()
+            case .torqueSensor:
+                return deviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .torque })
+            case .charger:
+                return .init()
+            case .frontLight, .rearLight:
+                return deviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .light })
+            case .throttle:
+                return deviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .throttle })
+            case .eBrake:
+                return .init()
+            case .eLock:
+                return .init()
+            case .frontDerailleur, .rearDerailleur:
+                return deviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .derailleur })
+            case .IoT:
+                return .init()
+            default:
+                return deviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .unknown })
+            }
+        }
+    }
+    
     public fileprivate(set) var hmiSSN: String?
     public fileprivate(set) var hmiDMID: String?
     public fileprivate(set) var hmiDSN: String?
@@ -56,6 +150,108 @@ public struct MetaParameter {
     public fileprivate(set) var controllerParaVer: String?
     public fileprivate(set) var controllerProtocolVer: String?
     public fileprivate(set) var controllerBtDevName: String?
+    
+    public fileprivate(set) var enablePartRawList: [UInt8]?
+    var enableParts: [EnablePart] {
+        var result: [EnablePart] = .init()
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 1, rawList[0] == 1 {
+            result.append(.hmi)
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 2, rawList[1] == 1 {
+            result.append(.controller)
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 3, rawList[2] == 1 {
+            result.append(.battery)
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 4, rawList[3] == 1 {
+            result.append(.display)
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 5, rawList[4] == 1 {
+            result.append(.motor)
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 6, rawList[5] == 1 {
+            result.append(.cadenceSensor)
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 7, rawList[6] == 1 {
+            result.append(.torqueSensor)
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 8, rawList[7] == 1 {
+            result.append(.charger)
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 9, rawList[8] == 1 {
+            result.append(.frontLight)
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 10, rawList[9] == 1 {
+            result.append(.rearLight)
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 11, rawList[10] == 1 {
+            result.append(.throttle)
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 12, rawList[11] == 1 {
+            result.append(.eBrake)
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 13, rawList[12] == 1 {
+            result.append(.eLock)
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 14, rawList[13] == 1 {
+            result.append(.frontDerailleur)
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 15, rawList[14] == 1 {
+            result.append(.rearDerailleur)
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 16, rawList[15] == 1 {
+            result.append(.IoT)
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 17, rawList[16] == 1 {
+            result.append(.undefined(16))
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 18, rawList[17] == 1 {
+            result.append(.undefined(17))
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 19, rawList[18] == 1 {
+            result.append(.undefined(18))
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 20, rawList[19] == 1 {
+            result.append(.undefined(19))
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 21, rawList[20] == 1 {
+            result.append(.undefined(20))
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 22, rawList[21] == 1 {
+            result.append(.undefined(21))
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 23, rawList[22] == 1 {
+            result.append(.undefined(22))
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 24, rawList[23] == 1 {
+            result.append(.undefined(23))
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 25, rawList[24] == 1 {
+            result.append(.undefined(24))
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 26, rawList[25] == 1 {
+            result.append(.undefined(25))
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 27, rawList[26] == 1 {
+            result.append(.undefined(26))
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 28, rawList[27] == 1 {
+            result.append(.undefined(27))
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 29, rawList[28] == 1 {
+            result.append(.undefined(28))
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 30, rawList[29] == 1 {
+            result.append(.undefined(29))
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 31, rawList[30] == 1 {
+            result.append(.undefined(30))
+        }
+        if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 32, rawList[31] == 1 {
+            result.append(.undefined(31))
+        }
+        return result
+    }
 }
 
 extension MetaParameter: Equatable {
@@ -79,9 +275,13 @@ extension MetaParameter: Equatable {
         self.controllerSSN == nil || self.controllerDMID == nil || self.controllerDSN == nil || self.controllerSMID == nil
     }
     
+    fileprivate var isEnablePartsOmit: Bool {
+        self.enablePartRawList == nil
+    }
+    
     /// 參數(HMI 、距離單位、電池與控制器)是否有缺失。
     public var isOmit: Bool {
-        self.isHMIOmit || self.isDistanceUintOmit || self.isBatteryOmit || self.isControllerOmit
+        self.isHMIOmit || self.isDistanceUintOmit || self.isBatteryOmit || self.isControllerOmit || self.isEnablePartsOmit
     }
     
     public static func == (lhs: Self, rhs: Self) -> Bool {
@@ -91,7 +291,14 @@ extension MetaParameter: Equatable {
         let isHmiEqual: Bool = lhs.hmiSSN == rhs.hmiSSN && lhs.hmiDMID == rhs.hmiDMID && lhs.hmiDSN == rhs.hmiDSN && lhs.hmiSMID == rhs.hmiSMID && lhs.hmiDistanceUint == rhs.hmiDistanceUint
         let isBatteryEqual: Bool = lhs.batterySSN == rhs.batterySSN && lhs.batteryDMID == rhs.batteryDMID && lhs.batteryDSN == rhs.batteryDSN && lhs.batterySMID == rhs.batterySMID
         let isControllerEqual: Bool = lhs.controllerSSN == rhs.controllerSSN && lhs.controllerDMID == rhs.controllerDMID && lhs.controllerDSN == rhs.controllerDSN && lhs.controllerSMID == rhs.controllerSMID
-        return isHmiEqual && isBatteryEqual && isControllerEqual
+        let isEnablePartsEqual: Bool = lhs.enablePartRawList == rhs.enablePartRawList
+        return isHmiEqual && isBatteryEqual && isControllerEqual && isEnablePartsEqual
+    }
+}
+
+extension FL_Info_st {
+    public var enableParts: [MetaParameter.EnablePart] {
+        FarmLandBikeKit.sleipnir.metaParameter.enableParts
     }
 }
 
@@ -113,7 +320,8 @@ final public class ConnectionMetaReadingHelper {
         .INTEGRATED_HMI_BANK0,
         .DISP_UNIT_SW,
         .INTEGRATED_BATTERY_BANK0,
-        .INTEGRATED_CONTROLLER_BANK0
+        .INTEGRATED_CONTROLLER_BANK0,
+        .SYS_PART_EN
     ]
     
     /**
@@ -255,6 +463,8 @@ final public class ConnectionMetaReadingHelper {
                 self.metaSubject.value.controllerProtocolVer = output as? String
             case .ControllerBtDevName:
                 self.metaSubject.value.controllerBtDevName = output as? String
+            case .SYS_PART_EN:
+                self.metaSubject.value.enablePartRawList = output as? [UInt8]
             default:
                 return
             }
@@ -273,6 +483,7 @@ final public class ConnectionMetaReadingHelper {
             if name == .DISP_UNIT_SW, !self.metaSubject.value.isDistanceUintOmit { continue }
             if name == .INTEGRATED_BATTERY_BANK0, !self.metaSubject.value.isBatteryOmit { continue }
             if name == .INTEGRATED_CONTROLLER_BANK0, !self.metaSubject.value.isControllerOmit { continue }
+            if name == .SYS_PART_EN, !self.metaSubject.value.isEnablePartsOmit { continue }
             try FarmLandBikeKit.sleipnir.readParameter(name: name)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
