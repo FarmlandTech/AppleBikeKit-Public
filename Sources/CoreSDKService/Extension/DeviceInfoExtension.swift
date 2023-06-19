@@ -111,15 +111,15 @@ public extension FL_Info_st {
 }
 
 public extension FL_Info_st {
-    var warningCodes: [Int] {
+    public var warningCodes: [Int] {
         self.hmiWarningCodes + self.batteryWarningCodes + self.controllerWarningCodes
     }
     
-    var errorCodes: [Int] {
+    public var errorCodes: [Int] {
         self.hmiErrorCodes + self.batteryErrorCodes + self.controllerErrorCodes
     }
     
-    var ableRideRange: Double {
+    public var ableRideRange: Double {
         switch self.battery_rsoc {
         case 0..<10:
             return 2.2
