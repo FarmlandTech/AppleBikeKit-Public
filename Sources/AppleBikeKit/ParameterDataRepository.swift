@@ -59,6 +59,10 @@ public class ParameterDataRepository {
         .init(name: .ControllerBtDevName, partType: .Controller, bank: 0, address: 180, length: 22, type: String.self),
     ]
     
+    public let controllerBank2Parameters: [ParameterData] = [
+        .init(name: .SYS_PART_EN, partType: .Controller, bank: 2, address: 358, length: 4, type: [UInt8].self)
+    ]
+    
     public let batteryBank0Parameters: [ParameterData] = [
         .init(name: .BattSMID, partType: .MainBatt, bank: 0, address: 0, length: 15, type: String.self),
         .init(name: .BattDMID, partType: .MainBatt, bank: 0, address: 15, length: 17, type: String.self),
@@ -80,6 +84,7 @@ public class ParameterDataRepository {
         self.hmiBank0Parameters +
         self.hmiBank2Parameters +
         self.controllerBank0Parameters +
+        self.controllerBank2Parameters +
         self.batteryBank0Parameters
     }()
     
