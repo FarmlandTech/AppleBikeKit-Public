@@ -35,9 +35,9 @@ extension Array where Element == UInt8 {
             return self.convert2Number(length: length)
         } else if let _ = type as? [UInt8].Type {
             return self.map({
-                String($0, radix: 2).split(separator: "")
+                String($0, radix: 2)
             }).map({
-                $0.map({ UInt8($0) ?? 0 })
+                $0.map({ UInt8(String($0)) ?? 0 })
             }).map({
                 var target = Array($0.reversed())
                 while target.count < 8 {
