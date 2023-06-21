@@ -14,6 +14,7 @@ public class ParameterData: NSCopying  {
         case INTEGRATED_HMI_BANK0
         case INTEGRATED_BATTERY_BANK0
         case INTEGRATED_CONTROLLER_BANK0
+        case INTEGRATED_ASSIST_LEVEL
         
         case HmiSMID
         case HmiDMID
@@ -122,16 +123,6 @@ public class ParameterData: NSCopying  {
         case UNIX_TIME_DAY31
         case RECORD_ODO_DAY31
         
-        case AST_LV1_STR_RANG
-        case AST_LV1_STR_ACC
-        case AST_LV1_STR_DEC
-        case AST_LV2_STR_RANG
-        case AST_LV2_STR_ACC
-        case AST_LV2_STR_DEC
-        case AST_LV3_STR_RANG
-        case AST_LV3_STR_ACC
-        case AST_LV3_STR_DEC
-        
         case LV1_MAX_AST_RATIO
         case LV1_MIN_AST_RATIO
         case LV1_AST_RATIO_STR_SPD
@@ -144,18 +135,6 @@ public class ParameterData: NSCopying  {
         case LV3_MIN_AST_RATIO
         case LV3_AST_RATIO_STR_SPD
         case LV3_AST_RATIO_END_SPD
-        case AST_LV1_MAX_CUR
-        case AST_LV2_MAX_CUR
-        case AST_LV3_MAX_CUR
-        case AST_LV1_ACC
-        case AST_LV1_DEC
-        case AST_LV2_ACC
-        case AST_LV2_DEC
-        case AST_LV3_ACC
-        case AST_LV3_DEC
-        case AST_OSP_DEC
-        case AST_OCP_DEC
-        case AST_STOP_DEC
     }
     
     public private(set) var name: ParameterData.Name
@@ -168,7 +147,11 @@ public class ParameterData: NSCopying  {
     // ，但因為早期規劃，暫時先保留，後面的版本在優化參數架構。
     public var value: Any?
     public private(set) var subject: CurrentValueSubject<Any?, Never> = .init(nil)
-    public private(set) var dividedParameters: [ParameterData]?
+    
+    private var _dividedParameters: [ParameterData]?
+    public var dividedParameters: [ParameterData]? {
+        self._dividedParameters
+    }
     
     public init(name: ParameterData.Name, partType: CommunicationPartType, bank: UInt8, address: UInt16, length: UInt16, type: Any, value: Any? = nil, dividedParameters: [ParameterData]? = nil) {
         self.name = name
@@ -178,7 +161,7 @@ public class ParameterData: NSCopying  {
         self.length = length
         self.type = type
         self.value = value
-        self.dividedParameters = dividedParameters
+        self._dividedParameters = dividedParameters
     }
     
     public func copy(with zone: NSZone? = nil) -> Any {

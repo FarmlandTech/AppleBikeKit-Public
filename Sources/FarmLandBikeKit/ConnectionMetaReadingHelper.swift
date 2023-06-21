@@ -151,7 +151,7 @@ public struct MetaParameter {
     public fileprivate(set) var controllerProtocolVer: String?
     public fileprivate(set) var controllerBtDevName: String?
     
-    public fileprivate(set) var enablePartRawList: [UInt8]?
+    internal fileprivate(set) var enablePartRawList: [UInt8]?
     var enableParts: [EnablePart] {
         var result: [EnablePart] = .init()
         if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 1, rawList[0] == 1 {
@@ -297,8 +297,9 @@ extension MetaParameter: Equatable {
 }
 
 extension FL_Info_st {
-    public var enableParts: [MetaParameter.EnablePart] {
-        FarmLandBikeKit.sleipnir.metaParameter.enableParts
+    public func getEnableParts() throws -> [MetaParameter.EnablePart] {
+        try FarmLandBikeKit.sleipnir.checkVersion(part: .controller, version: "0.0.22")
+        return FarmLandBikeKit.sleipnir.metaParameter.enableParts
     }
 }
 
