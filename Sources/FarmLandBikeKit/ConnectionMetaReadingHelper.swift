@@ -14,7 +14,7 @@ import CoreSDKService
 /// 緩存關鍵參數的物件。
 public struct MetaParameter {
     
-    public enum EnablePart {
+    public enum EnablePart: Equatable {
         case hmi
         case controller
         case battery
@@ -102,6 +102,46 @@ public struct MetaParameter {
                 return .init()
             default:
                 return deviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .unknown })
+            }
+        }
+        
+        public static func == (lhs: Self, rhs: Self) -> Bool {
+            if case .hmi = lhs, case .hmi = rhs {
+                return true
+            } else if case .controller = lhs, case .controller = rhs {
+                return true
+            } else if case .battery = lhs, case .battery = rhs {
+                return true
+            } else if case .display = lhs, case .display = rhs {
+                return true
+            } else if case .motor = lhs, case .motor = rhs {
+                return true
+            } else if case .cadenceSensor = lhs, case .cadenceSensor = rhs {
+                return true
+            } else if case .torqueSensor = lhs, case .torqueSensor = rhs {
+                return true
+            } else if case .charger = lhs, case .charger = rhs {
+                return true
+            } else if case .frontLight = lhs, case .frontLight = rhs {
+                return true
+            } else if case .rearLight = lhs, case .rearLight = rhs {
+                return true
+            } else if case .throttle = lhs, case .throttle = rhs {
+                return true
+            } else if case .eBrake = lhs, case .eBrake = rhs {
+                return true
+            } else if case .eLock = lhs, case .eLock = rhs {
+                return true
+            } else if case .frontDerailleur = lhs, case .frontDerailleur = rhs {
+                return true
+            } else if case .rearDerailleur = lhs, case .rearDerailleur = rhs {
+                return true
+            } else if case .IoT = lhs, case .IoT = rhs {
+                return true
+            } else if case .undefined(let lhsPosition) = lhs, case .undefined(let rhsPosition) = rhs, lhsPosition == rhsPosition {
+                return true
+            } else {
+                return false
             }
         }
     }
