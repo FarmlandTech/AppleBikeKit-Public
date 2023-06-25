@@ -21,6 +21,16 @@ final public class FarmLandBikeKit: AppleBikeKit {
         self.connectionMetaReadingHelper.metaSubject.removeDuplicates().eraseToAnyPublisher()
     }()
     
+    public private(set) lazy var assistLevelRepositoryReadingPublisher: AnyPublisher<AssistPlanUpdateHelper.ReadingResult<AssistLevelRepository?>, Never> = {
+        self.assistPlanUpdateHelper.readingSubject
+            .eraseToAnyPublisher()
+    }()
+    
+    public private(set) lazy var assistLevelRepositoryWritingPublisher: AnyPublisher<AssistPlanUpdateHelper.WritingResult<AssistLevelRepository?>, Never> = {
+        self.assistPlanUpdateHelper.writingSubject
+            .eraseToAnyPublisher()
+    }()
+    
     /// 關鍵參數(ssn或dmid等)的緩存值。
     public var metaParameter: MetaParameter {
         self.connectionMetaReadingHelper.metaSubject.value
@@ -32,12 +42,17 @@ final public class FarmLandBikeKit: AppleBikeKit {
     }()
     
     /// 取得關鍵參數(ssn或dmid等)的處理物件實例。
-    private lazy var connectionMetaReadingHelper: ConnectionMetaReadingHelper = {
+    public private(set) lazy var connectionMetaReadingHelper: ConnectionMetaReadingHelper = {
         .init()
     }()
     
     /// 更新電控時間的處理物件實例。
-    private lazy var systemTimeUpdateHelper: SystemTimeUpdateHelper = {
+    public private(set) lazy var systemTimeUpdateHelper: SystemTimeUpdateHelper = {
+        .init()
+    }()
+    
+    /// 更新電控時間的處理物件實例。
+    public private(set) lazy var mileageRecordHelper: MileageRecordHelper = {
         .init()
     }()
     
@@ -45,6 +60,10 @@ final public class FarmLandBikeKit: AppleBikeKit {
         .init()
     }()
     
+    private lazy var assistPlanUpdateHelper: AssistPlanUpdateHelper = {
+        .init()
+    }()
+
     /**
      建構子。
      */
@@ -98,5 +117,20 @@ final public class FarmLandBikeKit: AppleBikeKit {
     
     public func writeMetricSystem(_ isMetricSystem: Bool) throws {
         try self.metricSystemManipulateHelper.write(isMetricSystem)
+    }
+    
+    public func readAssistLevel() throws {
+        try self.assistPlanUpdateHelper.read()
+    }
+    
+    public func writeAssistLevel(LV1_AST_RATIO: Int, LV2_AST_RATIO: Int, LV3_AST_RATIO: Int) throws {
+        try self.assistPlanUpdateHelper.write(
+            LV1_MAX_AST_RATIO: LV1_AST_RATIO,
+            LV1_MIN_AST_RATIO: LV1_AST_RATIO / 2,
+            LV2_MAX_AST_RATIO: LV2_AST_RATIO,
+            LV2_MIN_AST_RATIO: LV2_AST_RATIO / 2,
+            LV3_MAX_AST_RATIO: LV3_AST_RATIO,
+            LV3_MIN_AST_RATIO: LV3_AST_RATIO / 2
+        )
     }
 }
