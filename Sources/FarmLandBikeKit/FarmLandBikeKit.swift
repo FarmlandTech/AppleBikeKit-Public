@@ -31,6 +31,25 @@ final public class FarmLandBikeKit: AppleBikeKit {
             .eraseToAnyPublisher()
     }()
     
+    public private(set) lazy var odoChartDataPublisher: AnyPublisher<Result<[MileageRecord], Error>, Swift.Error> = {
+        self.parameterDataPubisher
+            .filter({ $0.name == .INTEGRATED_MILEAGE_RECORD })
+            .compactMap({ parameterData in
+                FarmLandBikeKit.sleipnir.parameterDataRepository.parameters.firstIndex(where: { $0.name == parameterData.name })
+            })
+            .compactMap({ index in
+                FarmLandBikeKit.sleipnir.parameterDataRepository.parameters[index].dividedParameters
+            })
+            .map({
+                do {
+                    return Result<[MileageRecord], Error>.success(try $0.transfer2MileageRecords())
+                } catch {
+                    return Result<[MileageRecord], Error>.failure(error)
+                }
+            })
+            .eraseToAnyPublisher()
+    }()
+    
     /// 關鍵參數(ssn或dmid等)的緩存值。
     public var metaParameter: MetaParameter {
         self.connectionMetaReadingHelper.metaSubject.value
@@ -48,11 +67,6 @@ final public class FarmLandBikeKit: AppleBikeKit {
     
     /// 更新電控時間的處理物件實例。
     public private(set) lazy var systemTimeUpdateHelper: SystemTimeUpdateHelper = {
-        .init()
-    }()
-    
-    /// 更新電控時間的處理物件實例。
-    public private(set) lazy var mileageRecordHelper: MileageRecordHelper = {
         .init()
     }()
     
@@ -132,5 +146,9 @@ final public class FarmLandBikeKit: AppleBikeKit {
             LV3_MAX_AST_RATIO: LV3_AST_RATIO,
             LV3_MIN_AST_RATIO: LV3_AST_RATIO / 2
         )
+    }
+    
+    public func readODOChartData() throws {
+        try FarmLandBikeKit.sleipnir.readParameter(name: .INTEGRATED_MILEAGE_RECORD)
     }
 }
