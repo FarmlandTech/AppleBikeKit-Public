@@ -27,17 +27,21 @@ public final class CoreSDKService: NSObject {
     /// 讀取參數時的回調。
     private let readParameterEvent: ReadParameterEvent = {
         guard let pointer: UnsafeMutablePointer<UInt8> = $2 else { return }
-        CoreSDKService.dataSource?.readParameter(rawData: .init(targetDevice: $1,
+        CoreSDKService.dataSource?.readParameter(rawData: .init(device: $1,
                                                                 bank: $5,
                                                                 address: $3,
                                                                 length: $4,
-                                                                returnState: $0,
+                                                                state: $0 == 0,
                                                                 pointer: pointer))
     }
     
     /// 寫入參數時的回調。
     private let writeParameterEvent: WriteParameterEvent = {
-        CoreSDKService.dataSource?.writeParameter(state: $0 == 0)
+        CoreSDKService.dataSource?.writeParameter(rawData: .init(device: $1,
+                                                                 bank: $4,
+                                                                 address: $2,
+                                                                 length: $3,
+                                                                 state: $0 == 0))
     }
     
     /// 重啟部件時的回調。
@@ -47,7 +51,9 @@ public final class CoreSDKService: NSObject {
     
     /// 重置部件參數時的回調。
     private let resetPartParameterEvent: ResetPartParameterEvent = {
-        CoreSDKService.dataSource?.resetPartParameter(state: $0 == 0)
+        CoreSDKService.dataSource?.resetPartParameter(rawData: .init(device: $1,
+                                                                     bank: $2,
+                                                                     state: $0 == 0))
     }
     
     /// 校正電控時間時的回調。
@@ -77,12 +83,12 @@ public final class CoreSDKService: NSObject {
     }()
     
     /// 讀取參數的數據流。
-    public private(set) lazy var readingRawDataSubject: CurrentValueSubject<RawData?, Never> = {
+    public private(set) lazy var readingRawDataSubject: CurrentValueSubject<ReadingRawData?, Never> = {
         .init(nil)
     }()
     
     /// 寫入參數時，命令執行狀態的數據流。
-    public private(set) lazy var writingParameterStateSubject: CurrentValueSubject<Bool?, Never> = {
+    public private(set) lazy var writingParameterStateSubject: CurrentValueSubject<WritingRawData?, Never> = {
         .init(nil)
     }()
     
@@ -92,7 +98,7 @@ public final class CoreSDKService: NSObject {
     }()
     
     /// 重置部件參數時，命令執行狀態的數據流。
-    public private(set) lazy var resetingPartParameterStateSubject: CurrentValueSubject<Bool?, Never> = {
+    public private(set) lazy var resetingPartParameterStateSubject: CurrentValueSubject<ResetingRawData?, Never> = {
         .init(nil)
     }()
     
@@ -348,21 +354,21 @@ extension CoreSDKService: CoreSDKDataSource {
         self.deviceInfoSubject.send(deviceInfo)
     }
     
-    func readParameter(rawData: RawData) {
+    func readParameter(rawData: ReadingRawData) {
         self.readingRawDataSubject.send(rawData)
     }
     
-    func writeParameter(state: Bool) {
+    func writeParameter(rawData: WritingRawData) {
 #warning("目前研判是線程問題導致藍牙斷線(crash?)，反正目前用不到，暫時先註解吧...")
-//        self.writingParameterStateSubject.send(state)
+//        self.writingParameterStateSubject.send(rawData)
     }
     
     func restartPart(state: Bool) {
         self.restartingPartStateSubject.send(state)
     }
-    
-    func resetPartParameter(state: Bool) {
-        self.resetingPartParameterStateSubject.send(state)
+
+    func resetPartParameter(rawData: ResetingRawData) {
+        self.resetingPartParameterStateSubject.send(rawData)
     }
     
     func updateSystemTime(state: Bool) {
@@ -412,13 +418,13 @@ private protocol CoreSDKDataSource: AnyObject {
     /// 刷新腳踏車資訊時，回調的資訊。
     func updateDeviceInfo(deviceInfo: FL_Info_st)
     /// 讀取參數時，回調的資訊。
-    func readParameter(rawData: RawData)
+    func readParameter(rawData: ReadingRawData)
     /// 寫入參數時，回調的資訊。
-    func writeParameter(state: Bool)
+    func writeParameter(rawData: WritingRawData)
     /// 重啟部件時，回調的資訊。
     func restartPart(state: Bool)
     /// 重置部件參數時，回調的資訊。
-    func resetPartParameter(state: Bool)
+    func resetPartParameter(rawData: ResetingRawData)
     /// 校正電控時間時，回調的資訊。
     func updateSystemTime(state: Bool)
     /// 控制車燈開關，回調的資訊。
@@ -434,11 +440,11 @@ extension CoreSDKService {
     /// 讀取參數時，回調的別名。
     private typealias ReadParameterEvent = @convention(c) (Int32, DeviceType_enum, Optional<UnsafeMutablePointer<UInt8>>, UInt16, UInt16, UInt8) -> Void
     /// 寫入參數時，回調的別名。
-    private typealias WriteParameterEvent = @convention(c) (Int32) -> Void
+    private typealias WriteParameterEvent = @convention(c) (Int32, DeviceType_enum, UInt16, UInt16, UInt8) -> Void
     /// 重啟部件時，回調的別名。
     private typealias RestartPartEvent = @convention(c) (Int32) -> Void
     /// 重置部件參數時，回調的別名。
-    private typealias ResetPartParameterEvent = @convention(c) (Int32) -> Void
+    private typealias ResetPartParameterEvent = @convention(c) (Int32, DeviceType_enum, UInt8) -> Void
     /// 校正電控時間時，回調的別名。
     private typealias UpdateSystemTimeEvent = @convention(c) (Int32) -> Void
     /// 控制車燈開關，回調的別名。
