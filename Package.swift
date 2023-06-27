@@ -54,11 +54,19 @@ let package = Package(
         .target(
             name: "DataLakeBikeKit",
             dependencies: ["AppleBikeKit"],
-            path: "Sources/DataLakeBikeKit"),
+            path: "Sources/DataLakeBikeKit",
+            swiftSettings: [
+                .define("APPLICATION_EXTENSION_API_ONLY=YES"),
+                .unsafeFlags(["-application-extension"])
+            ]),
         .target(
             name: "FarmLandBikeKit",
             dependencies: ["AppleBikeKit"],
-            path: "Sources/FarmLandBikeKit"),
+            path: "Sources/FarmLandBikeKit",
+            swiftSettings: [
+                .define("APPLICATION_EXTENSION_API_ONLY=YES"),
+                .unsafeFlags(["-application-extension"])
+            ]),
         .testTarget(
             name: "AppleBikeKitTests",
             dependencies: ["AppleBikeKit"],
