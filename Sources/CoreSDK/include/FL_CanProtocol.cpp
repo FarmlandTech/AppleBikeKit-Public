@@ -7,7 +7,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif 
 
 #define ERROR_TABLE_SIZE	64
 #define ISO_TP_BUFF_SIZE	4096
@@ -772,7 +772,7 @@ int ControllerInfo05Handler(uint8_t* data, uint32_t leng)
 	FL_DeviceInfo->FL.assist_on = info.bits.assist_on;
 	FL_DeviceInfo->FL.front_light_on = info.bits.front_light_on;
 	FL_DeviceInfo->FL.rear_light_on = info.bits.rear_light_on;
-	FL_DeviceInfo->FL.break_light_on = info.bits.break_light_on;
+	FL_DeviceInfo->FL.brake_light_on = info.bits.brake_light_on;
 	FL_DeviceInfo->FL.activate_light_ctrl = info.bits.activate_light_ctrl;
 	FL_DeviceInfo->FL.brake_on = info.bits.brake_on;
 	FL_DeviceInfo->FL.candence_direction = info.bits.candence_direction;

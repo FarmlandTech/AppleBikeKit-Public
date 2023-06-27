@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #pragma warning(disable:4996)
 #pragma warning(disable:26812)
 //
@@ -189,8 +189,8 @@ struct DllExport FL_Info_st
 	bool front_light_on;
 	//當前尾燈輸出狀態
 	bool rear_light_on;
-	//當剎車燈輸出狀態
-	bool break_light_on;
+	//當前剎車燈輸出狀態
+	bool brake_light_on;
 	//是否可控燈
 	bool activate_light_ctrl;
 	//當前煞車感測觸發狀態
@@ -431,9 +431,9 @@ struct DllExport FL_Info_st
 	//ReadParameter Callback調用函數類型定義
 	typedef void(__stdcall* fpCallback_ReadParameters)(int return_state, SDKDeviceType_e target_device, unsigned char* read_buff, unsigned short addr, unsigned short leng, unsigned char bank_index);
 	//WriteParameters Callback調用函數類型定義
-	typedef void(__stdcall* fpCallback_WriteParameters)(int return_state);
+	typedef void(__stdcall* fpCallback_WriteParameters)(int return_state, SDKDeviceType_e target_device, unsigned short addr, unsigned short leng, unsigned char bank_index);
 	//ResetParameters Callback調用函數類型定義
-	typedef void(__stdcall* fpCallback_ResetParameters)(int return_state);
+	typedef void(__stdcall* fpCallback_ResetParameters)(int return_state, SDKDeviceType_e target_device, unsigned char bank_index);
 	//UpgradeFirmware Callback調用函數類型定義
 	typedef void(__stdcall* fpCallback_UpgradeFirmware)(int return_state);
 	//SetDebugMode Callback調用函數類型定義
@@ -498,7 +498,7 @@ struct DllExport FL_Info_st
 		// 電子鎖當前狀態查詢
 		int(__stdcall* GetELock_DEV)(RouterType router, fpCallback_GetELock_DEV callback);
 		// 車燈控制
-		int(__stdcall* LightControl)(RouterType router, light_control_parts parts, bool on_off, fpCallback_LightControl callback);
+		int(__stdcall* LightControl)(RouterType router, light_control_parts  parts, bool on_off, fpCallback_LightControl callback);
 	} DelegateFuncDefine_T;
 
 	//SDK接收及發送外部封包指令集
