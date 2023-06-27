@@ -129,6 +129,10 @@ final public class FarmLandBikeKit: AppleBikeKit {
         self.disconnect(peripheral)
     }
     
+    public func updateMetaParameter() throws {
+        try self.connectionMetaReadingHelper.doTask()
+    }
+    
     public func writeMetricSystem(_ isMetricSystem: Bool) throws {
         try self.metricSystemManipulateHelper.write(isMetricSystem)
     }

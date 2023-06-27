@@ -403,6 +403,7 @@ final public class ConnectionMetaReadingHelper {
      - Throws: 無法執行讀取參數命令時，將會拋出 readParameterFail 錯誤。
      */
     public func doTask() throws {
+        self.metaSubject.send(.init())
         try self.recurFetchMeta()
     }
     
