@@ -11,26 +11,60 @@ import CoreBLEService
 
 import AppleBikeKit
 
+/// 農田應用程式開發套件，常見需求的集成。
 final public class FarmLandBikeKit: AppleBikeKit {
     
     /// 單例。
     public static let sleipnir: FarmLandBikeKit = .init()
+    
+    /// 關鍵參數(ssn或dmid等)的緩存值。
+    public var metaParameter: MetaParameter {
+        self.connectionMetaReadingHelper.metaSubject.value
+    }
+    
+    /// 訂閱實例。
+    private lazy var subscriptions: Set<AnyCancellable> = {
+        .init()
+    }()
+    
+    /// 取得關鍵參數(ssn或dmid等)的處理物件實例。
+    private lazy var connectionMetaReadingHelper: ConnectionMetaReadingHelper = {
+        .init()
+    }()
+    
+    /// 更新電控時間的處理物件實例。
+    private lazy var systemTimeUpdateHelper: SystemTimeUpdateHelper = {
+        .init()
+    }()
+    
+    /// 存取距離單位(公制or英制)座標系統的處理物件實例。
+    private lazy var metricSystemManipulateHelper: MetricSystemManipulateHelper = {
+        .init()
+    }()
+    
+    /// 存取助力等級的處理物件實力。
+    private lazy var assistPlanUpdateHelper: AssistPlanUpdateHelper = {
+        .init()
+    }()
     
     /// 關鍵參數的 Publisher 。
     public private(set) lazy var metaPublisher: AnyPublisher<MetaParameter, Never> = {
         self.connectionMetaReadingHelper.metaSubject.removeDuplicates().eraseToAnyPublisher()
     }()
     
+    /// 助力等級讀取狀態的 Publisher 。
     public private(set) lazy var assistLevelRepositoryReadingPublisher: AnyPublisher<AssistPlanUpdateHelper.ReadingResult<AssistLevelRepository?>, Never> = {
         self.assistPlanUpdateHelper.readingSubject
             .eraseToAnyPublisher()
     }()
     
+    /// 助力等級寫入狀態的 Publisher 。
     public private(set) lazy var assistLevelRepositoryWritingPublisher: AnyPublisher<AssistPlanUpdateHelper.WritingResult<AssistLevelRepository?>, Never> = {
         self.assistPlanUpdateHelper.writingSubject
             .eraseToAnyPublisher()
     }()
     
+    /// 單日里程(chart)的 Publisher 。
     public private(set) lazy var odoChartDataPublisher: AnyPublisher<Result<[MileageRecord], Error>, Swift.Error> = {
         self.parameterDataPubisher
             .filter({ $0.name == .INTEGRATED_MILEAGE_RECORD })
@@ -48,34 +82,6 @@ final public class FarmLandBikeKit: AppleBikeKit {
                 }
             })
             .eraseToAnyPublisher()
-    }()
-    
-    /// 關鍵參數(ssn或dmid等)的緩存值。
-    public var metaParameter: MetaParameter {
-        self.connectionMetaReadingHelper.metaSubject.value
-    }
-    
-    /// 訂閱實例。
-    private lazy var subscriptions: Set<AnyCancellable> = {
-        .init()
-    }()
-    
-    /// 取得關鍵參數(ssn或dmid等)的處理物件實例。
-    public private(set) lazy var connectionMetaReadingHelper: ConnectionMetaReadingHelper = {
-        .init()
-    }()
-    
-    /// 更新電控時間的處理物件實例。
-    public private(set) lazy var systemTimeUpdateHelper: SystemTimeUpdateHelper = {
-        .init()
-    }()
-    
-    private lazy var metricSystemManipulateHelper: MetricSystemManipulateHelper = {
-        .init()
-    }()
-    
-    private lazy var assistPlanUpdateHelper: AssistPlanUpdateHelper = {
-        .init()
     }()
 
     /**
@@ -129,18 +135,42 @@ final public class FarmLandBikeKit: AppleBikeKit {
         self.disconnect(peripheral)
     }
     
+    /**
+     更新電控時間。
+     
+     - Throws: 上次的讀取仍然在執行(或重試)，便會拋出錯誤；如果底層 AppleBikeKit 讀取參數時，設定錯誤，也可能會拋出錯誤。
+     */
     public func updateMetaParameter() throws {
         try self.connectionMetaReadingHelper.doTask()
     }
     
+    /**
+     設定距離單位(公制or英制)座標系統。
+     
+     - parameter isMetricSystem: 是否為公制。
+     - Throws: 上次的寫入仍然在執行(或重試)，便會拋出錯誤；如果底層 AppleBikeKit 寫入參數時，設定錯誤，也可能會拋出錯誤。
+     */
     public func writeMetricSystem(_ isMetricSystem: Bool) throws {
         try self.metricSystemManipulateHelper.write(isMetricSystem)
     }
     
+    /**
+     讀取助力等級當前的數值。
+     
+     - Throws: 上次的讀取仍然在執行(或重試)，便會拋出錯誤；如果底層 AppleBikeKit 讀取參數時，設定錯誤，也可能會拋出錯誤。
+     */
     public func readAssistLevel() throws {
         try self.assistPlanUpdateHelper.read()
     }
     
+    /**
+     寫入助力等級。
+     
+     - parameter LV1_AST_RATIO: 第一段助力的數值。
+     - parameter LV2_AST_RATIO: 第二段助力的數值。
+     - parameter LV3_AST_RATIO: 第三段助力的數值。
+     - Throws: 上次的寫入仍然在執行(或重試)，便會拋出錯誤；如果底層 AppleBikeKit 寫入參數時，設定錯誤，也可能會拋出錯誤。
+     */
     public func writeAssistLevel(LV1_AST_RATIO: Int, LV2_AST_RATIO: Int, LV3_AST_RATIO: Int) throws {
         try self.assistPlanUpdateHelper.write(
             LV1_MAX_AST_RATIO: LV1_AST_RATIO,
@@ -152,6 +182,11 @@ final public class FarmLandBikeKit: AppleBikeKit {
         )
     }
     
+    /**
+     讀取單日里程(chart)的數據。
+     
+     - Throws: 上次的讀取仍然在執行(或重試)，便會拋出錯誤；如果底層 AppleBikeKit 讀取參數時，設定錯誤，也可能會拋出錯誤。
+     */
     public func readODOChartData() throws {
         try FarmLandBikeKit.sleipnir.readParameter(name: .INTEGRATED_MILEAGE_RECORD)
     }

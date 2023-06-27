@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// 單日里程(chart)的數據模型。
 public struct MileageRecord: Identifiable {
     
     /// 里程圖表數據相關的自定義錯誤。
@@ -17,11 +18,16 @@ public struct MileageRecord: Identifiable {
         case accumulatedODOMisSequence(MileageRecord, MileageRecord)
     }
     
+    /// 給 SwiftUI 的 List 用於識別的參數。
     public let id = UUID()
+    /// 顯示名稱。
     public let name: String
+    /// 日期。
     public let date: Date
+    /// 里程。
     public let odograph: Int
     
+    /// 格式化日期。
     public var dateContent: String {
         let formatter: DateFormatter = .init()
         formatter.timeZone = TimeZone(abbreviation: "GMT+0")

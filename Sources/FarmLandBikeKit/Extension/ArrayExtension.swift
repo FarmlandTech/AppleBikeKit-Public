@@ -10,6 +10,11 @@ import Foundation
 import CoreSDKService
 
 extension Array where Element == MileageRecord {
+    /**
+     從電控(電池)讀出來的原始數據為累積里程，此方法可將累積里程映射為單日里程。
+     
+     - Throws: 若單日里程計算結果為負值，則拋出錯誤。
+     */
     fileprivate func tranfer2SingleDayODO() throws -> [MileageRecord] {
         guard let first: MileageRecord = self.first else {
             return self
@@ -33,6 +38,11 @@ extension Array where Element == MileageRecord {
 }
 
 extension Array where Element == ParameterData {
+    /**
+     將電控(電池)讀出來的數據，映射為 chart 可以使用的數組。
+     
+     - Throws: 粗略校驗，若數據有明顯不合理的狀況(電控數據不成對；單日里程為負值)，便會拋出例外。
+     */
     func transfer2MileageRecords() throws -> [MileageRecord] {
         // 簡略的判斷，從藍牙讀到的參數應該要有62項，但這邊粗暴檢查，能兩兩成對就好了。
         guard self.count.isMultiple(of: 2) else {
@@ -68,7 +78,9 @@ extension Array where Element == ParameterData {
                 odograph: odographValue)
             mileageRecords.append(element)
         }
+        // 按時間先後升冪排序。
         mileageRecords.sort(by: { $0.date.compare($1.date) == .orderedAscending })
+        // 原始的里程為累積里程，這邊要在映射為單日里程。
         let singleDayMileageRecords: [MileageRecord] = try mileageRecords.tranfer2SingleDayODO()
         return singleDayMileageRecords
     }

@@ -10,14 +10,22 @@ import Combine
 
 import CoreSDKService
 
+/// 助力等級的數據。
 public struct AssistLevelRepository: Equatable {
+    /// 第一段助力的最大值。
     public let LV1_MAX_AST_RATIO: Int
+    /// 第一段助力的最小值。
     public let LV1_MIN_AST_RATIO: Int
+    /// 第二段助力的最大值。
     public let LV2_MAX_AST_RATIO: Int
+    /// 第二段助力的最小值。
     public let LV2_MIN_AST_RATIO: Int
+    /// 第三段助力的最大值。
     public let LV3_MAX_AST_RATIO: Int
+    /// 第三段助力的最小值。
     public let LV3_MIN_AST_RATIO: Int
     
+    /// 實作 Equatable 協定，用以判斷兩個 AssistLevelRepository 的內容是否相同。
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.LV1_MAX_AST_RATIO == rhs.LV1_MAX_AST_RATIO &&
         lhs.LV1_MIN_AST_RATIO == rhs.LV1_MIN_AST_RATIO &&
@@ -28,6 +36,7 @@ public struct AssistLevelRepository: Equatable {
     }
 }
 
+/// 存取助力等級的處理物件。
 final public class AssistPlanUpdateHelper {
     
     public enum ReadingResult<T> {
@@ -42,16 +51,9 @@ final public class AssistPlanUpdateHelper {
         case done(T)
     }
     
-    public enum CheckingResult<T> {
-        case prepared
-        case `try`(Int, T)
-        case done(T)
-    }
-    
     public enum Error: Swift.Error {
         case isReadRecursively
         case isWriteRecursively
-        case isCheckRecursively
     }
     
     private lazy var subscriptions: Set<AnyCancellable> = { .init() }()

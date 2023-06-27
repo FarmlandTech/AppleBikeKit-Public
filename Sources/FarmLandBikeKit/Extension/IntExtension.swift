@@ -8,6 +8,7 @@
 import Foundation
 
 extension Int {
+    /// 公里轉英里。
     var toMile: Int {
         Int(Double(self).toMile)
     }

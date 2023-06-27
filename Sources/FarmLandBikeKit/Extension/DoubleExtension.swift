@@ -8,6 +8,7 @@
 import Foundation
 
 extension Double {
+    /// 公里轉英里。
     var toMile: Double {
         self * 0.62137
     }
