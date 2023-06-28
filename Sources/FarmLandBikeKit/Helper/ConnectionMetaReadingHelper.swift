@@ -402,7 +402,8 @@ final public class ConnectionMetaReadingHelper {
      - Throws: 無法以名稱找到參數時，將會拋出 parameterDataNotFoundByName 錯誤。
      - Throws: 無法執行讀取參數命令時，將會拋出 readParameterFail 錯誤。
      */
-    func doTask() throws {
+    public func doTask() throws {
+        self.metaSubject.send(.init())
         try self.recurFetchMeta()
     }
     

@@ -267,7 +267,7 @@ void AS_FL_ActionStepNext(void)
 
 void ActionScriptResetStatus(void)
 {	
-	//lib_fifo_drop(&AS_Inst.action_queue); ¤£¥Î
+	//lib_fifo_drop(&AS_Inst.action_queue); 
 
 	AS_Inst.run_step = 0;
 	AS_Inst.timeout.count = 0;
@@ -339,7 +339,7 @@ void ActionScriptRun(void)
 	{
 		if (AS_Inst.Runtime.error_callback)
 		{
-			AS_Inst.Runtime.error_callback(SDK_RETURN_TIMEOUT);
+			AS_Inst.Runtime.error_callback(AS_Inst.Runtime.paras, SDK_RETURN_TIMEOUT);
 		}
 		ActionScriptResetStatus();
 
@@ -512,11 +512,14 @@ void AS_FL_CANBus_ReadParameter(struct FunctionParameterDefine* paras)
 	break;
 	}
 }
-
-
+int read_para_Request; //test
+int read_para_Response; //test
+int read_para_err; //test
+clock_t r_start; //test
 void AS_FL_BLE_ReadParam_GetRespond(uint8_t device, uint16_t opc, uint8_t response_code,
 	uint8_t* data, uint16_t data_leng)
 {
+	++read_para_Response;//test
 	if (data_leng >= 10)
 	{
 		uint32_t get_crc = data[(data_leng - 4)] + (data[(data_leng - 3)] << 8) + (data[(data_leng - 2)] << 16) + (data[(data_leng - 1)] << 24);
@@ -532,6 +535,10 @@ void AS_FL_BLE_ReadParam_GetRespond(uint8_t device, uint16_t opc, uint8_t respon
 		}
 		
 	}
+	if (response_code != 0)//test
+		++read_para_err;//test
+	LOG_PUSH("Elapsed time:%d ms\r\n read_para_Request: %d _____ read_para_Response: %d _____ error: %d \r\n ", clock() - r_start, read_para_Request, read_para_Response, read_para_err);//test 
+	LOG_FLUSH; //test 
 }
 
 void AS_FL_BLE_ReadParameter(struct FunctionParameterDefine* paras)
@@ -571,7 +578,10 @@ void AS_FL_BLE_ReadParameter(struct FunctionParameterDefine* paras)
 				0, post_data, post_leng);
 
 			start_addr += leng;
-
+			++read_para_Request;//test
+			r_start = clock();//test
+			LOG_PUSH("-----read_para_Request: %d \r\n ", read_para_Request);//test
+			LOG_FLUSH; //test 
 			ActionScriptRespondWait(5000);
 		}
 		else
@@ -603,7 +613,9 @@ void AS_FL_BLE_ReadParameter(struct FunctionParameterDefine* paras)
 				0, post_data, post_leng);
 
 			start_addr += leng;
-
+			++read_para_Request;//test 
+			LOG_PUSH("-----read_para_Request: %d \r\n ", read_para_Request);//test 
+			LOG_FLUSH; //test 
 			ActionScriptRespondWait(5000);
 		}
 		else
@@ -821,14 +833,21 @@ void AS_FL_BLE_SetCanIdBypassBlockList(struct FunctionParameterDefine* paras)
 	break;
 	}
 }
-
+int write_para_Request; //test
+int write_para_Response; //test
+int write_para_err; //test
 void AS_FL_BLE_WriteParam_GetRespond(uint8_t device, uint16_t opc, uint8_t response_code,
 	uint8_t* data, uint16_t leng)
 {
+	++write_para_Response;//test
 	if (opc == FL_BLE_OPC_PARAM_WRITE_RES)
 	{
 		AS_FL_ActionStepNext();
 	}
+	if (response_code != 0)//test
+		++write_para_err;//test
+	LOG_PUSH("-----write_para_Request: %d _____ write_para_Response: %d _____ error: %d \r\n ", write_para_Request, write_para_Response, write_para_err);//test
+	LOG_FLUSH; //test
 }
 
 
@@ -872,8 +891,10 @@ void AS_FL_BLE_WriteParameter(struct FunctionParameterDefine* paras)
 				FL_BLE_OPC_PARAM_WRITE_REQ,
 				device_id,
 				0, post_data, post_leng);
-
+			++write_para_Request;//test
 			ActionScriptRespondWait(5000);
+			LOG_PUSH("-----write_para_Request: %d  \r\n ", write_para_Request);//test
+			LOG_FLUSH; //test
 		}
 		else
 		{
@@ -1957,7 +1978,7 @@ void AS_FL_BLE_RestartDevice(struct FunctionParameterDefine* paras)
 		uint8_t post_leng = 0;
 		HOST_CONTROLINFO_00_T info = { 0 };
 
-		light_control_parts parts = (light_control_enum)paras[0].num.uint8_val;
+		light_control_parts parts = (light_control_parts)paras[0].num.uint8_val;
 		bool on_off = paras[1].num.uint8_val;
 
 		info.bits.set_assist_level = 0xF;

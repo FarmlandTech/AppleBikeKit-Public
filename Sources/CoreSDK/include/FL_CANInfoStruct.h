@@ -6,7 +6,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+ 
 #pragma pack(1)
 
 // Operate code
@@ -56,7 +56,6 @@ typedef enum DEVICE_OBJ_TYPE_E
 	DEVICE_OBJ_E_LOCK,
 	DEVICE_OBJ_UNKNOWN = (uint8_t)255,
 } DeviceObjTypes;
-
 
 // ISO-TP CANID define
 #define FL_ISOTP_CANID_DFU_ANY_2_HMI			(uint32_t)0x10000
@@ -528,7 +527,7 @@ typedef union CTRL_Info05_st
 
 		uint8_t front_light_on:1;
 		uint8_t rear_light_on:1;
-		uint8_t break_light_on : 1;
+		uint8_t brake_light_on : 1;
 		uint8_t activate_light_ctrl :1;
 		uint8_t brake_on:1;
 		uint8_t candence_direction : 1;

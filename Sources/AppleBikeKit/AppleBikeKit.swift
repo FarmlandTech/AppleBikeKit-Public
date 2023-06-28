@@ -69,7 +69,7 @@ open class AppleBikeKit {
     }()
     
     /// 寫入參數時，執行狀態的發佈者。
-    public private(set) lazy var writingParameterStatePublisher: AnyPublisher<Bool?, Never> = {
+    public private(set) lazy var writingParameterStatePublisher: AnyPublisher<WritingRawData?, Never> = {
         self.coreSDKService.writingParameterStateSubject.eraseToAnyPublisher()
     }()
     
@@ -78,7 +78,7 @@ open class AppleBikeKit {
         self.coreSDKService.restartingPartStateSubject.eraseToAnyPublisher()
     }()
     
-    public private(set) lazy var resetParameterStatePublisher: AnyPublisher<Bool?, Never> = {
+    public private(set) lazy var resetParameterStatePublisher: AnyPublisher<ResetingRawData?, Never> = {
         self.coreSDKService.resetingPartParameterStateSubject.eraseToAnyPublisher()
     }()
     
@@ -292,7 +292,7 @@ extension AppleBikeKit {
                 }
                 
                 do {
-                    let parameterData: ParameterData = try self.parameterDataRepository.findParameterData(type: rawData.targetDevice,
+                    let parameterData: ParameterData = try self.parameterDataRepository.findParameterData(type: rawData.device,
                                                                                                           bank: rawData.bank,
                                                                                                           address: rawData.address,
                                                                                                           length: rawData.length)

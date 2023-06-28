@@ -9,6 +9,8 @@
 extern "C" {
 #endif
 
+#define CAN_PROTOCOL_VER    "001.00.0017" 
+
 typedef int(* CANSenderHandlerFunc)(unsigned int can_id, bool is_extender_id, unsigned char* raw_data, unsigned int leng);
 
 

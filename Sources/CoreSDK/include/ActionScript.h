@@ -85,7 +85,7 @@ extern "C" {
 	typedef void (*ScriptFunction)(struct FunctionParameterDefine* paras);
 
 	typedef void (ActionFinally_Callback)(struct FunctionParameterDefine* action_param);
-	typedef void (ActionError_Callback)(uint32_t err_code);
+	typedef void (ActionError_Callback)(struct FunctionParameterDefine* action_param, uint32_t err_code);
 
 	typedef struct ActionDefine_st
 	{

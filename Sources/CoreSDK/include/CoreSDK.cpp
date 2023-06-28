@@ -31,8 +31,7 @@ using namespace std::chrono;
 using namespace std::this_thread;
 
 // SDK 版本號
-#define SDK_Version_Str "1.0.3"
-
+#define SDK_Version_Str "1.0.4"
 
 typedef struct CANPacket_st
 {
@@ -705,19 +704,11 @@ void ReadParameter_Finally(struct FunctionParameterDefine* action_param)
 {
     if (ReadParameters_callback)
     {
-        uint64_t temp_val;
-        uint32_t addr;
-        uint16_t leng;
-        uint8_t bank_index, device;
+        uint8_t  device = action_param[0].num.uint8_val;
+        uint16_t addr = action_param[1].num.uint16_val;
+        uint16_t leng = action_param[2].num.uint16_val;
+        uint8_t  bank_index = action_param[3].num.uint8_val;
 
-        GetActionParam(&action_param[0], &temp_val);
-        device = (uint8_t)temp_val;
-        GetActionParam(&action_param[1], &temp_val);
-        addr = (uint32_t)temp_val;
-        GetActionParam(&action_param[2], &temp_val);
-        leng = (uint16_t)temp_val;
-        GetActionParam(&action_param[3], &temp_val);
-        bank_index = (uint8_t)temp_val;
         FL_CAN_ReadParameter((SDKDeviceType_e)device, bank_index, addr, leng, sdk.param_mem);
         // 委派成功, 回傳讀取到的參數值
         ReadParameters_callback(SDK_RETURN_SUCCESS, (SDKDeviceType_e)device, sdk.param_mem, addr, leng, bank_index);
@@ -725,27 +716,17 @@ void ReadParameter_Finally(struct FunctionParameterDefine* action_param)
 }
 
 
-void ReadParameter_Error(uint32_t err_code)
+void ReadParameter_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
 {
     if (ReadParameters_callback)
-    {
-        /*
-        uint64_t temp_val;
-        uint32_t addr;
-        uint16_t leng;
-        uint8_t bank_index, device;
-        
-        GetActionParam(&action_param[0], &temp_val);
-        device = (uint8_t)temp_val;
-        GetActionParam(&action_param[1], &temp_val);
-        addr = (uint32_t)temp_val;
-        GetActionParam(&action_param[2], &temp_val);
-        leng = (uint16_t)temp_val;
-        GetActionParam(&action_param[3], &temp_val);
-        bank_index = (uint8_t)temp_val;
-        
-        ReadParameters_callback(err_code, (SDKDeviceType_e)device, sdk.param_mem, addr, leng, bank_index);
-        */
+    {  
+        uint8_t  device = action_param[0].num.uint8_val; 
+        uint16_t addr = action_param[1].num.uint16_val; 
+        uint16_t leng = action_param[2].num.uint16_val; 
+        uint8_t  bank_index = action_param[3].num.uint8_val; 
+        FL_CAN_ReadParameter((SDKDeviceType_e)device, bank_index, addr, leng, sdk.param_mem); 
+
+        ReadParameters_callback(err_code, (SDKDeviceType_e)device, sdk.param_mem, addr, leng, bank_index); 
     }
 }
 
@@ -802,16 +783,24 @@ void WriteParameter_Finally(struct FunctionParameterDefine* action_param)
 {
     if (WriteParameters_callback)
     {
-        WriteParameters_callback(SDK_RETURN_SUCCESS);
+        uint8_t device_id = action_param[0].num.uint8_val;
+        uint16_t addr = action_param[1].num.uint16_val;
+        uint16_t leng = action_param[2].num.uint16_val;
+        uint8_t bank_index = action_param[3].num.int8_val;
+        WriteParameters_callback(SDK_RETURN_SUCCESS, (SDKDeviceType_e)device_id, addr, leng, bank_index);
     }
 }
 
 
-void WriteParameter_Error(uint32_t err_code)
+void WriteParameter_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
 {
     if (WriteParameters_callback)
     {
-        WriteParameters_callback(err_code);
+        uint8_t device_id = action_param[0].num.uint8_val;
+        uint16_t addr = action_param[1].num.uint16_val;
+        uint16_t leng = action_param[2].num.uint16_val;
+        uint8_t bank_index = action_param[3].num.int8_val;
+        WriteParameters_callback(err_code, (SDKDeviceType_e)device_id, addr, leng, bank_index);
     }
 }
 
@@ -875,16 +864,20 @@ void ResetParameters_Finally(struct FunctionParameterDefine* action_param)
 {
     if (ResetParameters_callback)
     {
-        ResetParameters_callback(SDK_RETURN_SUCCESS);
+        uint8_t device_id = action_param[0].num.uint8_val;
+        uint8_t bank_index = action_param[1].num.int8_val;
+        ResetParameters_callback(SDK_RETURN_SUCCESS, (SDKDeviceType_e)device_id, bank_index);
     }
 }
 
 
-void ResetParameters_Error(uint32_t err_code)
+void ResetParameters_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
 {
     if (ResetParameters_callback)
-    {
-        ResetParameters_callback(err_code);
+    { 
+        uint8_t device_id = action_param[0].num.uint8_val; 
+        uint8_t bank_index = action_param[1].num.int8_val; 
+        ResetParameters_callback(err_code, (SDKDeviceType_e)device_id, bank_index);
     }
 }
 
@@ -900,7 +893,7 @@ int __stdcall ResetParameters(RouterType router,
     // 參數[1]:ID清單長度
     SetActionParam(&new_action.paras[1], PARA_TYPE_UINT8, &bank_index);
     // 儲存執行完畢後回呼指標
-    WriteParameters_callback = callback;
+    ResetParameters_callback = callback;
     // 判斷發送封包路由類型
     switch (router)
     {
@@ -940,7 +933,7 @@ void UpgradeFirmware_Finally(struct FunctionParameterDefine* action_param)
     }
 }
 
-void UpgradeFirmware_Error(uint32_t err_code)
+void UpgradeFirmware_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
 {
     if (UpgradeFirmware_callback)
     {
@@ -1004,7 +997,7 @@ void SetDebugMode_Finally(struct FunctionParameterDefine* action_param)
 }
 
 
-void SetDebugMode_Error(uint32_t err_code)
+void SetDebugMode_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
 {
     if (SetDebugMode_callback)
     {
@@ -1070,7 +1063,7 @@ void SetTestMode_Finally(struct FunctionParameterDefine* action_param)
 }
 
 
-void SetTestMode_Error(uint32_t err_code)
+void SetTestMode_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
 {
     if (SetTestMode_callback)
     {
@@ -1137,7 +1130,7 @@ void GetCanIdBypassList_Finally(struct FunctionParameterDefine* action_param)
 }
 
 
-void GetCanIdBypassList_Error(uint32_t err_code)
+void GetCanIdBypassList_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
 {
     if (GetCanIdBypassList_callback)
     {
@@ -1190,7 +1183,7 @@ void SetCanIdBypassAllowList_Finally(struct FunctionParameterDefine* action_para
 }
 
 
-void SetCanIdBypassAllowList_Error(uint32_t err_code)
+void SetCanIdBypassAllowList_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
 {
     if (SetCanIdBypassAllowList_callback)
     {
@@ -1252,7 +1245,7 @@ void SetCanIdBypassBlockList_Finally(struct FunctionParameterDefine* action_para
 }
 
 
-void SetCanIdBypassBlockList_Error(uint32_t err_code)
+void SetCanIdBypassBlockList_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
 {
     if (SetCanIdBypassBlockList_callback)
     {
@@ -1317,7 +1310,7 @@ void RestartDevice_Finally(struct FunctionParameterDefine* action_param)
 }
 
 
-void RestartDevice_Error(uint32_t err_code)
+void RestartDevice_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
 {
     if (RestartDevice_callback)
     {
@@ -1381,7 +1374,7 @@ void ReadDeviceLogs_Finally(struct FunctionParameterDefine* action_param)
 }
 
 
-void ReadDeviceLogs_Error(uint32_t err_code)
+void ReadDeviceLogs_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
 {
     if (ReadDeviceLogs_callback)
     {
@@ -1435,7 +1428,7 @@ void ClearDeviceLogs_Finally(struct FunctionParameterDefine* action_param)
 }
 
 
-void ClearDeviceLogs_Error(uint32_t err_code)
+void ClearDeviceLogs_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
 {
     if (ClearDeviceLogs_callback)
     {
@@ -1493,7 +1486,7 @@ void ConfigSysTime_Finally(struct FunctionParameterDefine* action_param)
 }
 
 
-void ConfigSysTime_Error(uint32_t err_code)
+void ConfigSysTime_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
 {
     if (ConfigSysTime_callback)
     {
@@ -1553,7 +1546,7 @@ void SetELock_DEV_Finally(struct FunctionParameterDefine* action_param)
 }
 
 
-void SetELock_DEV_Error(uint32_t err_code)
+void SetELock_DEV_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
 {
     if (SetELock_DEV_callback)
     {
@@ -1614,7 +1607,7 @@ void GetELock_DEV_Finally(struct FunctionParameterDefine* action_param)
 }
 
 
-void GetELock_DEV_Error(uint32_t err_code)
+void GetELock_DEV_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
 {
     if (GetELock_DEV_callback)
     {
@@ -1667,7 +1660,7 @@ void Light_control_Finally(struct FunctionParameterDefine* action_param)
 }
 
 
-void Light_control_Error(uint32_t err_code)
+void Light_control_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
 {
     if (Light_control_callback)
     {
@@ -1677,7 +1670,7 @@ void Light_control_Error(uint32_t err_code)
 }
 
 int __stdcall  Light_control(RouterType router,
-    light_control_enum  parts,
+    light_control_parts  parts,
     bool on_off,
     fpCallback_LightControl callback)
 {
@@ -1772,6 +1765,8 @@ int FarmLandCoreSDK_Init(CoreSDKInst_T* SDK_Inst)
         memcpy(SDK_Inst->Version, SDK_Version_Str, sizeof(SDK_Version_Str));
 
         LOG_PUSH("SDK Version:%s\n", SDK_Version_Str);
+        LOG_PUSH("CAN Protocol Version:%s\n", CAN_PROTOCOL_VER);   
+
         LOG_FLUSH;
 
         DeviceInfoInst = { 0 };

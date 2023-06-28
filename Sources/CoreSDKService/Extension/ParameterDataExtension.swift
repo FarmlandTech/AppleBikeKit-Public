@@ -14,7 +14,7 @@ extension ParameterData {
         case readParamterWithWrongLength
     }
     
-    public func dividIntoMultiParameters(rawData: RawData) throws -> [ParameterData] {
+    public func dividIntoMultiParameters(rawData: ReadingRawData) throws -> [ParameterData] {
         guard let parameterDataList: [ParameterData] = self.dividedParameters else {
             throw Self.Error.dividedParametersNotExist
         }

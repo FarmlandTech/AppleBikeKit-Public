@@ -1,4 +1,4 @@
-/*
+﻿/*
  * File:   lib_fifo_buff.c
  * Author: HsinyiFang
  */

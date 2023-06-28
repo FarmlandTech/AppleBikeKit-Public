@@ -1,4 +1,4 @@
-/*
+﻿/*
  * File:   lib_event_scheduler.c
  * Author: HsinyiFang
  */
