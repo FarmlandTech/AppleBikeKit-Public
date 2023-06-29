@@ -2,6 +2,8 @@
 
 - [說明](/Documentation/install.md)
 
+> 添加 package dependencies 時，設定 Rules 應避免使用 Version 欄位，因為此條件不支援 unsafe build flags 。
+
 # 使用
 
 - [行動裝置藍牙狀態](/Documentation/usage_ble_status.md)
