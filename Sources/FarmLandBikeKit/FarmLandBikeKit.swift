@@ -7,9 +7,10 @@
 
 import Foundation
 import Combine
-import CoreBLEService
 
+import CoreBLEService
 import AppleBikeKit
+import CoreSDK
 
 /// 農田應用程式開發套件，常見需求的集成。
 final public class FarmLandBikeKit: AppleBikeKit {
@@ -189,5 +190,11 @@ final public class FarmLandBikeKit: AppleBikeKit {
      */
     public func readODOChartData() throws {
         try FarmLandBikeKit.sleipnir.readParameter(name: .INTEGRATED_MILEAGE_RECORD)
+    }
+    
+    public override func lightControl(part: light_control_parts = LIGHT_CONTROL_FRONT, isOn: Bool) throws {
+        try FarmLandBikeKit.sleipnir.checkVersion(part: .controller, version: "0.0.22")
+        try FarmLandBikeKit.sleipnir.checkVersion(part: .hmi, version: "0.0.20")
+        try super.lightControl(part: part, isOn: isOn)
     }
 }

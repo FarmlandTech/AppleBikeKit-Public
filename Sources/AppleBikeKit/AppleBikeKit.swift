@@ -246,7 +246,7 @@ open class AppleBikeKit {
      - parameter isOn: 開或關。
      - Throws: CoreSDK 執行失敗。
      */
-    public func lightControl(part: light_control_parts = LIGHT_CONTROL_FRONT, isOn: Bool) throws {
+    open func lightControl(part: light_control_parts = LIGHT_CONTROL_FRONT, isOn: Bool) throws {
         try self.coreSDKService.lightControl(part: part, isOn: isOn)
     }
 }
