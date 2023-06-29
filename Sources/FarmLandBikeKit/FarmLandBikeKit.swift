@@ -192,6 +192,13 @@ final public class FarmLandBikeKit: AppleBikeKit {
         try FarmLandBikeKit.sleipnir.readParameter(name: .INTEGRATED_MILEAGE_RECORD)
     }
     
+    /**
+     控制車燈開關。
+     
+     - parameter part: 前燈或後燈。
+     - parameter isOn: 開或關。
+     - Throws: CoreSDK 執行失敗，或部件版本並未支持此功能。
+     */
     public override func lightControl(part: light_control_parts = LIGHT_CONTROL_FRONT, isOn: Bool) throws {
         try FarmLandBikeKit.sleipnir.checkVersion(part: .controller, version: "0.0.22")
         try FarmLandBikeKit.sleipnir.checkVersion(part: .hmi, version: "0.0.20")
