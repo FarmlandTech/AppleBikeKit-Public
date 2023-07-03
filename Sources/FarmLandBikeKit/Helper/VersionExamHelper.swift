@@ -19,7 +19,7 @@ extension String {
         guard element.count == 3 else {
             throw Version.Error.digitOfVersionMismatch
         }
-        return Version(major: element[0], minor: element[1], build: element[2])
+        return Version(major: element[0], minor: element[1], patch: element[2])
     }
 }
 
@@ -102,8 +102,8 @@ public struct Version {
     let major: Int
     /// 次版本。
     let minor: Int
-    /// 編譯版本。
-    let build: Int
+    /// 修訂版本。
+    let patch: Int
     
     /// 比對本版。
     func compare(_ part: Part) throws -> ComparisonResult {
@@ -116,11 +116,11 @@ public struct Version {
             return .orderedDescending
         } else if self.major == target.major, self.minor < target.minor {
             return .orderedAscending
-        } else if self.major == target.major, self.minor == target.minor, self.build > target.build {
+        } else if self.major == target.major, self.minor == target.minor, self.patch > target.patch {
             return .orderedDescending
-        } else if self.major == target.major, self.minor == target.minor, self.build < target.build {
+        } else if self.major == target.major, self.minor == target.minor, self.patch < target.patch {
             return .orderedAscending
-        } else if self.major == target.major, self.minor == target.minor, self.build == target.build {
+        } else if self.major == target.major, self.minor == target.minor, self.patch == target.patch {
             return .orderedSame
         } else {
             throw Version.Error.ridiculous
