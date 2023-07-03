@@ -321,7 +321,7 @@ extension MetaParameter: Equatable {
     
     /// 參數(HMI 、距離單位、電池與控制器)是否有缺失。
     public var isOmit: Bool {
-        self.isHMIOmit || self.isDistanceUintOmit || self.isBatteryOmit || self.isControllerOmit || self.isEnablePartsOmit
+        self.isHMIOmit || self.isDistanceUintOmit || self.isControllerOmit || self.isEnablePartsOmit
     }
     
     public static func == (lhs: Self, rhs: Self) -> Bool {
