@@ -87,15 +87,15 @@ public extension FL_Info_st {
 }
 
 public extension FL_Info_st {
-    public var warningCodes: [Int] {
+    var warningCodes: [Int] {
         self.hmiWarningCodes + self.batteryWarningCodes + self.controllerWarningCodes
     }
     
-    public var errorCodes: [Int] {
+    var errorCodes: [Int] {
         self.hmiErrorCodes + self.batteryErrorCodes + self.controllerErrorCodes
     }
     
-    public var ableRideRange: Double {
+    var ableRideRange: Double {
         switch self.battery_rsoc {
         case 0..<10:
             return 2.2
@@ -115,7 +115,7 @@ public extension FL_Info_st {
             return 17.6
         case 80..<90:
             return 19.8
-        case 90..<100:
+        case 90...100:
             return 22
         default :
             return 0
