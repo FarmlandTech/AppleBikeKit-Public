@@ -15,6 +15,10 @@ import CoreSDK
 /// 農田應用程式開發套件，常見需求的集成。
 final public class FarmLandBikeKit: AppleBikeKit {
     
+    enum Error: Swift.Error {
+        case DisguiseBatteryHelperIsNil
+    }
+    
     /// 單例。
     public static let sleipnir: FarmLandBikeKit = .init()
     
@@ -43,9 +47,19 @@ final public class FarmLandBikeKit: AppleBikeKit {
         .init()
     }()
     
-    /// 存取助力等級的處理物件實力。
+    /// 存取助力等級的處理物件實例。
     private lazy var assistPlanUpdateHelper: AssistPlanUpdateHelper = {
         .init()
+    }()
+    
+    /// 判斷 BMS 是否具有通訊功能的處理物件實例。
+    private lazy var disguiseBatteryHelper: DisguiseBatteryHelper? = {
+        do {
+            return try .init()
+        } catch {
+            print("\(error)")
+            return nil
+        }
     }()
     
     /// 關鍵參數的 Publisher 。
@@ -65,8 +79,8 @@ final public class FarmLandBikeKit: AppleBikeKit {
             .eraseToAnyPublisher()
     }()
     
-    /// 單日里程(chart)的 Publisher 。
-    public private(set) lazy var odoChartDataPublisher: AnyPublisher<Result<[MileageRecord], Error>, Swift.Error> = {
+    /// 單日里程(chart)的 /// 判斷 BMS 是否具有通訊功能的處理物件實例。 。
+    public private(set) lazy var odoChartDataPublisher: AnyPublisher<Result<[MileageRecord], Swift.Error>, Swift.Error> = {
         self.parameterDataPubisher
             .filter({ $0.name == .INTEGRATED_MILEAGE_RECORD })
             .compactMap({ parameterData in
@@ -77,11 +91,17 @@ final public class FarmLandBikeKit: AppleBikeKit {
             })
             .map({
                 do {
-                    return Result<[MileageRecord], Error>.success(try $0.transfer2MileageRecords())
+                    return Result<[MileageRecord], Swift.Error>.success(try $0.transfer2MileageRecords())
                 } catch {
-                    return Result<[MileageRecord], Error>.failure(error)
+                    return Result<[MileageRecord], Swift.Error>.failure(error)
                 }
             })
+            .eraseToAnyPublisher()
+    }()
+    
+    /// 判斷 BMS 是否具有通訊功能的 Publisher 。
+    public private(set) lazy var disguiseBatteryPublisher: AnyPublisher<DisguiseBatteryHelper.ReadingResult<Bool?>, Never>? = {
+        self.disguiseBatteryHelper?.readingSubject
             .eraseToAnyPublisher()
     }()
 
@@ -203,5 +223,17 @@ final public class FarmLandBikeKit: AppleBikeKit {
         try FarmLandBikeKit.sleipnir.checkVersion(part: .controller, version: "0.0.22")
         try FarmLandBikeKit.sleipnir.checkVersion(part: .hmi, version: "0.0.20")
         try super.lightControl(part: part, isOn: isOn)
+    }
+    
+    /**
+     讀取 BMS 是否具有通訊功能的狀態。
+     
+     - Throws: 參數找不到，或 CoreSDK 執行失敗。
+     */
+    public func readDisguiseBatteryStatus() throws {
+        guard let disguiseBatteryHelper: DisguiseBatteryHelper else {
+            throw Self.Error.DisguiseBatteryHelperIsNil
+        }
+        try disguiseBatteryHelper.read()
     }
 }
