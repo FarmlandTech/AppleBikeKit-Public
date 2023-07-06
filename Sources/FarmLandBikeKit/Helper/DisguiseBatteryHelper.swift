@@ -37,9 +37,9 @@ final public class DisguiseBatteryHelper {
             .map({
                 switch $0 {
                 case 0:
-                    return false
-                case 1:
                     return true
+                case 1:
+                    return false
                 default:
                     return nil
                 }
