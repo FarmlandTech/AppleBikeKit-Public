@@ -113,9 +113,9 @@ extension CoreBluetoothService {
     public enum PeripheralStatus {
         /// 未知。
         case unknown
-        /// 未連線。
-        case didConnect(BluetoothPeripheral)
         /// 已連線。
+        case didConnect(BluetoothPeripheral)
+        /// 未連線。
         case didDisconnect(BluetoothPeripheral)
         /// 已進入準備狀態。(可被操作)
         case prepared
