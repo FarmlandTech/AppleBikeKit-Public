@@ -44,7 +44,11 @@ public class ParameterData: NSCopying  {
         case ControllerParaVer
         case ControllerProtocolVer
         case ControllerBtDevName
+        case DISGUISE_BATT
+        case INFO_ODO
         case SYS_PART_EN
+        case BACKUP_ODO
+        case BACKUP_LAST_TIME_ODO
         
         case BattSMID
         case BattDMID
