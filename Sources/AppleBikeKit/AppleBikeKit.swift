@@ -43,6 +43,11 @@ open class AppleBikeKit {
     /// 操作 CoreSDK 的物件實例。
     private let coreSDKService: CoreSDKService = .init()
     
+    /// CoreSDK 版本編號。
+    public var sdkVersion: String {
+        self.coreSDKService.sdkVersion
+    }
+    
     /// 腳踏車裝置資訊。(最後一次)
     public var deviceInfo: FL_Info_st? {
         self.coreSDKService.deviceInfoSubject.value
