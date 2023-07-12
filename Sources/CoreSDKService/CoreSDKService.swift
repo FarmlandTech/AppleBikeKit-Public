@@ -112,12 +112,12 @@ public final class CoreSDKService: NSObject {
         .init(nil)
     }()
     
-    public var sdkVersion: String {
+    public var sdkVersion: String? {
         var version: [UInt8] = Mirror(reflecting: self.coreSDKInst.Version)
             .children
             .map({ $0.value as! UInt8 })
         version.removeAll(where: { $0 == 0 })
-        return String(describing: String(bytes: version, encoding: .utf8))
+        return String(bytes: version, encoding: .utf8)
     }
     
     private var coreSDKInst = CoreSDKInst_T()
