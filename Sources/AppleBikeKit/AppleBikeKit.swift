@@ -44,7 +44,7 @@ open class AppleBikeKit {
     private let coreSDKService: CoreSDKService = .init()
     
     /// CoreSDK 版本編號。
-    public var sdkVersion: String {
+    public var sdkVersion: String? {
         self.coreSDKService.sdkVersion
     }
     
