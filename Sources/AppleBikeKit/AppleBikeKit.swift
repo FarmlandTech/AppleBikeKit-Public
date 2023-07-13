@@ -49,7 +49,7 @@ open class AppleBikeKit {
     }
     
     /// 腳踏車裝置資訊。(最後一次)
-    public var deviceInfo: FL_Info_st? {
+    public var info: (deviceInfo: FL_Info_st?, timestamp: Date) {
         self.coreSDKService.deviceInfoSubject.value
     }
     
@@ -59,7 +59,7 @@ open class AppleBikeKit {
     }()
     
     /// 腳踏車裝置資訊的發佈者。
-    public private(set) lazy var deviceInfoPublisher: AnyPublisher<FL_Info_st?, Never> = {
+    public private(set) lazy var deviceInfoPublisher: AnyPublisher<(deviceInfo: FL_Info_st?, timestamp: Date), Never> = {
         self.coreSDKService.deviceInfoSubject
             .throttle(for: .milliseconds(700), scheduler: RunLoop.main, latest: true)
             .eraseToAnyPublisher()
@@ -227,7 +227,7 @@ open class AppleBikeKit {
         self.connectedPeripheral.reset()
         self.coreBluetoothService.disconnect(peripheral: bluetoothPeripheral)
         self.coreSDKService.stopReadWriteChannel()
-        self.coreSDKService.deviceInfoSubject.send(nil)
+        self.coreSDKService.deviceInfoSubject.send((nil, .init()))
     }
     
     /**

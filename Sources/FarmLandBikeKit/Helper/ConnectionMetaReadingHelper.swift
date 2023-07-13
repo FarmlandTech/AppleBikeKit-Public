@@ -34,7 +34,7 @@ public struct MetaParameter {
         case undefined(Int)
         
         public var warningCodes: [Int] {
-            guard let deviceInfo: FL_Info_st = FarmLandBikeKit.sleipnir.deviceInfo else {
+            guard let deviceInfo: FL_Info_st = FarmLandBikeKit.sleipnir.info.deviceInfo else {
                 return .init()
             }
             switch self {
@@ -70,7 +70,7 @@ public struct MetaParameter {
         }
         
         public var errorCodes: [Int] {
-            guard let deviceInfo: FL_Info_st = FarmLandBikeKit.sleipnir.deviceInfo else {
+            guard let deviceInfo: FL_Info_st = FarmLandBikeKit.sleipnir.info.deviceInfo else {
                 return .init()
             }
             switch self {

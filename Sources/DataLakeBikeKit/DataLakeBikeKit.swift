@@ -42,16 +42,19 @@ final public class DataLakeBikeKit: AppleBikeKit {
         self.peripheralPublisher.sink(receiveValue: { [weak self] status in
             guard let self: DataLakeBikeKit else { return }
             self.delegate?.dataLakeKikeKitConnection(status: status)
-            if case .didDisconnect = status {            
+            if case .didDisconnect = status {
                 self.subscriptions.forEach { $0.cancel() }
                 self.subscriptions = .init()
             }
         }).store(in: &self.subscriptions)
         // 監聽裝置資訊？
-        self.deviceInfoPublisher.sink(receiveValue: { deviceInfo in
-            self.delegate?.dataLakeBikeKitReadBatteryRSOC(deviceInfo?.battery_rsoc)
-            self.batteryRSOCSubject.send(deviceInfo?.battery_rsoc)
-        }).store(in: &self.subscriptions)
+        self.deviceInfoPublisher
+            .compactMap({ $0.deviceInfo })
+            .sink(receiveValue: { deviceInfo in
+                self.delegate?.dataLakeBikeKitReadBatteryRSOC(deviceInfo.battery_rsoc)
+                self.batteryRSOCSubject.send(deviceInfo.battery_rsoc)
+            })
+            .store(in: &self.subscriptions)
         // 開始掃描。
         try self.startScan()
         // 監聽掃描。
