@@ -78,8 +78,9 @@ public final class CoreSDKService: NSObject {
     }()
     
     /// 新腳踏車資訊的數據流。
-    public private(set) lazy var deviceInfoSubject: CurrentValueSubject<FL_Info_st?, Never> = {
-        .init(nil)
+    public private(set) lazy var deviceInfoSubject: CurrentValueSubject<(deviceInfo: FL_Info_st?, timestamp: Date), Never> = {
+        let value: (FL_Info_st?, Date) = (nil, .init())
+        return .init(value)
     }()
     
     /// 讀取參數的數據流。
@@ -351,7 +352,8 @@ public final class CoreSDKService: NSObject {
 extension CoreSDKService: CoreSDKDataSource {
     
     func updateDeviceInfo(deviceInfo: FL_Info_st) {
-        self.deviceInfoSubject.send(deviceInfo)
+        let value: (FL_Info_st, Date) = (deviceInfo, .init())
+        self.deviceInfoSubject.send(value)
     }
     
     func readParameter(rawData: ReadingRawData) {

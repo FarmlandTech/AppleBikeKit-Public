@@ -134,7 +134,7 @@ extension FarmLandBikeKit {
      
      - Throws: 字串格式不符，或無法取得部件版本，便會拋出錯誤。
      */
-    func checkVersion(part: Version.Part, version: String) throws {
+    public func checkVersion(part: Version.Part, version: String) throws {
         guard try version.getVersion().compare(part) != .orderedDescending else {
             throw Version.Error.notSupport(part, version)
         }
