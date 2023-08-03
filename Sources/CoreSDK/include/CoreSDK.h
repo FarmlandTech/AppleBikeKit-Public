@@ -361,6 +361,8 @@ struct DllExport FL_Info_st
 		SDK_ROUTER_BLE = 0U,
 		//CANBUS路由
 		SDK_ROUTER_CANBUS,
+		//MST板 USB路由
+		SDK_ROUTER_MST_USB,
 	} RouterType;
 
 	typedef DllExport enum light_control_enum
@@ -462,7 +464,10 @@ struct DllExport FL_Info_st
 	typedef void (__stdcall *UpgradeStateMsg_p)(const char* out_msg, int progress_value);
 	//Light control Callback調用函數類型定義
 	typedef void(__stdcall* fpCallback_LightControl)(int return_state);
-
+	//Trip info clear Callback調用函數類型定義
+	typedef void(__stdcall* fpCallback_ClearTripInfo)(int return_state); 
+	 
+	 
 	typedef struct DllExport DelegateFuncDefine_st
 	{
 		// 讀取裝置參數數值
@@ -487,7 +492,7 @@ struct DllExport FL_Info_st
 		int(__stdcall* RestartDevice)(RouterType router, SDKDeviceType_e target_device, fpCallback_RestartDevice callback);
 		// 讀取裝置內所儲存的歷史紀錄
 		int(__stdcall* ReadDeviceLogs)(RouterType router, SDKDeviceType_e target_device, fpCallback_ReadDeviceLogs callback);
-		// 讀取裝置內所儲存的歷史紀錄
+		// 清除裝置內所儲存的歷史紀錄
 		int(__stdcall* ClearDeviceLogs)(RouterType router, SDKDeviceType_e target_device, fpCallback_ClearDeviceLogs callback);
 		// Unix time 時區請使用+0
 		int(__stdcall* ConfigSysTime)(RouterType router, SDKDeviceType_e target_device, uint64_t unix_time, fpCallback_ConfigSysTime callback);
@@ -499,6 +504,10 @@ struct DllExport FL_Info_st
 		int(__stdcall* GetELock_DEV)(RouterType router, fpCallback_GetELock_DEV callback);
 		// 車燈控制
 		int(__stdcall* LightControl)(RouterType router, light_control_parts  parts, bool on_off, fpCallback_LightControl callback);
+		// 清除TRIP Info
+		int(__stdcall* ClearTripInfo)(RouterType router, fpCallback_ClearTripInfo  callback);
+
+
 	} DelegateFuncDefine_T;
 
 	//SDK接收及發送外部封包指令集
@@ -518,6 +527,16 @@ struct DllExport FL_Info_st
 		int(__stdcall* BLEDataPacket_OUT)(unsigned char* data, unsigned int* leng);
 	} MethodDefine_T;
 
+	//MST Sdk 選項
+	typedef struct DllExport MstSdkConfig_st
+	{
+		//啟用MST 初始化
+		bool initEnable;
+		//DFU 開啟功能
+		bool dfuEnable;
+		//Parameter 開啟功能
+		bool paraEnable;
+	}MstSdkConfig_T;
 
 	typedef DllExport struct FLCoreSDK_st
 	{
@@ -539,11 +558,12 @@ struct DllExport FL_Info_st
 		DelegateFuncDefine_T DelegateMethod;
 		//SDK Thread迴圈休眠設定值: us = 0.001 ms = 0.000001 Sec
 		int ThreadSleepInterval_us;
+		MstSdkConfig_T MstSdkConfig;
 	} CoreSDKInst_T;
-	
+
 	//初始化SDK功能
 	DllExport int FarmLandCoreSDK_Init(CoreSDKInst_T* SDK_Inst);
-
+	int __stdcall CANBusPacket_IN(unsigned int can_id, bool is_extender_id, unsigned char* raw_data, unsigned int leng);
 
 
 #ifdef __cplusplus
