@@ -7,7 +7,7 @@
 #include <iostream>
 #include <ctime>
 #include "LogPrinter.h"
-
+#include "FL_MstSdk.h"
 using namespace std;
 
 #define ISO_TP_BUFF_SIZE	4096
@@ -308,6 +308,15 @@ int ActionScriptCreate(ACTION_DEFINE_T new_action)
 {
 	lib_fifo_write(&AS_Inst.action_queue, &new_action);
 	return 0;
+}
+void ActionScriptDone()
+{
+	AS_Inst.status = ACTION_SCRITP_STATUS_DONE;
+}
+void AS_FL_ActionScriptResume(void)
+{
+	AS_Inst.timeout.threshold = 0;
+	AS_Inst.status = ACTION_SCRITP_STATUS_RUNNING;
 }
 
 
@@ -1788,6 +1797,7 @@ void AS_FL_BLE_SetDebugMode(struct FunctionParameterDefine* paras)
 		uint8_t debug_index = paras[1].num.uint8_val;
 		uint8_t debug_count = paras[2].num.uint8_val;
 		uint16_t interval_time = paras[3].num.uint16_val;
+		uint8_t path = paras[4].num.uint8_val; 
 
 		if (device_id != DEVICE_OBJ_UNKNOWN)
 		{
@@ -1801,10 +1811,15 @@ void AS_FL_BLE_SetDebugMode(struct FunctionParameterDefine* paras)
 			post_data[post_leng++] = (uint8_t)interval_time;
 			post_data[post_leng++] = (uint8_t)(interval_time >> 8);
 
-			AS_FL_BLE_DFU_CommonPackage_Send(1, 0,
-				FL_BLE_OPC_CAN_PASS_DATA_REQ,
-				0,
-				0, post_data, (uint8_t)post_leng);
+			if (path == 0)
+			{
+				AS_FL_BLE_DFU_CommonPackage_Send(1, 0,
+					FL_BLE_OPC_CAN_PASS_DATA_REQ,
+					0,
+					0, post_data, (uint8_t)post_leng);
+			}
+			else
+				Mst_can_pass((MST_SEND_PATH)path, FL_CANID_HOST_DEVICE_RESET_REQ, false, &post_data[4], post_leng - 4); 
 
 			ActionScriptRespondWait(5000);
 		}
@@ -1877,6 +1892,7 @@ void AS_FL_BLE_SetTestMode(struct FunctionParameterDefine* paras)
 		DeviceObjTypes device_id = ConverterToFlDeviceId(paras[0].num.uint8_val);
 		uint8_t test_mode = paras[1].num.uint8_val;
 		uint32_t test_value = paras[2].num.uint32_val;
+		uint8_t path = paras[4].num.uint8_val; 
 
 		if (device_id != DEVICE_OBJ_UNKNOWN)
 		{
@@ -1891,10 +1907,15 @@ void AS_FL_BLE_SetTestMode(struct FunctionParameterDefine* paras)
 			post_data[post_leng++] = (uint8_t)(test_value >> 16);
 			post_data[post_leng++] = (uint8_t)(test_value >> 24);
 
-			AS_FL_BLE_DFU_CommonPackage_Send(1, 0,
-				FL_BLE_OPC_CAN_PASS_DATA_REQ,
-				0,
-				0, post_data, (uint8_t)post_leng);
+			if (path == 0)
+			{
+				AS_FL_BLE_DFU_CommonPackage_Send(1, 0,
+					FL_BLE_OPC_CAN_PASS_DATA_REQ,
+					0,
+					0, post_data, (uint8_t)post_leng);
+			}
+			else
+				Mst_can_pass((MST_SEND_PATH)path, FL_CANID_HOST_DEVICE_RESET_REQ, false, &post_data[4], post_leng - 4); 
 
 			ActionScriptRespondWait(500);
 		}
@@ -1938,6 +1959,7 @@ void AS_FL_BLE_RestartDevice(struct FunctionParameterDefine* paras)
 		DeviceObjTypes device_id = ConverterToFlDeviceId(paras[0].num.uint8_val);
 		uint8_t test_mode = paras[1].num.uint8_val;
 		uint32_t test_value = paras[2].num.uint32_val;
+		uint8_t path = paras[4].num.uint8_val;
 
 		if (device_id != DEVICE_OBJ_UNKNOWN)
 		{
@@ -1947,10 +1969,15 @@ void AS_FL_BLE_RestartDevice(struct FunctionParameterDefine* paras)
 			post_data[post_leng++] = (uint8_t)(FL_CANID_HOST_DEVICE_RESET_REQ >> 24);
 			post_data[post_leng++] = device_id;
 
-			AS_FL_BLE_DFU_CommonPackage_Send(1, 0,
-				FL_BLE_OPC_CAN_PASS_DATA_REQ,
-				0,
-				0, post_data, post_leng);
+			if (path == 0)
+			{
+				AS_FL_BLE_DFU_CommonPackage_Send(1, 0,
+					FL_BLE_OPC_CAN_PASS_DATA_REQ,
+					0,
+					0, post_data, post_leng);
+			}
+			else
+				Mst_can_pass((MST_SEND_PATH)path, FL_CANID_HOST_DEVICE_RESET_REQ,  false, &post_data[4], post_leng - 4);
 
 			FL_CAN_HostCommon_RegResponseHandler(device_id, 
 				FL_CANID_HOST_DEVICE_RESET_REQ, 
@@ -2002,15 +2029,48 @@ void AS_FL_BLE_RestartDevice(struct FunctionParameterDefine* paras)
 			0, post_data, post_leng);
 		AS_Inst.status = ACTION_SCRITP_STATUS_DONE;
 	}
+	break;
 	default:
 	{
 	}
 	break;
-
 	}
 	 
 
 }
+
+ void BLE_ClearTripInfo(struct FunctionParameterDefine* paras)  
+ {
+	 switch (AS_Inst.run_step)
+	 {
+	 case 0:
+	 {
+		 uint8_t post_data[10] = { 0 };
+		 uint8_t post_leng = 0;
+		 HOST_DEVICE_TRIP_RESET_T info = { 0 };
+
+		 info.bits.reset_enable = 1;
+
+		 post_data[post_leng++] = FL_CANID_HOST_TRIP_RESET;
+		 post_data[post_leng++] = (uint8_t)(FL_CANID_HOST_TRIP_RESET >> 8);
+		 post_data[post_leng++] = (uint8_t)(FL_CANID_HOST_TRIP_RESET >> 16);
+		 post_data[post_leng++] = (uint8_t)(FL_CANID_HOST_TRIP_RESET >> 24);
+
+		 post_data[post_leng++] = info.bytes[0];
+
+		 AS_FL_BLE_DFU_CommonPackage_Send(1, 0,
+			 FL_BLE_OPC_CAN_PASS_DATA_REQ,
+			 DEVICE_OBJ_CONTROLLER,
+			 0, post_data, post_leng);
+		 AS_Inst.status = ACTION_SCRITP_STATUS_DONE;
+	 }
+	 break;
+	 default:
+	 {
+	 }
+	 break;
+	 }
+ }
 
 
 

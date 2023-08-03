@@ -12,6 +12,7 @@
 
 #include "FL_CANInfoStruct.h"
 #include "lib_fifo_buff.h"
+#include "FL_MstSdk.h"
 
 #include <iostream>
 #include <chrono>
@@ -31,7 +32,7 @@ using namespace std::chrono;
 using namespace std::this_thread;
 
 // SDK 版本號
-#define SDK_Version_Str "1.0.4"
+#define SDK_Version_Str "1.2.0"
 
 typedef struct CANPacket_st
 {
@@ -501,6 +502,8 @@ void parse_loop(void)
         */
         // 排程器執行
         lib_event_sched_run();
+        //MST 執行期
+        Mst_sdk_run_program();
         // 執行緒休眠
 #ifdef _WIN32
         Sleep(0);
@@ -704,14 +707,14 @@ void ReadParameter_Finally(struct FunctionParameterDefine* action_param)
 {
     if (ReadParameters_callback)
     {
-        uint8_t  device = action_param[0].num.uint8_val;
+        uint8_t  device_id = action_param[0].num.uint8_val;
         uint16_t addr = action_param[1].num.uint16_val;
         uint16_t leng = action_param[2].num.uint16_val;
         uint8_t  bank_index = action_param[3].num.uint8_val;
 
-        FL_CAN_ReadParameter((SDKDeviceType_e)device, bank_index, addr, leng, sdk.param_mem);
+        FL_CAN_ReadParameter((SDKDeviceType_e)device_id, bank_index, addr, leng, sdk.param_mem);
         // 委派成功, 回傳讀取到的參數值
-        ReadParameters_callback(SDK_RETURN_SUCCESS, (SDKDeviceType_e)device, sdk.param_mem, addr, leng, bank_index);
+        ReadParameters_callback(SDK_RETURN_SUCCESS, (SDKDeviceType_e)device_id, sdk.param_mem, addr, leng, bank_index);
     }
 }
 
@@ -720,13 +723,12 @@ void ReadParameter_Error(struct FunctionParameterDefine* action_param, uint32_t 
 {
     if (ReadParameters_callback)
     {  
-        uint8_t  device = action_param[0].num.uint8_val; 
+        uint8_t  device_id = action_param[0].num.uint8_val;
         uint16_t addr = action_param[1].num.uint16_val; 
         uint16_t leng = action_param[2].num.uint16_val; 
         uint8_t  bank_index = action_param[3].num.uint8_val; 
-        FL_CAN_ReadParameter((SDKDeviceType_e)device, bank_index, addr, leng, sdk.param_mem); 
 
-        ReadParameters_callback(err_code, (SDKDeviceType_e)device, sdk.param_mem, addr, leng, bank_index); 
+        ReadParameters_callback(err_code, (SDKDeviceType_e)device_id, NULL, addr, leng, bank_index);
     }
 }
 
@@ -753,20 +755,43 @@ int __stdcall ReadParameters(RouterType router,
     switch (router)
     {
     case SDK_ROUTER_CANBUS:
+    {
         // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_CANBus_ReadParameter;
-        break;
-
-    default:
+        // 指定Action Script完成時的回呼指標
+        new_action.finally_callback = ReadParameter_Finally;
+        // 指定Action Script錯誤時的回呼指標
+        new_action.error_callback = ReadParameter_Error;
+    }
+    break;
+    case SDK_ROUTER_BLE: 
+    {
         // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_BLE_ReadParameter;
-        break;
+        // 指定Action Script完成時的回呼指標
+        new_action.finally_callback = ReadParameter_Finally;
+        // 指定Action Script錯誤時的回呼指標
+        new_action.error_callback = ReadParameter_Error;
+    }
+    break;
+    case   SDK_ROUTER_MST_USB: 
+    { 
+        if (Mst_para_insta != NULL) 
+        {
+            new_action.run_script = Mst_para_insta->get_Mst_para_Script(Mst_Para::PARA_READ); 
+            Mst_para_insta->register_user_callback(Mst_Para::PARA_READ, (void*)callback); 
+            new_action.finally_callback = Mst_para_insta->get_finally_callback(Mst_Para::PARA_READ); 
+            new_action.error_callback = Mst_para_insta->get_error_callback(Mst_Para::PARA_READ); 
+        }
+        else
+            return SDK_RETURN_NULL; 
+    }
+    break;
+    default:
+        return SDK_RETURN_NULL;
+    break;
     }
 
-    // 指定Action Script完成時的回呼指標
-    new_action.finally_callback = ReadParameter_Finally;
-    // 指定Action Script錯誤時的回呼指標
-    new_action.error_callback = ReadParameter_Error;
     // 將新Action推送至等待處理的腳本中
     ActionScriptCreate(new_action);
 
@@ -831,19 +856,39 @@ int __stdcall WriteParameters(RouterType router,
     switch (router)
     {
     case SDK_ROUTER_CANBUS:
+    {
         // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_CANBus_WriteParameter;
+        new_action.finally_callback = WriteParameter_Finally;
+        new_action.error_callback = WriteParameter_Error;
+    }
         break;
-
+    case SDK_ROUTER_BLE: 
+    {
+        new_action.run_script = AS_FL_BLE_WriteParameter;
+        new_action.finally_callback = WriteParameter_Finally; 
+        new_action.error_callback = WriteParameter_Error; 
+    }
+    break;
+    case   SDK_ROUTER_MST_USB:    
+    {
+        if (Mst_para_insta != NULL)  
+        {
+            new_action.run_script = Mst_para_insta->get_Mst_para_Script(Mst_Para::PARA_WRITE); 
+            Mst_para_insta->register_user_callback(Mst_Para::PARA_WRITE, (void*)callback); 
+            new_action.finally_callback = Mst_para_insta->get_finally_callback(Mst_Para::PARA_WRITE);  
+            new_action.error_callback = Mst_para_insta->get_error_callback(Mst_Para::PARA_WRITE);  
+        }
+        else
+            return SDK_RETURN_NULL; 
+    }
+    break;
     default:
         // 指定腳本運行的功能名稱
-        new_action.run_script = AS_FL_BLE_WriteParameter;
+        return SDK_RETURN_NULL;
         break;
     }
-    // 指定Action Script完成時的回呼指標
-    new_action.finally_callback = WriteParameter_Finally;
-    // 指定Action Script錯誤時的回呼指標
-    new_action.error_callback = WriteParameter_Error;
+
     // 將新Action推送至等待處理的腳本中
     ActionScriptCreate(new_action);
 
@@ -901,16 +946,31 @@ int __stdcall ResetParameters(RouterType router,
         // 指定腳本運行的功能名稱
         //new_action.run_script = AS_FL_CANBus_ResetParameter;
         break;
-
-    default:
-        // 指定腳本運行的功能名稱
+    case SDK_ROUTER_BLE:
+    {
         new_action.run_script = AS_FL_BLE_ResetParameter;
+        new_action.finally_callback = ResetParameters_Finally;
+        new_action.error_callback = ResetParameters_Error;
+    }
+    break;
+    case  SDK_ROUTER_MST_USB:  
+    {
+        if (Mst_para_insta != NULL) 
+        {
+            new_action.run_script = Mst_para_insta->get_Mst_para_Script(Mst_Para::PARA_RESET);
+            Mst_para_insta->register_user_callback(Mst_Para::PARA_RESET, (void*)callback);
+            new_action.finally_callback = Mst_para_insta->get_finally_callback(Mst_Para::PARA_RESET);
+            new_action.error_callback = Mst_para_insta->get_error_callback(Mst_Para::PARA_RESET);
+        }
+        else
+            return SDK_RETURN_NULL;
+    }
+    break;
+    default:
+        return SDK_RETURN_NULL; 
         break;
     }
-    // 指定Action Script完成時的回呼指標
-    new_action.finally_callback = ResetParameters_Finally;
-    // 指定Action Script錯誤時的回呼指標
-    new_action.error_callback = ResetParameters_Error;
+
     // 將新Action推送至等待處理的腳本中
     ActionScriptCreate(new_action);
 
@@ -971,10 +1031,42 @@ int __stdcall UpgradeFirmware(RouterType router,
         // 指定腳本運行的功能名稱
         new_action.run_script = AS_FL_CANBusUpgradeFirmware;
     }
-    // 指定Action Script完成時的回呼指標
-    new_action.finally_callback = UpgradeFirmware_Finally;
-    // 指定Action Script錯誤時的回呼指標
-    new_action.error_callback = UpgradeFirmware_Error;
+
+    switch (router)
+    {
+    case SDK_ROUTER_CANBUS:
+    {
+        new_action.run_script = AS_FL_CANBusUpgradeFirmware;
+        new_action.finally_callback = UpgradeFirmware_Finally; 
+        new_action.error_callback = UpgradeFirmware_Error; 
+    }
+    break;
+    case SDK_ROUTER_BLE:
+    {
+        new_action.run_script = AS_FL_BLEUpgradeFirmware;
+        new_action.finally_callback = UpgradeFirmware_Finally;
+        new_action.error_callback = UpgradeFirmware_Error;
+    }
+    case SDK_ROUTER_MST_USB:
+    {
+        if (Mst_dfu_insta == NULL)
+            return SDK_RETURN_NULL;
+
+        ScriptFunction fp_temp = Mst_dfu_insta->get_Mst_Upgrad_FW_Script((uint8_t)target_device - 1, data, data_size);
+        if (fp_temp == NULL)
+            return SDK_RETURN_NULL;
+        new_action.run_script = fp_temp;
+
+        Mst_dfu_insta->register_user_callback(callback, upgrade_msg_callback);
+        new_action.finally_callback = Mst_DFU::MST_Upgrade_script_finally_callback;
+        new_action.error_callback = Mst_DFU::MST_Upgrade_script_error_callback;  
+    }
+    break;
+    default:
+        return SDK_RETURN_NULL;
+    break;
+    }
+
     // 將新Action推送至等待處理的腳本中
     ActionScriptCreate(new_action);
 
@@ -1022,6 +1114,9 @@ int __stdcall SetDebugMode(RouterType router,
     SetActionParam(&new_action.paras[2], PARA_TYPE_UINT8, &repet_cnt);
     // 參數[0]:重複發送間隔
     SetActionParam(&new_action.paras[3], PARA_TYPE_UINT16, &interval_time);
+    // 參數[4]:CAN BUS路徑
+    uint8_t   path = router == SDK_ROUTER_MST_USB ? MST_PATH_USB : MST_PATH_NULL; 
+    SetActionParam(&new_action.paras[4], PARA_TYPE_UINT8, &path);
     // 儲存執行完畢後回呼指標
     SetDebugMode_callback = callback;
     // 判斷發送封包路由類型
@@ -1084,6 +1179,9 @@ int __stdcall SetTestMode(RouterType router,
     SetActionParam(&new_action.paras[1], PARA_TYPE_UINT8, &mode);
     // 參數[2]:數值
     SetActionParam(&new_action.paras[2], PARA_TYPE_UINT32, &value);
+    // 參數[4]:CAN BUS路徑
+    uint8_t   path = router == SDK_ROUTER_MST_USB ? MST_PATH_USB : MST_PATH_NULL; 
+    SetActionParam(&new_action.paras[4], PARA_TYPE_UINT8, &path);
     // 儲存執行完畢後回呼指標
     SetTestMode_callback = callback;
     // 判斷是發送BLE封包或是CAN-Bus封包
@@ -1326,6 +1424,9 @@ int __stdcall RestartDevice(RouterType router,
     ACTION_DEFINE_T new_action = { };
     // 參數[0]:目標裝置
     SetActionParam(&new_action.paras[0], PARA_TYPE_DEVICE_TYPE, &target_device);
+    // 參數[4]:CAN BUS路徑
+    uint8_t   path = router == SDK_ROUTER_MST_USB ? MST_PATH_USB : MST_PATH_NULL;  
+    SetActionParam(&new_action.paras[4], PARA_TYPE_UINT8, &path);
     // 儲存執行完畢後回呼指標
     RestartDevice_callback = callback;
     // 判斷是發送BLE封包或是CAN-Bus封包
@@ -1703,6 +1804,56 @@ int __stdcall  Light_control(RouterType router,
 }
 
 
+static fpCallback_ClearTripInfo  ClearTripInfo_callback = NULL;
+
+void ClearTripInfo_Finally(struct FunctionParameterDefine* action_param)
+{
+    if (ClearTripInfo_callback)
+    {
+        // 調用回呼傳送操作成功
+        ClearTripInfo_callback(SDK_RETURN_SUCCESS);
+    }
+}
+
+
+void ClearTripInfo_Error(struct FunctionParameterDefine* action_param, uint32_t err_code)
+{
+    if (ClearTripInfo_callback)
+    {
+        // 調用回呼傳送錯誤碼
+        ClearTripInfo_callback(err_code);
+    }
+}
+
+int __stdcall  ClearTripInfo(RouterType router,
+    fpCallback_ClearTripInfo callback)
+{
+    ACTION_DEFINE_T new_action = { };
+
+    // 儲存執行完畢後回呼指標
+    ClearTripInfo_callback = callback;
+    // 判斷是發送BLE封包或是CAN-Bus封包
+    switch (router)
+    {
+    case SDK_ROUTER_CANBUS:
+        return SDK_RETURN_INVALID_PARAM;
+        break;
+
+    default:
+        // 指定腳本運行的功能名稱
+        new_action.run_script = BLE_ClearTripInfo;  
+        break;
+    }
+    // 指定Action Script完成時的回呼指標
+    new_action.finally_callback = ClearTripInfo_Finally;
+    // 指定Action Script錯誤時的回呼指標
+    new_action.error_callback = ClearTripInfo_Error;
+    // 將新Action推送至等待處理的腳本中
+    ActionScriptCreate(new_action);
+
+    return SDK_RETURN_SUCCESS;
+}
+
 /*
     Init Method : Init CoreSDK
 */
@@ -1743,6 +1894,7 @@ int FarmLandCoreSDK_Init(CoreSDKInst_T* SDK_Inst)
         SDK_Inst->DelegateMethod.SetELock_DEV = SetELock_DEV;
         SDK_Inst->DelegateMethod.GetELock_DEV = GetELock_DEV;
         SDK_Inst->DelegateMethod.LightControl = Light_control;
+        SDK_Inst->DelegateMethod.ClearTripInfo = ClearTripInfo;
 
         SDK_Inst->Method.CANBusPacket_IN = CANBusPacket_IN;
         SDK_Inst->Method.CANBusPacket_OUT = CANBusPacket_OUT;
@@ -1779,6 +1931,9 @@ int FarmLandCoreSDK_Init(CoreSDKInst_T* SDK_Inst)
         lib_event_sched_init(&sched_inst);
         // 初始化虛擬HMI, 但目前尚未使用
         FL_device_HMI_Init(&FL_HMI_ISOTP, SendToCANBUS);
+        //MST 功能初始化
+        if(SDK_Inst->MstSdkConfig.initEnable)
+            Mst_init(SDK_Inst->MstSdkConfig);
         // 確認SDK已被初始化, 避免重複初始化
         SDK_BeInit = true;
 

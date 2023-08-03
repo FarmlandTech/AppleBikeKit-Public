@@ -144,6 +144,8 @@ extern "C" {
 
 	void BLE_light_control(struct FunctionParameterDefine* paras);
 
+	void BLE_ClearTripInfo(struct FunctionParameterDefine* paras);
+
 
 	//void AS_FL_CANBus_ReadDeviceLogs(struct FunctionParameterDefine* paras);
 
@@ -171,6 +173,12 @@ extern "C" {
 	void ActionScriptRun(void);
 
 	void print_time(void);
+
+	enum DEVICE_OBJ_TYPE_E ConverterToFlDeviceId(uint8_t sdk_device_id_type);
+
+	void ActionScriptRespondWait(uint32_t timeout_ms_set);
+	void AS_FL_ActionScriptResume(void);
+	void ActionScriptDone(void);
 
 #ifdef __cplusplus
 }

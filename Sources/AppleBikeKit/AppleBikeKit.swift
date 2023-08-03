@@ -83,6 +83,11 @@ open class AppleBikeKit {
         self.coreSDKService.restartingPartStateSubject.eraseToAnyPublisher()
     }()
     
+    /// 重置里程參數時，執行狀態的發佈者。
+    public private(set) lazy var resetTripInfoStatePublisher: AnyPublisher<Bool, Never> = {
+        self.coreSDKService.resetTripInfoSubject.compactMap({ $0 }).eraseToAnyPublisher()
+    }()
+    
     public private(set) lazy var resetParameterStatePublisher: AnyPublisher<ResetingRawData?, Never> = {
         self.coreSDKService.resetingPartParameterStateSubject.eraseToAnyPublisher()
     }()
@@ -128,6 +133,15 @@ open class AppleBikeKit {
      */
     public func restartDevice(partType: CommunicationPartType) throws {
         try self.coreSDKService.restartPart(partType)
+    }
+    
+    /**
+     重置里程參數的方法。
+     
+     - Throws: 來自 CoreSDK 判定的錯誤。
+     */
+    public func resetTripInfo() throws {
+        try self.coreSDKService.resetTripInfo()
     }
     
     // MARK: - CoreBluetoothService
