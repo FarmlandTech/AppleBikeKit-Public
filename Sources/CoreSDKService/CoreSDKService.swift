@@ -49,6 +49,11 @@ public final class CoreSDKService: NSObject {
         CoreSDKService.dataSource?.restartPart(state: $0 == 0)
     }
     
+    /// 重置里程參數的回調。
+    private let resetTripInfoEvent: ResetTripInfoEvent = {
+        CoreSDKService.dataSource?.resetTripInfo(state: $0 == 0)
+    }
+    
     /// 重置部件參數時的回調。
     private let resetPartParameterEvent: ResetPartParameterEvent = {
         CoreSDKService.dataSource?.resetPartParameter(rawData: .init(device: $1,
@@ -95,6 +100,11 @@ public final class CoreSDKService: NSObject {
     
     /// 重啟部件時，命令執行狀態的數據流。
     public private(set) lazy var restartingPartStateSubject: CurrentValueSubject<Bool?, Never> = {
+        .init(nil)
+    }()
+    
+    /// 重置里程參數時，命令執行狀態的數據流。
+    public private(set) lazy var resetTripInfoSubject: CurrentValueSubject<Bool?, Never> = {
         .init(nil)
     }()
     
@@ -312,6 +322,16 @@ public final class CoreSDKService: NSObject {
     }
     
     /**
+     重置里程參數。
+     */
+    public func resetTripInfo() throws {
+        let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.ClearTripInfo(SDK_ROUTER_BLE, self.resetTripInfoEvent)
+        guard isCoreSDKCompleteTask == 0 else {
+            throw Self.Error.resetTripInfoFail
+        }
+    }
+    
+    /**
      重置部件參數。
      */
     public func resetPartParameter(part: CommunicationPartType, bank: Int) throws {
@@ -368,6 +388,10 @@ extension CoreSDKService: CoreSDKDataSource {
     func restartPart(state: Bool) {
         self.restartingPartStateSubject.send(state)
     }
+    
+    func resetTripInfo(state: Bool) {
+        self.resetTripInfoSubject.send(state)
+    }
 
     func resetPartParameter(rawData: ResetingRawData) {
         self.resetingPartParameterStateSubject.send(rawData)
@@ -402,6 +426,8 @@ extension CoreSDKService {
         case writeParameterFail(ParameterData)
         /// 重啟部件失敗。
         case restartPartFail(CommunicationPartType)
+        /// 重置里程參數失敗。
+        case resetTripInfoFail
         /// 重置部件參數失敗。
         case resetPartParameterFail(CommunicationPartType, Int)
         /// 校正電控時間失敗。
@@ -425,6 +451,8 @@ private protocol CoreSDKDataSource: AnyObject {
     func writeParameter(rawData: WritingRawData)
     /// 重啟部件時，回調的資訊。
     func restartPart(state: Bool)
+    /// 重置里程參數時，回調的資訊。
+    func resetTripInfo(state: Bool)
     /// 重置部件參數時，回調的資訊。
     func resetPartParameter(rawData: ResetingRawData)
     /// 校正電控時間時，回調的資訊。
@@ -445,6 +473,8 @@ extension CoreSDKService {
     private typealias WriteParameterEvent = @convention(c) (Int32, DeviceType_enum, UInt16, UInt16, UInt8) -> Void
     /// 重啟部件時，回調的別名。
     private typealias RestartPartEvent = @convention(c) (Int32) -> Void
+    /// 重置里程參數時，回調的別名。
+    private typealias ResetTripInfoEvent = @convention(c) (Int32) -> Void
     /// 重置部件參數時，回調的別名。
     private typealias ResetPartParameterEvent = @convention(c) (Int32, DeviceType_enum, UInt8) -> Void
     /// 校正電控時間時，回調的別名。
