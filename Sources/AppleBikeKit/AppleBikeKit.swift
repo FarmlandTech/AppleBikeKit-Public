@@ -187,12 +187,12 @@ open class AppleBikeKit {
     }()
     
     /// 更新特徵時的發佈者。
-    public private(set) lazy var didUpdateValueForCharacteristicsPublisher: AnyPublisher<CBCharacteristic?, Never> = {
+    public private(set) lazy var didUpdateValueForCharacteristicsPublisher: AnyPublisher<Result<CBCharacteristic, Swift.Error>?, Never> = {
         self.coreBluetoothService.didUpdateValueForCharacteristicsSubject.eraseToAnyPublisher()
     }()
     
     /// 寫入特徵時的發佈者。
-    public private(set) lazy var didWriteValueForCharacteristicsPublisher: AnyPublisher<CBCharacteristic?, Never> = {
+    public private(set) lazy var didWriteValueForCharacteristicsPublisher: AnyPublisher<Result<CBCharacteristic, Swift.Error>?, Never> = {
         self.coreBluetoothService.didWriteValueForCharacteristicsSubject.eraseToAnyPublisher()
     }()
     
@@ -405,9 +405,15 @@ extension AppleBikeKit {
         
         // 監聽特徵寫入事件，處理廣播參數。
         self.didUpdateValueForCharacteristicsPublisher
-            .sink(receiveValue: { [weak self] characteristic in
+            .compactMap({ (result: Result<CBCharacteristic, Swift.Error>?) -> CBCharacteristic? in
+                guard let result: Result<CBCharacteristic, Swift.Error>, case .success(let characteristic) = result else {
+                    return nil
+                }
+                return characteristic
+            })
+            .sink(receiveValue: { [weak self] (characteristic: CBCharacteristic) in
                 guard let self: AppleBikeKit else { return }
-                guard let value: Data = characteristic?.value else { return }
+                guard let value: Data = characteristic.value else { return }
                 self.coreSDKService.commandPacketIn(dataPacket: Array(value))
             })
             .store(in: &self.subscriptions)
