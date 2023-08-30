@@ -58,12 +58,25 @@ open class AppleBikeKit {
         .init()
     }()
     
+    @available(*, deprecated, message: "该方法已被弃用，请改用 deviceInfoPublisher(throttle:) 方法。")
     /// 腳踏車裝置資訊的發佈者。
     public private(set) lazy var deviceInfoPublisher: AnyPublisher<(deviceInfo: FL_Info_st?, timestamp: Date), Never> = {
         self.coreSDKService.deviceInfoSubject
             .throttle(for: .milliseconds(700), scheduler: RunLoop.main, latest: true)
             .eraseToAnyPublisher()
     }()
+    
+    /// 腳踏車裝置資訊的發佈者。
+    public func deviceInfoPublisher(throttle milliseconds: Int = 0) -> AnyPublisher<(deviceInfo: FL_Info_st?, timestamp: Date), Never> {
+        if milliseconds > 0 {
+            return self.coreSDKService.deviceInfoSubject
+                .throttle(for: .milliseconds(milliseconds), scheduler: RunLoop.main, latest: true)
+                .eraseToAnyPublisher()
+        } else {
+            return self.coreSDKService.deviceInfoSubject
+                .eraseToAnyPublisher()
+        }
+    }
     
     /// 讀取參數時，電控回傳數據的發佈者。
     private let parameterDataSubject: PassthroughSubject<ParameterData, Swift.Error> = .init()
@@ -187,12 +200,12 @@ open class AppleBikeKit {
     }()
     
     /// 更新特徵時的發佈者。
-    public private(set) lazy var didUpdateValueForCharacteristicsPublisher: AnyPublisher<CBCharacteristic?, Never> = {
+    public private(set) lazy var didUpdateValueForCharacteristicsPublisher: AnyPublisher<Result<CBCharacteristic, Swift.Error>?, Never> = {
         self.coreBluetoothService.didUpdateValueForCharacteristicsSubject.eraseToAnyPublisher()
     }()
     
     /// 寫入特徵時的發佈者。
-    public private(set) lazy var didWriteValueForCharacteristicsPublisher: AnyPublisher<CBCharacteristic?, Never> = {
+    public private(set) lazy var didWriteValueForCharacteristicsPublisher: AnyPublisher<Result<CBCharacteristic, Swift.Error>?, Never> = {
         self.coreBluetoothService.didWriteValueForCharacteristicsSubject.eraseToAnyPublisher()
     }()
     
@@ -405,9 +418,15 @@ extension AppleBikeKit {
         
         // 監聽特徵寫入事件，處理廣播參數。
         self.didUpdateValueForCharacteristicsPublisher
-            .sink(receiveValue: { [weak self] characteristic in
+            .compactMap({ (result: Result<CBCharacteristic, Swift.Error>?) -> CBCharacteristic? in
+                guard let result: Result<CBCharacteristic, Swift.Error>, case .success(let characteristic) = result else {
+                    return nil
+                }
+                return characteristic
+            })
+            .sink(receiveValue: { [weak self] (characteristic: CBCharacteristic) in
                 guard let self: AppleBikeKit else { return }
-                guard let value: Data = characteristic?.value else { return }
+                guard let value: Data = characteristic.value else { return }
                 self.coreSDKService.commandPacketIn(dataPacket: Array(value))
             })
             .store(in: &self.subscriptions)

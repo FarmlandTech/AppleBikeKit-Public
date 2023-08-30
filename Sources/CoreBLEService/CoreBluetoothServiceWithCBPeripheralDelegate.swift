@@ -68,10 +68,10 @@ extension CoreBluetoothService: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Swift.Error?) {
         if let error: Swift.Error {
             print("AppleBikeKit[UpdateValueForCharacteristic]: \(error)")
-            return
+            self.didUpdateValueForCharacteristicsSubject.send(.failure(error))
+        } else {
+            self.didUpdateValueForCharacteristicsSubject.send(.success(characteristic))
         }
-        
-        self.didUpdateValueForCharacteristicsSubject.send(characteristic)
     }
     
     /**
@@ -94,10 +94,10 @@ extension CoreBluetoothService: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Swift.Error?) {
         if let error: Swift.Error {
             print("AppleBikeKit[WriteValueForCharacteristic]: \(error)")
-            return
+            self.didWriteValueForCharacteristicsSubject.send(.failure(error))
+        } else {
+            self.didWriteValueForCharacteristicsSubject.send(.success(characteristic))
         }
-        
-        self.didWriteValueForCharacteristicsSubject.send(characteristic)
     }
     
     // 監聽特定藍牙裝置的訊號強度。
