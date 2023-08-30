@@ -58,12 +58,25 @@ open class AppleBikeKit {
         .init()
     }()
     
+    @available(*, deprecated, message: "该方法已被弃用，请改用 deviceInfoPublisher(throttle:) 方法。")
     /// 腳踏車裝置資訊的發佈者。
     public private(set) lazy var deviceInfoPublisher: AnyPublisher<(deviceInfo: FL_Info_st?, timestamp: Date), Never> = {
         self.coreSDKService.deviceInfoSubject
             .throttle(for: .milliseconds(700), scheduler: RunLoop.main, latest: true)
             .eraseToAnyPublisher()
     }()
+    
+    /// 腳踏車裝置資訊的發佈者。
+    public func deviceInfoPublisher(throttle milliseconds: Int = 0) -> AnyPublisher<(deviceInfo: FL_Info_st?, timestamp: Date), Never> {
+        if milliseconds > 0 {
+            return self.coreSDKService.deviceInfoSubject
+                .throttle(for: .milliseconds(milliseconds), scheduler: RunLoop.main, latest: true)
+                .eraseToAnyPublisher()
+        } else {
+            return self.coreSDKService.deviceInfoSubject
+                .eraseToAnyPublisher()
+        }
+    }
     
     /// 讀取參數時，電控回傳數據的發佈者。
     private let parameterDataSubject: PassthroughSubject<ParameterData, Swift.Error> = .init()
