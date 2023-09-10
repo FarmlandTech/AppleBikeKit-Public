@@ -101,16 +101,30 @@ open class AppleBikeKit {
         self.coreSDKService.resetTripInfoSubject.compactMap({ $0 }).eraseToAnyPublisher()
     }()
     
+    /// 重置部件參數時，執行狀態的發佈者。
     public private(set) lazy var resetParameterStatePublisher: AnyPublisher<ResetingRawData?, Never> = {
         self.coreSDKService.resetingPartParameterStateSubject.eraseToAnyPublisher()
     }()
     
+    /// 校正電控時間時，執行狀態的發佈者。
     public private(set) lazy var updatingSystemTimeStatePublisher: AnyPublisher<Bool?, Never> = {
         self.coreSDKService.updatingSystemTimeStateSubject.eraseToAnyPublisher()
     }()
     
+    /// 控制車燈開關時，執行狀態的發佈者。
     public private(set) lazy var lightControlStatePublisher: AnyPublisher<Bool?, Never> = {
         self.coreSDKService.lightControlStateSubject.eraseToAnyPublisher()
+    }()
+    
+    
+    /// 更新韌體(進度及資訊)時，執行狀態的發佈者。
+    public private(set) lazy var upgradeFirmwareProgressPublisher: AnyPublisher<UpgradingRawData?, Never> = {
+        self.coreSDKService.upgradeFirmwareProgressSubject.eraseToAnyPublisher()
+    }()
+
+    /// 更新韌體(執行結果)時，執行狀態的發佈者。
+    public private(set) lazy var upgradeFirmwareStatePublisher: AnyPublisher<Int32?, Never> = {
+        self.coreSDKService.upgradeFirmwareStateSubject.eraseToAnyPublisher()
     }()
     
     /**
@@ -280,6 +294,17 @@ open class AppleBikeKit {
      */
     open func lightControl(part: light_control_parts = LIGHT_CONTROL_FRONT, isOn: Bool) throws {
         try self.coreSDKService.lightControl(part: part, isOn: isOn)
+    }
+    
+    /**
+     更新韌體。
+     
+     - parameter part: 部件。
+     - parameter firmware: 韌體。
+     - Throws: CoreSDK 執行失敗。
+     */
+    open func upgradeFirmware(part: CommunicationPartType, firmware: Data) throws {
+        try self.coreSDKService.upgradeFirmware(part: part, data: firmware)
     }
 }
 

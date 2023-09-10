@@ -70,6 +70,16 @@ public final class CoreSDKService: NSObject {
         CoreSDKService.dataSource?.lightControl(state: $0 == 0)
     }
     
+    /// 更新韌體時的回調。(進度及資訊)
+    private let upgradeFirmwareProgress: UpgradeStateMsg_p = {
+        CoreSDKService.dataSource?.upgradeFirmware(rawData: .init(pointer: $0, progress: $1))
+    }
+    
+    /// 更新韌體時的回調。(執行結果)
+    private let upgradeFirmwareEvent: fpCallback_UpgradeFirmware = {
+        CoreSDKService.dataSource?.upgradeFirmware(code: $0)
+    }
+    
     // MARK: 數據流
     
     // TODO: 找時間改以 Result Type 來改寫傳入值，以免數據為空值時，造成訂閱的終結。
@@ -122,6 +132,17 @@ public final class CoreSDKService: NSObject {
     public private(set) lazy var lightControlStateSubject: CurrentValueSubject<Bool?, Never> = {
         .init(nil)
     }()
+    
+    /// 更新韌體(進度及資訊)時，命令執行狀態的數據流。
+    public private(set) lazy var upgradeFirmwareProgressSubject: CurrentValueSubject<UpgradingRawData?, Never> = {
+        .init(nil)
+    }()
+    
+    /// 更新韌體(執行結果)時，命令執行狀態的數據流。
+    public private(set) lazy var upgradeFirmwareStateSubject: CurrentValueSubject<Int32?, Never> = {
+        .init(nil)
+    }()
+    
     
     public var sdkVersion: String? {
         var version: [UInt8] = Mirror(reflecting: self.coreSDKInst.Version)
@@ -365,6 +386,34 @@ public final class CoreSDKService: NSObject {
             throw Self.Error.lightControlFail
         }
     }
+    
+    /**
+     更新部件韌體
+     
+     - parameter part: 部件。
+     - parameter data: 韌體。
+     - Throws: CoreSDK 執行失敗。
+     */
+    public func upgradeFirmware(part: CommunicationPartType, data: Data) throws {
+        let midPointer: UnsafeMutablePointer<UInt8> = .allocate(capacity: 1)
+        midPointer.initialize(to: 0)
+        
+        var dataPointer: UnsafeMutablePointer<UInt8>?
+        data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
+            dataPointer = .allocate(capacity: data.count)
+            dataPointer?.initialize(from: rawBufferPointer.baseAddress!.assumingMemoryBound(to: UInt8.self), count: data.count)
+        }
+        
+        print(part.coreType, data, data.count)
+        
+        let isCoreSDKCompleteTask: Int32 =  self.coreSDKInst.DelegateMethod.UpgradeFirmware(SDK_ROUTER_BLE, part.coreType, midPointer, dataPointer, UInt32(data.count), self.upgradeFirmwareProgress, self.upgradeFirmwareEvent)
+        guard isCoreSDKCompleteTask == 0 else {
+            throw Self.Error.upgradeFirmwareFail(part)
+        }
+        
+        midPointer.deallocate()
+        dataPointer?.deallocate()
+    }
 }
 
 // MARK: - CoreSDK Protocol
@@ -403,6 +452,14 @@ extension CoreSDKService: CoreSDKDataSource {
     
     func lightControl(state: Bool) {
         self.lightControlStateSubject.send(state)
+    }
+    
+    func upgradeFirmware(rawData: UpgradingRawData) {
+        self.upgradeFirmwareProgressSubject.send(rawData)
+    }
+    
+    func upgradeFirmware(code: Int32) {
+        self.upgradeFirmwareStateSubject.send(code)
     }
 }
 
@@ -481,4 +538,8 @@ extension CoreSDKService {
     private typealias UpdateSystemTimeEvent = @convention(c) (Int32) -> Void
     /// 控制車燈開關，回調的別名。
     private typealias LightControlEvent = @convention(c) (Int32) -> Void
+    /// 更新韌體(進度及資訊)，回調的資訊。
+    func upgradeFirmware(rawData: UpgradingRawData)
+    /// 更新韌體(執行結果)，回調的資訊。
+    func upgradeFirmware(code: Int32)
 }
