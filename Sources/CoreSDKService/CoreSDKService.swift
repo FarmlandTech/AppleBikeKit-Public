@@ -19,13 +19,15 @@ public final class CoreSDKService: NSObject {
     
     // MARK: 回調
     
+    /// 刷新腳踏車資訊時，回調的別名。
+    private typealias UpdateDeviceInfoEvent = @convention(c) (DeviceInformation_T) -> Void
     /// 刷新腳踏車資訊時的回調。
     private let updateDeviceInfoEvent: UpdateDeviceInfoEvent = {
         CoreSDKService.dataSource?.updateDeviceInfo(deviceInfo: $0.FL)
     }
     
     /// 讀取參數時的回調。
-    private let readParameterEvent: ReadParameterEvent = {
+    private let readParameterEvent: fpCallback_ReadParameters = {
         guard let pointer: UnsafeMutablePointer<UInt8> = $2 else { return }
         CoreSDKService.dataSource?.readParameter(rawData: .init(device: $1,
                                                                 bank: $5,
@@ -36,7 +38,7 @@ public final class CoreSDKService: NSObject {
     }
     
     /// 寫入參數時的回調。
-    private let writeParameterEvent: WriteParameterEvent = {
+    private let writeParameterEvent: fpCallback_WriteParameters = {
         CoreSDKService.dataSource?.writeParameter(rawData: .init(device: $1,
                                                                  bank: $4,
                                                                  address: $2,
@@ -45,29 +47,40 @@ public final class CoreSDKService: NSObject {
     }
     
     /// 重啟部件時的回調。
-    private let restartPartEvent: RestartPartEvent = {
+    private let restartPartEvent: fpCallback_RestartDevice = {
         CoreSDKService.dataSource?.restartPart(state: $0 == 0)
     }
     
     /// 重置里程參數的回調。
-    private let resetTripInfoEvent: ResetTripInfoEvent = {
+    private let resetTripInfoEvent: fpCallback_ClearTripInfo = {
         CoreSDKService.dataSource?.resetTripInfo(state: $0 == 0)
     }
     
     /// 重置部件參數時的回調。
-    private let resetPartParameterEvent: ResetPartParameterEvent = {
+    private let resetPartParameterEvent: fpCallback_ResetParameters = {
         CoreSDKService.dataSource?.resetPartParameter(rawData: .init(device: $1,
                                                                      bank: $2,
                                                                      state: $0 == 0))
     }
     
     /// 校正電控時間時的回調。
-    private let updateSystemTimeEvent: UpdateSystemTimeEvent = {
+    private let updateSystemTimeEvent: fpCallback_ConfigSysTime = {
         CoreSDKService.dataSource?.updateSystemTime(state: $0 == 0)
     }
     
-    private let lightControlEvent: LightControlEvent = {
+    /// 控制車燈開關時的回調。
+    private let lightControlEvent: fpCallback_LightControl = {
         CoreSDKService.dataSource?.lightControl(state: $0 == 0)
+    }
+    
+    /// 更新韌體時的回調。(進度及資訊)
+    private let upgradeFirmwareProgress: UpgradeStateMsg_p = {
+        CoreSDKService.dataSource?.upgradeFirmware(rawData: .init(pointer: $0, progress: $1))
+    }
+    
+    /// 更新韌體時的回調。(執行結果)
+    private let upgradeFirmwareEvent: fpCallback_UpgradeFirmware = {
+        CoreSDKService.dataSource?.upgradeFirmware(code: $0)
     }
     
     // MARK: 數據流
@@ -122,6 +135,17 @@ public final class CoreSDKService: NSObject {
     public private(set) lazy var lightControlStateSubject: CurrentValueSubject<Bool?, Never> = {
         .init(nil)
     }()
+    
+    /// 更新韌體(進度及資訊)時，命令執行狀態的數據流。
+    public private(set) lazy var upgradeFirmwareProgressSubject: CurrentValueSubject<UpgradingRawData?, Never> = {
+        .init(nil)
+    }()
+    
+    /// 更新韌體(執行結果)時，命令執行狀態的數據流。
+    public private(set) lazy var upgradeFirmwareStateSubject: CurrentValueSubject<Int32?, Never> = {
+        .init(nil)
+    }()
+    
     
     public var sdkVersion: String? {
         var version: [UInt8] = Mirror(reflecting: self.coreSDKInst.Version)
@@ -365,6 +389,34 @@ public final class CoreSDKService: NSObject {
             throw Self.Error.lightControlFail
         }
     }
+    
+    /**
+     更新部件韌體
+     
+     - parameter part: 部件。
+     - parameter data: 韌體。
+     - Throws: CoreSDK 執行失敗。
+     */
+    public func upgradeFirmware(part: CommunicationPartType, data: Data) throws {
+        let midPointer: UnsafeMutablePointer<UInt8> = .allocate(capacity: 1)
+        midPointer.initialize(to: 0)
+        
+        var dataPointer: UnsafeMutablePointer<UInt8>?
+        data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
+            dataPointer = .allocate(capacity: data.count)
+            dataPointer?.initialize(from: rawBufferPointer.baseAddress!.assumingMemoryBound(to: UInt8.self), count: data.count)
+        }
+        
+        print(part.coreType, data, data.count)
+        
+        let isCoreSDKCompleteTask: Int32 =  self.coreSDKInst.DelegateMethod.UpgradeFirmware(SDK_ROUTER_BLE, part.coreType, midPointer, dataPointer, UInt32(data.count), self.upgradeFirmwareProgress, self.upgradeFirmwareEvent)
+        guard isCoreSDKCompleteTask == 0 else {
+            throw Self.Error.upgradeFirmwareFail(part)
+        }
+        
+        midPointer.deallocate()
+        dataPointer?.deallocate()
+    }
 }
 
 // MARK: - CoreSDK Protocol
@@ -404,6 +456,14 @@ extension CoreSDKService: CoreSDKDataSource {
     func lightControl(state: Bool) {
         self.lightControlStateSubject.send(state)
     }
+    
+    func upgradeFirmware(rawData: UpgradingRawData) {
+        self.upgradeFirmwareProgressSubject.send(rawData)
+    }
+    
+    func upgradeFirmware(code: Int32) {
+        self.upgradeFirmwareStateSubject.send(code)
+    }
 }
 
 // MARK: - 操作 CoreSDK 時所遭遇的錯誤
@@ -434,7 +494,8 @@ extension CoreSDKService {
         case updateSystemTimeFail
         /// 控制車燈開關失敗。
         case lightControlFail
-        
+        /// 更新韌體失敗
+        case upgradeFirmwareFail(CommunicationPartType)
     }
 }
 
@@ -459,26 +520,8 @@ private protocol CoreSDKDataSource: AnyObject {
     func updateSystemTime(state: Bool)
     /// 控制車燈開關，回調的資訊。
     func lightControl(state: Bool)
-}
-
-// MARK: - 取得 CoreSDK 回調的方法別名
-
-extension CoreSDKService {
-    
-    /// 刷新腳踏車資訊時，回調的別名。
-    private typealias UpdateDeviceInfoEvent = @convention(c) (DeviceInformation_T) -> Void
-    /// 讀取參數時，回調的別名。
-    private typealias ReadParameterEvent = @convention(c) (Int32, DeviceType_enum, Optional<UnsafeMutablePointer<UInt8>>, UInt16, UInt16, UInt8) -> Void
-    /// 寫入參數時，回調的別名。
-    private typealias WriteParameterEvent = @convention(c) (Int32, DeviceType_enum, UInt16, UInt16, UInt8) -> Void
-    /// 重啟部件時，回調的別名。
-    private typealias RestartPartEvent = @convention(c) (Int32) -> Void
-    /// 重置里程參數時，回調的別名。
-    private typealias ResetTripInfoEvent = @convention(c) (Int32) -> Void
-    /// 重置部件參數時，回調的別名。
-    private typealias ResetPartParameterEvent = @convention(c) (Int32, DeviceType_enum, UInt8) -> Void
-    /// 校正電控時間時，回調的別名。
-    private typealias UpdateSystemTimeEvent = @convention(c) (Int32) -> Void
-    /// 控制車燈開關，回調的別名。
-    private typealias LightControlEvent = @convention(c) (Int32) -> Void
+    /// 更新韌體(進度及資訊)，回調的資訊。
+    func upgradeFirmware(rawData: UpgradingRawData)
+    /// 更新韌體(執行結果)，回調的資訊。
+    func upgradeFirmware(code: Int32)
 }

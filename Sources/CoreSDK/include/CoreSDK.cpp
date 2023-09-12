@@ -1,4 +1,4 @@
-﻿
+
 #include <string>
 
 #include "CoreSDK.h"
@@ -1047,6 +1047,7 @@ int __stdcall UpgradeFirmware(RouterType router,
         new_action.finally_callback = UpgradeFirmware_Finally;
         new_action.error_callback = UpgradeFirmware_Error;
     }
+    break;
     case SDK_ROUTER_MST_USB:
     {
         if (Mst_dfu_insta == NULL)
