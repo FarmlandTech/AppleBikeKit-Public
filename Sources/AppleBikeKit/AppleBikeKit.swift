@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import CoreBluetooth
 
-import CoreSDK
+import CoreSDKSourceCode
 import CoreSDKService
 import CoreBLEServiceSourceCode
 
