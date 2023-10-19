@@ -11,7 +11,7 @@ import CoreBluetooth
 
 import CoreSDK
 import CoreSDKService
-import CoreBLEService
+import CoreBLEServiceSourceCode
 
 /// 藍牙連線統一的對外接口，整合 CoreSDK 與 CoreBLEService 的調用。
 open class AppleBikeKit {

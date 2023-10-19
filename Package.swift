@@ -36,9 +36,9 @@ let package = Package(
             name: "CoreSDKService",
             dependencies: ["CoreSDK"],
             path: "Sources/CoreSDKService"),
-        .target(
+        .binaryTarget(
             name: "CoreBLEService",
-            path: "Sources/CoreBLEService"),
+            path: "Sources/CoreBLEService/CoreBLEServiceSourceCode.xcframework"),
         .target(
             name: "AppleBikeKit",
             dependencies: ["CoreSDK", "CoreSDKService", "CoreBLEService"],

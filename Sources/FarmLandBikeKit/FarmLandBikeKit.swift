@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-import CoreBLEService
+import CoreBLEServiceSourceCode
 import AppleBikeKit
 import CoreSDK
 
