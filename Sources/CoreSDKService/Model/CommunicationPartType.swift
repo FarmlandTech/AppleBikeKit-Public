@@ -7,7 +7,7 @@
 
 import Foundation
 
-import CoreSDK
+import CoreSDKSourceCode
 
 public enum CommunicationPartType: Int {
     

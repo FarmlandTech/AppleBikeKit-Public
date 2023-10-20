@@ -1,0 +1,11 @@
+framework module CoreBLEServiceSourceCode {
+  umbrella header "CoreBLEServiceSourceCode.h"
+
+  export *
+  module * { export * }
+}
+
+module CoreBLEServiceSourceCode.Swift {
+  header "CoreBLEServiceSourceCode-Swift.h"
+  requires objc
+}

@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-import CoreSDK
+import CoreSDKSourceCode
 import CoreSDKService
 
 /// 緩存關鍵參數的物件。

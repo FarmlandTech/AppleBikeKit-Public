@@ -8,9 +8,9 @@
 import Foundation
 import Combine
 
-import CoreBLEService
+import CoreBLEServiceSourceCode
 import AppleBikeKit
-import CoreSDK
+import CoreSDKSourceCode
 
 /// 農田應用程式開發套件，常見需求的集成。
 final public class FarmLandBikeKit: AppleBikeKit {

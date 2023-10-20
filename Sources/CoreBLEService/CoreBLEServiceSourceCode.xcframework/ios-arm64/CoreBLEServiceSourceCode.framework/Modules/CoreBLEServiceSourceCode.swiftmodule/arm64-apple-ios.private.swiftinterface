@@ -1,0 +1,111 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)
+// swift-module-flags: -target arm64-apple-ios16.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name CoreBLEServiceSourceCode
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import Combine
+@_exported import CoreBLEServiceSourceCode
+import CoreBluetooth
+import Foundation
+import Swift
+import _Concurrency
+import _StringProcessing
+extension CoreBLEServiceSourceCode.CoreBluetoothService : CoreBluetooth.CBCentralManagerDelegate {
+  @objc dynamic public func centralManagerDidUpdateState(_ central: CoreBluetooth.CBCentralManager)
+  @objc dynamic public func centralManager(_ central: CoreBluetooth.CBCentralManager, didDiscover peripheral: CoreBluetooth.CBPeripheral, advertisementData: [Swift.String : Any], rssi RSSI: Foundation.NSNumber)
+  @objc dynamic public func centralManager(_ central: CoreBluetooth.CBCentralManager, didConnect peripheral: CoreBluetooth.CBPeripheral)
+  @objc dynamic public func centralManager(_ central: CoreBluetooth.CBCentralManager, didFailToConnect peripheral: CoreBluetooth.CBPeripheral, error: (any Swift.Error)?)
+  @objc dynamic public func centralManager(_ central: CoreBluetooth.CBCentralManager, didDisconnectPeripheral peripheral: CoreBluetooth.CBPeripheral, error: (any Swift.Error)?)
+}
+@objc @_inheritsConvenienceInitializers public class CoreBluetoothService : ObjectiveC.NSObject {
+  public var centralManager: CoreBluetooth.CBCentralManager {
+    get
+  }
+  @objc override dynamic public init()
+  public var stateSubject: Combine.CurrentValueSubject<CoreBluetooth.CBManagerState, Swift.Never> {
+    get
+  }
+  public var scanningSubject: Combine.CurrentValueSubject<Swift.Bool, Swift.Never> {
+    get
+  }
+  public var foundDevicesSubject: Combine.CurrentValueSubject<Swift.Array<(peripheral: CoreBLEServiceSourceCode.BluetoothPeripheral, date: Foundation.Date)>, Swift.Never> {
+    get
+  }
+  public var peripheralSubject: Combine.CurrentValueSubject<CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus, Swift.Never> {
+    get
+  }
+  public var characteristicsSubject: Combine.CurrentValueSubject<CoreBluetooth.CBPeripheral?, Swift.Never> {
+    get
+  }
+  public var didUpdateValueForCharacteristicsSubject: Combine.CurrentValueSubject<Swift.Result<CoreBluetooth.CBCharacteristic, any Swift.Error>?, Swift.Never> {
+    get
+  }
+  public var didWriteValueForCharacteristicsSubject: Combine.CurrentValueSubject<Swift.Result<CoreBluetooth.CBCharacteristic, any Swift.Error>?, Swift.Never> {
+    get
+  }
+  public var rssiSubject: Combine.CurrentValueSubject<Foundation.NSNumber?, Swift.Never> {
+    get
+  }
+  public func startScanning() throws
+  public func stopScanning()
+  public func connect(peripheral: CoreBLEServiceSourceCode.BluetoothPeripheral)
+  public func disconnect(peripheral: CoreBLEServiceSourceCode.BluetoothPeripheral)
+  @objc deinit
+}
+extension CoreBLEServiceSourceCode.CoreBluetoothService {
+  public enum PeripheralStatus {
+    case unknown
+    case didConnect(CoreBLEServiceSourceCode.BluetoothPeripheral)
+    case didDisconnect(CoreBLEServiceSourceCode.BluetoothPeripheral)
+    case prepared
+  }
+}
+extension CoreBLEServiceSourceCode.CoreBluetoothService {
+  public enum CharacteristicWriteType : Swift.String {
+    case write
+    case writeWithoutResponse
+    case notify
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+}
+extension Swift.String {
+  public enum AdvertisementDataRetrievalKey {
+    case localName
+    case manufacturerData
+    case serviceUUIDsKey
+    case isConnectable
+    public static func == (a: Swift.String.AdvertisementDataRetrievalKey, b: Swift.String.AdvertisementDataRetrievalKey) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+public struct BluetoothPeripheral {
+  public let device: CoreBluetooth.CBPeripheral
+  public var rssi: Swift.Float?
+  public var deviceName: Swift.String?
+  public var localName: Swift.String?
+  public var uuid: Swift.String?
+  public var address: Swift.String {
+    get
+  }
+  public func writeValue(_ data: Foundation.Data, for characteristic: CoreBluetooth.CBCharacteristic)
+}
+extension CoreBLEServiceSourceCode.CoreBluetoothService : CoreBluetooth.CBPeripheralDelegate {
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didDiscoverServices error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didDiscoverCharacteristicsFor service: CoreBluetooth.CBService, error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didDiscoverDescriptorsFor characteristic: CoreBluetooth.CBCharacteristic, error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didUpdateValueFor characteristic: CoreBluetooth.CBCharacteristic, error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didUpdateNotificationStateFor characteristic: CoreBluetooth.CBCharacteristic, error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didWriteValueFor characteristic: CoreBluetooth.CBCharacteristic, error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didReadRSSI RSSI: Foundation.NSNumber, error: (any Swift.Error)?)
+}
+extension CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType : Swift.Equatable {}
+extension CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType : Swift.Hashable {}
+extension CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType : Swift.RawRepresentable {}
+extension Swift.String.AdvertisementDataRetrievalKey : Swift.Equatable {}
+extension Swift.String.AdvertisementDataRetrievalKey : Swift.Hashable {}

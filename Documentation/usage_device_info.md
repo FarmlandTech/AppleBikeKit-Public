@@ -11,7 +11,7 @@ AppleBikeKit.shared.deviceInfo?.battery_rsoc
 
 ```
 import AppleBikeKit
-import CoreSDK
+import CoreSDKSourceCode
 
 var subscriptions: Set<AnyCancellable> = .init()
     
