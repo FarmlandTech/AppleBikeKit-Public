@@ -12,31 +12,18 @@ import CoreBluetooth
 import CoreSDKSourceCode
 import CoreSDKService
 import CoreBLEServiceSourceCode
+import AppleBikeKitSourceCode
 
 /// 藍牙連線統一的對外接口，整合 CoreSDK 與 CoreBLEService 的調用。
-open class AppleBikeKit {
+open class AppleBikeKit: BaseAppleBikeKit {
     
-    /// 資料流的訂閱。
-    private var subscriptions: Set<AnyCancellable> = .init()
+    /// 單例。
+    public static let shared: AppleBikeKit = .init()
     
     /// 當前連線裝置的實例緩存。
     public private(set) lazy var connectedPeripheral: ConnectedPeripheral = {
         .init()
     }()
-    
-    /// 單例。
-    public static let shared: AppleBikeKit = .init()
-    
-    /// 建構子。
-    public init() {
-        self.subscribeCoreSDKServiceSubjects()
-        self.subscribeCoreBLEServiceSubjects()
-    }
-    
-    /// 解構子。
-    deinit {
-        self.subscriptions.forEach { $0.cancel() }
-    }
     
     // MARK: - CoreSDKService
     
@@ -126,6 +113,194 @@ open class AppleBikeKit {
     public private(set) lazy var upgradeFirmwareStatePublisher: AnyPublisher<Int32?, Never> = {
         self.coreSDKService.upgradeFirmwareStateSubject.eraseToAnyPublisher()
     }()
+    
+    override open func subscribeCoreSDKServiceSubjects() {
+        super.subscribeCoreSDKServiceSubjects()
+        
+        // 監聽參數寫入的事件處理。
+        self.coreSDKService.commandPacketSubject
+            .sink(receiveValue: { output in
+                guard let characteristic: CBCharacteristic = self.connectedPeripheral.writeCharacteristicSubject.value else { return }
+                self.connectedPeripheral.currentPeripheralSubject.value?.writeValue(.init(output), for: characteristic)
+            })
+            .store(in: &self.subscriptions)
+        
+        // 監聽更新韌體的事件處理。
+        self.coreSDKService.dataPacketSubject
+            .sink(receiveValue: { output in
+                guard let characteristic: CBCharacteristic = self.connectedPeripheral.writeWithoutResponseCharacteristicSubject.value else { return }
+                self.connectedPeripheral.currentPeripheralSubject.value?.writeValue(.init(output), for: characteristic)
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreSDKService.deviceInfoSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        // 監聽參數讀取的事件處理。
+        self.coreSDKService.readingRawDataSubject
+            .compactMap({ $0 })
+            .sink(receiveValue: { rawData in
+                func setParameterValue(_ parameterData: ParameterData) {
+                    guard let index: Int = self.parameterDataRepository.parameters.firstIndex(where: { $0.name == parameterData.name }) else { return }
+                    DispatchQueue.main.async {
+                        self.parameterDataRepository.parameters[index].subject.send(parameterData.value)
+                    }
+                    self.parameterDataRepository.parameters[index].value = parameterData.value
+                }
+                
+                do {
+                    let parameterData: ParameterData = try self.parameterDataRepository.findParameterData(type: rawData.device,
+                                                                                                          bank: rawData.bank,
+                                                                                                          address: rawData.address,
+                                                                                                          length: rawData.length)
+                    if self.parameterDataRepository.integratedParameters.contains(where: { $0.name == parameterData.name }) {
+                        let parameterDataList: [ParameterData] = try parameterData.dividIntoMultiParameters(rawData: rawData)
+                        // 將讀取到的內容，分別存到個別參數內緩存，並透過 subject 傳遞出去。
+                        for parameterData in parameterDataList {
+                            self.parameterDataSubject.send(parameterData)
+                            setParameterValue(parameterData)
+                        }
+                        // 將讀取到的內容，封裝起來，且透過 subject 傳遞出去。
+                        let result: ParameterData = .init(name: parameterData.name,
+                                                          partType: parameterData.partType,
+                                                          bank: parameterData.bank,
+                                                          address: parameterData.address,
+                                                          length: parameterData.length,
+                                                          type: parameterData.type,
+                                                          dividedParameters: parameterDataList)
+                        self.parameterDataSubject.send(result)
+                    } else {
+                        parameterData.value = try rawData.bytes.convert2Value(type: parameterData.type,
+                                                                              length: Int(parameterData.length))
+                        self.parameterDataSubject.send(parameterData)
+                        setParameterValue(parameterData)
+                    }
+                } catch {
+                    self.parameterDataSubject.send(completion: .failure(error))
+                }
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreSDKService.writingParameterStateSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreSDKService.restartingPartStateSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreSDKService.resetingPartParameterStateSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreSDKService.updatingSystemTimeStateSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreSDKService.lightControlStateSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+    }
+    
+    override open func subscribeCoreBLEServiceSubjects() {
+        super.subscribeCoreBLEServiceSubjects()
+        
+        // 監聽特徵，確認連線狀態。
+        self.characteristicsPublisher
+            .sink(receiveValue: { peripheral in
+                // 取得每個服務。
+                self.connectedPeripheral.currentPeripheralSubject.value?.device.services?.forEach({ [weak self] service in
+                    guard let self: AppleBikeKit else { return }
+                    guard let characteristics: [CBCharacteristic] = service.characteristics else { return }
+                    // 取得每個服務的所有特徵。
+                    characteristics.forEach { [weak self] characteristic in
+                        guard let self: AppleBikeKit else { return }
+                        guard let type: CoreBluetoothService.CharacteristicWriteType = .init(rawValue: characteristic.uuid.uuidString) else { return }
+                        // 判斷特徵型態，並緩存。
+                        switch type {
+                        case .write:
+                            self.connectedPeripheral.writeCharacteristicSubject.value = characteristic
+                        case .notify:
+                            self.connectedPeripheral.notifyCharacteristicSubject.value = characteristic
+                            // 訂閱通知。
+                            self.connectedPeripheral.currentPeripheralSubject.value?.device.setNotifyValue(true, for: characteristic)
+                        case .writeWithoutResponse:
+                            self.connectedPeripheral.writeWithoutResponseCharacteristicSubject.value = characteristic
+                        }
+                    }
+                })
+            })
+            .store(in: &self.subscriptions)
+        
+        // 監聽特徵寫入事件，處理廣播參數。
+        self.didUpdateValueForCharacteristicsPublisher
+            .compactMap({ (result: Result<CBCharacteristic, Swift.Error>?) -> CBCharacteristic? in
+                guard let result: Result<CBCharacteristic, Swift.Error>, case .success(let characteristic) = result else {
+                    return nil
+                }
+                return characteristic
+            })
+            .sink(receiveValue: { [weak self] (characteristic: CBCharacteristic) in
+                guard let self: AppleBikeKit else { return }
+                guard let value: Data = characteristic.value else { return }
+                self.coreSDKService.commandPacketIn(dataPacket: Array(value))
+            })
+            .store(in: &self.subscriptions)
+        
+        self.didWriteValueForCharacteristicsPublisher
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreBluetoothService.rssiSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreBluetoothService.stateSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreBluetoothService.scanningSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreBluetoothService.foundDevicesSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreBluetoothService.peripheralSubject
+            .sink(receiveValue: { status in
+                guard case .didDisconnect = status else { return }
+                self.coreBluetoothService.foundDevicesSubject.value = .init()
+            })
+            .store(in: &self.subscriptions)
+    }
+    
+    override open func doTasks() {
+        super.doTasks()
+    }
     
     /**
      讀取部件參數的方法。
@@ -305,192 +480,5 @@ open class AppleBikeKit {
      */
     open func upgradeFirmware(part: CommunicationPartType, firmware: Data) throws {
         try self.coreSDKService.upgradeFirmware(part: part, data: firmware)
-    }
-}
-
-extension AppleBikeKit {
-    
-    // TODO: subject 皆已完成訂閱，但 publisher 還未確保皆以在初始化時就被訂閱。
-    
-    func subscribeCoreSDKServiceSubjects() {
-        
-        // 監聽參數寫入的事件處理。
-        self.coreSDKService.commandPacketSubject
-            .sink(receiveValue: { output in
-                guard let characteristic: CBCharacteristic = self.connectedPeripheral.writeCharacteristicSubject.value else { return }
-                self.connectedPeripheral.currentPeripheralSubject.value?.writeValue(.init(output), for: characteristic)
-            })
-            .store(in: &self.subscriptions)
-        
-        // 監聽更新韌體的事件處理。
-        self.coreSDKService.dataPacketSubject
-            .sink(receiveValue: { output in
-                guard let characteristic: CBCharacteristic = self.connectedPeripheral.writeWithoutResponseCharacteristicSubject.value else { return }
-                self.connectedPeripheral.currentPeripheralSubject.value?.writeValue(.init(output), for: characteristic)
-            })
-            .store(in: &self.subscriptions)
-        
-        self.coreSDKService.deviceInfoSubject
-            .sink(receiveValue: { _ in
-                
-            })
-            .store(in: &self.subscriptions)
-        
-        // 監聽參數讀取的事件處理。
-        self.coreSDKService.readingRawDataSubject
-            .compactMap({ $0 })
-            .sink(receiveValue: { rawData in
-                func setParameterValue(_ parameterData: ParameterData) {
-                    guard let index: Int = self.parameterDataRepository.parameters.firstIndex(where: { $0.name == parameterData.name }) else { return }
-                    DispatchQueue.main.async {
-                        self.parameterDataRepository.parameters[index].subject.send(parameterData.value)
-                    }
-                    self.parameterDataRepository.parameters[index].value = parameterData.value
-                }
-                
-                do {
-                    let parameterData: ParameterData = try self.parameterDataRepository.findParameterData(type: rawData.device,
-                                                                                                          bank: rawData.bank,
-                                                                                                          address: rawData.address,
-                                                                                                          length: rawData.length)
-                    if self.parameterDataRepository.integratedParameters.contains(where: { $0.name == parameterData.name }) {
-                        let parameterDataList: [ParameterData] = try parameterData.dividIntoMultiParameters(rawData: rawData)
-                        // 將讀取到的內容，分別存到個別參數內緩存，並透過 subject 傳遞出去。
-                        for parameterData in parameterDataList {
-                            self.parameterDataSubject.send(parameterData)
-                            setParameterValue(parameterData)
-                        }
-                        // 將讀取到的內容，封裝起來，且透過 subject 傳遞出去。
-                        let result: ParameterData = .init(name: parameterData.name,
-                                                          partType: parameterData.partType,
-                                                          bank: parameterData.bank,
-                                                          address: parameterData.address,
-                                                          length: parameterData.length,
-                                                          type: parameterData.type,
-                                                          dividedParameters: parameterDataList)
-                        self.parameterDataSubject.send(result)
-                    } else {
-                        parameterData.value = try rawData.bytes.convert2Value(type: parameterData.type,
-                                                                              length: Int(parameterData.length))
-                        self.parameterDataSubject.send(parameterData)
-                        setParameterValue(parameterData)
-                    }
-                } catch {
-                    self.parameterDataSubject.send(completion: .failure(error))
-                }
-            })
-            .store(in: &self.subscriptions)
-        
-        self.coreSDKService.writingParameterStateSubject
-            .sink(receiveValue: { _ in
-                
-            })
-            .store(in: &self.subscriptions)
-        
-        self.coreSDKService.restartingPartStateSubject
-            .sink(receiveValue: { _ in
-                
-            })
-            .store(in: &self.subscriptions)
-        
-        self.coreSDKService.resetingPartParameterStateSubject
-            .sink(receiveValue: { _ in
-                
-            })
-            .store(in: &self.subscriptions)
-        
-        self.coreSDKService.updatingSystemTimeStateSubject
-            .sink(receiveValue: { _ in
-                
-            })
-            .store(in: &self.subscriptions)
-        
-        self.coreSDKService.lightControlStateSubject
-            .sink(receiveValue: { _ in
-                
-            })
-            .store(in: &self.subscriptions)
-    }
-    
-    func subscribeCoreBLEServiceSubjects() {
-        
-        // 監聽特徵，確認連線狀態。
-        self.characteristicsPublisher
-            .sink(receiveValue: { peripheral in
-                // 取得每個服務。
-                self.connectedPeripheral.currentPeripheralSubject.value?.device.services?.forEach({ [weak self] service in
-                    guard let self: AppleBikeKit else { return }
-                    guard let characteristics: [CBCharacteristic] = service.characteristics else { return }
-                    // 取得每個服務的所有特徵。
-                    characteristics.forEach { [weak self] characteristic in
-                        guard let self: AppleBikeKit else { return }
-                        guard let type: CoreBluetoothService.CharacteristicWriteType = .init(rawValue: characteristic.uuid.uuidString) else { return }
-                        // 判斷特徵型態，並緩存。
-                        switch type {
-                        case .write:
-                            self.connectedPeripheral.writeCharacteristicSubject.value = characteristic
-                        case .notify:
-                            self.connectedPeripheral.notifyCharacteristicSubject.value = characteristic
-                            // 訂閱通知。
-                            self.connectedPeripheral.currentPeripheralSubject.value?.device.setNotifyValue(true, for: characteristic)
-                        case .writeWithoutResponse:
-                            self.connectedPeripheral.writeWithoutResponseCharacteristicSubject.value = characteristic
-                        }
-                    }
-                })
-            })
-            .store(in: &self.subscriptions)
-        
-        // 監聽特徵寫入事件，處理廣播參數。
-        self.didUpdateValueForCharacteristicsPublisher
-            .compactMap({ (result: Result<CBCharacteristic, Swift.Error>?) -> CBCharacteristic? in
-                guard let result: Result<CBCharacteristic, Swift.Error>, case .success(let characteristic) = result else {
-                    return nil
-                }
-                return characteristic
-            })
-            .sink(receiveValue: { [weak self] (characteristic: CBCharacteristic) in
-                guard let self: AppleBikeKit else { return }
-                guard let value: Data = characteristic.value else { return }
-                self.coreSDKService.commandPacketIn(dataPacket: Array(value))
-            })
-            .store(in: &self.subscriptions)
-        
-        self.didWriteValueForCharacteristicsPublisher
-            .sink(receiveValue: { _ in
-                
-            })
-            .store(in: &self.subscriptions)
-        
-        self.coreBluetoothService.rssiSubject
-            .sink(receiveValue: { _ in
-                
-            })
-            .store(in: &self.subscriptions)
-        
-        self.coreBluetoothService.stateSubject
-            .sink(receiveValue: { _ in
-                
-            })
-            .store(in: &self.subscriptions)
-        
-        self.coreBluetoothService.scanningSubject
-            .sink(receiveValue: { _ in
-                
-            })
-            .store(in: &self.subscriptions)
-        
-        self.coreBluetoothService.foundDevicesSubject
-            .sink(receiveValue: { _ in
-                
-            })
-            .store(in: &self.subscriptions)
-        
-        self.coreBluetoothService.peripheralSubject
-            .sink(receiveValue: { status in
-                guard case .didDisconnect = status else { return }
-                self.coreBluetoothService.foundDevicesSubject.value = .init()
-            })
-            .store(in: &self.subscriptions)
     }
 }
