@@ -470,6 +470,7 @@ extension CoreSDKService: CoreSDKDataSource {
     
     func updateDeviceInfo(deviceInfo: FL_Info_st) {
         let value: (FL_Info_st, Date) = (deviceInfo, .init())
+        self.getElockStateSubject.send(deviceInfo.e_lock_states)
         self.deviceInfoSubject.send(value)
     }
     
