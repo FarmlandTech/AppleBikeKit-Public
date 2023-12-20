@@ -1,0 +1,11 @@
+framework module AppleBikeKitSourceCode {
+  umbrella header "AppleBikeKitSourceCode.h"
+
+  export *
+  module * { export * }
+}
+
+module AppleBikeKitSourceCode.Swift {
+  header "AppleBikeKitSourceCode-Swift.h"
+  requires objc
+}

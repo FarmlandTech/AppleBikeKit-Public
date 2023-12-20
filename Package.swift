@@ -32,9 +32,12 @@ let package = Package(
         .binaryTarget(
             name: "CoreBLEService",
             path: "Sources/CoreBLEService/CoreBLEServiceSourceCode.xcframework"),
+        .binaryTarget(
+            name: "AppleBikeKitSourceCode",
+            path: "Sources/AppleBikeKitSourceCode/AppleBikeKitSourceCode.xcframework"),
         .target(
             name: "AppleBikeKit",
-            dependencies: ["CoreSDK", "CoreSDKService", "CoreBLEService"],
+            dependencies: ["CoreSDK", "CoreSDKService", "CoreBLEService", "AppleBikeKitSourceCode"],
             path: "Sources/AppleBikeKit",
             swiftSettings: [
                 .define("APPLICATION_EXTENSION_API_ONLY=YES"),

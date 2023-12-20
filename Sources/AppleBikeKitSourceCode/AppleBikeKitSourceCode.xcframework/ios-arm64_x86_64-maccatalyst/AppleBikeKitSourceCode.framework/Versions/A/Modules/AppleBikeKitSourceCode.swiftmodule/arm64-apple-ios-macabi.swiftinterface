@@ -1,0 +1,18 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)
+// swift-module-flags: -target arm64-apple-ios16-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name AppleBikeKitSourceCode
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+@_exported import AppleBikeKitSourceCode
+import Combine
+import Foundation
+import Swift
+import _Concurrency
+import _StringProcessing
+open class BaseAppleBikeKit {
+  open var subscriptions: Swift.Set<Combine.AnyCancellable>
+  public init()
+  @objc deinit
+  open func subscribeCoreSDKServiceSubjects()
+  open func subscribeCoreBLEServiceSubjects()
+  open func doTasks()
+}

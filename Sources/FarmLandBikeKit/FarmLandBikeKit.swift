@@ -15,22 +15,17 @@ import CoreSDKSourceCode
 /// 農田應用程式開發套件，常見需求的集成。
 final public class FarmLandBikeKit: AppleBikeKit {
     
+    /// 單例。
+    public static let sleipnir: FarmLandBikeKit = .init()
+    
     enum Error: Swift.Error {
         case DisguiseBatteryHelperIsNil
     }
-    
-    /// 單例。
-    public static let sleipnir: FarmLandBikeKit = .init()
     
     /// 關鍵參數(ssn或dmid等)的緩存值。
     public var metaParameter: MetaParameter {
         self.connectionMetaReadingHelper.metaSubject.value
     }
-    
-    /// 訂閱實例。
-    private lazy var subscriptions: Set<AnyCancellable> = {
-        .init()
-    }()
     
     /// 取得關鍵參數(ssn或dmid等)的處理物件實例。
     private lazy var connectionMetaReadingHelper: ConnectionMetaReadingHelper = {
@@ -84,10 +79,10 @@ final public class FarmLandBikeKit: AppleBikeKit {
         self.parameterDataPubisher
             .filter({ $0.name == .INTEGRATED_MILEAGE_RECORD })
             .compactMap({ parameterData in
-                FarmLandBikeKit.sleipnir.parameterDataRepository.parameters.firstIndex(where: { $0.name == parameterData.name })
+                self.parameterDataRepository.parameters.firstIndex(where: { $0.name == parameterData.name })
             })
             .compactMap({ index in
-                FarmLandBikeKit.sleipnir.parameterDataRepository.parameters[index].dividedParameters
+                self.parameterDataRepository.parameters[index].dividedParameters
             })
             .map({
                 do {
@@ -104,12 +99,10 @@ final public class FarmLandBikeKit: AppleBikeKit {
         self.disguiseBatteryHelper?.readingSubject
             .eraseToAnyPublisher()
     }()
-
-    /**
-     建構子。
-     */
-    private override init() {
-        super.init()
+    
+    public override func doTasks() {
+        super.doTasks()
+        
         // 監聽連線狀態。
         self.peripheralPublisher.sink(receiveValue: { status in
             switch status {
@@ -128,17 +121,11 @@ final public class FarmLandBikeKit: AppleBikeKit {
                 }
             }
         }).store(in: &self.subscriptions)
+        
         // 監聽裝置資訊。
-        self.deviceInfoPublisher.sink(receiveValue: { deviceInfo in
-            
+        self.deviceInfoPublisher().sink(receiveValue: { deviceInfo in
+
         }).store(in: &self.subscriptions)
-    }
-    
-    /**
-     解構子。
-     */
-    deinit {
-        self.subscriptions.forEach({ $0.cancel() })
     }
     
     /**
@@ -209,7 +196,7 @@ final public class FarmLandBikeKit: AppleBikeKit {
      - Throws: 上次的讀取仍然在執行(或重試)，便會拋出錯誤；如果底層 AppleBikeKit 讀取參數時，設定錯誤，也可能會拋出錯誤。
      */
     public func readODOChartData() throws {
-        try FarmLandBikeKit.sleipnir.readParameter(name: .INTEGRATED_MILEAGE_RECORD)
+        try self.readParameter(name: .INTEGRATED_MILEAGE_RECORD)
     }
     
     /**
@@ -220,8 +207,8 @@ final public class FarmLandBikeKit: AppleBikeKit {
      - Throws: CoreSDK 執行失敗，或部件版本並未支持此功能。
      */
     public override func lightControl(part: light_control_parts = LIGHT_CONTROL_FRONT, isOn: Bool) throws {
-        try FarmLandBikeKit.sleipnir.checkVersion(part: .controller, version: "0.0.22")
-        try FarmLandBikeKit.sleipnir.checkVersion(part: .hmi, version: "0.0.20")
+        try self.checkVersion(part: .controller, version: "0.0.22")
+        try self.checkVersion(part: .hmi, version: "0.0.20")
         try super.lightControl(part: part, isOn: isOn)
     }
     
