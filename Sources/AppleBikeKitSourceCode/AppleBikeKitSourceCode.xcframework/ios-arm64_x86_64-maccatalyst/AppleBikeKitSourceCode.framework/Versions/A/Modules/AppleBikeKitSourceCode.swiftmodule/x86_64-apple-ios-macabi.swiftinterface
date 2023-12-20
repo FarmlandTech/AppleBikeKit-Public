@@ -8,9 +8,7 @@ import Foundation
 import Swift
 import _Concurrency
 import _StringProcessing
-public protocol BaseAppleBikeKitInterfase {
-}
-open class BaseAppleBikeKit : AppleBikeKitSourceCode.BaseAppleBikeKitInterfase {
+open class BaseAppleBikeKit {
   open var subscriptions: Swift.Set<Combine.AnyCancellable>
   public init()
   @objc deinit

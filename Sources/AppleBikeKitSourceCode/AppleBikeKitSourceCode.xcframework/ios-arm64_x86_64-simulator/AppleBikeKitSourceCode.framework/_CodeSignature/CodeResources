@@ -18,11 +18,11 @@
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		Jc50OibhDvy/sjBxxhjGq+iwG+g=
+		y9GiqePQNfl5akUzrlLOWzyLXSk=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		un/KMppPHag0f5u0RYAduuVBtME=
+		BwMDnjDs5V/EYFwmOMXkJvP8Ppc=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -30,19 +30,19 @@
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		un/KMppPHag0f5u0RYAduuVBtME=
+		BwMDnjDs5V/EYFwmOMXkJvP8Ppc=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		3ztJz1i0W/gLaU6ealYv37Kfju0=
+		Gs8qildsg3S3EIsiMM4A+ZfgRM8=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		Jc50OibhDvy/sjBxxhjGq+iwG+g=
+		y9GiqePQNfl5akUzrlLOWzyLXSk=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		SK9DqRAPTgJPf7aD+JbN7SRIh1U=
+		j9kICiU6LMNZHDc7c2K1s5X01u8=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -50,11 +50,11 @@
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		SK9DqRAPTgJPf7aD+JbN7SRIh1U=
+		j9kICiU6LMNZHDc7c2K1s5X01u8=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		FuyFVSLmwzw3hI1CuVybIcFPcCE=
+		HVeE1nkHKYI5z8gxK89+8y/Jk9Y=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -81,14 +81,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			uywTv2/0QM2S5DvWTlPbFl/3JI2EmVyrUxuHQ9/4Wjo=
+			7zaC3Eeags//hlyzBjUZ3lalXQiuyBzMhxf9j+p0kjY=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			dKqSs1YW9Vfzv031URk2lGpQq5ahD0zGxioKhRlLIHw=
+			g/kTypmr5X2piBoAx+uwmhtrWDIYf1UzIMAhojwryqg=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -102,28 +102,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			dKqSs1YW9Vfzv031URk2lGpQq5ahD0zGxioKhRlLIHw=
+			g/kTypmr5X2piBoAx+uwmhtrWDIYf1UzIMAhojwryqg=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			x+mt6Y8qyqxwX9Wm49BBnqPPVrbzdIzxYmP4gsdf8dM=
+			gQp50jHAaWlQyjyv/uGMMPTV95Nr+DcsOUmxBJAvKo4=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			uywTv2/0QM2S5DvWTlPbFl/3JI2EmVyrUxuHQ9/4Wjo=
+			7zaC3Eeags//hlyzBjUZ3lalXQiuyBzMhxf9j+p0kjY=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			IPZZK87oyXVOBdxWSnz3IHynrEnixcDc8oQ/mQSIFug=
+			wEiiD1bW4+T3sN1ZcjTi7gmQLGslCUcNd2KPnnpCsxw=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -137,14 +137,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			IPZZK87oyXVOBdxWSnz3IHynrEnixcDc8oQ/mQSIFug=
+			wEiiD1bW4+T3sN1ZcjTi7gmQLGslCUcNd2KPnnpCsxw=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			/DRl5sl3pub7v1f6EkyI+3/Y3UMsSVAOsSas9MHsusA=
+			WGS7oTREqOPrgB5YsbcIKcpUQsf8DUxHplFT27VMEkU=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

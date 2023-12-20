@@ -18,11 +18,11 @@
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		Jc50OibhDvy/sjBxxhjGq+iwG+g=
+		y9GiqePQNfl5akUzrlLOWzyLXSk=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		UVVldCCBNoQEZhcdDcR3kQgBAps=
+		WhLyFhhAUZ4yey8uSMo3cDM+I28=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
@@ -30,11 +30,11 @@
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		UVVldCCBNoQEZhcdDcR3kQgBAps=
+		WhLyFhhAUZ4yey8uSMo3cDM+I28=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		uDh9Pq/e96j1bIKYl7MaBir4ijk=
+		TqDCY1vAjky0b8UITUwxgvx3Vd4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -61,14 +61,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			uywTv2/0QM2S5DvWTlPbFl/3JI2EmVyrUxuHQ9/4Wjo=
+			7zaC3Eeags//hlyzBjUZ3lalXQiuyBzMhxf9j+p0kjY=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			QzzJW6ajKniJh1lKmxHINt2UaC5UYeTwPGfv0KkeB+E=
+			H/gP+h6kDfMBH5CR2rwMQ4DLK0eEYuEyOmeCz7ogNT0=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios.swiftdoc</key>
@@ -82,14 +82,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			QzzJW6ajKniJh1lKmxHINt2UaC5UYeTwPGfv0KkeB+E=
+			H/gP+h6kDfMBH5CR2rwMQ4DLK0eEYuEyOmeCz7ogNT0=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			PAQn8mjUp4QOvdS56NoBr79UaDe3k6jxRTnhObPMvrg=
+			Eco7auUU1KNg28qZisayndH8/OhNuTVQyxvF8ML+GWQ=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
