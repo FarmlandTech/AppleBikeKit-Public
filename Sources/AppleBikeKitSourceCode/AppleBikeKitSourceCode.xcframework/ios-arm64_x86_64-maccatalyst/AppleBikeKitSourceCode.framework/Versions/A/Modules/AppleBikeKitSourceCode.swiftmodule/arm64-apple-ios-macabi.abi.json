@@ -243,21 +243,14 @@
     {
       "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode.swift",
       "kind": "StringLiteral",
-      "offset": 372,
-      "length": 18,
-      "value": "\"com.dyaco.cikada\""
-    },
-    {
-      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode.swift",
-      "kind": "StringLiteral",
-      "offset": 421,
+      "offset": 439,
       "length": 23,
       "value": "\"未授權的使用！\""
     },
     {
       "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode.swift",
       "kind": "Array",
-      "offset": 788,
+      "offset": 806,
       "length": 126,
       "value": "[\"tw.farmland.riderapp\", \"tw.farmland.RD-Tuning-Tool-Apple\", \"com.dyaco.cikada\"]"
     }
