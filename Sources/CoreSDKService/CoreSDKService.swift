@@ -83,6 +83,11 @@ public final class CoreSDKService: NSObject {
         CoreSDKService.dataSource?.upgradeFirmware(code: $0)
     }
     
+    /// 取得電子鎖狀態時的回調。
+    private let getELockEvent: fpCallback_GetELock_DEV = {
+        CoreSDKService.dataSource?.getELock(state: $1)
+    }
+    
     // MARK: 數據流
     
     // TODO: 找時間改以 Result Type 來改寫傳入值，以免數據為空值時，造成訂閱的終結。
@@ -144,6 +149,11 @@ public final class CoreSDKService: NSObject {
     /// 更新韌體(執行結果)時，命令執行狀態的數據流。
     public private(set) lazy var upgradeFirmwareStateSubject: CurrentValueSubject<Int32?, Never> = {
         .init(nil)
+    }()
+    
+    /// 取得電子鎖狀態時，命令執行狀態的數據流。
+    public private(set) lazy var getElockStateSubject: CurrentValueSubject<ELockStates, Never> = {
+        .init(ELOCK_STATES_UNKNOW)
     }()
     
     
@@ -417,6 +427,18 @@ public final class CoreSDKService: NSObject {
         midPointer.deallocate()
         dataPointer?.deallocate()
     }
+    
+    /**
+     取得電子鎖狀態。
+     
+     - Throws: CoreSDK 執行失敗。
+     */
+    public func getELock() throws {
+        let isCoreSDKCompleteTask: Int32 =  self.coreSDKInst.DelegateMethod.GetELock_DEV(SDK_ROUTER_BLE, self.getELockEvent)
+        guard isCoreSDKCompleteTask == 0 else {
+            throw Self.Error.getELockFail
+        }
+    }
 }
 
 // MARK: - CoreSDK Protocol
@@ -463,6 +485,10 @@ extension CoreSDKService: CoreSDKDataSource {
     func upgradeFirmware(code: Int32) {
         self.upgradeFirmwareStateSubject.send(code)
     }
+    
+    func getELock(state: ELockStates) {
+        self.getElockStateSubject.send(state)
+    }
 }
 
 // MARK: - 操作 CoreSDK 時所遭遇的錯誤
@@ -495,6 +521,8 @@ extension CoreSDKService {
         case lightControlFail
         /// 更新韌體失敗。
         case upgradeFirmwareFail(CommunicationPartType)
+        /// 取得電子鎖狀態失敗。
+        case getELockFail
     }
 }
 
@@ -523,4 +551,6 @@ private protocol CoreSDKDataSource: AnyObject {
     func upgradeFirmware(rawData: UpgradingRawData)
     /// 更新韌體(執行結果)，回調的資訊。
     func upgradeFirmware(code: Int32)
+    /// 取得電子鎖狀態。
+    func getELock(state: ELockStates)
 }

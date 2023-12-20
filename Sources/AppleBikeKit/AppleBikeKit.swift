@@ -114,6 +114,13 @@ open class AppleBikeKit: BaseAppleBikeKit {
         self.coreSDKService.upgradeFirmwareStateSubject.eraseToAnyPublisher()
     }()
     
+    /// 取得電子鎖狀態時，執行狀態的發佈者。
+    public private(set) lazy var getELockStatePublisher: AnyPublisher<ELockStates, Never> = {
+        self.coreSDKService.getElockStateSubject
+            .removeDuplicates()
+            .eraseToAnyPublisher()
+    }()
+    
     override open func subscribeCoreSDKServiceSubjects() {
         super.subscribeCoreSDKServiceSubjects()
         
@@ -209,6 +216,12 @@ open class AppleBikeKit: BaseAppleBikeKit {
             .store(in: &self.subscriptions)
         
         self.coreSDKService.lightControlStateSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
+        
+        self.coreSDKService.getElockStateSubject
             .sink(receiveValue: { _ in
                 
             })
@@ -344,6 +357,15 @@ open class AppleBikeKit: BaseAppleBikeKit {
      */
     public func resetTripInfo() throws {
         try self.coreSDKService.resetTripInfo()
+    }
+    
+    /**
+     取得電子鎖狀態。
+     
+     - Throws: 來自 CoreSDK 判定的錯誤。
+     */
+    public func getELock() throws {
+        try self.coreSDKService.getELock()
     }
     
     // MARK: - CoreBluetoothService
