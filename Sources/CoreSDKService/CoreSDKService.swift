@@ -391,7 +391,7 @@ public final class CoreSDKService: NSObject {
     }
     
     /**
-     更新部件韌體
+     更新部件韌體。
      
      - parameter part: 部件。
      - parameter data: 韌體。
@@ -433,7 +433,6 @@ extension CoreSDKService: CoreSDKDataSource {
     }
     
     func writeParameter(rawData: WritingRawData) {
-#warning("目前研判是線程問題導致藍牙斷線(crash?)，反正目前用不到，暫時先註解吧...")
 //        self.writingParameterStateSubject.send(rawData)
     }
     
@@ -494,7 +493,7 @@ extension CoreSDKService {
         case updateSystemTimeFail
         /// 控制車燈開關失敗。
         case lightControlFail
-        /// 更新韌體失敗
+        /// 更新韌體失敗。
         case upgradeFirmwareFail(CommunicationPartType)
     }
 }
