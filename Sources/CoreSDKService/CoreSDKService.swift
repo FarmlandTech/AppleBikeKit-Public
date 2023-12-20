@@ -88,6 +88,11 @@ public final class CoreSDKService: NSObject {
         CoreSDKService.dataSource?.getELock(state: $1)
     }
     
+    /// 設定電子鎖狀態時的回調。
+    private let setELockEvent: fpCallback_SetELock_DEV = {
+        CoreSDKService.dataSource?.setELock(state: $0 == 0)
+    }
+    
     // MARK: 數據流
     
     // TODO: 找時間改以 Result Type 來改寫傳入值，以免數據為空值時，造成訂閱的終結。
@@ -156,6 +161,10 @@ public final class CoreSDKService: NSObject {
         .init(ELOCK_STATES_UNKNOW)
     }()
     
+    /// 設定電子鎖狀態時，命令執行狀態的數據流。
+    public private(set) lazy var setELockStateSubject: CurrentValueSubject<Bool?, Never> = {
+        .init(nil)
+    }()
     
     public var sdkVersion: String? {
         var version: [UInt8] = Mirror(reflecting: self.coreSDKInst.Version)
@@ -439,6 +448,20 @@ public final class CoreSDKService: NSObject {
             throw Self.Error.getELockFail
         }
     }
+    
+    /**
+     設定電子鎖狀態。
+     
+     - parameter release: 防誤觸定位閂鎖。
+     - parameter unlocked: 是否解鎖。
+     - Throws: CoreSDK 執行失敗。
+     */
+    public func setELock(release: Bool, unlocked: Bool) throws {
+        let isCoreSDKCompleteTask: Int32 =  self.coreSDKInst.DelegateMethod.SetELock_DEV(SDK_ROUTER_BLE, release, unlocked, self.setELockEvent)
+        guard isCoreSDKCompleteTask == 0 else {
+            throw Self.Error.setELockFail
+        }
+    }
 }
 
 // MARK: - CoreSDK Protocol
@@ -489,6 +512,10 @@ extension CoreSDKService: CoreSDKDataSource {
     func getELock(state: ELockStates) {
         self.getElockStateSubject.send(state)
     }
+    
+    func setELock(state: Bool) {
+        self.setELockStateSubject.send(state)
+    }
 }
 
 // MARK: - 操作 CoreSDK 時所遭遇的錯誤
@@ -523,6 +550,8 @@ extension CoreSDKService {
         case upgradeFirmwareFail(CommunicationPartType)
         /// 取得電子鎖狀態失敗。
         case getELockFail
+        /// 更新電子鎖狀態失敗。
+        case setELockFail
     }
 }
 
@@ -553,4 +582,6 @@ private protocol CoreSDKDataSource: AnyObject {
     func upgradeFirmware(code: Int32)
     /// 取得電子鎖狀態。
     func getELock(state: ELockStates)
+    /// 設定電子鎖狀態。
+    func setELock(state: Bool)
 }
