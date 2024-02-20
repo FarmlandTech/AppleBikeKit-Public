@@ -1,0 +1,265 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "TopLevel",
+    "printedName": "TopLevel",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AppleBikeKitSourceCode",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Combine",
+        "printedName": "Combine",
+        "declKind": "Import",
+        "moduleName": "AppleBikeKitSourceCode"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "BaseAppleBikeKit",
+        "printedName": "BaseAppleBikeKit",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "subscriptions",
+            "printedName": "subscriptions",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Set",
+                "printedName": "Swift.Set<Combine.AnyCancellable>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AnyCancellable",
+                    "printedName": "Combine.AnyCancellable",
+                    "usr": "s:7Combine14AnyCancellableC"
+                  }
+                ],
+                "usr": "s:Sh"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:22AppleBikeKitSourceCode04BaseabC0C13subscriptionsShy7Combine14AnyCancellableCGvp",
+            "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0C13subscriptionsShy7Combine14AnyCancellableCGvp",
+            "moduleName": "AppleBikeKitSourceCode",
+            "isOpen": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Set",
+                    "printedName": "Swift.Set<Combine.AnyCancellable>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "AnyCancellable",
+                        "printedName": "Combine.AnyCancellable",
+                        "usr": "s:7Combine14AnyCancellableC"
+                      }
+                    ],
+                    "usr": "s:Sh"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:22AppleBikeKitSourceCode04BaseabC0C13subscriptionsShy7Combine14AnyCancellableCGvg",
+                "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0C13subscriptionsShy7Combine14AnyCancellableCGvg",
+                "moduleName": "AppleBikeKitSourceCode",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Set",
+                    "printedName": "Swift.Set<Combine.AnyCancellable>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "AnyCancellable",
+                        "printedName": "Combine.AnyCancellable",
+                        "usr": "s:7Combine14AnyCancellableC"
+                      }
+                    ],
+                    "usr": "s:Sh"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:22AppleBikeKitSourceCode04BaseabC0C13subscriptionsShy7Combine14AnyCancellableCGvs",
+                "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0C13subscriptionsShy7Combine14AnyCancellableCGvs",
+                "moduleName": "AppleBikeKitSourceCode",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:22AppleBikeKitSourceCode04BaseabC0C13subscriptionsShy7Combine14AnyCancellableCGvM",
+                "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0C13subscriptionsShy7Combine14AnyCancellableCGvM",
+                "moduleName": "AppleBikeKitSourceCode",
+                "implicit": true,
+                "isOpen": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "BaseAppleBikeKit",
+                "printedName": "AppleBikeKitSourceCode.BaseAppleBikeKit",
+                "usr": "s:22AppleBikeKitSourceCode04BaseabC0C"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:22AppleBikeKitSourceCode04BaseabC0CACycfc",
+            "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0CACycfc",
+            "moduleName": "AppleBikeKitSourceCode",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "subscribeCoreSDKServiceSubjects",
+            "printedName": "subscribeCoreSDKServiceSubjects()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:22AppleBikeKitSourceCode04BaseabC0C31subscribeCoreSDKServiceSubjectsyyF",
+            "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0C31subscribeCoreSDKServiceSubjectsyyF",
+            "moduleName": "AppleBikeKitSourceCode",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "subscribeCoreBLEServiceSubjects",
+            "printedName": "subscribeCoreBLEServiceSubjects()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:22AppleBikeKitSourceCode04BaseabC0C31subscribeCoreBLEServiceSubjectsyyF",
+            "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0C31subscribeCoreBLEServiceSubjectsyyF",
+            "moduleName": "AppleBikeKitSourceCode",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "doTasks",
+            "printedName": "doTasks()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:22AppleBikeKitSourceCode04BaseabC0C7doTasksyyF",
+            "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0C7doTasksyyF",
+            "moduleName": "AppleBikeKitSourceCode",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:22AppleBikeKitSourceCode04BaseabC0C",
+        "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0C",
+        "moduleName": "AppleBikeKitSourceCode",
+        "isOpen": true,
+        "declAttributes": [
+          "AccessControl"
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode.swift",
+      "kind": "StringLiteral",
+      "offset": 372,
+      "length": 18,
+      "value": "\"com.dyaco.cikada\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode.swift",
+      "kind": "StringLiteral",
+      "offset": 421,
+      "length": 23,
+      "value": "\"未授權的使用！\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode.swift",
+      "kind": "Array",
+      "offset": 788,
+      "length": 126,
+      "value": "[\"tw.farmland.riderapp\", \"tw.farmland.RD-Tuning-Tool-Apple\", \"com.dyaco.cikada\"]"
+    }
+  ]
+}

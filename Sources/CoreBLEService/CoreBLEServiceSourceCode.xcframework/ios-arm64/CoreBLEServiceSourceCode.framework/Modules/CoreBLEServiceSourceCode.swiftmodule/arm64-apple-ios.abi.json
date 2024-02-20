@@ -1,0 +1,3790 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "TopLevel",
+    "printedName": "TopLevel",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "CoreBLEServiceSourceCode",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "CoreBluetooth",
+        "printedName": "CoreBluetooth",
+        "declKind": "Import",
+        "moduleName": "CoreBLEServiceSourceCode"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "CoreBLEServiceSourceCode",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "CoreBluetooth",
+        "printedName": "CoreBluetooth",
+        "declKind": "Import",
+        "moduleName": "CoreBLEServiceSourceCode"
+      },
+      {
+        "kind": "Import",
+        "name": "Combine",
+        "printedName": "Combine",
+        "declKind": "Import",
+        "moduleName": "CoreBLEServiceSourceCode"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "CoreBluetoothService",
+        "printedName": "CoreBluetoothService",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "centralManager",
+            "printedName": "centralManager",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CBCentralManager",
+                "printedName": "CoreBluetooth.CBCentralManager",
+                "usr": "c:objc(cs)CBCentralManager"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC14centralManagerSo09CBCentralH0Cvp",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC14centralManagerSo09CBCentralH0Cvp",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "Lazy",
+              "SetterAccess",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CBCentralManager",
+                    "printedName": "CoreBluetooth.CBCentralManager",
+                    "usr": "c:objc(cs)CBCentralManager"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC14centralManagerSo09CBCentralH0Cvg",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC14centralManagerSo09CBCentralH0Cvg",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CoreBluetoothService",
+                "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService",
+                "usr": "c:@M@CoreBLEServiceSourceCode@objc(cs)CoreBluetoothService"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@CoreBLEServiceSourceCode@objc(cs)CoreBluetoothService(im)init",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceCACycfc",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "overriding": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "stateSubject",
+            "printedName": "stateSubject",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CurrentValueSubject",
+                "printedName": "Combine.CurrentValueSubject<CoreBluetooth.CBManagerState, Swift.Never>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CBManagerState",
+                    "printedName": "CoreBluetooth.CBManagerState",
+                    "usr": "c:@E@CBManagerState"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Never",
+                    "printedName": "Swift.Never",
+                    "usr": "s:s5NeverO"
+                  }
+                ],
+                "usr": "s:7Combine19CurrentValueSubjectC"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC12stateSubject7Combine012CurrentValueH0CySo14CBManagerStateVs5NeverOGvp",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC12stateSubject7Combine012CurrentValueH0CySo14CBManagerStateVs5NeverOGvp",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "Lazy",
+              "SetterAccess",
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CurrentValueSubject",
+                    "printedName": "Combine.CurrentValueSubject<CoreBluetooth.CBManagerState, Swift.Never>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CBManagerState",
+                        "printedName": "CoreBluetooth.CBManagerState",
+                        "usr": "c:@E@CBManagerState"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Never",
+                        "printedName": "Swift.Never",
+                        "usr": "s:s5NeverO"
+                      }
+                    ],
+                    "usr": "s:7Combine19CurrentValueSubjectC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC12stateSubject7Combine012CurrentValueH0CySo14CBManagerStateVs5NeverOGvg",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC12stateSubject7Combine012CurrentValueH0CySo14CBManagerStateVs5NeverOGvg",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "scanningSubject",
+            "printedName": "scanningSubject",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CurrentValueSubject",
+                "printedName": "Combine.CurrentValueSubject<Swift.Bool, Swift.Never>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Never",
+                    "printedName": "Swift.Never",
+                    "usr": "s:s5NeverO"
+                  }
+                ],
+                "usr": "s:7Combine19CurrentValueSubjectC"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC15scanningSubject7Combine012CurrentValueH0CySbs5NeverOGvp",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC15scanningSubject7Combine012CurrentValueH0CySbs5NeverOGvp",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "Lazy",
+              "SetterAccess",
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CurrentValueSubject",
+                    "printedName": "Combine.CurrentValueSubject<Swift.Bool, Swift.Never>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Never",
+                        "printedName": "Swift.Never",
+                        "usr": "s:s5NeverO"
+                      }
+                    ],
+                    "usr": "s:7Combine19CurrentValueSubjectC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC15scanningSubject7Combine012CurrentValueH0CySbs5NeverOGvg",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC15scanningSubject7Combine012CurrentValueH0CySbs5NeverOGvg",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "foundDevicesSubject",
+            "printedName": "foundDevicesSubject",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CurrentValueSubject",
+                "printedName": "Combine.CurrentValueSubject<[(peripheral: CoreBLEServiceSourceCode.BluetoothPeripheral, date: Foundation.Date)], Swift.Never>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Array",
+                    "printedName": "[(peripheral: CoreBLEServiceSourceCode.BluetoothPeripheral, date: Foundation.Date)]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Tuple",
+                        "printedName": "(peripheral: CoreBLEServiceSourceCode.BluetoothPeripheral, date: Foundation.Date)",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "BluetoothPeripheral",
+                            "printedName": "CoreBLEServiceSourceCode.BluetoothPeripheral",
+                            "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Date",
+                            "printedName": "Foundation.Date",
+                            "usr": "s:10Foundation4DateV"
+                          }
+                        ]
+                      }
+                    ],
+                    "usr": "s:Sa"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Never",
+                    "printedName": "Swift.Never",
+                    "usr": "s:s5NeverO"
+                  }
+                ],
+                "usr": "s:7Combine19CurrentValueSubjectC"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC19foundDevicesSubject7Combine012CurrentValueI0CySayAA0E10PeripheralV10peripheral_10Foundation4DateV4datetGs5NeverOGvp",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC19foundDevicesSubject7Combine012CurrentValueI0CySayAA0E10PeripheralV10peripheral_10Foundation4DateV4datetGs5NeverOGvp",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "Lazy",
+              "SetterAccess",
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CurrentValueSubject",
+                    "printedName": "Combine.CurrentValueSubject<[(peripheral: CoreBLEServiceSourceCode.BluetoothPeripheral, date: Foundation.Date)], Swift.Never>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Array",
+                        "printedName": "[(peripheral: CoreBLEServiceSourceCode.BluetoothPeripheral, date: Foundation.Date)]",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(peripheral: CoreBLEServiceSourceCode.BluetoothPeripheral, date: Foundation.Date)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "BluetoothPeripheral",
+                                "printedName": "CoreBLEServiceSourceCode.BluetoothPeripheral",
+                                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Date",
+                                "printedName": "Foundation.Date",
+                                "usr": "s:10Foundation4DateV"
+                              }
+                            ]
+                          }
+                        ],
+                        "usr": "s:Sa"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Never",
+                        "printedName": "Swift.Never",
+                        "usr": "s:s5NeverO"
+                      }
+                    ],
+                    "usr": "s:7Combine19CurrentValueSubjectC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC19foundDevicesSubject7Combine012CurrentValueI0CySayAA0E10PeripheralV10peripheral_10Foundation4DateV4datetGs5NeverOGvg",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC19foundDevicesSubject7Combine012CurrentValueI0CySayAA0E10PeripheralV10peripheral_10Foundation4DateV4datetGs5NeverOGvg",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "peripheralSubject",
+            "printedName": "peripheralSubject",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CurrentValueSubject",
+                "printedName": "Combine.CurrentValueSubject<CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus, Swift.Never>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PeripheralStatus",
+                    "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus",
+                    "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Never",
+                    "printedName": "Swift.Never",
+                    "usr": "s:s5NeverO"
+                  }
+                ],
+                "usr": "s:7Combine19CurrentValueSubjectC"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC17peripheralSubject7Combine012CurrentValueH0CyAC16PeripheralStatusOs5NeverOGvp",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC17peripheralSubject7Combine012CurrentValueH0CyAC16PeripheralStatusOs5NeverOGvp",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "Lazy",
+              "SetterAccess",
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CurrentValueSubject",
+                    "printedName": "Combine.CurrentValueSubject<CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus, Swift.Never>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "PeripheralStatus",
+                        "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus",
+                        "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Never",
+                        "printedName": "Swift.Never",
+                        "usr": "s:s5NeverO"
+                      }
+                    ],
+                    "usr": "s:7Combine19CurrentValueSubjectC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC17peripheralSubject7Combine012CurrentValueH0CyAC16PeripheralStatusOs5NeverOGvg",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC17peripheralSubject7Combine012CurrentValueH0CyAC16PeripheralStatusOs5NeverOGvg",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "characteristicsSubject",
+            "printedName": "characteristicsSubject",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CurrentValueSubject",
+                "printedName": "Combine.CurrentValueSubject<CoreBluetooth.CBPeripheral?, Swift.Never>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "CoreBluetooth.CBPeripheral?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CBPeripheral",
+                        "printedName": "CoreBluetooth.CBPeripheral",
+                        "usr": "c:objc(cs)CBPeripheral"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Never",
+                    "printedName": "Swift.Never",
+                    "usr": "s:s5NeverO"
+                  }
+                ],
+                "usr": "s:7Combine19CurrentValueSubjectC"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC22characteristicsSubject7Combine012CurrentValueH0CySo12CBPeripheralCSgs5NeverOGvp",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC22characteristicsSubject7Combine012CurrentValueH0CySo12CBPeripheralCSgs5NeverOGvp",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "Lazy",
+              "SetterAccess",
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CurrentValueSubject",
+                    "printedName": "Combine.CurrentValueSubject<CoreBluetooth.CBPeripheral?, Swift.Never>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "CoreBluetooth.CBPeripheral?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "CBPeripheral",
+                            "printedName": "CoreBluetooth.CBPeripheral",
+                            "usr": "c:objc(cs)CBPeripheral"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Never",
+                        "printedName": "Swift.Never",
+                        "usr": "s:s5NeverO"
+                      }
+                    ],
+                    "usr": "s:7Combine19CurrentValueSubjectC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC22characteristicsSubject7Combine012CurrentValueH0CySo12CBPeripheralCSgs5NeverOGvg",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC22characteristicsSubject7Combine012CurrentValueH0CySo12CBPeripheralCSgs5NeverOGvg",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "didUpdateValueForCharacteristicsSubject",
+            "printedName": "didUpdateValueForCharacteristicsSubject",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CurrentValueSubject",
+                "printedName": "Combine.CurrentValueSubject<Swift.Result<CoreBluetooth.CBCharacteristic, Swift.Error>?, Swift.Never>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Result<CoreBluetooth.CBCharacteristic, Swift.Error>?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Result",
+                        "printedName": "Swift.Result<CoreBluetooth.CBCharacteristic, Swift.Error>",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "CBCharacteristic",
+                            "printedName": "CoreBluetooth.CBCharacteristic",
+                            "usr": "c:objc(cs)CBCharacteristic"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Error",
+                            "printedName": "Swift.Error",
+                            "usr": "s:s5ErrorP"
+                          }
+                        ],
+                        "usr": "s:s6ResultO"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Never",
+                    "printedName": "Swift.Never",
+                    "usr": "s:s5NeverO"
+                  }
+                ],
+                "usr": "s:7Combine19CurrentValueSubjectC"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC39didUpdateValueForCharacteristicsSubject7Combine07CurrentiL0Cys6ResultOySo16CBCharacteristicCs5Error_pGSgs5NeverOGvp",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC39didUpdateValueForCharacteristicsSubject7Combine07CurrentiL0Cys6ResultOySo16CBCharacteristicCs5Error_pGSgs5NeverOGvp",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "Lazy",
+              "SetterAccess",
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CurrentValueSubject",
+                    "printedName": "Combine.CurrentValueSubject<Swift.Result<CoreBluetooth.CBCharacteristic, Swift.Error>?, Swift.Never>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.Result<CoreBluetooth.CBCharacteristic, Swift.Error>?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Result",
+                            "printedName": "Swift.Result<CoreBluetooth.CBCharacteristic, Swift.Error>",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "CBCharacteristic",
+                                "printedName": "CoreBluetooth.CBCharacteristic",
+                                "usr": "c:objc(cs)CBCharacteristic"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Error",
+                                "printedName": "Swift.Error",
+                                "usr": "s:s5ErrorP"
+                              }
+                            ],
+                            "usr": "s:s6ResultO"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Never",
+                        "printedName": "Swift.Never",
+                        "usr": "s:s5NeverO"
+                      }
+                    ],
+                    "usr": "s:7Combine19CurrentValueSubjectC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC39didUpdateValueForCharacteristicsSubject7Combine07CurrentiL0Cys6ResultOySo16CBCharacteristicCs5Error_pGSgs5NeverOGvg",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC39didUpdateValueForCharacteristicsSubject7Combine07CurrentiL0Cys6ResultOySo16CBCharacteristicCs5Error_pGSgs5NeverOGvg",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "didWriteValueForCharacteristicsSubject",
+            "printedName": "didWriteValueForCharacteristicsSubject",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CurrentValueSubject",
+                "printedName": "Combine.CurrentValueSubject<Swift.Result<CoreBluetooth.CBCharacteristic, Swift.Error>?, Swift.Never>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Result<CoreBluetooth.CBCharacteristic, Swift.Error>?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Result",
+                        "printedName": "Swift.Result<CoreBluetooth.CBCharacteristic, Swift.Error>",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "CBCharacteristic",
+                            "printedName": "CoreBluetooth.CBCharacteristic",
+                            "usr": "c:objc(cs)CBCharacteristic"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Error",
+                            "printedName": "Swift.Error",
+                            "usr": "s:s5ErrorP"
+                          }
+                        ],
+                        "usr": "s:s6ResultO"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Never",
+                    "printedName": "Swift.Never",
+                    "usr": "s:s5NeverO"
+                  }
+                ],
+                "usr": "s:7Combine19CurrentValueSubjectC"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC38didWriteValueForCharacteristicsSubject7Combine07CurrentiL0Cys6ResultOySo16CBCharacteristicCs5Error_pGSgs5NeverOGvp",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC38didWriteValueForCharacteristicsSubject7Combine07CurrentiL0Cys6ResultOySo16CBCharacteristicCs5Error_pGSgs5NeverOGvp",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "Lazy",
+              "SetterAccess",
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CurrentValueSubject",
+                    "printedName": "Combine.CurrentValueSubject<Swift.Result<CoreBluetooth.CBCharacteristic, Swift.Error>?, Swift.Never>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.Result<CoreBluetooth.CBCharacteristic, Swift.Error>?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Result",
+                            "printedName": "Swift.Result<CoreBluetooth.CBCharacteristic, Swift.Error>",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "CBCharacteristic",
+                                "printedName": "CoreBluetooth.CBCharacteristic",
+                                "usr": "c:objc(cs)CBCharacteristic"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Error",
+                                "printedName": "Swift.Error",
+                                "usr": "s:s5ErrorP"
+                              }
+                            ],
+                            "usr": "s:s6ResultO"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Never",
+                        "printedName": "Swift.Never",
+                        "usr": "s:s5NeverO"
+                      }
+                    ],
+                    "usr": "s:7Combine19CurrentValueSubjectC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC38didWriteValueForCharacteristicsSubject7Combine07CurrentiL0Cys6ResultOySo16CBCharacteristicCs5Error_pGSgs5NeverOGvg",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC38didWriteValueForCharacteristicsSubject7Combine07CurrentiL0Cys6ResultOySo16CBCharacteristicCs5Error_pGSgs5NeverOGvg",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "rssiSubject",
+            "printedName": "rssiSubject",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CurrentValueSubject",
+                "printedName": "Combine.CurrentValueSubject<Foundation.NSNumber?, Swift.Never>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Foundation.NSNumber?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "NSNumber",
+                        "printedName": "Foundation.NSNumber",
+                        "usr": "c:objc(cs)NSNumber"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Never",
+                    "printedName": "Swift.Never",
+                    "usr": "s:s5NeverO"
+                  }
+                ],
+                "usr": "s:7Combine19CurrentValueSubjectC"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC11rssiSubject7Combine012CurrentValueH0CySo8NSNumberCSgs5NeverOGvp",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC11rssiSubject7Combine012CurrentValueH0CySo8NSNumberCSgs5NeverOGvp",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "Lazy",
+              "SetterAccess",
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CurrentValueSubject",
+                    "printedName": "Combine.CurrentValueSubject<Foundation.NSNumber?, Swift.Never>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Foundation.NSNumber?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "NSNumber",
+                            "printedName": "Foundation.NSNumber",
+                            "usr": "c:objc(cs)NSNumber"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Never",
+                        "printedName": "Swift.Never",
+                        "usr": "s:s5NeverO"
+                      }
+                    ],
+                    "usr": "s:7Combine19CurrentValueSubjectC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC11rssiSubject7Combine012CurrentValueH0CySo8NSNumberCSgs5NeverOGvg",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC11rssiSubject7Combine012CurrentValueH0CySo8NSNumberCSgs5NeverOGvg",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "startScanning",
+            "printedName": "startScanning()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC13startScanningyyKF",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC13startScanningyyKF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "stopScanning",
+            "printedName": "stopScanning()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC12stopScanningyyF",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC12stopScanningyyF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "connect",
+            "printedName": "connect(peripheral:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "BluetoothPeripheral",
+                "printedName": "CoreBLEServiceSourceCode.BluetoothPeripheral",
+                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC7connect10peripheralyAA0E10PeripheralV_tF",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC7connect10peripheralyAA0E10PeripheralV_tF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "disconnect",
+            "printedName": "disconnect(peripheral:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "BluetoothPeripheral",
+                "printedName": "CoreBLEServiceSourceCode.BluetoothPeripheral",
+                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC10disconnect10peripheralyAA0E10PeripheralV_tF",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC10disconnect10peripheralyAA0E10PeripheralV_tF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "centralManagerDidUpdateState",
+            "printedName": "centralManagerDidUpdateState(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCentralManager",
+                "printedName": "CoreBluetooth.CBCentralManager",
+                "usr": "c:objc(cs)CBCentralManager"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@CoreBLEServiceSourceCode@objc(cs)CoreBluetoothService(im)centralManagerDidUpdateState:",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC28centralManagerDidUpdateStateyySo09CBCentralH0CF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "objc_name": "centralManagerDidUpdateState:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "centralManager",
+            "printedName": "centralManager(_:didDiscover:advertisementData:rssi:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCentralManager",
+                "printedName": "CoreBluetooth.CBCentralManager",
+                "usr": "c:objc(cs)CBCentralManager"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Any]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:SD"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSNumber",
+                "printedName": "Foundation.NSNumber",
+                "usr": "c:objc(cs)NSNumber"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@CoreBLEServiceSourceCode@objc(cs)CoreBluetoothService(im)centralManager:didDiscoverPeripheral:advertisementData:RSSI:",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC14centralManager_11didDiscover17advertisementData4rssiySo09CBCentralH0C_So12CBPeripheralCSDySSypGSo8NSNumberCtF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "objc_name": "centralManager:didDiscoverPeripheral:advertisementData:RSSI:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "centralManager",
+            "printedName": "centralManager(_:didConnect:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCentralManager",
+                "printedName": "CoreBluetooth.CBCentralManager",
+                "usr": "c:objc(cs)CBCentralManager"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@CoreBLEServiceSourceCode@objc(cs)CoreBluetoothService(im)centralManager:didConnectPeripheral:",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC14centralManager_10didConnectySo09CBCentralH0C_So12CBPeripheralCtF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "objc_name": "centralManager:didConnectPeripheral:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "centralManager",
+            "printedName": "centralManager(_:didFailToConnect:error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCentralManager",
+                "printedName": "CoreBluetooth.CBCentralManager",
+                "usr": "c:objc(cs)CBCentralManager"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Error?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@CoreBLEServiceSourceCode@objc(cs)CoreBluetoothService(im)centralManager:didFailToConnectPeripheral:error:",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC14centralManager_16didFailToConnect5errorySo09CBCentralH0C_So12CBPeripheralCs5Error_pSgtF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "objc_name": "centralManager:didFailToConnectPeripheral:error:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "centralManager",
+            "printedName": "centralManager(_:didDisconnectPeripheral:error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCentralManager",
+                "printedName": "CoreBluetooth.CBCentralManager",
+                "usr": "c:objc(cs)CBCentralManager"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Error?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@CoreBLEServiceSourceCode@objc(cs)CoreBluetoothService(im)centralManager:didDisconnectPeripheral:error:",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC14centralManager_23didDisconnectPeripheral5errorySo09CBCentralH0C_So12CBPeripheralCs5Error_pSgtF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "objc_name": "centralManager:didDisconnectPeripheral:error:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "PeripheralStatus",
+            "printedName": "PeripheralStatus",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "unknown",
+                "printedName": "unknown",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus.Type) -> CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "PeripheralStatus",
+                        "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus",
+                        "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "PeripheralStatus",
+                            "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus",
+                            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO7unknownyA2EmF",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO7unknownyA2EmF",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "didConnect",
+                "printedName": "didConnect",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus.Type) -> (CoreBLEServiceSourceCode.BluetoothPeripheral) -> CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(CoreBLEServiceSourceCode.BluetoothPeripheral) -> CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "PeripheralStatus",
+                            "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus",
+                            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "BluetoothPeripheral",
+                            "printedName": "CoreBLEServiceSourceCode.BluetoothPeripheral",
+                            "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV"
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "PeripheralStatus",
+                            "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus",
+                            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO10didConnectyAeA0eG0VcAEmF",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO10didConnectyAeA0eG0VcAEmF",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "didDisconnect",
+                "printedName": "didDisconnect",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus.Type) -> (CoreBLEServiceSourceCode.BluetoothPeripheral) -> CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(CoreBLEServiceSourceCode.BluetoothPeripheral) -> CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "PeripheralStatus",
+                            "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus",
+                            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "BluetoothPeripheral",
+                            "printedName": "CoreBLEServiceSourceCode.BluetoothPeripheral",
+                            "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV"
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "PeripheralStatus",
+                            "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus",
+                            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO13didDisconnectyAeA0eG0VcAEmF",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO13didDisconnectyAeA0eG0VcAEmF",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "prepared",
+                "printedName": "prepared",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus.Type) -> CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "PeripheralStatus",
+                        "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus",
+                        "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "PeripheralStatus",
+                            "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus",
+                            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO8preparedyA2EmF",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO8preparedyA2EmF",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC16PeripheralStatusO",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "CharacteristicWriteType",
+            "printedName": "CharacteristicWriteType",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "write",
+                "printedName": "write",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType.Type) -> CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CharacteristicWriteType",
+                        "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType",
+                        "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "CharacteristicWriteType",
+                            "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType",
+                            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO5writeyA2EmF",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO5writeyA2EmF",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "writeWithoutResponse",
+                "printedName": "writeWithoutResponse",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType.Type) -> CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CharacteristicWriteType",
+                        "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType",
+                        "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "CharacteristicWriteType",
+                            "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType",
+                            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO20writeWithoutResponseyA2EmF",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO20writeWithoutResponseyA2EmF",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "notify",
+                "printedName": "notify",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType.Type) -> CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CharacteristicWriteType",
+                        "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType",
+                        "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "CharacteristicWriteType",
+                            "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType",
+                            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO6notifyyA2EmF",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO6notifyyA2EmF",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Constructor",
+                "name": "init",
+                "printedName": "init(rawValue:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CharacteristicWriteType",
+                        "printedName": "CoreBLEServiceSourceCode.CoreBluetoothService.CharacteristicWriteType",
+                        "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Constructor",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO8rawValueAESgSS_tcfc",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO8rawValueAESgSS_tcfc",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "init_kind": "Designated"
+              },
+              {
+                "kind": "Var",
+                "name": "rawValue",
+                "printedName": "rawValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO8rawValueSSvp",
+                "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO8rawValueSSvp",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO8rawValueSSvg",
+                    "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO8rawValueSSvg",
+                    "moduleName": "CoreBLEServiceSourceCode",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC23CharacteristicWriteTypeO",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "enumRawTypeName": "String",
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Hashable",
+                "printedName": "Hashable",
+                "usr": "s:SH",
+                "mangledName": "$sSH"
+              },
+              {
+                "kind": "Conformance",
+                "name": "RawRepresentable",
+                "printedName": "RawRepresentable",
+                "children": [
+                  {
+                    "kind": "TypeWitness",
+                    "name": "RawValue",
+                    "printedName": "RawValue",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ]
+                  }
+                ],
+                "usr": "s:SY",
+                "mangledName": "$sSY"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "peripheral",
+            "printedName": "peripheral(_:didDiscoverServices:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Error?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@CoreBLEServiceSourceCode@objc(cs)CoreBluetoothService(im)peripheral:didDiscoverServices:",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC10peripheral_19didDiscoverServicesySo12CBPeripheralC_s5Error_pSgtF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "objc_name": "peripheral:didDiscoverServices:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "peripheral",
+            "printedName": "peripheral(_:didDiscoverCharacteristicsFor:error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBService",
+                "printedName": "CoreBluetooth.CBService",
+                "usr": "c:objc(cs)CBService"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Error?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@CoreBLEServiceSourceCode@objc(cs)CoreBluetoothService(im)peripheral:didDiscoverCharacteristicsForService:error:",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC10peripheral_29didDiscoverCharacteristicsFor5errorySo12CBPeripheralC_So9CBServiceCs5Error_pSgtF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "objc_name": "peripheral:didDiscoverCharacteristicsForService:error:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "peripheral",
+            "printedName": "peripheral(_:didDiscoverDescriptorsFor:error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCharacteristic",
+                "printedName": "CoreBluetooth.CBCharacteristic",
+                "usr": "c:objc(cs)CBCharacteristic"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Error?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@CoreBLEServiceSourceCode@objc(cs)CoreBluetoothService(im)peripheral:didDiscoverDescriptorsForCharacteristic:error:",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC10peripheral_25didDiscoverDescriptorsFor5errorySo12CBPeripheralC_So16CBCharacteristicCs5Error_pSgtF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "objc_name": "peripheral:didDiscoverDescriptorsForCharacteristic:error:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "peripheral",
+            "printedName": "peripheral(_:didUpdateValueFor:error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCharacteristic",
+                "printedName": "CoreBluetooth.CBCharacteristic",
+                "usr": "c:objc(cs)CBCharacteristic"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Error?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@CoreBLEServiceSourceCode@objc(cs)CoreBluetoothService(im)peripheral:didUpdateValueForCharacteristic:error:",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC10peripheral_17didUpdateValueFor5errorySo12CBPeripheralC_So16CBCharacteristicCs5Error_pSgtF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "objc_name": "peripheral:didUpdateValueForCharacteristic:error:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "peripheral",
+            "printedName": "peripheral(_:didUpdateNotificationStateFor:error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCharacteristic",
+                "printedName": "CoreBluetooth.CBCharacteristic",
+                "usr": "c:objc(cs)CBCharacteristic"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Error?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@CoreBLEServiceSourceCode@objc(cs)CoreBluetoothService(im)peripheral:didUpdateNotificationStateForCharacteristic:error:",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC10peripheral_29didUpdateNotificationStateFor5errorySo12CBPeripheralC_So16CBCharacteristicCs5Error_pSgtF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "objc_name": "peripheral:didUpdateNotificationStateForCharacteristic:error:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "peripheral",
+            "printedName": "peripheral(_:didWriteValueFor:error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCharacteristic",
+                "printedName": "CoreBluetooth.CBCharacteristic",
+                "usr": "c:objc(cs)CBCharacteristic"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Error?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@CoreBLEServiceSourceCode@objc(cs)CoreBluetoothService(im)peripheral:didWriteValueForCharacteristic:error:",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC10peripheral_16didWriteValueFor5errorySo12CBPeripheralC_So16CBCharacteristicCs5Error_pSgtF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "objc_name": "peripheral:didWriteValueForCharacteristic:error:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "peripheral",
+            "printedName": "peripheral(_:didReadRSSI:error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSNumber",
+                "printedName": "Foundation.NSNumber",
+                "usr": "c:objc(cs)NSNumber"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Error?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@CoreBLEServiceSourceCode@objc(cs)CoreBluetoothService(im)peripheral:didReadRSSI:error:",
+            "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC10peripheral_11didReadRSSI5errorySo12CBPeripheralC_So8NSNumberCs5Error_pSgtF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "objc_name": "peripheral:didReadRSSI:error:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@CoreBLEServiceSourceCode@objc(cs)CoreBluetoothService",
+        "mangledName": "$s24CoreBLEServiceSourceCode0A16BluetoothServiceC",
+        "moduleName": "CoreBLEServiceSourceCode",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "CoreBLEServiceSourceCode",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "CoreBLEServiceSourceCode",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "CoreBluetooth",
+        "printedName": "CoreBluetooth",
+        "declKind": "Import",
+        "moduleName": "CoreBLEServiceSourceCode"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "CoreBLEServiceSourceCode",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "CoreBluetooth",
+        "printedName": "CoreBluetooth",
+        "declKind": "Import",
+        "moduleName": "CoreBLEServiceSourceCode"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "BluetoothPeripheral",
+        "printedName": "BluetoothPeripheral",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "device",
+            "printedName": "device",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV6deviceSo12CBPeripheralCvp",
+            "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV6deviceSo12CBPeripheralCvp",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CBPeripheral",
+                    "printedName": "CoreBluetooth.CBPeripheral",
+                    "usr": "c:objc(cs)CBPeripheral"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV6deviceSo12CBPeripheralCvg",
+                "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV6deviceSo12CBPeripheralCvg",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "rssi",
+            "printedName": "rssi",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Float?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Float",
+                    "printedName": "Swift.Float",
+                    "usr": "s:Sf"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV4rssiSfSgvp",
+            "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV4rssiSfSgvp",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Float?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Float",
+                        "printedName": "Swift.Float",
+                        "usr": "s:Sf"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV4rssiSfSgvg",
+                "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV4rssiSfSgvg",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Float?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Float",
+                        "printedName": "Swift.Float",
+                        "usr": "s:Sf"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV4rssiSfSgvs",
+                "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV4rssiSfSgvs",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV4rssiSfSgvM",
+                "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV4rssiSfSgvM",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "deviceName",
+            "printedName": "deviceName",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV10deviceNameSSSgvp",
+            "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV10deviceNameSSSgvp",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV10deviceNameSSSgvg",
+                "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV10deviceNameSSSgvg",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV10deviceNameSSSgvs",
+                "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV10deviceNameSSSgvs",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV10deviceNameSSSgvM",
+                "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV10deviceNameSSSgvM",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "localName",
+            "printedName": "localName",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV9localNameSSSgvp",
+            "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV9localNameSSSgvp",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV9localNameSSSgvg",
+                "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV9localNameSSSgvg",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV9localNameSSSgvs",
+                "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV9localNameSSSgvs",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV9localNameSSSgvM",
+                "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV9localNameSSSgvM",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "uuid",
+            "printedName": "uuid",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV4uuidSSSgvp",
+            "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV4uuidSSSgvp",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV4uuidSSSgvg",
+                "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV4uuidSSSgvg",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV4uuidSSSgvs",
+                "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV4uuidSSSgvs",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV4uuidSSSgvM",
+                "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV4uuidSSSgvM",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "address",
+            "printedName": "address",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV7addressSSvp",
+            "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV7addressSSvp",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV7addressSSvg",
+                "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV7addressSSvg",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "writeValue",
+            "printedName": "writeValue(_:for:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCharacteristic",
+                "printedName": "CoreBluetooth.CBCharacteristic",
+                "usr": "c:objc(cs)CBCharacteristic"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV10writeValue_3fory10Foundation4DataV_So16CBCharacteristicCtF",
+            "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV10writeValue_3fory10Foundation4DataV_So16CBCharacteristicCtF",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:24CoreBLEServiceSourceCode19BluetoothPeripheralV",
+        "mangledName": "$s24CoreBLEServiceSourceCode19BluetoothPeripheralV",
+        "moduleName": "CoreBLEServiceSourceCode",
+        "declAttributes": [
+          "AccessControl"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "CoreBLEServiceSourceCode",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "CoreBluetooth",
+        "printedName": "CoreBluetooth",
+        "declKind": "Import",
+        "moduleName": "CoreBLEServiceSourceCode"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "String",
+        "printedName": "String",
+        "children": [
+          {
+            "kind": "TypeDecl",
+            "name": "AdvertisementDataRetrievalKey",
+            "printedName": "AdvertisementDataRetrievalKey",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "localName",
+                "printedName": "localName",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Swift.String.AdvertisementDataRetrievalKey.Type) -> Swift.String.AdvertisementDataRetrievalKey",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "AdvertisementDataRetrievalKey",
+                        "printedName": "Swift.String.AdvertisementDataRetrievalKey",
+                        "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "Swift.String.AdvertisementDataRetrievalKey.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "AdvertisementDataRetrievalKey",
+                            "printedName": "Swift.String.AdvertisementDataRetrievalKey",
+                            "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO9localNameyA2CmF",
+                "mangledName": "$sSS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO9localNameyA2CmF",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "manufacturerData",
+                "printedName": "manufacturerData",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Swift.String.AdvertisementDataRetrievalKey.Type) -> Swift.String.AdvertisementDataRetrievalKey",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "AdvertisementDataRetrievalKey",
+                        "printedName": "Swift.String.AdvertisementDataRetrievalKey",
+                        "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "Swift.String.AdvertisementDataRetrievalKey.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "AdvertisementDataRetrievalKey",
+                            "printedName": "Swift.String.AdvertisementDataRetrievalKey",
+                            "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO012manufacturerF0yA2CmF",
+                "mangledName": "$sSS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO012manufacturerF0yA2CmF",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "serviceUUIDsKey",
+                "printedName": "serviceUUIDsKey",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Swift.String.AdvertisementDataRetrievalKey.Type) -> Swift.String.AdvertisementDataRetrievalKey",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "AdvertisementDataRetrievalKey",
+                        "printedName": "Swift.String.AdvertisementDataRetrievalKey",
+                        "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "Swift.String.AdvertisementDataRetrievalKey.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "AdvertisementDataRetrievalKey",
+                            "printedName": "Swift.String.AdvertisementDataRetrievalKey",
+                            "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO012serviceUUIDsH0yA2CmF",
+                "mangledName": "$sSS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO012serviceUUIDsH0yA2CmF",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "isConnectable",
+                "printedName": "isConnectable",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Swift.String.AdvertisementDataRetrievalKey.Type) -> Swift.String.AdvertisementDataRetrievalKey",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "AdvertisementDataRetrievalKey",
+                        "printedName": "Swift.String.AdvertisementDataRetrievalKey",
+                        "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "Swift.String.AdvertisementDataRetrievalKey.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "AdvertisementDataRetrievalKey",
+                            "printedName": "Swift.String.AdvertisementDataRetrievalKey",
+                            "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO13isConnectableyA2CmF",
+                "mangledName": "$sSS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO13isConnectableyA2CmF",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "==",
+                "printedName": "==(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AdvertisementDataRetrievalKey",
+                    "printedName": "Swift.String.AdvertisementDataRetrievalKey",
+                    "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AdvertisementDataRetrievalKey",
+                    "printedName": "Swift.String.AdvertisementDataRetrievalKey",
+                    "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO2eeoiySbAC_ACtFZ",
+                "mangledName": "$sSS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO2eeoiySbAC_ACtFZ",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "static": true,
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Var",
+                "name": "hashValue",
+                "printedName": "hashValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO9hashValueSivp",
+                "mangledName": "$sSS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO9hashValueSivp",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO9hashValueSivg",
+                    "mangledName": "$sSS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO9hashValueSivg",
+                    "moduleName": "CoreBLEServiceSourceCode",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "hash",
+                "printedName": "hash(into:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Hasher",
+                    "printedName": "Swift.Hasher",
+                    "paramValueOwnership": "InOut",
+                    "usr": "s:s6HasherV"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO4hash4intoys6HasherVz_tF",
+                "mangledName": "$sSS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO4hash4intoys6HasherVz_tF",
+                "moduleName": "CoreBLEServiceSourceCode",
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:SS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO",
+            "mangledName": "$sSS24CoreBLEServiceSourceCodeE29AdvertisementDataRetrievalKeyO",
+            "moduleName": "CoreBLEServiceSourceCode",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Hashable",
+                "printedName": "Hashable",
+                "usr": "s:SH",
+                "mangledName": "$sSH"
+              }
+            ]
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:SS",
+        "mangledName": "$sSS",
+        "moduleName": "Swift",
+        "declAttributes": [
+          "Frozen"
+        ],
+        "isExternal": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Decodable",
+            "printedName": "Decodable",
+            "usr": "s:Se",
+            "mangledName": "$sSe"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Encodable",
+            "printedName": "Encodable",
+            "usr": "s:SE",
+            "mangledName": "$sSE"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CodingKeyRepresentable",
+            "printedName": "CodingKeyRepresentable",
+            "usr": "s:s22CodingKeyRepresentableP",
+            "mangledName": "$ss22CodingKeyRepresentableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_HasContiguousBytes",
+            "printedName": "_HasContiguousBytes",
+            "usr": "s:s19_HasContiguousBytesP",
+            "mangledName": "$ss19_HasContiguousBytesP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomReflectable",
+            "printedName": "CustomReflectable",
+            "usr": "s:s17CustomReflectableP",
+            "mangledName": "$ss17CustomReflectableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_CustomPlaygroundQuickLookable",
+            "printedName": "_CustomPlaygroundQuickLookable",
+            "usr": "s:s30_CustomPlaygroundQuickLookableP",
+            "mangledName": "$ss30_CustomPlaygroundQuickLookableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "TextOutputStream",
+            "printedName": "TextOutputStream",
+            "usr": "s:s16TextOutputStreamP",
+            "mangledName": "$ss16TextOutputStreamP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "TextOutputStreamable",
+            "printedName": "TextOutputStreamable",
+            "usr": "s:s20TextOutputStreamableP",
+            "mangledName": "$ss20TextOutputStreamableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_ExpressibleByBuiltinUnicodeScalarLiteral",
+            "printedName": "_ExpressibleByBuiltinUnicodeScalarLiteral",
+            "usr": "s:s41_ExpressibleByBuiltinUnicodeScalarLiteralP",
+            "mangledName": "$ss41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_ExpressibleByBuiltinExtendedGraphemeClusterLiteral",
+            "printedName": "_ExpressibleByBuiltinExtendedGraphemeClusterLiteral",
+            "usr": "s:s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP",
+            "mangledName": "$ss51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_ExpressibleByBuiltinStringLiteral",
+            "printedName": "_ExpressibleByBuiltinStringLiteral",
+            "usr": "s:s34_ExpressibleByBuiltinStringLiteralP",
+            "mangledName": "$ss34_ExpressibleByBuiltinStringLiteralP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "ExpressibleByStringLiteral",
+            "printedName": "ExpressibleByStringLiteral",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "StringLiteralType",
+                "printedName": "StringLiteralType",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s26ExpressibleByStringLiteralP",
+            "mangledName": "$ss26ExpressibleByStringLiteralP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "ExpressibleByExtendedGraphemeClusterLiteral",
+            "printedName": "ExpressibleByExtendedGraphemeClusterLiteral",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "ExtendedGraphemeClusterLiteralType",
+                "printedName": "ExtendedGraphemeClusterLiteralType",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s43ExpressibleByExtendedGraphemeClusterLiteralP",
+            "mangledName": "$ss43ExpressibleByExtendedGraphemeClusterLiteralP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "ExpressibleByUnicodeScalarLiteral",
+            "printedName": "ExpressibleByUnicodeScalarLiteral",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "UnicodeScalarLiteralType",
+                "printedName": "UnicodeScalarLiteralType",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s33ExpressibleByUnicodeScalarLiteralP",
+            "mangledName": "$ss33ExpressibleByUnicodeScalarLiteralP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BidirectionalCollection",
+            "printedName": "BidirectionalCollection",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "Element",
+                "printedName": "Element",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Character",
+                    "printedName": "Swift.Character",
+                    "usr": "s:SJ"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeWitness",
+                "name": "Index",
+                "printedName": "Index",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Index",
+                    "printedName": "Swift.String.Index",
+                    "usr": "s:SS5IndexV"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeWitness",
+                "name": "SubSequence",
+                "printedName": "SubSequence",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Substring",
+                    "printedName": "Swift.Substring",
+                    "usr": "s:Ss"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeWitness",
+                "name": "Indices",
+                "printedName": "Indices",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DefaultIndices",
+                    "printedName": "Swift.DefaultIndices<Swift.String>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:SI"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:SK",
+            "mangledName": "$sSK"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Collection",
+            "printedName": "Collection",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "Element",
+                "printedName": "Element",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Character",
+                    "printedName": "Swift.Character",
+                    "usr": "s:SJ"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeWitness",
+                "name": "Index",
+                "printedName": "Index",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Index",
+                    "printedName": "Swift.String.Index",
+                    "usr": "s:SS5IndexV"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeWitness",
+                "name": "Iterator",
+                "printedName": "Iterator",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Iterator",
+                    "printedName": "Swift.String.Iterator",
+                    "usr": "s:SS8IteratorV"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeWitness",
+                "name": "SubSequence",
+                "printedName": "SubSequence",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Substring",
+                    "printedName": "Swift.Substring",
+                    "usr": "s:Ss"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeWitness",
+                "name": "Indices",
+                "printedName": "Indices",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DefaultIndices",
+                    "printedName": "Swift.DefaultIndices<Swift.String>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:SI"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:Sl",
+            "mangledName": "$sSl"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sequence",
+            "printedName": "Sequence",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "Element",
+                "printedName": "Element",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Character",
+                    "printedName": "Swift.Character",
+                    "usr": "s:SJ"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeWitness",
+                "name": "Iterator",
+                "printedName": "Iterator",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Iterator",
+                    "printedName": "Swift.String.Iterator",
+                    "usr": "s:SS8IteratorV"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:ST",
+            "mangledName": "$sST"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Comparable",
+            "printedName": "Comparable",
+            "usr": "s:SL",
+            "mangledName": "$sSL"
+          },
+          {
+            "kind": "Conformance",
+            "name": "StringProtocol",
+            "printedName": "StringProtocol",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "UTF8View",
+                "printedName": "UTF8View",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UTF8View",
+                    "printedName": "Swift.String.UTF8View",
+                    "usr": "s:SS8UTF8ViewV"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeWitness",
+                "name": "UTF16View",
+                "printedName": "UTF16View",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UTF16View",
+                    "printedName": "Swift.String.UTF16View",
+                    "usr": "s:SS9UTF16ViewV"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeWitness",
+                "name": "UnicodeScalarView",
+                "printedName": "UnicodeScalarView",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UnicodeScalarView",
+                    "printedName": "Swift.String.UnicodeScalarView",
+                    "usr": "s:SS17UnicodeScalarViewV"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeWitness",
+                "name": "SubSequence",
+                "printedName": "SubSequence",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Substring",
+                    "printedName": "Swift.Substring",
+                    "usr": "s:Ss"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:Sy",
+            "mangledName": "$sSy"
+          },
+          {
+            "kind": "Conformance",
+            "name": "ExpressibleByStringInterpolation",
+            "printedName": "ExpressibleByStringInterpolation",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "StringInterpolation",
+                "printedName": "StringInterpolation",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DefaultStringInterpolation",
+                    "printedName": "Swift.DefaultStringInterpolation",
+                    "usr": "s:s26DefaultStringInterpolationV"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s32ExpressibleByStringInterpolationP",
+            "mangledName": "$ss32ExpressibleByStringInterpolationP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "LosslessStringConvertible",
+            "printedName": "LosslessStringConvertible",
+            "usr": "s:s25LosslessStringConvertibleP",
+            "mangledName": "$ss25LosslessStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "RangeReplaceableCollection",
+            "printedName": "RangeReplaceableCollection",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "SubSequence",
+                "printedName": "SubSequence",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Substring",
+                    "printedName": "Swift.Substring",
+                    "usr": "s:Ss"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:Sm",
+            "mangledName": "$sSm"
+          },
+          {
+            "kind": "Conformance",
+            "name": "MirrorPath",
+            "printedName": "MirrorPath",
+            "usr": "s:s10MirrorPathP",
+            "mangledName": "$ss10MirrorPathP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_ObjectiveCBridgeable",
+            "printedName": "_ObjectiveCBridgeable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "_ObjectiveCType",
+                "printedName": "_ObjectiveCType",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "NSString",
+                    "printedName": "Foundation.NSString",
+                    "usr": "c:objc(cs)NSString"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s21_ObjectiveCBridgeableP",
+            "mangledName": "$ss21_ObjectiveCBridgeableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBCentralManagerDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 394,
+      "length": 45,
+      "value": "\"AppleBikeKit[UpdateState]: \""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBCentralManagerDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 438,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBCentralManagerDelegate.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1473,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBCentralManagerDelegate.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1505,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBCentralManagerDelegate.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1512,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBCentralManagerDelegate.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1968,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBCentralManagerDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 2252,
+      "length": 73,
+      "value": "\"AppleBikeKit[ConnectPeripheral]: \""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBCentralManagerDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 2324,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBCentralManagerDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 2927,
+      "length": 77,
+      "value": "\"AppleBikeKit[ConnectPeripheralFail]: \""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBCentralManagerDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 3003,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBCentralManagerDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 3457,
+      "length": 76,
+      "value": "\"AppleBikeKit[DisconnectPeripheral]: \""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBCentralManagerDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 3532,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothService.swift",
+      "kind": "BooleanLiteral",
+      "offset": 790,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothService.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1144,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothService.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2544,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothService.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2670,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothService.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3333,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothService.swift",
+      "kind": "StringLiteral",
+      "offset": 4655,
+      "length": 38,
+      "value": "\"46610010-726D-6C61-6E64-546563685457\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothService.swift",
+      "kind": "StringLiteral",
+      "offset": 4766,
+      "length": 38,
+      "value": "\"46610020-726D-6C61-6E64-546563685457\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothService.swift",
+      "kind": "StringLiteral",
+      "offset": 4849,
+      "length": 38,
+      "value": "\"46610011-726D-6C61-6E64-546563685457\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothService.swift",
+      "kind": "StringLiteral",
+      "offset": 4655,
+      "length": 38,
+      "value": "\"46610010-726D-6C61-6E64-546563685457\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothService.swift",
+      "kind": "StringLiteral",
+      "offset": 4766,
+      "length": 38,
+      "value": "\"46610020-726D-6C61-6E64-546563685457\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothService.swift",
+      "kind": "StringLiteral",
+      "offset": 4849,
+      "length": 38,
+      "value": "\"46610011-726D-6C61-6E64-546563685457\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/Extension\/StringExtension.swift",
+      "kind": "StringLiteral",
+      "offset": 705,
+      "length": 25,
+      "value": "\"kCBAdvDataIsConnectable\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/Extension\/StringExtension.swift",
+      "kind": "StringLiteral",
+      "offset": 779,
+      "length": 21,
+      "value": "\"kCBAdvDataLocalName\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/Extension\/StringExtension.swift",
+      "kind": "StringLiteral",
+      "offset": 845,
+      "length": 28,
+      "value": "\"kCBAdvDataManufacturerData\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/Extension\/StringExtension.swift",
+      "kind": "StringLiteral",
+      "offset": 925,
+      "length": 24,
+      "value": "\"kCBAdvDataServiceUUIDs\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBPeripheralDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 435,
+      "length": 42,
+      "value": "\"AppleBikeKit[DiscoverServices]: \""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBPeripheralDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 476,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBPeripheralDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 988,
+      "length": 49,
+      "value": "\"AppleBikeKit[DiscoverCharacteristics]: \""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBPeripheralDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 1036,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBPeripheralDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 1526,
+      "length": 45,
+      "value": "\"AppleBikeKit[DiscoverDescriptors]: \""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBPeripheralDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 1570,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBPeripheralDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 2306,
+      "length": 54,
+      "value": "\"AppleBikeKit[UpdateValueForCharacteristic]: \""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBPeripheralDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 2359,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBPeripheralDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 3112,
+      "length": 66,
+      "value": "\"AppleBikeKit[UpdateNotificationStateForCharacteristic]: \""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBPeripheralDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 3177,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBPeripheralDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 3580,
+      "length": 53,
+      "value": "\"AppleBikeKit[WriteValueForCharacteristic]: \""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBPeripheralDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 3632,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBPeripheralDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 4184,
+      "length": 34,
+      "value": "\"AppleBikeKit[ReadRSSI]: \""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/CoreBLEServiceSourceCode\/CoreBLEServiceSourceCode\/CoreBluetoothServiceWithCBPeripheralDelegate.swift",
+      "kind": "StringLiteral",
+      "offset": 4217,
+      "length": 2,
+      "value": "\"\""
+    }
+  ]
+}
