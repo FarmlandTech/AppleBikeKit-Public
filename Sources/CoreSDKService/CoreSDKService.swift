@@ -20,10 +20,10 @@ public final class CoreSDKService: NSObject {
     // MARK: 回調
     
     /// 刷新腳踏車資訊時，回調的別名。
-    private typealias UpdateDeviceInfoEvent = @convention(c) (DeviceInformation_T) -> Void
+    private typealias UpdateDeviceInfoEvent = @convention(c) (ProtocolType, DeviceInformation_T) -> Void
     /// 刷新腳踏車資訊時的回調。
     private let updateDeviceInfoEvent: UpdateDeviceInfoEvent = {
-        CoreSDKService.dataSource?.updateDeviceInfo(deviceInfo: $0.FL)
+        CoreSDKService.dataSource?.updateDeviceInfo(deviceInfo: $1.FL)
     }
     
     /// 讀取參數時的回調。
@@ -195,7 +195,7 @@ public final class CoreSDKService: NSObject {
     // 處理 Notify 吐回的資料
     public func commandPacketIn(dataPacket: [UInt8]) {
         var data: [UInt8] = dataPacket
-        _ = coreSDKInst.Method.BLECommandPacket_IN(&data, UInt32(dataPacket.count))
+        _ = coreSDKInst.DataBus.FL.BLECommandPacket_IN(&data, UInt32(dataPacket.count))
     }
     
     // 停止讀寫通道，不使用就直接 invalidate timer
@@ -212,10 +212,10 @@ public final class CoreSDKService: NSObject {
             guard let self: CoreSDKService else { return }
             
             // part 參數讀寫通道
-            let commandPacketOutResult = self.coreSDKInst.Method.BLECommandPacket_OUT(&self.commandPacketOutData, &self.commandPacketOutDataLeng)
+            let commandPacketOutResult = self.coreSDKInst.DataBus.FL.BLECommandPacket_OUT(&self.commandPacketOutData, &self.commandPacketOutDataLeng)
             
             // 接收 sdk 處理後的 bin 檔 data，主要是更新 fw 會使用到
-            let dataPacketOutResult = self.coreSDKInst.Method.BLEDataPacket_OUT(&self.dataPacketOutData, &self.dataPacketOutDataLeng)
+            let dataPacketOutResult = self.coreSDKInst.DataBus.FL.BLEDataPacket_OUT(&self.dataPacketOutData, &self.dataPacketOutDataLeng)
             
             if commandPacketOutResult == SDK_RETURN_SUCCESS.rawValue {
                 // 要把處理過的原始封包丟給 BleSDK 去傳給 Hmi
@@ -256,7 +256,7 @@ public final class CoreSDKService: NSObject {
      初始化 CoreSDK 。
      */
     private func initCoreSDK() {
-        print("AppleBikeKit[InitializingCoreSDK]: \(self.sdkVersion)")
+        print("AppleBikeKit[InitializingCoreSDK]: \(String(describing: self.sdkVersion))")
         self.coreSDKInst.InfoUpdateEvent = self.updateDeviceInfoEvent
         FarmLandCoreSDK_Init(&self.coreSDKInst)
     }
@@ -284,7 +284,7 @@ public final class CoreSDKService: NSObject {
      - Throws: CoreSDK 執行失敗。
      */
     public func read(parameter: ParameterData) throws {
-        let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.ReadParameters(SDK_ROUTER_BLE, parameter.partType.coreType, parameter.address, parameter.length, parameter.bank, self.readParameterEvent)
+        let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.FL.ReadParameters(SDK_ROUTER_BLE, parameter.partType.coreType, parameter.address, parameter.length, parameter.bank, self.readParameterEvent)
         guard isCoreSDKCompleteTask == 0 else {
             throw CoreSDKService.Error.readParameterFail(parameter)
         }
@@ -315,7 +315,7 @@ public final class CoreSDKService: NSObject {
             }
             var isCoreSDKCompleteTask: Int32?
             withUnsafePointer(to: &Self.writingData) { pointer in
-                isCoreSDKCompleteTask = self.coreSDKInst.DelegateMethod.WriteParameters(SDK_ROUTER_BLE, parameter.partType.coreType, parameter.address, parameter.length, parameter.bank, pointer.pointee, self.writeParameterEvent)
+                isCoreSDKCompleteTask = self.coreSDKInst.DelegateMethod.FL.WriteParameters(SDK_ROUTER_BLE, parameter.partType.coreType, parameter.address, parameter.length, parameter.bank, pointer.pointee, self.writeParameterEvent)
             }
             guard let isCoreSDKCompleteTask: Int32, isCoreSDKCompleteTask == 0 else {
                 throw Self.Error.writeParameterFail(parameter)
@@ -336,7 +336,7 @@ public final class CoreSDKService: NSObject {
             let unsafeMutableRawPointer = UnsafeMutableRawPointer.allocate(byteCount: byteCount, alignment: alignment)
             unsafeMutableRawPointer.storeBytes(of: parameterValue, as: Int.self)
             
-            let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.WriteParameters(SDK_ROUTER_BLE, parameter.partType.coreType, parameter.address, parameter.length, parameter.bank, unsafeMutableRawPointer, self.writeParameterEvent)
+            let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.FL.WriteParameters(SDK_ROUTER_BLE, parameter.partType.coreType, parameter.address, parameter.length, parameter.bank, unsafeMutableRawPointer, self.writeParameterEvent)
             guard isCoreSDKCompleteTask == 0 else {
                 throw Self.Error.writeParameterFail(parameter)
             }
@@ -349,7 +349,7 @@ public final class CoreSDKService: NSObject {
      重啟部件。
      */
     public func restartPart(_ part: CommunicationPartType) throws {
-        let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.RestartDevice(SDK_ROUTER_BLE, part.coreType, self.restartPartEvent)
+        let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.FL.RestartDevice(SDK_ROUTER_BLE, part.coreType, self.restartPartEvent)
         guard isCoreSDKCompleteTask == 0 else {
             throw Self.Error.restartPartFail(part)
         }
@@ -359,7 +359,7 @@ public final class CoreSDKService: NSObject {
      重置里程參數。
      */
     public func resetTripInfo() throws {
-        let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.ClearTripInfo(SDK_ROUTER_BLE, self.resetTripInfoEvent)
+        let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.FL.ClearTripInfo(SDK_ROUTER_BLE, self.resetTripInfoEvent)
         guard isCoreSDKCompleteTask == 0 else {
             throw Self.Error.resetTripInfoFail
         }
@@ -369,7 +369,7 @@ public final class CoreSDKService: NSObject {
      重置部件參數。
      */
     public func resetPartParameter(part: CommunicationPartType, bank: Int) throws {
-        let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.ResetParameters(SDK_ROUTER_BLE, part.coreType, UInt8(bank), self.resetPartParameterEvent)
+        let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.FL.ResetParameters(SDK_ROUTER_BLE, part.coreType, UInt8(bank), self.resetPartParameterEvent)
         guard isCoreSDKCompleteTask == 0 else {
             throw Self.Error.resetPartParameterFail(part, bank)
         }
@@ -380,7 +380,7 @@ public final class CoreSDKService: NSObject {
      */
     public func updateSystemTime() throws {
         let time: UInt64 = .init(Date().timeIntervalSince1970)
-        let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.ConfigSysTime(SDK_ROUTER_BLE, SDK_FL_MAIN_BATT, time, self.updateSystemTimeEvent)
+        let isCoreSDKCompleteTask: Int32 = self.coreSDKInst.DelegateMethod.FL.ConfigSysTime(SDK_ROUTER_BLE, SDK_FL_MAIN_BATT, time, self.updateSystemTimeEvent)
         guard isCoreSDKCompleteTask == 0 else {
             throw Self.Error.updateSystemTimeFail
         }
@@ -394,7 +394,7 @@ public final class CoreSDKService: NSObject {
      - Throws: CoreSDK 執行失敗。
      */
     public func lightControl(part: light_control_parts = LIGHT_CONTROL_FRONT, isOn: Bool) throws {
-        let isCoreSDKCompleteTask: Int32 =  self.coreSDKInst.DelegateMethod.LightControl(SDK_ROUTER_BLE, part, isOn, self.lightControlEvent)
+        let isCoreSDKCompleteTask: Int32 =  self.coreSDKInst.DelegateMethod.FL.LightControl(SDK_ROUTER_BLE, part, isOn, self.lightControlEvent)
         guard isCoreSDKCompleteTask == 0 else {
             throw Self.Error.lightControlFail
         }
@@ -419,7 +419,7 @@ public final class CoreSDKService: NSObject {
         
         print(part.coreType, data, data.count)
         
-        let isCoreSDKCompleteTask: Int32 =  self.coreSDKInst.DelegateMethod.UpgradeFirmware(SDK_ROUTER_BLE, part.coreType, midPointer, dataPointer, UInt32(data.count), self.upgradeFirmwareProgress, self.upgradeFirmwareEvent)
+        let isCoreSDKCompleteTask: Int32 =  self.coreSDKInst.DelegateMethod.FL.UpgradeFirmware(SDK_ROUTER_BLE, part.coreType, midPointer, dataPointer, UInt32(data.count), self.upgradeFirmwareProgress, self.upgradeFirmwareEvent)
         guard isCoreSDKCompleteTask == 0 else {
             throw Self.Error.upgradeFirmwareFail(part)
         }
@@ -434,7 +434,7 @@ public final class CoreSDKService: NSObject {
      - Throws: CoreSDK 執行失敗。
      */
     public func getELock() throws {
-        let isCoreSDKCompleteTask: Int32 =  self.coreSDKInst.DelegateMethod.GetELock_DEV(SDK_ROUTER_BLE, self.getELockEvent)
+        let isCoreSDKCompleteTask: Int32 =  self.coreSDKInst.DelegateMethod.FL.GetELock_DEV(SDK_ROUTER_BLE, self.getELockEvent)
         guard isCoreSDKCompleteTask == 0 else {
             throw Self.Error.getELockFail
         }

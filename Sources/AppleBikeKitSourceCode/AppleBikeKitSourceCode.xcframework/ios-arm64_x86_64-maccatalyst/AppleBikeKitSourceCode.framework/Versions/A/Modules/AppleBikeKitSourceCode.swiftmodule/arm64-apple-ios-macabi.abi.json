@@ -28,6 +28,58 @@
         "children": [
           {
             "kind": "Var",
+            "name": "moduleVersion",
+            "printedName": "moduleVersion",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:22AppleBikeKitSourceCode04BaseabC0C13moduleVersionSivpZ",
+            "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0C13moduleVersionSivpZ",
+            "moduleName": "AppleBikeKitSourceCode",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:22AppleBikeKitSourceCode04BaseabC0C13moduleVersionSivgZ",
+                "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0C13moduleVersionSivgZ",
+                "moduleName": "AppleBikeKitSourceCode",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "subscriptions",
             "printedName": "subscriptions",
             "children": [
@@ -242,22 +294,36 @@
   "ConstValues": [
     {
       "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode.swift",
-      "kind": "StringLiteral",
-      "offset": 372,
-      "length": 18,
-      "value": "\"com.dyaco.cikada\""
+      "kind": "IntegerLiteral",
+      "offset": 234,
+      "length": 1,
+      "value": "1"
     },
     {
       "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode.swift",
       "kind": "StringLiteral",
-      "offset": 421,
-      "length": 23,
-      "value": "\"未授權的使用！\""
+      "offset": 471,
+      "length": 47,
+      "value": "\"此應用是否具有授權，判斷失敗。\""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode.swift",
+      "kind": "StringLiteral",
+      "offset": 623,
+      "length": 35,
+      "value": "\"未授權的使用： \""
+    },
+    {
+      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode.swift",
+      "kind": "StringLiteral",
+      "offset": 657,
+      "length": 2,
+      "value": "\"\""
     },
     {
       "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode.swift",
       "kind": "Array",
-      "offset": 788,
+      "offset": 1002,
       "length": 126,
       "value": "[\"tw.farmland.riderapp\", \"tw.farmland.RD-Tuning-Tool-Apple\", \"com.dyaco.cikada\"]"
     }

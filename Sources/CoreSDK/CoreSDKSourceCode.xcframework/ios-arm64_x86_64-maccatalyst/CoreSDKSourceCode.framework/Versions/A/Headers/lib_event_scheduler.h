@@ -8,7 +8,6 @@
 #define __LIB_EVENT_SCHEDLULER_H
 
 /* Includes ------------------------------------------------------------------*/
-#import <CoreSDKSourceCode/CoreSDK.h>
 #include <stdbool.h>
 #include <stdint.h>
 /* Exported constants --------------------------------------------------------*/
