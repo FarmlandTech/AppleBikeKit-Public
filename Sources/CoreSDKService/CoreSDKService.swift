@@ -88,6 +88,11 @@ public final class CoreSDKService: NSObject {
         CoreSDKService.dataSource?.getELock(state: $1)
     }
     
+    // 設定助力段數時的回調。
+    private let setAssistLevelEvent: fpCallback_NoParamReturn = {
+        CoreSDKService.dataSource?.setAssistLevel(state: $0 == 0)
+    }
+    
     // MARK: 數據流
     
     // TODO: 找時間改以 Result Type 來改寫傳入值，以免數據為空值時，造成訂閱的終結。
@@ -156,6 +161,10 @@ public final class CoreSDKService: NSObject {
         .init(ELOCK_STATES_UNKNOW)
     }()
     
+    /// 設定助力段數時，命令執行狀態的數據流。
+    public private(set) lazy var setAssistLevelStateSubject: CurrentValueSubject<Bool?, Never> = {
+        .init(nil)
+    }()
     
     public var sdkVersion: String? {
         var version: [UInt8] = Mirror(reflecting: self.coreSDKInst.Version)
@@ -439,6 +448,18 @@ public final class CoreSDKService: NSObject {
             throw Self.Error.getELockFail
         }
     }
+    
+    /**
+     設定助力段數。
+     
+     - Throws: CoreSDK 執行失敗。
+     */
+    public func setAssistLevel(_ level: UInt8) throws {
+        let isCoreSDKCompleteTask: Int32 =  self.coreSDKInst.DelegateMethod.FL.SetAssistLV(SDK_ROUTER_BLE, level, self.setAssistLevelEvent)
+        guard isCoreSDKCompleteTask == 0 else {
+            throw Self.Error.setAssistLevelFail
+        }
+    }
 }
 
 // MARK: - CoreSDK Protocol
@@ -489,6 +510,10 @@ extension CoreSDKService: CoreSDKDataSource {
     func getELock(state: ELockStates) {
         self.getElockStateSubject.send(state)
     }
+    
+    func setAssistLevel(state: Bool) {
+        self.setAssistLevelStateSubject.send(state)
+    }
 }
 
 // MARK: - 操作 CoreSDK 時所遭遇的錯誤
@@ -523,6 +548,8 @@ extension CoreSDKService {
         case upgradeFirmwareFail(CommunicationPartType)
         /// 取得電子鎖狀態失敗。
         case getELockFail
+        /// 設定助力段數失敗。
+        case setAssistLevelFail
     }
 }
 
@@ -553,4 +580,6 @@ private protocol CoreSDKDataSource: AnyObject {
     func upgradeFirmware(code: Int32)
     /// 取得電子鎖狀態。
     func getELock(state: ELockStates)
+    // 設定助力段數。
+    func setAssistLevel(state: Bool)
 }

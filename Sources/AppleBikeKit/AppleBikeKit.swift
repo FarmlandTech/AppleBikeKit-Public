@@ -503,4 +503,14 @@ open class AppleBikeKit: BaseAppleBikeKit {
     open func upgradeFirmware(part: CommunicationPartType, firmware: Data) throws {
         try self.coreSDKService.upgradeFirmware(part: part, data: firmware)
     }
+    
+    /**
+     設定助力段數。
+     
+     - parameter level: 助力段數。
+     - Throws: CoreSDK 執行失敗。
+     */
+    open func setAssistLevel(_ level: UInt8) throws {
+        try self.coreSDKService.setAssistLevel(level)
+    }
 }
