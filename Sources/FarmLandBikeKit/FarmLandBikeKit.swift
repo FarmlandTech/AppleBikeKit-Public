@@ -20,6 +20,8 @@ final public class FarmLandBikeKit: AppleBikeKit {
     
     enum Error: Swift.Error {
         case DisguiseBatteryHelperIsNil
+        case unsupportedLevel
+        case deviceInfoUnavailable
     }
     
     /// 關鍵參數(ssn或dmid等)的緩存值。
@@ -223,4 +225,26 @@ final public class FarmLandBikeKit: AppleBikeKit {
         }
         try disguiseBatteryHelper.read()
     }
+    
+    /**
+     設置輔助等級。
+
+     - Important: 請確保輸入的輔助等級在設備支援的範圍內。
+     - Attention: 如果設備信息不可用或輸入的輔助等級超出支援範圍，將會拋出錯誤。
+     - Requires: `info.deviceInfo` 必須不為 `nil`，且 `support_assist_lv` 必須大於或等於輸入的等級。
+
+     - parameter level: 欲設置的輔助等級。
+     - Throws: `FarmLandBikeKit.Error.deviceInfoUnavailable` 如果設備信息不可用。
+              `FarmLandBikeKit.Error.unsupportedLevel` 如果輸入的等級超出設備支援範圍。
+     */
+    public override func setAssistLevel(_ level: UInt8) throws {
+        guard let support_assist_lv = self.info.deviceInfo?.support_assist_lv else {
+            throw FarmLandBikeKit.Error.deviceInfoUnavailable
+        }
+        guard support_assist_lv >= UInt32(level) else {
+            throw FarmLandBikeKit.Error.unsupportedLevel
+        }
+        try super.setAssistLevel(level)
+    }
+
 }
