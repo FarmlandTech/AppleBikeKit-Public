@@ -6,19 +6,31 @@
 	<dict>
 		<key>Headers/CAN_ISO_TP.h</key>
 		<data>
-		SsUEqvthi58cqQvWd7hDThB+taY=
+		l8alLtTMdKLVz2pSIwADIOpaE8s=
 		</data>
 		<key>Headers/Common.h</key>
 		<data>
-		+AUzH4vk+QEOFdZZTRs3CSqcXKY=
+		VIldTkbbMFTgz7BnFo0B08knexQ=
 		</data>
 		<key>Headers/CoreSDK.h</key>
 		<data>
-		bdpbDRJzuMIikJ16326Pp+gbdIU=
+		DT4pWvAQAk6ZC8SYaGipx0hbwek=
 		</data>
 		<key>Headers/CoreSDKSourceCode.h</key>
 		<data>
-		G8fvQNJna0j73S4lMG0Amqd9wXs=
+		dLwMfZsgc1pNdDWAD4SreAYhrEk=
+		</data>
+		<key>Headers/CoreSDK_Common.h</key>
+		<data>
+		SxBNaRwQKkLKQarUY7eSYqF5ymw=
+		</data>
+		<key>Headers/CoreSDK_DelegateFunc.h</key>
+		<data>
+		NwwQ/7uZGtnKPMZganh9cxt4h6s=
+		</data>
+		<key>Headers/CoreSDK_DeviceInfo.h</key>
+		<data>
+		e46MQPNBMBz8ME5WHPmmKua4bz4=
 		</data>
 		<key>Headers/FL_CANInfoStruct.h</key>
 		<data>
@@ -30,15 +42,15 @@
 		</data>
 		<key>Headers/lib_event_scheduler.h</key>
 		<data>
-		y/4uoQnfHgnN/OsYQ49pTdGhwvU=
+		TVdXOCxJ5VaNsJwyncBtbgvArT4=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		bWVHaIY/pTzS4iehO7dMWteb/ds=
+		MHxWiCAZsNyIGEjSYigu7dvPJbU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		Z5yokP5LfpcGSLLiVNqXVnQmQ9k=
+		n8IwFye5Yi2enfauS9hesXqsZP8=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -47,28 +59,49 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			E8X/PsRzYG9o70kR4jkI2BswN6+UAkTonTLUeUxG14U=
+			UPcpL+/LvMybEdetR6Zp9VmCqeiTv6DSt6NTe0xBg64=
 			</data>
 		</dict>
 		<key>Headers/Common.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			8BeX5csrOTxvKQoMUO7l76sQmwfWnr220FU33RXqarQ=
+			rQm4KXsRTk179wCAaNMBUlWmedPrIUj3wiuxmNIgNik=
 			</data>
 		</dict>
 		<key>Headers/CoreSDK.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			usYw+3eomhfourleDoSxixOyi86zTjP3y0FQBmgdgQY=
+			0WBjYjEjuQPvyY4iKZMkWjmBJMl1KzjCWRg1DxAGuLs=
 			</data>
 		</dict>
 		<key>Headers/CoreSDKSourceCode.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			GsZzKf9b9zcud0l9nP7JIKNnGvI8/sNs25C/KGt77tA=
+			+sZ515746NYGHTsVSg1yF9Z4+SsG9LDu7v7S+u5yWW0=
+			</data>
+		</dict>
+		<key>Headers/CoreSDK_Common.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			J2qflJfMtWb5qr6b4eJ60R5LRfky5SZV3Yak4SijJ3Q=
+			</data>
+		</dict>
+		<key>Headers/CoreSDK_DelegateFunc.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ZmdiJDZ1jvfF/dKnvsgPp4q27ZOuza0eyoVyzNMQCZ4=
+			</data>
+		</dict>
+		<key>Headers/CoreSDK_DeviceInfo.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			/XQyxGc2rxwxkkcucfqknTi3Qb/WfRfVrLtyv2PUZ3A=
 			</data>
 		</dict>
 		<key>Headers/FL_CANInfoStruct.h</key>
@@ -89,14 +122,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			DSw9d9kk3KuCi6JLrI8OZN57dF4N0HP60DHTZwA5FnA=
+			I7BzZA1A0fIzVeG/IDObp9F2xZ5rEZEax62ojjYbFoY=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			hbhkVQKEz0rssTsuYfVIy3LAsjh6GfOCNwD0iBP5az4=
+			36ODXvHvO5uoD1IBwhWn2R91/Z7ZyHXBuyZFWWtEoek=
 			</data>
 		</dict>
 	</dict>

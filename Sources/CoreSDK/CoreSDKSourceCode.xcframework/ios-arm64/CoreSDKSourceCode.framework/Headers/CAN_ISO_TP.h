@@ -56,10 +56,10 @@ typedef struct ISOTP_PortInfo_st
 
 #define LISTEN_PORT_SIZE		32
 
-#define FRAME_TYPE_SINGLE		0U
-#define FRAME_TYPE_FIRST		1U
-#define FRAME_TYPE_CONSECUTIVE	2U
-#define FRAME_TYPE_FLOW_CTL		3U
+#define FRAME_TYPE_SINGLE		(uint8_t)0
+#define FRAME_TYPE_FIRST		(uint8_t)1
+#define FRAME_TYPE_CONSECUTIVE	(uint8_t)2
+#define FRAME_TYPE_FLOW_CTL		(uint8_t)3
 
 
 union SingleFrameHeader_st

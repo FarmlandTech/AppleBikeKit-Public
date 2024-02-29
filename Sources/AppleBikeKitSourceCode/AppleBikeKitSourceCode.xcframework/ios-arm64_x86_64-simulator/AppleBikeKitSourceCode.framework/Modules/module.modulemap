@@ -1,7 +1,7 @@
 framework module AppleBikeKitSourceCode {
   umbrella header "AppleBikeKitSourceCode.h"
-
   export *
+
   module * { export * }
 }
 
