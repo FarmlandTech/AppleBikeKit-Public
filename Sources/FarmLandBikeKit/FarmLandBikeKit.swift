@@ -207,8 +207,8 @@ final public class FarmLandBikeKit: AppleBikeKit {
      - Throws: CoreSDK 執行失敗，或部件版本並未支持此功能。
      */
     public override func lightControl(part: light_control_parts = LIGHT_CONTROL_FRONT, isOn: Bool) throws {
-        try self.checkVersion(part: .controller, version: "0.0.22")
-        try self.checkVersion(part: .hmi, version: "0.0.01")
+//        try self.checkVersion(part: .controller, version: "0.0.22")
+//        try self.checkVersion(part: .hmi, version: "0.0.20")
         try super.lightControl(part: part, isOn: isOn)
     }
     
