@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import CoreBluetooth
 
-import CoreBLEServiceSourceCode
+import CoreBLEService
 
 /// 連線的裝置實例緩存。
 public class ConnectedPeripheral {

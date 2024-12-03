@@ -9,26 +9,33 @@ import Foundation
 import Combine
 import CoreBluetooth
 
-import CoreSDKSourceCode
+import CoreSDK
 import CoreSDKService
-import CoreBLEServiceSourceCode
+import CoreBLEService
 import AppleBikeKitSourceCode
 
 /// 藍牙連線統一的對外接口，整合 CoreSDK 與 CoreBLEService 的調用。
 open class AppleBikeKit: BaseAppleBikeKit {
     
-    /// 單例。
+    /// 提供一個單例實例，用於全局訪問 `AppleBikeKit` 的功能。
     public static let shared: AppleBikeKit = .init()
     
-    /// 當前連線裝置的實例緩存。
+    /// 用於緩存當前已連線裝置的實例。這允許應用快速訪問當前連線的藍牙裝置資訊。
     public private(set) lazy var connectedPeripheral: ConnectedPeripheral = {
         .init()
     }()
     
     // MARK: - CoreSDKService
     
-    /// 操作 CoreSDK 的物件實例。
-    private let coreSDKService: CoreSDKService = .init()
+    /// 操作 `CoreSDK` 的物件實例。此實例負責處理與核心SDK相關的操作，如初始化和配置SDK。
+    /// 初始化時會根據 `BaseAppleBikeKit` 中設置的 `target` 進行相應的配置。
+    public private(set) lazy var coreSDKService: CoreSDKService = {
+        // 檢查 `BaseAppleBikeKit` 中的 `target` 是否已設置且非空，這是初始化 `CoreSDKService` 的必要條件。
+        guard let target: String = Self.target else {
+            fatalError("配置目標(target)不可為空。")
+        }
+        return .init(target: target)
+    }()
     
     /// CoreSDK 版本編號。
     public var sdkVersion: String? {
@@ -36,25 +43,40 @@ open class AppleBikeKit: BaseAppleBikeKit {
     }
     
     /// 腳踏車裝置資訊。(最後一次)
-    public var info: (deviceInfo: FL_Info_st?, timestamp: Date) {
+    public var info: (deviceInfo: DeviceInfo?, timestamp: Date) {
         self.coreSDKService.deviceInfoSubject.value
     }
     
     /// 用於 CoreSDK 的參數倉庫，包括定義與緩存，也實作部分的邏輯。
-    public private(set) lazy var parameterDataRepository: ParameterDataRepository = {
-        .init()
+    public private(set) lazy var parameterDataRepository: ParameterDataSource = {
+        switch Self.tenant {
+        case .apple, .kiwi:
+            return AppleParameterDataRepository()
+        case .orange:
+            return OrangeParameterDataRepository()
+        case .cherry:
+            return CherryParameterDataRepository()
+        case .unknown:
+            // 由於未知的配置目標，這裡採用了防禦式編程，直接觸發錯誤。
+            // 這確保了應用不會在未知的配置狀態下運行，避免可能的錯誤或不可預測的行為。
+            fallthrough
+        @unknown default:
+            // 為了未來擴展性，捕捉任何未知的配置案例。
+            // 直接觸發錯誤，因為未處理的配置可能會導致應用不穩定或數據處理問題。
+            fatalError("未知的配置目標(target)。")
+        }
     }()
     
     @available(*, deprecated, message: "该方法已被弃用，请改用 deviceInfoPublisher(throttle:) 方法。")
     /// 腳踏車裝置資訊的發佈者。
-    public private(set) lazy var deviceInfoPublisher: AnyPublisher<(deviceInfo: FL_Info_st?, timestamp: Date), Never> = {
+    public private(set) lazy var deviceInfoPublisher: AnyPublisher<(deviceInfo: DeviceInfo?, timestamp: Date), Never> = {
         self.coreSDKService.deviceInfoSubject
             .throttle(for: .milliseconds(700), scheduler: RunLoop.main, latest: true)
             .eraseToAnyPublisher()
     }()
     
     /// 腳踏車裝置資訊的發佈者。
-    public func deviceInfoPublisher(throttle milliseconds: Int = 0) -> AnyPublisher<(deviceInfo: FL_Info_st?, timestamp: Date), Never> {
+    public func deviceInfoPublisher(throttle milliseconds: Int = 0) -> AnyPublisher<(deviceInfo: DeviceInfo?, timestamp: Date), Never> {
         if milliseconds > 0 {
             return self.coreSDKService.deviceInfoSubject
                 .throttle(for: .milliseconds(milliseconds), scheduler: RunLoop.main, latest: true)
@@ -69,7 +91,7 @@ open class AppleBikeKit: BaseAppleBikeKit {
     private let parameterDataSubject: PassthroughSubject<ParameterData, Swift.Error> = .init()
     
     /// 腳踏車裝置讀取來的參數的發佈者。
-    public private(set) lazy var parameterDataPubisher: AnyPublisher<ParameterData, Swift.Error> = {
+    public private(set) lazy var parameterDataPublisher: AnyPublisher<ParameterData, Swift.Error> = {
         self.parameterDataSubject.eraseToAnyPublisher()
     }()
     
@@ -119,6 +141,11 @@ open class AppleBikeKit: BaseAppleBikeKit {
         self.coreSDKService.getElockStateSubject
             .removeDuplicates()
             .eraseToAnyPublisher()
+    }()
+    
+    /// 設定電子鎖狀態時，執行狀態的發佈者。
+    public private(set) lazy var setELockStatePublisher: AnyPublisher<Bool?, Never> = {
+        self.coreSDKService.setELockStateSubject.eraseToAnyPublisher()
     }()
     
     override open func subscribeCoreSDKServiceSubjects() {
@@ -226,6 +253,12 @@ open class AppleBikeKit: BaseAppleBikeKit {
                 
             })
             .store(in: &self.subscriptions)
+        
+        self.coreSDKService.setELockStateSubject
+            .sink(receiveValue: { _ in
+                
+            })
+            .store(in: &self.subscriptions)
     }
     
     override open func subscribeCoreBLEServiceSubjects() {
@@ -241,17 +274,23 @@ open class AppleBikeKit: BaseAppleBikeKit {
                     // 取得每個服務的所有特徵。
                     characteristics.forEach { [weak self] characteristic in
                         guard let self: AppleBikeKit else { return }
-                        guard let type: CoreBluetoothService.CharacteristicWriteType = .init(rawValue: characteristic.uuid.uuidString) else { return }
                         // 判斷特徵型態，並緩存。
-                        switch type {
-                        case .write:
-                            self.connectedPeripheral.writeCharacteristicSubject.value = characteristic
-                        case .notify:
-                            self.connectedPeripheral.notifyCharacteristicSubject.value = characteristic
-                            // 訂閱通知。
-                            self.connectedPeripheral.currentPeripheralSubject.value?.device.setNotifyValue(true, for: characteristic)
-                        case .writeWithoutResponse:
-                            self.connectedPeripheral.writeWithoutResponseCharacteristicSubject.value = characteristic
+                        do {
+                            let type: CoreBluetoothService.CharacteristicWriteType = try .init(Self.tenant.rawValue)
+                            switch characteristic.uuid.uuidString {
+                            case type.write:
+                                self.connectedPeripheral.writeCharacteristicSubject.value = characteristic
+                            case type.notify:
+                                self.connectedPeripheral.notifyCharacteristicSubject.value = characteristic
+                                // 訂閱通知。
+                                self.connectedPeripheral.currentPeripheralSubject.value?.device.setNotifyValue(true, for: characteristic)
+                            case type.writeWithoutResponse:
+                                self.connectedPeripheral.writeWithoutResponseCharacteristicSubject.value = characteristic
+                            default:
+                                break
+                            }
+                        } catch {
+                            print(error)
                         }
                     }
                 })
@@ -316,14 +355,21 @@ open class AppleBikeKit: BaseAppleBikeKit {
     }
     
     /**
+     重置更新韌體(執行結果)的狀態值。
+     */
+    public func resetUpgradeFirmwareState() {
+        self.coreSDKService.upgradeFirmwareStateSubject.send(nil)
+    }
+    
+    /**
      讀取部件參數的方法。
      
      - parameter name: 部件參數的名稱。
      - Throws: 未定義的部件名稱，將會導致錯誤的拋出。
      - Throws: 來自 CoreSDK 判定的錯誤，應該是肇因於參數的錯誤。
      */
-    public func readParameter(name: ParameterData.Name) throws {
-        let parameterData: ParameterData = try self.parameterDataRepository.findParameterData(name: name)
+    public func readParameter(name: String, part: CommunicationPartType) throws {
+        let parameterData: ParameterData = try self.parameterDataRepository.findParameterData(name: name, part: part)
         try self.coreSDKService.read(parameter: parameterData)
     }
     
@@ -334,8 +380,8 @@ open class AppleBikeKit: BaseAppleBikeKit {
      - Returns: 未定義的部件名稱，將會導致錯誤的拋出。
      - Throws: 參數的型別或數值等各分面可能導致的錯誤。
      */
-    public func writeParameter(name: ParameterData.Name, value: Any) throws {
-        let parameterData: ParameterData = try self.parameterDataRepository.findParameterData(name: name)
+    public func writeParameter(name: String, part: CommunicationPartType, value: Any) throws {
+        let parameterData: ParameterData = try self.parameterDataRepository.findParameterData(name: name, part: part)
         parameterData.value = value
         try self.coreSDKService.write(parameter: parameterData)
     }
@@ -368,10 +414,61 @@ open class AppleBikeKit: BaseAppleBikeKit {
         try self.coreSDKService.getELock()
     }
     
+    /**
+     設定電子鎖狀態。
+     
+     - Throws: 來自 CoreSDK 判定的錯誤。
+     */
+    public func setELock(release: Bool, unlocked: Bool) throws {
+        try self.coreSDKService.setELock(release: release, unlocked: unlocked)
+    }
+    
+    public func updateSystemTime() throws {
+        try self.coreSDKService.updateSystemTime()
+    }
+    
+    /**
+     控制車燈開關。
+     
+     - parameter part: 前燈或後燈。
+     - parameter isOn: 開或關。
+     - Throws: CoreSDK 執行失敗。
+     */
+    open func lightControl(part: light_control_parts = LIGHT_CONTROL_FRONT, isOn: Bool) throws {
+        try self.coreSDKService.lightControl(part: part, isOn: isOn)
+    }
+    
+    /**
+     更新韌體。
+     
+     - parameter part: 部件。
+     - parameter firmware: 韌體。
+     - Throws: CoreSDK 執行失敗。
+     */
+    open func upgradeFirmware(part: CommunicationPartType, firmware: Data) throws {
+        try self.coreSDKService.upgradeFirmware(part: part, data: firmware)
+    }
+    
+    /**
+     設定助力段數。
+     
+     - parameter level: 助力段數。
+     - Throws: CoreSDK 執行失敗。
+     */
+    open func setAssistLevel(_ level: UInt8) throws {
+        try self.coreSDKService.setAssistLevel(level)
+    }
+    
     // MARK: - CoreBluetoothService
     
     /// 操作 CoreBluetooth 的物件實例。
-    private let coreBluetoothService: CoreBluetoothService = .init()
+    lazy var coreBluetoothService: CoreBluetoothService = {
+        // 檢查 `BaseAppleBikeKit` 中的 `target` 是否已設置且非空，這是初始化 `coreBluetoothService` 的必要條件。
+        guard let target: String = Self.target else {
+            fatalError("配置目標(target)不可為空。")
+        }
+        return .init(target: target)
+    }()
     
     /// 連線狀態的發佈者。
     public private(set) lazy var statePublisher: AnyPublisher<CBManagerState, Never> = {
@@ -385,17 +482,53 @@ open class AppleBikeKit: BaseAppleBikeKit {
     
     /// 掃描到的裝置的發佈者。
     public private(set) lazy var foundDevicesPublisher: AnyPublisher<Array<BluetoothPeripheral>, Never> = {
-        self.coreBluetoothService.foundDevicesSubject
+        /// 過濾符合特定名稱前綴的藍牙裝置。
+        let filteredDevicesPublisher: AnyPublisher<Array<BluetoothPeripheral>, Never> = self.coreBluetoothService.foundDevicesSubject
             .map({ elements in
+                // 提取 BluetoothPeripheral 對象。
                 elements.map({ $0.peripheral })
             })
             .map({ peripherals in
+                // 過濾裝置名稱符合指定前綴的裝置。
                 peripherals.filter({
-                    $0.deviceName != nil && ($0.deviceName!.hasPrefix("FL") || $0.deviceName!.hasPrefix("Farmland"))
+                    $0.deviceName != nil && ($0.deviceName!.hasPrefix("FL") || $0.deviceName!.hasPrefix("Farmland") || $0.deviceName!.hasPrefix("LEXY"))
                 })
             })
-            .throttle(for: .milliseconds(700), scheduler: RunLoop.main, latest: true)
             .eraseToAnyPublisher()
+        /// 將過濾後的裝置每 0.7 秒批次收集，並去除重複項目。
+        let flattedDevicesPublisher: AnyPublisher<Array<BluetoothPeripheral>, Never> = filteredDevicesPublisher
+            .collect(.byTime(RunLoop.main, .seconds(0.7))) // 每0.7秒收集一次事件。
+            .map({ collectedArrays in
+                collectedArrays
+                    .flatMap({ $0 })  // 將多個陣列平坦化成單一陣列。
+                    .reduce(into: [String: BluetoothPeripheral](), { result, device in
+                        result[device.address] = device  // 使用 `address` 作為唯一標識來移除重複裝置。
+                    })
+                    .values
+            })
+            .map({ Array($0) })
+            .scan(.init()) { previousDevices, currentDevices in
+                /// 使用 `scan` 來追蹤前次與當前的裝置列表。
+                var updatedDevices: Array<BluetoothPeripheral> = previousDevices
+                // 更新已存在裝置的資訊，或移除不再存在的裝置。
+                for (index, oldDevice) in updatedDevices.enumerated().reversed() {
+                    if let newDevice = currentDevices.first(where: { $0.address == oldDevice.address }) {
+                        // 更新裝置資訊（例如更新 RSSI 等動態數據）。
+                        updatedDevices[index] = newDevice
+                    } else {
+                        // 移除不再存在的裝置。
+                        updatedDevices.remove(at: index)
+                    }
+                }
+                /// 新增新的裝置到末尾。
+                let newDevices: Array<BluetoothPeripheral> = currentDevices.filter { device in
+                    !previousDevices.contains(where: { $0.address == device.address })
+                }
+                updatedDevices.append(contentsOf: newDevices)
+                return updatedDevices
+            }
+            .eraseToAnyPublisher()
+        return flattedDevicesPublisher
     }()
     
     /// 已連線裝置的發佈者。(包含其連線狀態與斷線狀態)
@@ -429,13 +562,17 @@ open class AppleBikeKit: BaseAppleBikeKit {
         self.coreBluetoothService.rssiSubject.eraseToAnyPublisher()
     }()
     
+    public func retrivePeripheral(withIdentifiers identifiers: [UUID]) {
+        self.coreBluetoothService.retrivePeripheral(withIdentifiers: identifiers)
+    }
+    
     /**
      開始掃描藍牙裝置。
      
      - Throws: 如果行動裝置的藍牙為未開啟狀態，則拋出錯誤。
      */
     public func startScan() throws {
-        try self.coreBluetoothService.startScanning()
+        try self.coreBluetoothService.startScanning(serviceUUIDs: nil)
     }
     
     /**
@@ -478,39 +615,11 @@ open class AppleBikeKit: BaseAppleBikeKit {
         self.connectedPeripheral.currentPeripheralSubject.value?.device.readRSSI()
     }
     
-    public func updateSystemTime() throws {
-        try self.coreSDKService.updateSystemTime()
+    public func setScreenAccessControl(_ accessControl: CoreSDKService.ScreenLockState) throws {
+        try self.coreSDKService.setScreenAccessControl(accessControl)
     }
     
-    /**
-     控制車燈開關。
-     
-     - parameter part: 前燈或後燈。
-     - parameter isOn: 開或關。
-     - Throws: CoreSDK 執行失敗。
-     */
-    open func lightControl(part: light_control_parts = LIGHT_CONTROL_FRONT, isOn: Bool) throws {
-        try self.coreSDKService.lightControl(part: part, isOn: isOn)
-    }
-    
-    /**
-     更新韌體。
-     
-     - parameter part: 部件。
-     - parameter firmware: 韌體。
-     - Throws: CoreSDK 執行失敗。
-     */
-    open func upgradeFirmware(part: CommunicationPartType, firmware: Data) throws {
-        try self.coreSDKService.upgradeFirmware(part: part, data: firmware)
-    }
-    
-    /**
-     設定助力段數。
-     
-     - parameter level: 助力段數。
-     - Throws: CoreSDK 執行失敗。
-     */
-    open func setAssistLevel(_ level: UInt8) throws {
-        try self.coreSDKService.setAssistLevel(level)
+    public func resetScreenAccessControl() throws {
+        try self.coreSDKService.resetScreenAccessControl()
     }
 }
