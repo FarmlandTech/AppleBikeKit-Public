@@ -70,43 +70,51 @@ final public class AssistPlanUpdateHelper {
     
     init() {
         //
-        FarmLandBikeKit.sleipnir.parameterDataPubisher
+        FarmLandBikeKit.sleipnir.parameterDataPublisher
             .sink(receiveCompletion: { _ in
                 
             }, receiveValue: { [weak self] parameterData in
+                guard FarmLandBikeKit.tenant == .apple || FarmLandBikeKit.tenant == .kiwi else { return }
+                
                 guard let self: AssistPlanUpdateHelper else { return }
-                guard parameterData.name == .INTEGRATED_ASSIST_LEVEL else { return }
+                
+                guard parameterData.name == ParameterData.Apple.Name.INTEGRATED_ASSIST_LEVEL.rawValue else { return }
+                
                 guard let parameters: [ParameterData] = parameterData.dividedParameters else { return }
+                
                 var LV1_MAX_AST_RATIO: Int?
                 var LV1_MIN_AST_RATIO: Int?
                 var LV2_MAX_AST_RATIO: Int?
                 var LV2_MIN_AST_RATIO: Int?
                 var LV3_MAX_AST_RATIO: Int?
                 var LV3_MIN_AST_RATIO: Int?
+                
                 for parameter in parameters {
                     switch parameter.name {
-                    case .LV1_MAX_AST_RATIO:
+                    case ParameterData.Apple.Name.LV1_MAX_AST_RATIO.rawValue:
                         LV1_MAX_AST_RATIO = parameter.value as? Int
-                    case .LV1_MIN_AST_RATIO:
+                    case ParameterData.Apple.Name.LV1_MIN_AST_RATIO.rawValue:
                         LV1_MIN_AST_RATIO = parameter.value as? Int
-                    case .LV2_MAX_AST_RATIO:
+                    case ParameterData.Apple.Name.LV2_MAX_AST_RATIO.rawValue:
                         LV2_MAX_AST_RATIO = parameter.value as? Int
-                    case .LV2_MIN_AST_RATIO:
+                    case ParameterData.Apple.Name.LV2_MIN_AST_RATIO.rawValue:
                         LV2_MIN_AST_RATIO = parameter.value as? Int
-                    case .LV3_MAX_AST_RATIO:
+                    case ParameterData.Apple.Name.LV3_MAX_AST_RATIO.rawValue:
                         LV3_MAX_AST_RATIO = parameter.value as? Int
-                    case .LV3_MIN_AST_RATIO:
+                    case ParameterData.Apple.Name.LV3_MIN_AST_RATIO.rawValue:
                         LV3_MIN_AST_RATIO = parameter.value as? Int
                     default:
                         break
                     }
                 }
+                
                 guard let LV1_MAX_AST_RATIO: Int else { return }
                 guard let LV1_MIN_AST_RATIO: Int else { return }
                 guard let LV2_MAX_AST_RATIO: Int else { return }
                 guard let LV2_MIN_AST_RATIO: Int else { return }
                 guard let LV3_MAX_AST_RATIO: Int else { return }
                 guard let LV3_MIN_AST_RATIO: Int else { return }
+                
                 let repository: AssistLevelRepository = .init(
                     LV1_MAX_AST_RATIO: LV1_MAX_AST_RATIO,
                     LV1_MIN_AST_RATIO: LV1_MIN_AST_RATIO,
@@ -115,9 +123,11 @@ final public class AssistPlanUpdateHelper {
                     LV3_MAX_AST_RATIO: LV3_MAX_AST_RATIO,
                     LV3_MIN_AST_RATIO: LV3_MIN_AST_RATIO
                 )
+                
                 if case .try(_) = self.readingSubject.value {
                     self.readingSubject.send(.done(repository))
                 }
+                
                 if case .try(_, let target) = self.writingSubject.value, let target: AssistLevelRepository {
                     if target == repository {
                         self.writingSubject.send(.done(repository))
@@ -140,6 +150,12 @@ final public class AssistPlanUpdateHelper {
     }
     
     public func read() throws {
+        
+        let functionName: String = #function
+        guard FarmLandBikeKit.tenant == .apple || FarmLandBikeKit.tenant == .kiwi else {
+            throw FarmLandBikeKit.Error.functionNotExist(functionName)
+        }
+        
         guard case .done(_) = self.readingSubject.value else {
             throw Self.Error.isReadRecursively
         }
@@ -150,7 +166,14 @@ final public class AssistPlanUpdateHelper {
     private func recurReadValue() throws {
         
         func doTask() throws {
-            try FarmLandBikeKit.sleipnir.readParameter(name: .INTEGRATED_ASSIST_LEVEL)
+            
+            let functionName: String = #function
+            guard FarmLandBikeKit.tenant == .apple || FarmLandBikeKit.tenant == .kiwi else {
+                throw FarmLandBikeKit.Error.functionNotExist(functionName)
+            }
+            
+            try FarmLandBikeKit.sleipnir.readParameter(name: ParameterData.Apple.Name.INTEGRATED_ASSIST_LEVEL.rawValue, part: .Controller)
+            
             DispatchQueue.global().asyncAfter(deadline: .now() + 1.9) { [weak self] in
                 try? self?.recurReadValue()
             }
@@ -193,7 +216,13 @@ final public class AssistPlanUpdateHelper {
     private func recurWriteValue(_ repository: AssistLevelRepository) throws {
         
         func doTask() throws {
-            let parameters: [(name: ParameterData.Name, value: Any)] = [
+            
+            let functionName: String = #function
+            guard FarmLandBikeKit.tenant == .apple || FarmLandBikeKit.tenant == .kiwi else {
+                throw FarmLandBikeKit.Error.functionNotExist(functionName)
+            }
+            
+            let parameters: [(name: ParameterData.Apple.Name, value: Any)] = [
                 (.LV1_MAX_AST_RATIO, repository.LV1_MAX_AST_RATIO),
                 (.LV1_MIN_AST_RATIO, repository.LV1_MIN_AST_RATIO),
                 (.LV2_MAX_AST_RATIO, repository.LV2_MAX_AST_RATIO),
@@ -201,11 +230,13 @@ final public class AssistPlanUpdateHelper {
                 (.LV3_MAX_AST_RATIO, repository.LV3_MAX_AST_RATIO),
                 (.LV3_MIN_AST_RATIO, repository.LV3_MIN_AST_RATIO)
             ]
+            
             for (index, parameter) in parameters.enumerated() {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.25 * Double(index)) {
-                    try? FarmLandBikeKit.sleipnir.writeParameter(name: parameter.name, value: parameter.value)
+                    try? FarmLandBikeKit.sleipnir.writeParameter(name: parameter.name.rawValue, part: .Controller, value: parameter.value)
                 }
             }
+            
             DispatchQueue.global().asyncAfter(deadline: .now() + 1.25 * Double(parameters.count)) { [weak self] in
                 try? self?.read()
             }
