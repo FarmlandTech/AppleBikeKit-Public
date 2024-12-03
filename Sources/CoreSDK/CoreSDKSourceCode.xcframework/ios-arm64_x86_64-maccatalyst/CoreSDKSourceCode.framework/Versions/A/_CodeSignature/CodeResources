@@ -4,57 +4,9 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Headers/CAN_ISO_TP.h</key>
+		<key>Resources/Info.plist</key>
 		<data>
-		l8alLtTMdKLVz2pSIwADIOpaE8s=
-		</data>
-		<key>Headers/Common.h</key>
-		<data>
-		VIldTkbbMFTgz7BnFo0B08knexQ=
-		</data>
-		<key>Headers/CoreSDK.h</key>
-		<data>
-		/TmSk8qbn5m5yDS9hc1uNU5u/Ow=
-		</data>
-		<key>Headers/CoreSDKSourceCode.h</key>
-		<data>
-		Ce8QSVuduec3Ta3CB1BaWkWrfWY=
-		</data>
-		<key>Headers/CoreSDK_Common.h</key>
-		<data>
-		ClBovi/AkoKHDjAza5Ifh3QZD5I=
-		</data>
-		<key>Headers/CoreSDK_DelegateFunc.h</key>
-		<data>
-		q6/EN8ujjALmknUxWBAv1awPmGU=
-		</data>
-		<key>Headers/CoreSDK_DeviceInfo.h</key>
-		<data>
-		5cT12L/zgN1MUph/0bccQC0bZik=
-		</data>
-		<key>Headers/FL_CANInfoStruct.h</key>
-		<data>
-		6GRFL3qyJrP6GelhAO24E7eOYVk=
-		</data>
-		<key>Headers/FL_Logs.h</key>
-		<data>
-		eGofeNz2tp2tafT1XGM+wWvXTEY=
-		</data>
-		<key>Headers/LogPrinter.h</key>
-		<data>
-		xk2LVsT5vdvqlw7O9A7N6oowO40=
-		</data>
-		<key>Headers/lib_event_scheduler.h</key>
-		<data>
-		TVdXOCxJ5VaNsJwyncBtbgvArT4=
-		</data>
-		<key>Info.plist</key>
-		<data>
-		ZIjTVEmim8/BF49v8Rg+McvjRvM=
-		</data>
-		<key>Modules/module.modulemap</key>
-		<data>
-		n8IwFye5Yi2enfauS9hesXqsZP8=
+		wCNEovPdup9tZMfb6z+1h3lWCow=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -143,26 +95,33 @@
 			36ODXvHvO5uoD1IBwhWn2R91/Z7ZyHXBuyZFWWtEoek=
 			</data>
 		</dict>
+		<key>Resources/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			0fd5Lj7kI/A/Oo0wHPahZPkAZKjKq2q+KKgUHonNHpM=
+			</data>
+		</dict>
 	</dict>
 	<key>rules</key>
 	<dict>
-		<key>^.*</key>
+		<key>^Resources/</key>
 		<true/>
-		<key>^.*\.lproj/</key>
+		<key>^Resources/.*\.lproj/</key>
 		<dict>
 			<key>optional</key>
 			<true/>
 			<key>weight</key>
 			<real>1000</real>
 		</dict>
-		<key>^.*\.lproj/locversion.plist$</key>
+		<key>^Resources/.*\.lproj/locversion.plist$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
 		</dict>
-		<key>^Base\.lproj/</key>
+		<key>^Resources/Base\.lproj/</key>
 		<dict>
 			<key>weight</key>
 			<real>1010</real>
@@ -184,27 +143,15 @@
 			<key>weight</key>
 			<real>2000</real>
 		</dict>
+		<key>^(Frameworks|SharedFrameworks|PlugIns|Plug-ins|XPCServices|Helpers|MacOS|Library/(Automator|Spotlight|LoginItems))/</key>
+		<dict>
+			<key>nested</key>
+			<true/>
+			<key>weight</key>
+			<real>10</real>
+		</dict>
 		<key>^.*</key>
 		<true/>
-		<key>^.*\.lproj/</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>1000</real>
-		</dict>
-		<key>^.*\.lproj/locversion.plist$</key>
-		<dict>
-			<key>omit</key>
-			<true/>
-			<key>weight</key>
-			<real>1100</real>
-		</dict>
-		<key>^Base\.lproj/</key>
-		<dict>
-			<key>weight</key>
-			<real>1010</real>
-		</dict>
 		<key>^Info\.plist$</key>
 		<dict>
 			<key>omit</key>
@@ -218,6 +165,37 @@
 			<true/>
 			<key>weight</key>
 			<real>20</real>
+		</dict>
+		<key>^Resources/</key>
+		<dict>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+		<key>^Resources/.*\.lproj/</key>
+		<dict>
+			<key>optional</key>
+			<true/>
+			<key>weight</key>
+			<real>1000</real>
+		</dict>
+		<key>^Resources/.*\.lproj/locversion.plist$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>1100</real>
+		</dict>
+		<key>^Resources/Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
+		</dict>
+		<key>^[^/]+$</key>
+		<dict>
+			<key>nested</key>
+			<true/>
+			<key>weight</key>
+			<real>10</real>
 		</dict>
 		<key>^embedded\.provisionprofile$</key>
 		<dict>

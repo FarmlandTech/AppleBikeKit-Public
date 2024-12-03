@@ -23,6 +23,8 @@ extern "C" {
 #define OPC_RESET_PARAM			(uint8_t)11
 #define OPC_READ_LOG			(uint8_t)12
 #define OPC_CLEAR_LOG			(uint8_t)13
+#define OPC_READ_ERROR_LOG		(uint8_t)16
+#define OPC_CLEAR_ERROR_LOG		(uint8_t)17
 #define OPC_UNLOCK_DEVICE		(uint8_t)20
 
 // Response code
@@ -33,7 +35,9 @@ extern "C" {
 #define RESPONSE_INVALID_PARAM	(uint8_t)4
 #define RESPONSE_CRC_FAIL		(uint8_t)5
 #define RESPONSE_NULL			(uint8_t)6
-
+#define RESPONSE_INVALID_DEVICE (uint8_t)7
+#define RESPONSE_INVALID_OPC    (uint8_t)8
+#define RESPONSE_BAT_LOW_RSOC   (uint8_t)9
 
 // Other define
 #define WARNING_CODE_PAGE_SIZE	(uint8_t)4
@@ -80,29 +84,32 @@ typedef enum DEVICE_OBJ_TYPE_E
 #define FL_ISOTP_CANID_PARAM_ANY_2_SUBBATT2		(uint32_t)0x10042
 #define FL_ISOTP_CANID_PARAM_SUBBATT2_2_ANY		(uint32_t)0x10043
 
+#define FL_ISOTP_CANID_LOG_ANY_2_MAINBATT		(uint32_t)0x10024
+#define FL_ISOTP_CANID_LOG_MAINBATT_2_ANY		(uint32_t)0x10025
+#define FL_ISOTP_CANID_LOG_ANY_2_SUBBATT1		(uint32_t)0x10026
+#define FL_ISOTP_CANID_LOG_SUBBATT1_2_ANY		(uint32_t)0x10027
 // Test Mode Code
 #define FL_TESTMODE_STOP_TEST					(uint8_t)0x0
 
-#define FL_TESTMODE_HMI_SEGMENT_ALL_BLINK		(uint8_t)0x1
-#define FL_TESTMODE_HMI_SEGMENT_SCAN			(uint8_t)0x2
-#define FL_TESTMODE_HMI_SEGMENT_ALL_ON			(uint8_t)0x3
-#define FL_TESTMODE_HMI_SEGMENT_ALL_OFF			(uint8_t)0x4
-#define FL_TESTMODE_HMI_BUTTON_DISABLE			(uint8_t)0x5
+#define FL_TESTMODE_HMI_SEGMENT_ALL_BLINK		(uint8_t)0x1    // unit:1 times
+#define FL_TESTMODE_HMI_SEGMENT_SCAN			(uint8_t)0x2    // unit:1 times
+#define FL_TESTMODE_HMI_SEGMENT_ALL_ON			(uint8_t)0x3    // unit:1sec
+#define FL_TESTMODE_HMI_SEGMENT_ALL_OFF			(uint8_t)0x4    // unit:1sec
+#define FL_TESTMODE_HMI_BUTTON_DISABLE			(uint8_t)0x5    // unit:1sec
 
-
-#define FL_TESTMODE_CTRL_DRIVE_TARGE_AMP		(uint8_t)0x1
-#define FL_TESTMODE_CTRL_DRIVE_TARGE_SPEED		(uint8_t)0x2
-#define FL_TESTMODE_CTRL_DRIVE_TARGE_CURRENT	(uint8_t)0x3
-#define FL_TESTMODE_CTRL_DRIVE_TARGE_POWER		(uint8_t)0x4
-#define FL_TESTMODE_CTRL_DRIVE_TARGE_DISTANCE	(uint8_t)0x5
-#define FL_TESTMODE_CTRL_DRIVE_CYCLE			(uint8_t)0x6
-#define FL_TESTMODE_CTRL_DIRECT_UVW_CONTROL		(uint8_t)0x7
+#define FL_TESTMODE_CTRL_DRIVE_TARGE_AMP		(uint8_t)0x1    // unit:1%
+#define FL_TESTMODE_CTRL_DRIVE_TARGE_SPEED		(uint8_t)0x2    // unit:0.1Km/hr
+#define FL_TESTMODE_CTRL_DRIVE_TARGE_CURRENT	(uint8_t)0x3    // unit:0.01A
+#define FL_TESTMODE_CTRL_DRIVE_TARGE_POWER		(uint8_t)0x4    // unit:0.1W
+#define FL_TESTMODE_CTRL_DRIVE_TARGE_DISTANCE	(uint8_t)0x5    // unit:0.1Km
+#define FL_TESTMODE_CTRL_DRIVE_CYCLE			(uint8_t)0x6    // unit:1 cycle times
+#define FL_TESTMODE_CTRL_DIRECT_UVW_CONTROL		(uint8_t)0x7    // bit0: U phase, bit1: V phase, bit2: W phase (0:OFF/1:ON)
 
 #define FL_TESTMODE_BATT_DIS_SW_OCP_OVP_UVP		(uint8_t)0x1
 #define FL_TESTMODE_BATT_DIS_SW_OTP_UTP			(uint8_t)0x2
 #define FL_TESTMODE_BATT_AFE_OCP				(uint8_t)0x3	// unit:0.1A
-#define FL_TESTMODE_BATT_AFE_OVP_OF_CELL		(uint8_t)0x4	// unit:1mA
-#define FL_TESTMODE_BATT_AFE_UVP_OF_CELL		(uint8_t)0x5	// unit:1mA
+#define FL_TESTMODE_BATT_AFE_OVP_OF_CELL		(uint8_t)0x4	// unit:1mV
+#define FL_TESTMODE_BATT_AFE_UVP_OF_CELL		(uint8_t)0x5	// unit:1mV
 #define FL_TESTMODE_BATT_SET_CHARGE_OTP			(uint8_t)0x6	// unit:1¢XC
 #define FL_TESTMODE_BATT_SET_CHARGE_UTP			(uint8_t)0x7	// unit:1¢XC
 #define FL_TESTMODE_BATT_SET_DISCHARGE_OTP		(uint8_t)0x8	// unit:1¢XC
@@ -114,7 +121,15 @@ typedef enum DEVICE_OBJ_TYPE_E
 #define FL_TESTMODE_BATT_INDICATOR_LED_OFF		(uint8_t)0xE
 #define FL_TESTMODE_BATT_BUTTON_DISABLE			(uint8_t)0xF	// unit:sec (max 180sec)
 #define FL_TESTMODE_BATT_STOP_COULOMB			(uint8_t)0x10
-// Protocol packet struct
+#define FL_TESTMODE_BATT_ENTER_SLEEP_MODE		(uint8_t)0x11
+#define FL_TESTMODE_BATT_SWITCH_BATTERY_MODE    (uint8_t)0x13
+/* Exported macro ------------------------------------------------------------*/
+
+/* Exported types ------------------------------------------------------------*/ 
+
+#pragma pack (1)
+
+// Host Protocol packet struct
 #define FL_CANID_HOST_INFO_00	(uint32_t)0x80
 typedef union HOST_ControlInfo_00_st
 {
@@ -297,24 +312,44 @@ typedef union HOST_TripReset_st
 #define FL_CANID_HMI_INFO_00	(uint32_t)0x100
 typedef union HMI_Info00_st
 {
-	uint8_t bytes[3];
+	uint8_t bytes[8];
 
 	struct
 	{
+		//Byte 0
 		uint8_t support_assist_level : 4;
 		uint8_t current_assist_level : 4;
-		
+		//Byte 1
 		uint8_t system_power_on : 1;
 		uint8_t walk_assist_on : 1;
-		uint8_t light_on : 1;
-		uint8_t reserved_0 : 5;
-
+		uint8_t front_light_on : 1;
+		uint8_t rear_light_on : 1;
+		uint8_t low_beam_light_on : 1;
+		uint8_t high_beam_light_on : 1;
+		uint8_t turn_left_light_on : 1;
+		uint8_t turn_right_light_on : 1;
+		//Byte 2
 		uint8_t power_key_status : 1;
 		uint8_t up_key_status : 1;
 		uint8_t down_key_status : 1;
 		uint8_t walk_key_status : 1;
 		uint8_t light_key_status : 1;
-		uint8_t reserved_1 : 3;
+		uint8_t brake_key_status : 1;
+		uint8_t reserved_1 : 2;
+		//Byte 3
+		uint8_t throttle_amplitude;
+		//Byte 4
+		uint8_t cruise_ctrl;
+		//Byte 5
+		uint8_t ACC_on : 1;
+		uint8_t anti_theft_ctrl : 1;
+		uint8_t reverse_ctrl_on : 1;
+		uint8_t parking_on : 1;
+		uint8_t reserved_2 : 4;
+		//Byte 6
+		uint8_t reserved_3;
+		//Byte 7
+		uint8_t alive_count;
 	} bits;
 
 } HMI_INFO_00_T;
@@ -363,16 +398,30 @@ typedef union HMI_Info03_st
 
 } HMI_INFO_03_T;
 
+#define FL_CANID_HMI_INFO_04	(uint32_t)0x104
+typedef union HMI_Info04_st
+{
+	uint8_t bytes[3];
 
-#define FL_CANID_HMI_WARNING	(uint32_t)0x17E
+	struct
+	{
+		uint8_t screen_lock_error_count;
+		uint8_t screen_lock_state;
+		uint8_t reserver_1;
+	} bits;
+
+} HMI_INFO_04_T;
+
+#define FL_CANID_HMI_WARNING_INFO   (uint32_t)0x17E
 typedef union HMI_WarningInfo_st
 {
 	uint8_t bytes[8];
 
 	struct
 	{
-		uint8_t page_num:3;
-		uint8_t total_leng:5;
+        //Byte 0
+		uint8_t page_num: 3;
+		uint8_t total_leng: 5;
 
 		uint8_t warning_0;
 		uint8_t warning_1;
@@ -385,15 +434,16 @@ typedef union HMI_WarningInfo_st
 
 } HMI_WARNINGINFO_T;
 
-#define FL_CANID_HMI_ERROR	(uint32_t)0x17F
+#define FL_CANID_HMI_ERROR_INFO     (uint32_t)0x17F
 typedef union HMI_ErrorInfo_st
 {
 	uint8_t bytes[8];
 
 	struct
 	{
-		uint8_t page_num : 3;
-		uint8_t total_leng : 5;
+        //Byte 0
+		uint8_t page_num: 3;
+		uint8_t total_leng: 5;
 
 		uint8_t error_0;
 		uint8_t error_1;
@@ -420,7 +470,7 @@ typedef union HMI_DebugInfo_00_st
 		uint16_t key_4_count;
 	} bits;
 
-} HMI_DEBUGINFO_O0_T;
+} HMI_DEBUGINFO_00_T;
 
 
 #define FL_CANID_HMI_DEBUGINFO_01	(uint32_t)0x1101
@@ -439,6 +489,7 @@ typedef union HMI_DebugInfo_01_st
 } HMI_DEBUGINFO_01_T;
 
 
+// Controller protocol packet struct
 #define FL_CANID_CTRL_INFO_00	(uint32_t)0x180
 typedef union CTRL_Info00_st
 {
@@ -475,7 +526,7 @@ typedef union CTRL_Info01_st
 #define FL_CANID_CTRL_INFO_02	(uint32_t)0x182
 typedef union CTRL_Info02_st
 {
-	uint8_t bytes[6];
+	uint8_t bytes[8];
 
 	struct
 	{
@@ -483,6 +534,7 @@ typedef union CTRL_Info02_st
 		uint8_t pedal_cadence;
 		uint16_t pedal_torque;
 		uint16_t pedal_power;
+        uint16_t max_bus_current;
 	} bits;
 
 } CTRL_INFO02_T;
@@ -521,21 +573,38 @@ typedef union CTRL_Info05_st
 
 	struct
 	{
+        //Byte 0
 		uint8_t assist_level: 4;
-		uint8_t assist_type : 3;
-		uint8_t assist_on : 1;
-
-		uint8_t front_light_on:1;
-		uint8_t rear_light_on:1;
-		uint8_t brake_light_on : 1;
-		uint8_t activate_light_ctrl :1;
-		uint8_t brake_on:1;
-		uint8_t candence_direction : 1;
-		uint8_t motor_direction:1;
-		uint8_t reserved_1 : 1;
+		uint8_t assist_type: 3;
+		uint8_t assist_on: 1;
+        //Byte 1
+		uint8_t front_light_on: 1;
+		uint8_t rear_light_on: 1;
+        uint8_t brake_light_on: 1;
+		uint8_t activate_light_ctrl: 1;
+		uint8_t brake_on: 1;
+		uint8_t candence_direction: 1;
+		uint8_t motor_direction: 1;
+		uint8_t reserved_1: 1;
 	} bits;
 
 } CTRL_INFO05_T;
+
+#define FL_CANID_CTRL_INFO_06	(uint32_t)0x186
+typedef union CTRL_Info06_st
+{
+	uint8_t bytes[4];
+
+	struct
+	{
+        //Byte 0
+		uint8_t caninfo_fw_app_ver_00;
+        uint8_t caninfo_fw_app_ver_01;
+        uint8_t caninfo_fw_app_ver_02;
+        uint8_t caninfo_fw_app_ver_03;
+	} bits;
+
+} CTRL_INFO06_T;
 
 
 #define FL_CANID_CTRL_WARNING_INFO	(uint32_t)0x1FE
@@ -545,8 +614,9 @@ typedef union CTRL_WarningInfo_st
 
 	struct
 	{
-		uint8_t page_num : 3;
-		uint8_t total_leng : 5;
+        //Byte 0
+		uint8_t page_num: 3;
+		uint8_t total_leng: 5;
 
 		uint8_t warning_0;
 		uint8_t warning_1;
@@ -567,8 +637,9 @@ typedef union CTRL_ErrorInfo_st
 
 	struct
 	{
-		uint8_t page_num : 3;
-		uint8_t total_leng : 5;
+        //Byte 0
+		uint8_t page_num: 3;
+		uint8_t total_leng: 5;
 
 		uint8_t error_0;
 		uint8_t error_1;
@@ -623,14 +694,46 @@ typedef union CTRL_DebugInfo02_st
 	{
 		uint32_t wheel_rotate_laps;
 		uint16_t output_amplitude;
-
-		uint8_t hall_state:4;
-		uint8_t sector_state : 4;
+        //Byte 6
+		uint8_t hall_state: 4;
+		uint8_t sector_state: 4;
 	} bits;
 
 } CTRL_DEBUGINFO02_T;
 
+#define FL_CANID_CTRL_DEBUGINFO_03	(uint32_t)0x1183
+typedef union CTRL_DebugInfo03_st
+{
+	uint8_t bytes[8];
 
+	struct
+	{
+		uint8_t tuning_hall_status;
+		uint8_t tuning_hall_angle;
+		uint8_t reserve_01;
+		uint8_t reserve_02;
+        uint8_t reserve_03;
+		uint8_t reserve_04;
+        uint8_t reserve_05;
+		uint8_t reserve_06;
+	} bits;
+
+} CTRL_DEBUGINFO03_T;
+
+#define FL_CANID_CTRL_DEBUGINFO_04	(uint32_t)0x1184
+typedef union CTRL_DebugInfo04_st
+{
+	uint8_t bytes[2];
+
+	struct
+	{
+		uint8_t tuning_hall_seq_status;
+		uint8_t tuning_hall_seq_result;
+	} bits;
+
+} CTRL_DEBUGINFO04_T;
+
+// Main Battery protocol packet struct
 #define FL_CANID_MBAT_INFO_00		(uint32_t)0x200
 typedef union Main_BAT_Info00_st
 {
@@ -638,14 +741,15 @@ typedef union Main_BAT_Info00_st
 
 	struct
 	{
-		uint8_t charge_fet:1;
-		uint8_t charging:1;
-		uint8_t fully_charged:1;
-		uint8_t charge_detected:1;
-		uint8_t discharge_fet:1;
-		uint8_t discharging:1;
-		uint8_t nearly_discharged:1;
-		uint8_t fully_discharged:1;
+        //Byte 0
+		uint8_t charge_fet: 1;
+		uint8_t charging: 1;
+		uint8_t fully_charged: 1;
+		uint8_t charge_detected: 1;
+		uint8_t discharge_fet: 1;
+		uint8_t discharging: 1;
+		uint8_t nearly_discharged: 1;
+		uint8_t fully_discharged: 1;
 
 		uint8_t design_volt;		//uint:V
 		uint16_t design_capacity;	//uint:AH
@@ -711,6 +815,22 @@ typedef union Main_BAT_RTCInfo_st
 
 } MAIN_BAT_RTCINFO_T;
 
+#define FL_CANID_MBAT_CONTROL_INFO		(uint32_t)0x205
+typedef union Main_BAT_ControlInfo_st
+{
+	uint8_t bytes[1];
+
+	struct
+	{
+        //Byte 0
+		uint8_t power_conversion: 1;
+		uint8_t dual_control_state: 3; 
+        uint8_t support_ntc_control: 1;
+        uint8_t reserved_1: 3;
+	} bits;
+    
+} MAIN_BAT_CONTROLINFO_T;
+
 
 #define FL_CANID_MBAT_WARNING_INFO	(uint32_t)0x27E
 typedef union Main_BAT_WarningInfo_st
@@ -719,8 +839,9 @@ typedef union Main_BAT_WarningInfo_st
 
 	struct
 	{
-		uint8_t page_num : 3;
-		uint8_t total_leng : 5;
+        //Byte 0
+		uint8_t page_num: 3;
+		uint8_t total_leng: 5;
 
 		uint8_t warning_0;
 		uint8_t warning_1;
@@ -741,8 +862,9 @@ typedef union Main_BAT_ErrorInfo_st
 
 	struct
 	{
-		uint8_t page_num : 3;
-		uint8_t total_leng : 5;
+        //Byte 0
+		uint8_t page_num: 3;
+		uint8_t total_leng: 5;
 
 		uint8_t error_0;
 		uint8_t error_1;
@@ -855,6 +977,250 @@ typedef union BAT_DebugInfo05_st
 
 } BAT_DEBUGINFO05_T;
 
+
+// SLAVE1 Battery protocol packet struct
+#define FL_CANID_S1BAT_INFO_00		(uint32_t)0x280
+typedef union Slave1_BAT_Info00_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+        //Byte 0
+		uint8_t charge_fet: 1;
+		uint8_t charging: 1;
+		uint8_t fully_charged: 1;
+		uint8_t charge_detected: 1;
+		uint8_t discharge_fet: 1;
+		uint8_t discharging: 1;
+		uint8_t nearly_discharged: 1;
+		uint8_t fully_discharged: 1;
+
+		uint8_t design_volt;		//uint:V
+		uint16_t design_capacity;	//uint:AH
+		uint16_t cycle_count;		
+		uint16_t uncharged_day;
+	} bits;
+
+} SLAVE1_BAT_INFO00_T;
+
+
+#define FL_CANID_S1BAT_INFO_01		(uint32_t)0x281
+typedef union S1BAT_Info01_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+		uint32_t actual_volt;	//uint:mV
+		int32_t actual_current; //uint:mA
+	} bits;
+
+} SLAVE1_BAT_INFO01_T;
+
+
+#define FL_CANID_S1BAT_INFO_02		(uint32_t)0x282
+typedef union S1BAT_Info02_st
+{
+	uint8_t bytes[1];
+
+	struct
+	{
+		int8_t temperature;	//uint:C
+	} bits;
+
+} SLAVE1_BAT_INFO02_T;
+
+
+#define FL_CANID_S1BAT_INFO_03		(uint32_t)0x283
+typedef union S1BAT_Info03_st
+{
+	uint8_t bytes[6];
+
+	struct
+	{
+		uint8_t rsoc;	//uint:%
+		uint16_t asoc;	//uint:mAH
+		uint8_t rsoh;	//uint:%
+		uint16_t asoh;	//uint:mAH
+	} bits;
+
+} SLAVE1_BAT_INFO03_T;
+
+
+#define FL_CANID_S1BAT_RTC_INFO		(uint32_t)0x284
+typedef union S1BAT_RTCInfo_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+		uint64_t unix_time;
+	} bits;
+
+} SLAVE1_BAT_RTCINFO_T;
+
+#define FL_CANID_S1BAT_MOSFET_INFO		(uint32_t)0x285
+typedef union S1BAT_MOSFETInfo_st
+{
+	uint8_t bytes[1];
+
+	struct
+	{
+        //Byte 0
+		uint8_t s1bat_predischarge_fet: 1;     
+		uint8_t s1bat_receive_cmd: 1;         
+        uint8_t reserved_1: 6;
+	} bits;
+
+} SLAVE1_BAT_MOSFETINFO_T;
+
+#define FL_CANID_S1BAT_WARNING_INFO	(uint32_t)0x2FE
+typedef union S1BAT_WarningInfo_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+        //Byte 0
+		uint8_t page_num: 3;
+		uint8_t total_leng: 5;
+
+		uint8_t warning_0;
+		uint8_t warning_1;
+		uint8_t warning_2;
+		uint8_t warning_3;
+		uint8_t warning_4;
+		uint8_t warning_5;
+		uint8_t warning_6;
+	} bits;
+
+} SLAVE1_BAT_WARNINGINFO_T;
+
+
+#define FL_CANID_S1BAT_ERROR_INFO	(uint32_t)0x2FF
+typedef union S1BAT_ErrorInfo_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+        //Byte 0
+		uint8_t page_num: 3;
+		uint8_t total_leng: 5;
+
+		uint8_t error_0;
+		uint8_t error_1;
+		uint8_t error_2;
+		uint8_t error_3;
+		uint8_t error_4;
+		uint8_t error_5;
+		uint8_t error_6;
+	} bits;
+
+} SLAVE1_BAT_ERRORINFO_T;
+
+
+#define FL_CANID_S1BAT_DEBUGINFO_00	(uint32_t)0x1280
+typedef union S1BAT_DebugInfo00_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+		uint16_t cell_1_volt;
+		uint16_t cell_2_volt;
+		uint16_t cell_3_volt;
+		uint16_t cell_4_volt;
+	} bits;
+
+} SLAVE1_BAT_DEBUGINFO00_T;
+
+
+#define FL_CANID_S1BAT_DEBUGINFO_01	(uint32_t)0x1281
+typedef union S1BAT_DebugInfo01_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+		uint16_t cell_5_volt;
+		uint16_t cell_6_volt;
+		uint16_t cell_7_volt;
+		uint16_t cell_8_volt;
+	} bits;
+
+} SLAVE1_BAT_DEBUGINFO01_T;
+
+
+#define FL_CANID_S1BAT_DEBUGINFO_02	(uint32_t)0x1282
+typedef union S1BAT_DebugInfo02_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+		uint16_t cell_9_volt;
+		uint16_t cell_10_volt;
+		uint16_t cell_11_volt;
+		uint16_t cell_12_volt;
+	} bits;
+
+} SLAVE1_BAT_DEBUGINFO02_T;
+
+
+#define FL_CANID_S1BAT_DEBUGINFO_03	(uint32_t)0x1283
+typedef union S1BAT_DebugInfo03_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+		uint16_t cell_13_volt;
+		uint16_t cell_14_volt;
+		uint16_t cell_15_volt;
+		uint16_t cell_16_volt;
+	} bits;
+
+} SLAVE1_BAT_DEBUGINFO03_T;
+
+
+#define FL_CANID_S1BAT_DEBUGINFO_04	(uint32_t)0x1284
+typedef union S1BAT_DebugInfo04_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+		uint16_t cell_17_volt;
+		uint16_t cell_18_volt;
+		uint16_t cell_19_volt;
+		uint16_t cell_20_volt;
+	} bits;
+
+} SLAVE1_BAT_DEBUGINFO04_T;
+
+
+#define FL_CANID_S1BAT_DEBUGINFO_05	(uint32_t)0x1285
+typedef union S1BAT_DebugInfo05_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+		int8_t temperature_1;
+		int8_t temperature_2;
+		int8_t temperature_3;
+		int8_t temperature_4;
+		int8_t temperature_5;
+		int8_t temperature_6;
+		int8_t temperature_7;
+		int8_t temperature_8;
+	} bits;
+
+} SLAVE1_BAT_DEBUGINFO05_T;
+
+
 #pragma pack()
 /*
 
@@ -894,6 +1260,10 @@ typedef union BAT_DebugInfo05_st
 #define FL_BLE_JUMP_BOOTLOADER			(uint8_t)1
 #define FL_BLE_JUMP_APPLICATION			(uint8_t)2
 
+#define FL_BLE_Screen_ACCESSCTRL_SET_REQ			(uint16_t)71
+#define FL_BLE_Screen_ACCESSCTRL_SET_RES			(uint16_t)72
+#define FL_BLE_Screen_ACCESSCTRL_RESET_REQ			(uint16_t)73
+#define FL_BLE_Screen_ACCESSCTRL_RESET_RES			(uint16_t)74
 
 
 

@@ -5,12 +5,8 @@
 #ifndef _FL_CORE_SDK_DEVICE_INFO_H
 #define _FL_CORE_SDK_DEVICE_INFO_H
 
-
-
-#import <CoreSDKSourceCode/Common.h>
-#import <CoreSDKSourceCode/CoreSDK_Common.h>
-
-
+#include <CoreSDKSourceCode/Common.h>
+#include <CoreSDKSourceCode/CoreSDK_Common.h>
 
 #define LOG_PRINT_ENABLE 1
 
@@ -35,8 +31,8 @@ extern "C" {
 #endif
 
 
-// 農田電控零件即時狀態定義
-struct DllExport FL_Info_st
+// 電控零件即時狀態定義
+struct DllExport Apple_Info_st
 {
 	//當前助力段數
 	unsigned int current_assist_lv;
@@ -82,7 +78,7 @@ struct DllExport FL_Info_st
 	unsigned int HMI_warning_list[28];
 	//HMI 當前發送警告碼清單長度
 	unsigned int HMI_warning_leng;
-	//HMI 當前發送錯誤碼清單長度
+	//HMI 當前發送錯誤碼清單
 	unsigned int HMI_error_list[28];
 	//HMI 當前發送錯誤碼清單長度
 	unsigned int HMI_error_leng;
@@ -102,6 +98,11 @@ struct DllExport FL_Info_st
 	unsigned int key_7_count;
 	//HMI KEY NUMBER 8累積按壓計數次數
 	unsigned int key_8_count;
+	//HMI 密碼錯誤次數 
+	unsigned int screen_lock_error_count;
+	//HMI 狀態
+	unsigned int screen_lock_state;
+
 	//當前車速
 	float bike_speed; // Unit:1Km/hr
 	//馬達轉速
@@ -204,7 +205,7 @@ struct DllExport FL_Info_st
 	unsigned int design_volt;
 	//電池設計容量值
 	float design_capacity;
-	//電池累積循環沖放次數
+	//電池累積循環次數
 	unsigned int battery_cycle_count;
 	//電池累積未充電天數
 	unsigned int battery_uncharged_day;
@@ -288,12 +289,49 @@ struct DllExport FL_Info_st
 	int battery_temperature_7;
 	//電池溫度感測器8 溫度值
 	int battery_temperature_8;
+	
 	//E Lock當前狀態
+	//Enum C/C++ 可以指定型別為 Byte但是, 實際上編譯後所佔用記憶體長度(位元組)可能有所變化
 	ELockStates e_lock_states;
+
+	//遠燈狀態	
+	bool high_beam_light_on;
+	//近燈狀態
+	bool low_beam_light_on;
+	//左轉燈狀態
+	bool turn_left_light_on;
+	//右轉燈狀態
+	bool turn_right_light_on;
+	//剎車開關狀態
+	bool brake_key_status;
+	//HMI油門開度
+	unsigned int hmi_throttle_amplitude;
+	//定速巡航啟動
+	bool cruise_ctrl;
+	//電門啟動
+	bool ACC_on;
+	//竊盜模式啟動
+	bool anti_theft_ctrl;
+	//倒車模式
+	bool reverse_ctrl_on;
+	//駐車模式
+	bool parking_on;
+
+
+	// 控制器霍爾感測器校正執行狀態
+	unsigned char tuning_hall_sensor_state;
+	// 控制器霍爾感測器校正數值
+	unsigned char tuning_hall_sensor_angle;
+	// 控制器霍爾排序校正狀態
+	unsigned char tuning_hall_sensor_seq_state;
+	// 控制器霍爾排序校正數值
+	unsigned char tuning_hall_sensor_seq_result;
+
+
 };
 
-// 麥思系統即時資訊
-struct DllExport Mivice_Info_st
+// 系統即時資訊
+struct DllExport Cherry_Info_st
 {
 	// 當前助力段數
 	unsigned char current_assist_lv;
@@ -335,6 +373,10 @@ struct DllExport Mivice_Info_st
 	unsigned int ride_cycle_cnt;
 	// 系統累積總里程
 	unsigned int total_odo;	// Unit:1Km
+	// 系統累積總運行時間
+	unsigned int total_runing_time;	// Unit:1 sec
+	// 系統累積騎乘時間
+	unsigned int total_riding_time;	// Unit:1 sec
 	// 輪徑
 	float wheel_size;
 	// 當前前燈輸出狀態
@@ -359,6 +401,10 @@ struct DllExport Mivice_Info_st
 	unsigned int controller_error_list[28];
 	// 控制器當前發送錯誤碼清單長度
 	unsigned int controller_error_leng;
+	// 控制器當前發送警示碼清單
+	unsigned int controller_warning_list[28];
+	// 控制器當前發送警示碼清單長度
+	unsigned int controller_warning_leng;
 	// 電池當前電壓值 mV
 	unsigned int batt_volt_mv;
 	// 電池當前電量
@@ -366,8 +412,8 @@ struct DllExport Mivice_Info_st
 };
 
 
-// 萊克系統即時資訊
-struct DllExport Lexy_Info_st
+// 系統即時資訊
+struct DllExport Orange_Info_st
 {
 	// 車輛當前狀態
 	unsigned char bike_status;
@@ -377,6 +423,8 @@ struct DllExport Lexy_Info_st
 	unsigned char rang_KM;
 	// 顯示單位 0:公制 1:英制
 	bool display_unit;
+	// 充電狀態指示
+	bool charging;
 	// 當前前燈輸出狀態
 	bool front_light_on;
 	// 當前尾燈輸出狀態
@@ -384,7 +432,7 @@ struct DllExport Lexy_Info_st
 	// 當前車速 單位:KPH
 	float bike_speed;
 	// 旅行里程 單位:KM
-	unsigned int trip_odo;
+	float trip_odo;
 	// 旅行時間 單位:秒
 	unsigned int trip_time_sec;
 	// 電機輸出功率 單位:W
