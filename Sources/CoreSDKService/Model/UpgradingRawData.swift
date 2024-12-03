@@ -7,7 +7,7 @@
 
 import Foundation
 
-import CoreSDKSourceCode
+import CoreSDK
 
 public struct UpgradingRawData: CustomStringConvertible {
     
