@@ -7,7 +7,7 @@
 
 import Foundation
 
-import CoreSDK
+import CoreSDKSourceCode
 
 public extension Apple_Info_st {
     

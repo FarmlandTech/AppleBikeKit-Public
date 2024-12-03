@@ -7,7 +7,7 @@
 
 import Foundation
 
-import CoreSDK
+import CoreSDKSourceCode
 
 protocol DataBus {
     func bleCommandPacketIn(data: UnsafeMutablePointer<UInt8>?, length: UInt32) -> Int32

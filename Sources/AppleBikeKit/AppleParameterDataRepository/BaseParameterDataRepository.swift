@@ -7,7 +7,7 @@
 
 import Foundation
 
-import CoreSDK
+import CoreSDKSourceCode
 
 /// 部件參數模型的倉庫，包括定義與緩存，以及小部分的邏輯。
 public class BaseParameterDataRepository {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-import CoreSDK
+import CoreSDKSourceCode
 
 protocol DelegateFunction {
     func readParameters(return_state: RouterType, target_device: SDKDeviceType_e, addr: UInt16, leng: UInt16, bank_index: UInt8, callback: fpCallback_ReadParameters?) throws -> Int32
