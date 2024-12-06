@@ -14,31 +14,35 @@
 		</data>
 		<key>Headers/CoreSDK.h</key>
 		<data>
-		DT4pWvAQAk6ZC8SYaGipx0hbwek=
+		/TmSk8qbn5m5yDS9hc1uNU5u/Ow=
 		</data>
 		<key>Headers/CoreSDKSourceCode.h</key>
 		<data>
-		dLwMfZsgc1pNdDWAD4SreAYhrEk=
+		Ce8QSVuduec3Ta3CB1BaWkWrfWY=
 		</data>
 		<key>Headers/CoreSDK_Common.h</key>
 		<data>
-		SxBNaRwQKkLKQarUY7eSYqF5ymw=
+		ClBovi/AkoKHDjAza5Ifh3QZD5I=
 		</data>
 		<key>Headers/CoreSDK_DelegateFunc.h</key>
 		<data>
-		NwwQ/7uZGtnKPMZganh9cxt4h6s=
+		q6/EN8ujjALmknUxWBAv1awPmGU=
 		</data>
 		<key>Headers/CoreSDK_DeviceInfo.h</key>
 		<data>
-		e46MQPNBMBz8ME5WHPmmKua4bz4=
+		5cT12L/zgN1MUph/0bccQC0bZik=
 		</data>
 		<key>Headers/FL_CANInfoStruct.h</key>
 		<data>
-		wcJBA9EpoCEIa8a8ynjAuW6hk08=
+		6GRFL3qyJrP6GelhAO24E7eOYVk=
 		</data>
 		<key>Headers/FL_Logs.h</key>
 		<data>
 		eGofeNz2tp2tafT1XGM+wWvXTEY=
+		</data>
+		<key>Headers/LogPrinter.h</key>
+		<data>
+		xk2LVsT5vdvqlw7O9A7N6oowO40=
 		</data>
 		<key>Headers/lib_event_scheduler.h</key>
 		<data>
@@ -46,7 +50,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		MHxWiCAZsNyIGEjSYigu7dvPJbU=
+		ZIjTVEmim8/BF49v8Rg+McvjRvM=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -73,42 +77,42 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0WBjYjEjuQPvyY4iKZMkWjmBJMl1KzjCWRg1DxAGuLs=
+			I6ouv2Lw5rBFzlBXSE2WvlcOIy7DYjo2HC/dYA7GPkI=
 			</data>
 		</dict>
 		<key>Headers/CoreSDKSourceCode.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+sZ515746NYGHTsVSg1yF9Z4+SsG9LDu7v7S+u5yWW0=
+			NvP2aFWa09SHh0SXdfUINEyA21Rz+0b65B4bLWHZUCY=
 			</data>
 		</dict>
 		<key>Headers/CoreSDK_Common.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			J2qflJfMtWb5qr6b4eJ60R5LRfky5SZV3Yak4SijJ3Q=
+			TwADgzhoyn0o5hl6t9kdmx34n6Us78GanBeD9+/6Avk=
 			</data>
 		</dict>
 		<key>Headers/CoreSDK_DelegateFunc.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZmdiJDZ1jvfF/dKnvsgPp4q27ZOuza0eyoVyzNMQCZ4=
+			8jOjScYczO12K1WHN16HN53vzke8lc9ETY2vD5gktIA=
 			</data>
 		</dict>
 		<key>Headers/CoreSDK_DeviceInfo.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			/XQyxGc2rxwxkkcucfqknTi3Qb/WfRfVrLtyv2PUZ3A=
+			8o9AAm6WdNeEJjXfnNmH5gG3BOLDyHVkZAf8x5byiOg=
 			</data>
 		</dict>
 		<key>Headers/FL_CANInfoStruct.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			IfmzWpGnDWqDW0ZrempZBbIwVyPI5nBFUA7Nz+hohV0=
+			qQ21P9WpK6aFdZeco9cZxB3b6KOlLTj6vvJbamlwpd0=
 			</data>
 		</dict>
 		<key>Headers/FL_Logs.h</key>
@@ -116,6 +120,13 @@
 			<key>hash2</key>
 			<data>
 			w4TbrvxKtS2u80I1yn94ngQihJbQxycFlAT7U+miFLQ=
+			</data>
+		</dict>
+		<key>Headers/LogPrinter.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Da9RGDJtzKZ2cCWk0rnEp65Lyhxc8nssfM+rR0pLq+k=
 			</data>
 		</dict>
 		<key>Headers/lib_event_scheduler.h</key>

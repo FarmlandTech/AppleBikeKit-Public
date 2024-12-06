@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import CoreSDKService
 
 /// 判斷 BMS 是否具有通訊功能的處理物件。
 final public class DisguiseBatteryHelper {
@@ -29,9 +30,15 @@ final public class DisguiseBatteryHelper {
     public private(set) lazy var readingSubject: CurrentValueSubject<DisguiseBatteryHelper.ReadingResult<Bool?>, Never> = { .init(.done(nil)) }()
     
     init() throws {
-        guard let index: Int = FarmLandBikeKit.sleipnir.parameterDataRepository.parameters.firstIndex(where: { $0.name == .DISGUISE_BATT }) else {
+        let functionName: String = #function
+        guard FarmLandBikeKit.tenant == .apple || FarmLandBikeKit.tenant == .kiwi else {
+            throw FarmLandBikeKit.Error.functionNotExist(functionName)
+        }
+        
+        guard let index: Int = FarmLandBikeKit.sleipnir.parameterDataRepository.parameters.firstIndex(where: { $0.name == ParameterData.Apple.Name.DISGUISE_BATT.rawValue }) else {
             throw Self.Error.parameterNotFound
         }
+        
         self.subscribe = FarmLandBikeKit.sleipnir.parameterDataRepository.parameters[index].subject
             .compactMap({ $0 as? Int })
             .map({
@@ -51,6 +58,11 @@ final public class DisguiseBatteryHelper {
     }
     
     public func read() throws {
+        let functionName: String = #function
+        guard FarmLandBikeKit.tenant == .apple || FarmLandBikeKit.tenant == .kiwi else {
+            throw FarmLandBikeKit.Error.functionNotExist(functionName)
+        }
+        
         guard case .done(_) = self.readingSubject.value else {
             throw Self.Error.isReadRecursively
         }
@@ -59,9 +71,13 @@ final public class DisguiseBatteryHelper {
     }
     
     private func recurReadValue() throws {
+        let functionName: String = #function
+        guard FarmLandBikeKit.tenant == .apple || FarmLandBikeKit.tenant == .kiwi else {
+            throw FarmLandBikeKit.Error.functionNotExist(functionName)
+        }
         
-        func doTask() throws {
-            try FarmLandBikeKit.sleipnir.readParameter(name: .DISGUISE_BATT)
+        func doTask() throws {        
+            try FarmLandBikeKit.sleipnir.readParameter(name: ParameterData.Apple.Name.DISGUISE_BATT.rawValue, part: .Controller)
             DispatchQueue.global().asyncAfter(deadline: .now() + 1.3) { [weak self] in
                 try? self?.recurReadValue()
             }

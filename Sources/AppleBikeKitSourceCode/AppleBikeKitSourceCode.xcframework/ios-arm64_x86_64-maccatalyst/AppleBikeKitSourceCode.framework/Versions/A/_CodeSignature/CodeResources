@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		bHNLKGlDpKLE/odQlUKdFV4QLNg=
+		DRg1OgKck0iW4VV4r6jEydmLtto=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -15,7 +15,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ueVS4f+ctGbZBF3v6ntByiLO3vHcB8seXn6pEANkqEA=
+			Q3kHGTjxaBceI2lzM0FVXfvd2kdkBXRchKhHulU8JY8=
 			</data>
 		</dict>
 		<key>Headers/AppleBikeKitSourceCode.h</key>
@@ -29,70 +29,70 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Y9NiRszTIje3NPUwvUqMTir8nD8PqvMHCSIQ+B/YDes=
+			83wmDEmFCOUpH6+BGHgwx24OQeUN1itJPOyNlcMown8=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-macabi.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			RHxw6jhvrEqTfI/41w1ia8j/8DtUfOxWXbHXbWBovtc=
+			yWQgq/o6IwmQaWNZxSB3/YdoxcpeaFzBX1C9BMP3T7k=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-macabi.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ACAtOx8c27qclyBHYqX9x3g1Zyq3RSflyhJF8LNVfic=
+			fgIP9qX6WzRqxWIuzkozNMAjg8mCAU+WfLPr/0rWjQU=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-macabi.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			RHxw6jhvrEqTfI/41w1ia8j/8DtUfOxWXbHXbWBovtc=
+			yWQgq/o6IwmQaWNZxSB3/YdoxcpeaFzBX1C9BMP3T7k=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-macabi.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5ijI/xLP0fACTjTORZktbplhoTylI5l2r4pj2CsFUZU=
+			7Na4jCYk3g3ASIuNE//gkvLR0Z9pcClJ3A9A44wUhkc=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-macabi.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Y9NiRszTIje3NPUwvUqMTir8nD8PqvMHCSIQ+B/YDes=
+			83wmDEmFCOUpH6+BGHgwx24OQeUN1itJPOyNlcMown8=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-macabi.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZbYDf52xZhI/1HZJHYV+e83Ov43LJUowLVRHRvnoy2o=
+			VPwn/qsQqgHjT8m78gBPC5gvtQy3FCpCfn7OIflkHjs=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-macabi.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ehBsIMGJehoNwYlButvLk7vi4LLSzeumoWmSIhHQgeg=
+			PPr/A1nkdiYSjbf8WntpKxzlbOdmGVyvc34IKwjHhZ0=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-macabi.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZbYDf52xZhI/1HZJHYV+e83Ov43LJUowLVRHRvnoy2o=
+			VPwn/qsQqgHjT8m78gBPC5gvtQy3FCpCfn7OIflkHjs=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-macabi.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			84INPRBdFHbfZOp1WlUUY8zWddr0UGe6n3NLjN2lBbM=
+			CCKkYJox+LYHDWly/O6+hzmHId8/Pl/Z8/A6EHYB6sM=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -106,7 +106,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bc8z+eYkQJQ9YhHFxKY7wr4N/CZlZytTJGB81vlPp20=
+			DYG/DxPd2Q3sqb8D6l0Xpy5QIYmv5A8s6jgGIqN/sSg=
 			</data>
 		</dict>
 	</dict>

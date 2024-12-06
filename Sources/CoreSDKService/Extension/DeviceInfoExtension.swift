@@ -9,7 +9,7 @@ import Foundation
 
 import CoreSDKSourceCode
 
-public extension FL_Info_st {
+public extension Apple_Info_st {
     
     var hmiWarningCodes: [Int] {
         withUnsafeBytes(of: self.HMI_warning_list, { [UInt8]($0) })
@@ -86,7 +86,7 @@ public extension FL_Info_st {
     }
 }
 
-public extension FL_Info_st {
+public extension Apple_Info_st {
     var warningCodes: [Int] {
         self.hmiWarningCodes + self.batteryWarningCodes + self.controllerWarningCodes
     }
@@ -120,5 +120,54 @@ public extension FL_Info_st {
         default :
             return 0
         }
+    }
+}
+
+public protocol DeviceInfo {
+    func asAppleDeviceInfo() throws -> Apple_Info_st
+    func asOrangeDeviceInfo() throws -> Orange_Info_st
+    func asCherryDeviceInfo() throws -> Cherry_Info_st
+}
+
+
+extension Apple_Info_st: DeviceInfo {
+    public func asAppleDeviceInfo() throws -> Apple_Info_st {
+        self
+    }
+    
+    public func asOrangeDeviceInfo() throws -> Orange_Info_st {
+        throw Tenant.Error.protocolMethodNotValid(#function)
+    }
+    
+    public func asCherryDeviceInfo() throws -> Cherry_Info_st {
+        throw Tenant.Error.protocolMethodNotValid(#function)
+    }
+}
+
+extension Orange_Info_st: DeviceInfo {
+    public func asAppleDeviceInfo() throws -> Apple_Info_st {
+        throw Tenant.Error.protocolMethodNotValid(#function)
+    }
+    
+    public func asCherryDeviceInfo() throws -> Cherry_Info_st {
+        throw Tenant.Error.protocolMethodNotValid(#function)
+    }
+    
+    public func asOrangeDeviceInfo() throws -> Orange_Info_st {
+        self
+    }
+}
+
+extension Cherry_Info_st: DeviceInfo {
+    public func asAppleDeviceInfo() throws -> Apple_Info_st {
+        throw Tenant.Error.protocolMethodNotValid(#function)
+    }
+    
+    public func asOrangeDeviceInfo() throws -> Orange_Info_st {
+        throw Tenant.Error.protocolMethodNotValid(#function)
+    }
+    
+    public func asCherryDeviceInfo() throws -> Cherry_Info_st {
+        self
     }
 }

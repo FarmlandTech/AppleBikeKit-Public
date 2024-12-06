@@ -21,7 +21,7 @@ final public class MetricSystemManipulateHelper {
     
     /// 是否為公制。
     public var isMetricSystem: Bool? {
-        FarmLandBikeKit.sleipnir.metaParameter.hmiDistanceUint
+        FarmLandBikeKit.sleipnir.metaParameter.distanceUint
     }
     
     /// 數據流的訂閱實例。
@@ -80,11 +80,22 @@ final public class MetricSystemManipulateHelper {
         if let _isMetricSystem: Bool = self.isMetricSystem, _isMetricSystem == isMetricSystem {
             self.isWriteRecursively = false
         } else {
-            let name: ParameterData.Name = .DISP_UNIT_SW
-            try FarmLandBikeKit.sleipnir.writeParameter(name: name, value: isMetricSystem ? 0 : 1)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                try? FarmLandBikeKit.sleipnir.readParameter(name: name)
+            let name: String!
+            switch FarmLandBikeKit.tenant {
+            case .apple, .kiwi:
+                name = ParameterData.Apple.Name.DISP_UNIT_SW.rawValue
+            case .orange:
+                name = ParameterData.Orange.HMI.Bank2.DISP_UNIT_SW.rawValue
+            default:
+                throw FarmLandBikeKit.Error.functionNotExist(#function)
             }
+            
+            try FarmLandBikeKit.sleipnir.writeParameter(name: name, part: .HMI, value: isMetricSystem ? 0 : 1)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                try? FarmLandBikeKit.sleipnir.readParameter(name: name, part: .HMI)
+            }
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) { [weak self] in
                 guard let self: MetricSystemManipulateHelper else { return }
                 guard self.isMetricSystem != isMetricSystem else {

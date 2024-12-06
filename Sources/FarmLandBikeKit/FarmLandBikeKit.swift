@@ -11,9 +11,17 @@ import Combine
 import CoreBLEServiceSourceCode
 import AppleBikeKit
 import CoreSDKSourceCode
+import CoreSDKService
 
 /// 農田應用程式開發套件，常見需求的集成。
-final public class FarmLandBikeKit: AppleBikeKit {
+open class FarmLandBikeKit: AppleBikeKit {
+    
+    public enum HMIAccessControl: UInt32 {
+        case lock = 0
+        case unlock
+        case disable
+        case unknown
+    }
     
     /// 單例。
     public static let sleipnir: FarmLandBikeKit = .init()
@@ -22,6 +30,8 @@ final public class FarmLandBikeKit: AppleBikeKit {
         case DisguiseBatteryHelperIsNil
         case unsupportedLevel
         case deviceInfoUnavailable
+        case functionNotExist(String)
+        case deviceNotUnlocked
     }
     
     /// 關鍵參數(ssn或dmid等)的緩存值。
@@ -78,8 +88,13 @@ final public class FarmLandBikeKit: AppleBikeKit {
     
     /// 單日里程(chart)的 /// 判斷 BMS 是否具有通訊功能的處理物件實例。 。
     public private(set) lazy var odoChartDataPublisher: AnyPublisher<Result<[MileageRecord], Swift.Error>, Swift.Error> = {
-        self.parameterDataPubisher
-            .filter({ $0.name == .INTEGRATED_MILEAGE_RECORD })
+        guard Self.tenant == .apple || Self.tenant == .kiwi else {
+            return Fail(error: Self.Error.functionNotExist(#function))
+                .map({ Result<[MileageRecord], Swift.Error>.failure($0) })
+                .eraseToAnyPublisher()
+        }
+        return self.parameterDataPublisher
+            .filter({ $0.name == ParameterData.Apple.Name.INTEGRATED_MILEAGE_RECORD.rawValue })
             .compactMap({ parameterData in
                 self.parameterDataRepository.parameters.firstIndex(where: { $0.name == parameterData.name })
             })
@@ -102,6 +117,28 @@ final public class FarmLandBikeKit: AppleBikeKit {
             .eraseToAnyPublisher()
     }()
     
+    public private(set) lazy var screenLockPublisher: AnyPublisher<(errorCount: Int, state: FarmLandBikeKit.HMIAccessControl), Swift.Error> = {
+        self.deviceInfoPublisher()
+            .compactMap({ $0.deviceInfo })
+            .tryMap({ try $0.asAppleDeviceInfo() })
+            .removeDuplicates(by: {
+                $0.screen_lock_error_count == $1.screen_lock_error_count && $0.screen_lock_state == $1.screen_lock_state
+            })
+            .map({
+                switch $0.screen_lock_state {
+                case 0:
+                    return (errorCount: .init($0.screen_lock_error_count), state: FarmLandBikeKit.HMIAccessControl.lock)
+                case 1:
+                    return (errorCount: .init($0.screen_lock_error_count), state: FarmLandBikeKit.HMIAccessControl.unlock)
+                case 2:
+                    return (errorCount: .init($0.screen_lock_error_count), state: FarmLandBikeKit.HMIAccessControl.disable)
+                default:
+                    return (errorCount: .init($0.screen_lock_error_count), state: FarmLandBikeKit.HMIAccessControl.unknown)
+                }
+            })
+            .eraseToAnyPublisher()
+    }()
+    
     public override func doTasks() {
         super.doTasks()
         
@@ -116,10 +153,14 @@ final public class FarmLandBikeKit: AppleBikeKit {
             case .prepared:  // 取得關鍵參數。
                 do {
                     try self.connectionMetaReadingHelper.doTask()
-                    try self.systemTimeUpdateHelper.doTask()
                 } catch {
                     // TODO: 錯誤處理？
                     assertionFailure("\(error)")
+                }
+                do {
+                    try self.systemTimeUpdateHelper.doTask()
+                } catch {
+                    print(error)
                 }
             }
         }).store(in: &self.subscriptions)
@@ -198,7 +239,13 @@ final public class FarmLandBikeKit: AppleBikeKit {
      - Throws: 上次的讀取仍然在執行(或重試)，便會拋出錯誤；如果底層 AppleBikeKit 讀取參數時，設定錯誤，也可能會拋出錯誤。
      */
     public func readODOChartData() throws {
-        try self.readParameter(name: .INTEGRATED_MILEAGE_RECORD)
+        
+        let functionName: String = #function
+        guard FarmLandBikeKit.tenant == .apple || FarmLandBikeKit.tenant == .kiwi else {
+            throw FarmLandBikeKit.Error.functionNotExist(functionName)
+        }
+        
+        try self.readParameter(name: ParameterData.Apple.Name.INTEGRATED_MILEAGE_RECORD.rawValue, part: .MainBatt)
     }
     
     /**
@@ -238,13 +285,90 @@ final public class FarmLandBikeKit: AppleBikeKit {
               `FarmLandBikeKit.Error.unsupportedLevel` 如果輸入的等級超出設備支援範圍。
      */
     public override func setAssistLevel(_ level: UInt8) throws {
-        guard let support_assist_lv = self.info.deviceInfo?.support_assist_lv else {
+        guard let deviceInfo: DeviceInfo = self.info.deviceInfo else {
             throw FarmLandBikeKit.Error.deviceInfoUnavailable
         }
-        guard support_assist_lv >= UInt32(level) else {
-            throw FarmLandBikeKit.Error.unsupportedLevel
+        
+        if FarmLandBikeKit.tenant == .apple || FarmLandBikeKit.tenant == .kiwi {
+            let appleDeviceInfo: Apple_Info_st = try deviceInfo.asAppleDeviceInfo()
+            guard appleDeviceInfo.support_assist_lv >= UInt32(level) else {
+                throw FarmLandBikeKit.Error.unsupportedLevel
+            }
+        } else if FarmLandBikeKit.tenant == .orange {
+            guard 9 >= UInt32(level) else {
+                throw FarmLandBikeKit.Error.unsupportedLevel
+            }
+        } else {
+            fatalError("未授權的使用： \(#function)")
         }
+        
         try super.setAssistLevel(level)
     }
-
+    
+    public func getHmiPasswordCode() -> AnyPublisher<[Int]?, Swift.Error> {
+        self.screenLockPublisher
+            .compactMap({ $0.state })
+            .tryMap({
+                if $0 == .lock || $0 == .disable {
+                    throw FarmLandBikeKit.Error.deviceNotUnlocked
+                } else {
+                    let name: ParameterData.Apple.Name = .INTEGRATED_HMI_ACCESS
+                    try self.readParameter(name: name.rawValue, part: .HMI)
+                    return name
+                }
+            })
+            .flatMap({ name in
+                self.parameterDataPublisher
+                    .filter({ $0.name == name.rawValue })
+                    .map({ $0.dividedParameters })
+                    .map({ $0?.map({ $0.value as? Int }) })
+                    .map({ $0?.compactMap({ $0 }) })
+                    .eraseToAnyPublisher()
+            })
+            .eraseToAnyPublisher()
+    }
+    
+    public func setHmiPasswordCode(_ passwords: [Int]) -> AnyPublisher<String, Swift.Error> {
+        self.screenLockPublisher
+            .compactMap({ $0.state })
+            .tryMap({
+                if $0 == .lock || $0 == .disable {
+                    throw FarmLandBikeKit.Error.deviceNotUnlocked
+                } else {
+                    let name: ParameterData.Apple.Name = .INTEGRATED_HMI_ACCESS
+                    try self.writeParameter(name: name.rawValue, part: .HMI, value: passwords)
+                    return "\(name.rawValue): (\(passwords))"
+                }
+            })
+            .eraseToAnyPublisher()
+    }
+    
+    public func getHmiErrorLimit() -> AnyPublisher<Int?, Swift.Error> {
+        let name: ParameterData.Apple.Name = .HmiErrorLimit
+        do {
+            try self.readParameter(name: name.rawValue, part: .HMI)
+        } catch {
+            return Fail<Int?, Swift.Error>(error: error)
+                .eraseToAnyPublisher()
+        }
+        return self.parameterDataPublisher
+            .filter({ $0.name == name.rawValue })
+            .map({ $0.value as? Int })
+            .eraseToAnyPublisher()
+    }
+    
+    public func setHmiErrorLimit(_ limitation: Int) -> AnyPublisher<String, Swift.Error> {
+        self.screenLockPublisher
+            .compactMap({ $0.state })
+            .tryMap({
+                if $0 == .lock || $0 == .disable {
+                    throw FarmLandBikeKit.Error.deviceNotUnlocked
+                } else {
+                    let name: ParameterData.Apple.Name = .HmiErrorLimit
+                    try self.writeParameter(name: name.rawValue, part: .HMI, value: limitation)
+                    return "\(name.rawValue): (\(limitation))"
+                }
+            })
+            .eraseToAnyPublisher()
+    }
 }

@@ -68,7 +68,7 @@ extension Array where Element == ParameterData {
                 continue
             }
             
-            if let isMetricSystem: Bool = FarmLandBikeKit.sleipnir.metaParameter.hmiDistanceUint, !isMetricSystem {
+            if let isMetricSystem: Bool = FarmLandBikeKit.sleipnir.metaParameter.distanceUint, !isMetricSystem {
                 odographValue = Int(Double(odographValue).toMile)
             }
             
