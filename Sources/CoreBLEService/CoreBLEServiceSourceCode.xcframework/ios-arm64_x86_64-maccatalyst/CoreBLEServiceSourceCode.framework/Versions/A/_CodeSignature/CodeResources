@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		ADL+7yMCDsM8wQ3BfqEfYzvPrxw=
+		eAoIluFaeMW+ZW3Rm2ansUaZNEE=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -15,7 +15,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			UlW9bDfmGU3CZWqIX5xWLgelsfVNhRjOxV/YhYcpDXc=
+			4WE0jfp6m0ccIhFmscxLnd9/jfkRxH7WOXxVepK20dc=
 			</data>
 		</dict>
 		<key>Headers/CoreBLEServiceSourceCode.h</key>
@@ -29,70 +29,70 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			egf+gt3+D6H82+GXDoP0++VU8L4+vfloSLEtljQYRBc=
+			ricBrwpcSOpR3r69YbaYCQZBCd72yCDSE59JTN7Buik=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios-macabi.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Jsa4rutJiHdZyK+Qery5lJKmA/n2T9znueR095Dc93Q=
+			zJZHXvY0L2WXwXF5k81wmFn3AmNIpb6QQDA9ynfpSg4=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios-macabi.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			oT5PWuLaTlb5gjBODAm9fRdDpNji3Aj5kH6NKYGHeS4=
+			rWqT2J6IW6voM2Yz4OD1DkLb5P2kRBT24Xm8pGv0BxE=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios-macabi.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Jsa4rutJiHdZyK+Qery5lJKmA/n2T9znueR095Dc93Q=
+			zJZHXvY0L2WXwXF5k81wmFn3AmNIpb6QQDA9ynfpSg4=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios-macabi.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			3GNS5HaLK6/0P4HFdzfPW9rJNiH2mThWe3im8FDdlGU=
+			yrBLgaIAMxTVLuEh2w0sVZ4C5OC4VjsLIvuceAr4A8c=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-macabi.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			egf+gt3+D6H82+GXDoP0++VU8L4+vfloSLEtljQYRBc=
+			ricBrwpcSOpR3r69YbaYCQZBCd72yCDSE59JTN7Buik=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-macabi.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bIOr/9VwzYbKOO60GrMLg7vR8AWrqDFH7SIfuxSuk0U=
+			PWCj6dmNnHOzrT/qUfrFRKI2K1rZg0o7FIPiqn8OnS4=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-macabi.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			n20KQl+RIPHX+1EfrJFZiP8w9YW8c7UERx4nunwYYqQ=
+			SrG98Vb8W2KLR38MkW5I4h5VOcrNRqL3UJE1ulqL3u0=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-macabi.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bIOr/9VwzYbKOO60GrMLg7vR8AWrqDFH7SIfuxSuk0U=
+			PWCj6dmNnHOzrT/qUfrFRKI2K1rZg0o7FIPiqn8OnS4=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-macabi.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			1TfufkC+W+RiLKCJgX0wV2gSqPrkly+2NCT3QmBDeGU=
+			uePPH/y6/QLKQRlqKMeeOVXysxqC+ZtX7eUmhm60eKc=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -106,7 +106,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			XZBGD8jnpao9lwFsE3bWrhv+ZucjfPokkLxBy77aOog=
+			xVPMcCJnLbnDWKGyzNkl/qlSsxdGYLpBWNVrR367LXE=
 			</data>
 		</dict>
 	</dict>
