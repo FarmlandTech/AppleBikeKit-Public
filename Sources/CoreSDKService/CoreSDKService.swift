@@ -23,7 +23,7 @@ public final class CoreSDKService: NSObject {
     /// 代表 App 的 DelegateFunction 配置，用於識別不同的運行環境或客戶端。
     private var delegateFunction: DelegateFunction?
     
-    let tenant: Tenant
+    internal private(set) var tenant: Tenant = .unknown
     
     // MARK: 委派
     
@@ -354,6 +354,24 @@ public final class CoreSDKService: NSObject {
      建構子。
      */
     public init(target: String) {
+        super.init()
+        print("AppleBikeKit[CoreSdkService]: init")
+        self.setTenant(target)
+        Self.dataSource = self
+        self.initCoreSDK()
+        self.enableSDK()
+    }
+    
+    /**
+     解構子。
+     */
+    deinit {
+        print("AppleBikeKit[CoreSdkService]: deinit")
+        Self.dataSource = nil
+        self.disableSDK()
+    }
+    
+    public func setTenant(_ target: String) {
         // 檢查新值是否為空。
         guard !target.isEmpty else {
             fatalError("配置目標(target)不可為空。")
@@ -366,14 +384,6 @@ public final class CoreSDKService: NSObject {
         }
         
         self.tenant = tenant
-        
-        super.init()
-        
-        print("AppleBikeKit[CoreSdkService]: init")
-        
-        Self.dataSource = self
-        self.initCoreSDK()
-        self.enableSDK()
         
         switch tenant {
         case .farmland, .merida:
@@ -397,15 +407,6 @@ public final class CoreSDKService: NSObject {
             // 直接觸發錯誤，因為未處理的配置可能會導致應用不穩定或數據處理問題。
             fatalError("未知的配置目標(target)。")
         }
-    }
-    
-    /**
-     解構子。
-     */
-    deinit {
-        print("AppleBikeKit[CoreSdkService]: deinit")
-        Self.dataSource = nil
-        self.disableSDK()
     }
     
     /**
@@ -837,16 +838,14 @@ public final class CoreSDKService: NSObject {
 extension CoreSDKService: CoreSDKDataSource {
     
     func updateDeviceInfo(deviceInfo: DeviceInformation_T) {
-        switch tenant {
+        switch self.tenant {
         case .farmland, .merida:
             self.getElockStateSubject.send(deviceInfo.Apple.e_lock_states)
             self.deviceInfoSubject.value = (deviceInfo.Apple, .init())
         case .lexy:
             self.deviceInfoSubject.value = (deviceInfo.Orange, .init())
-            break
         case .mivice:
             self.deviceInfoSubject.value = (deviceInfo.Cherry, .init())
-            break
         case .unknown:
             // 由於未知的配置目標，這裡採用了防禦式編程，直接觸發錯誤。
             // 這確保了應用不會在未知的配置狀態下運行，避免可能的錯誤或不可預測的行為。
@@ -863,7 +862,7 @@ extension CoreSDKService: CoreSDKDataSource {
     }
     
     func writeParameter(rawData: WritingRawData) {
-//        self.writingParameterStateSubject.send(rawData)
+        self.writingParameterStateSubject.send(rawData)
     }
     
     func restartPart(state: Bool) {

@@ -327,23 +327,14 @@ extension Orange_DelegateFuncDefine_T {
 
 extension Cherry_DelegateFuncDefine_T: DelegateFunction {
     func readParameters(return_state: RouterType, target_device: SDKDeviceType_e, addr: UInt16, leng: UInt16, bank_index: UInt8, callback: fpCallback_ReadParameters?) throws -> Int32 {
-//        self.ReadParameters(return_state, target_device, addr, leng, bank_index, callback)
         throw Tenant.Error.delegateFunctionNotExist(#function)
     }
     
     func writeStringParameters(router: RouterType, target_device: SDKDeviceType_e, addr: UInt16, leng: UInt16, bank_index: UInt8, callback: fpCallback_WriteParameters?) throws -> Int32 {
-//        var result: Int32?
-//        withUnsafePointer(to: &CoreSDKService.writingStringData) { pointer in
-//            result = self.WriteParameters(router, target_device, addr, leng, bank_index, pointer.pointee, callback)
-//        }
-//        return result ?? .min
         throw Tenant.Error.delegateFunctionNotExist(#function)
     }
     
     func writeIntParameters(router: RouterType, target_device: SDKDeviceType_e, addr: UInt16, leng: UInt16, bank_index: UInt8, callback: fpCallback_WriteParameters?) throws -> Int32 {
-//        let unsafeMutableRawPointer = UnsafeMutableRawPointer.allocate(byteCount: MemoryLayout<Int32>.stride * 2, alignment: MemoryLayout<Int>.alignment)
-//        unsafeMutableRawPointer.storeBytes(of: CoreSDKService.writingIntData, as: Int.self)
-//        return self.WriteParameters(SDK_ROUTER_BLE, target_device, addr, leng, bank_index, unsafeMutableRawPointer, callback)
         throw Tenant.Error.delegateFunctionNotExist(#function)
     }
     
@@ -360,12 +351,10 @@ extension Cherry_DelegateFuncDefine_T: DelegateFunction {
     }
     
     func resetParameters(router: RouterType, target_device: SDKDeviceType_e, bank_index: UInt8, callback: fpCallback_ResetParameters?) throws -> Int32 {
-//        self.ResetParameters(router, target_device, bank_index, callback)
         throw Tenant.Error.delegateFunctionNotExist(#function)
     }
     
     func configSystemTime(router: RouterType, target_device: SDKDeviceType_e?, unix_time: UInt64, callback: fpCallback_NoParamReturn?) throws -> Int32 {
-//        self.ConfigSysTime(router, unix_time, callback)
         throw Tenant.Error.delegateFunctionNotExist(#function)
     }
     
@@ -374,7 +363,6 @@ extension Cherry_DelegateFuncDefine_T: DelegateFunction {
     }
     
     func upgradeFirmware(router: RouterType, target_device: SDKDeviceType_e, device_MID: UnsafeMutablePointer<UInt8>?, data: UnsafeMutablePointer<UInt8>?, data_size: UInt32, upgrade_msg_callback: UpgradeStateMsg_p?, callback: fpCallback_NoParamReturn?) throws -> Int32 {
-//        self.UpgradeFirmware(router, target_device, device_MID, data, data_size, upgrade_msg_callback, callback)
         throw Tenant.Error.delegateFunctionNotExist(#function)
     }
     
