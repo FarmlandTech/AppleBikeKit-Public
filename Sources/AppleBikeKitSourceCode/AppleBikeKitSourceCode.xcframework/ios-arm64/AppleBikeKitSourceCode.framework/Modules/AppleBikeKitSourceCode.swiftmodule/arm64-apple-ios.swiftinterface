@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
 // swift-module-flags: -target arm64-apple-ios16 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name AppleBikeKitSourceCode
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
 @_exported import AppleBikeKitSourceCode
 import Combine
 import Foundation
@@ -8,21 +9,6 @@ import Swift
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-open class BaseAppleBikeKit {
-  public static var target: Swift.String? {
-    get
-    set
-  }
-  public static var tenant: AppleBikeKitSourceCode.Tenant {
-    get
-  }
-  open var subscriptions: Swift.Set<Combine.AnyCancellable>
-  public init()
-  @objc deinit
-  open func subscribeCoreSDKServiceSubjects()
-  open func subscribeCoreBLEServiceSubjects()
-  open func doTasks()
-}
 public enum Tenant : Swift.String {
   case unknown
   case apple
@@ -34,6 +20,24 @@ public enum Tenant : Swift.String {
   public var rawValue: Swift.String {
     get
   }
+}
+open class BaseAppleBikeKit {
+  public static var assignedValidBikeList: [Swift.String]?
+  public static var target: Swift.String? {
+    get
+    set
+  }
+  public static var tenant: AppleBikeKitSourceCode.Tenant {
+    get
+  }
+  open var subscriptions: Swift.Set<Combine.AnyCancellable>
+  public init()
+  @objc deinit
+  open func setTarget(_ target: Swift.String)
+  public func isDeviceNameValid(_ deviceName: Swift.String) -> Swift.Bool
+  open func subscribeCoreSDKServiceSubjects()
+  open func subscribeCoreBLEServiceSubjects()
+  open func doTasks()
 }
 extension AppleBikeKitSourceCode.Tenant : Swift.Equatable {}
 extension AppleBikeKitSourceCode.Tenant : Swift.Hashable {}
