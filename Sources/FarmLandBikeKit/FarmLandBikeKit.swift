@@ -32,6 +32,8 @@ open class FarmLandBikeKit: AppleBikeKit {
         case deviceInfoUnavailable
         case functionNotExist(String)
         case deviceNotUnlocked
+        case screenLockTokenCorrupted
+        case screenLockTokenIsNotAllowed
     }
     
     /// 關鍵參數(ssn或dmid等)的緩存值。
@@ -88,8 +90,8 @@ open class FarmLandBikeKit: AppleBikeKit {
     
     /// 單日里程(chart)的 /// 判斷 BMS 是否具有通訊功能的處理物件實例。 。
     public private(set) lazy var odoChartDataPublisher: AnyPublisher<Result<[MileageRecord], Swift.Error>, Swift.Error> = {
-        guard Self.tenant == .apple || Self.tenant == .kiwi else {
-            return Fail(error: Self.Error.functionNotExist(#function))
+        guard FarmLandBikeKit.tenant == .apple || FarmLandBikeKit.tenant == .kiwi else {
+            return Fail(error: FarmLandBikeKit.Error.functionNotExist(#function))
                 .map({ Result<[MileageRecord], Swift.Error>.failure($0) })
                 .eraseToAnyPublisher()
         }
@@ -368,6 +370,48 @@ open class FarmLandBikeKit: AppleBikeKit {
                     try self.writeParameter(name: name.rawValue, part: .HMI, value: limitation)
                     return "\(name.rawValue): (\(limitation))"
                 }
+            })
+            .eraseToAnyPublisher()
+    }
+    
+    public func setScreenLockToken(_ token: UUID) -> AnyPublisher<Bool, Swift.Error> {
+        self.screenLockPublisher
+            .compactMap({ $0.state })
+            .tryMap({
+                if $0 == .lock || $0 == .disable {
+                    throw FarmLandBikeKit.Error.deviceNotUnlocked
+                } else {
+                    let name: ParameterData.Apple.Name = .HmiSvrToken
+                    try self.writeParameter(name: name.rawValue, part: .HMI, value: token.toToken)
+                }
+            })
+            .flatMap({ _ in
+                self.writingParameterStatePublisher
+                    .setFailureType(to: Swift.Error.self)
+            })
+            .compactMap({ $0?.state })
+            .eraseToAnyPublisher()
+    }
+    
+    public func resetScreenAccessControl(_ token: UUID) -> AnyPublisher<Void, Swift.Error> {
+        let name: ParameterData.Apple.Name = .HmiSvrToken
+        do {
+            try self.readParameter(name: name.rawValue, part: .HMI)
+        } catch {
+            return Fail<Void, Swift.Error>(error: error)
+                .eraseToAnyPublisher()
+        }
+        return self.parameterDataPublisher
+            .filter({ $0.name == name.rawValue })
+            .first()
+            .tryMap({
+                guard let uuid: String = $0.value as? String else {
+                    throw FarmLandBikeKit.Error.screenLockTokenCorrupted
+                }
+                guard uuid == token.toToken else {
+                    throw FarmLandBikeKit.Error.screenLockTokenIsNotAllowed
+                }
+                try self.coreSDKService.resetScreenAccessControl()
             })
             .eraseToAnyPublisher()
     }
