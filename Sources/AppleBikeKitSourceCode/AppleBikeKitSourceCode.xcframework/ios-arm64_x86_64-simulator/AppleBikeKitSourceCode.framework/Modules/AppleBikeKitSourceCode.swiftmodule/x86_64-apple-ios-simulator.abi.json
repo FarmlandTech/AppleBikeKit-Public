@@ -1,9 +1,359 @@
 {
   "ABIRoot": {
     "kind": "Root",
-    "name": "TopLevel",
-    "printedName": "TopLevel",
+    "name": "AppleBikeKitSourceCode",
+    "printedName": "AppleBikeKitSourceCode",
     "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AppleBikeKitSourceCode",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "Tenant",
+        "printedName": "Tenant",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "unknown",
+            "printedName": "unknown",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(AppleBikeKitSourceCode.Tenant.Type) -> AppleBikeKitSourceCode.Tenant",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tenant",
+                    "printedName": "AppleBikeKitSourceCode.Tenant",
+                    "usr": "s:22AppleBikeKitSourceCode6TenantO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "AppleBikeKitSourceCode.Tenant.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Tenant",
+                        "printedName": "AppleBikeKitSourceCode.Tenant",
+                        "usr": "s:22AppleBikeKitSourceCode6TenantO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:22AppleBikeKitSourceCode6TenantO7unknownyA2CmF",
+            "mangledName": "$s22AppleBikeKitSourceCode6TenantO7unknownyA2CmF",
+            "moduleName": "AppleBikeKitSourceCode",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "apple",
+            "printedName": "apple",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(AppleBikeKitSourceCode.Tenant.Type) -> AppleBikeKitSourceCode.Tenant",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tenant",
+                    "printedName": "AppleBikeKitSourceCode.Tenant",
+                    "usr": "s:22AppleBikeKitSourceCode6TenantO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "AppleBikeKitSourceCode.Tenant.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Tenant",
+                        "printedName": "AppleBikeKitSourceCode.Tenant",
+                        "usr": "s:22AppleBikeKitSourceCode6TenantO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:22AppleBikeKitSourceCode6TenantO5appleyA2CmF",
+            "mangledName": "$s22AppleBikeKitSourceCode6TenantO5appleyA2CmF",
+            "moduleName": "AppleBikeKitSourceCode",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "orange",
+            "printedName": "orange",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(AppleBikeKitSourceCode.Tenant.Type) -> AppleBikeKitSourceCode.Tenant",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tenant",
+                    "printedName": "AppleBikeKitSourceCode.Tenant",
+                    "usr": "s:22AppleBikeKitSourceCode6TenantO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "AppleBikeKitSourceCode.Tenant.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Tenant",
+                        "printedName": "AppleBikeKitSourceCode.Tenant",
+                        "usr": "s:22AppleBikeKitSourceCode6TenantO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:22AppleBikeKitSourceCode6TenantO6orangeyA2CmF",
+            "mangledName": "$s22AppleBikeKitSourceCode6TenantO6orangeyA2CmF",
+            "moduleName": "AppleBikeKitSourceCode",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "cherry",
+            "printedName": "cherry",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(AppleBikeKitSourceCode.Tenant.Type) -> AppleBikeKitSourceCode.Tenant",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tenant",
+                    "printedName": "AppleBikeKitSourceCode.Tenant",
+                    "usr": "s:22AppleBikeKitSourceCode6TenantO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "AppleBikeKitSourceCode.Tenant.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Tenant",
+                        "printedName": "AppleBikeKitSourceCode.Tenant",
+                        "usr": "s:22AppleBikeKitSourceCode6TenantO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:22AppleBikeKitSourceCode6TenantO6cherryyA2CmF",
+            "mangledName": "$s22AppleBikeKitSourceCode6TenantO6cherryyA2CmF",
+            "moduleName": "AppleBikeKitSourceCode",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "kiwi",
+            "printedName": "kiwi",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(AppleBikeKitSourceCode.Tenant.Type) -> AppleBikeKitSourceCode.Tenant",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tenant",
+                    "printedName": "AppleBikeKitSourceCode.Tenant",
+                    "usr": "s:22AppleBikeKitSourceCode6TenantO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "AppleBikeKitSourceCode.Tenant.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Tenant",
+                        "printedName": "AppleBikeKitSourceCode.Tenant",
+                        "usr": "s:22AppleBikeKitSourceCode6TenantO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:22AppleBikeKitSourceCode6TenantO4kiwiyA2CmF",
+            "mangledName": "$s22AppleBikeKitSourceCode6TenantO4kiwiyA2CmF",
+            "moduleName": "AppleBikeKitSourceCode",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(rawValue:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "AppleBikeKitSourceCode.Tenant?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tenant",
+                    "printedName": "AppleBikeKitSourceCode.Tenant",
+                    "usr": "s:22AppleBikeKitSourceCode6TenantO"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:22AppleBikeKitSourceCode6TenantO8rawValueACSgSS_tcfc",
+            "mangledName": "$s22AppleBikeKitSourceCode6TenantO8rawValueACSgSS_tcfc",
+            "moduleName": "AppleBikeKitSourceCode",
+            "implicit": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "rawValue",
+            "printedName": "rawValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:22AppleBikeKitSourceCode6TenantO8rawValueSSvp",
+            "mangledName": "$s22AppleBikeKitSourceCode6TenantO8rawValueSSvp",
+            "moduleName": "AppleBikeKitSourceCode",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:22AppleBikeKitSourceCode6TenantO8rawValueSSvg",
+                "mangledName": "$s22AppleBikeKitSourceCode6TenantO8rawValueSSvg",
+                "moduleName": "AppleBikeKitSourceCode",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:22AppleBikeKitSourceCode6TenantO",
+        "mangledName": "$s22AppleBikeKitSourceCode6TenantO",
+        "moduleName": "AppleBikeKitSourceCode",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "enumRawTypeName": "String",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "RawRepresentable",
+            "printedName": "RawRepresentable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "RawValue",
+                "printedName": "RawValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:SY",
+            "mangledName": "$sSY"
+          }
+        ]
+      },
       {
         "kind": "Import",
         "name": "Foundation",
@@ -26,6 +376,154 @@
         "name": "BaseAppleBikeKit",
         "printedName": "BaseAppleBikeKit",
         "children": [
+          {
+            "kind": "Var",
+            "name": "assignedValidBikeList",
+            "printedName": "assignedValidBikeList",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.String]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Array",
+                    "printedName": "[Swift.String]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sa"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:22AppleBikeKitSourceCode04BaseabC0C013assignedValidB4ListSaySSGSgvpZ",
+            "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0C013assignedValidB4ListSaySSGSgvpZ",
+            "moduleName": "AppleBikeKitSourceCode",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "[Swift.String]?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Array",
+                        "printedName": "[Swift.String]",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sa"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:22AppleBikeKitSourceCode04BaseabC0C013assignedValidB4ListSaySSGSgvgZ",
+                "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0C013assignedValidB4ListSaySSGSgvgZ",
+                "moduleName": "AppleBikeKitSourceCode",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "[Swift.String]?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Array",
+                        "printedName": "[Swift.String]",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sa"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:22AppleBikeKitSourceCode04BaseabC0C013assignedValidB4ListSaySSGSgvsZ",
+                "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0C013assignedValidB4ListSaySSGSgvsZ",
+                "moduleName": "AppleBikeKitSourceCode",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:22AppleBikeKitSourceCode04BaseabC0C013assignedValidB4ListSaySSGSgvMZ",
+                "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0C013assignedValidB4ListSaySSGSgvMZ",
+                "moduleName": "AppleBikeKitSourceCode",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
           {
             "kind": "Var",
             "name": "target",
@@ -341,6 +839,61 @@
           },
           {
             "kind": "Function",
+            "name": "setTarget",
+            "printedName": "setTarget(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:22AppleBikeKitSourceCode04BaseabC0C9setTargetyySSF",
+            "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0C9setTargetyySSF",
+            "moduleName": "AppleBikeKitSourceCode",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "isDeviceNameValid",
+            "printedName": "isDeviceNameValid(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:22AppleBikeKitSourceCode04BaseabC0C17isDeviceNameValidySbSSF",
+            "mangledName": "$s22AppleBikeKitSourceCode04BaseabC0C17isDeviceNameValidySbSSF",
+            "moduleName": "AppleBikeKitSourceCode",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "subscribeCoreSDKServiceSubjects",
             "printedName": "subscribeCoreSDKServiceSubjects()",
             "children": [
@@ -413,341 +966,21 @@
         "isOpen": true,
         "declAttributes": [
           "AccessControl"
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "Foundation",
-        "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "AppleBikeKitSourceCode",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "TypeDecl",
-        "name": "Tenant",
-        "printedName": "Tenant",
-        "children": [
-          {
-            "kind": "Var",
-            "name": "unknown",
-            "printedName": "unknown",
-            "children": [
-              {
-                "kind": "TypeFunc",
-                "name": "Function",
-                "printedName": "(AppleBikeKitSourceCode.Tenant.Type) -> AppleBikeKitSourceCode.Tenant",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Tenant",
-                    "printedName": "AppleBikeKitSourceCode.Tenant",
-                    "usr": "s:22AppleBikeKitSourceCode6TenantO"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Metatype",
-                    "printedName": "AppleBikeKitSourceCode.Tenant.Type",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Tenant",
-                        "printedName": "AppleBikeKitSourceCode.Tenant",
-                        "usr": "s:22AppleBikeKitSourceCode6TenantO"
-                      }
-                    ]
-                  }
-                ]
-              }
-            ],
-            "declKind": "EnumElement",
-            "usr": "s:22AppleBikeKitSourceCode6TenantO7unknownyA2CmF",
-            "mangledName": "$s22AppleBikeKitSourceCode6TenantO7unknownyA2CmF",
-            "moduleName": "AppleBikeKitSourceCode",
-            "declAttributes": [
-              "RawDocComment"
-            ]
-          },
-          {
-            "kind": "Var",
-            "name": "apple",
-            "printedName": "apple",
-            "children": [
-              {
-                "kind": "TypeFunc",
-                "name": "Function",
-                "printedName": "(AppleBikeKitSourceCode.Tenant.Type) -> AppleBikeKitSourceCode.Tenant",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Tenant",
-                    "printedName": "AppleBikeKitSourceCode.Tenant",
-                    "usr": "s:22AppleBikeKitSourceCode6TenantO"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Metatype",
-                    "printedName": "AppleBikeKitSourceCode.Tenant.Type",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Tenant",
-                        "printedName": "AppleBikeKitSourceCode.Tenant",
-                        "usr": "s:22AppleBikeKitSourceCode6TenantO"
-                      }
-                    ]
-                  }
-                ]
-              }
-            ],
-            "declKind": "EnumElement",
-            "usr": "s:22AppleBikeKitSourceCode6TenantO5appleyA2CmF",
-            "mangledName": "$s22AppleBikeKitSourceCode6TenantO5appleyA2CmF",
-            "moduleName": "AppleBikeKitSourceCode",
-            "declAttributes": [
-              "RawDocComment"
-            ]
-          },
-          {
-            "kind": "Var",
-            "name": "orange",
-            "printedName": "orange",
-            "children": [
-              {
-                "kind": "TypeFunc",
-                "name": "Function",
-                "printedName": "(AppleBikeKitSourceCode.Tenant.Type) -> AppleBikeKitSourceCode.Tenant",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Tenant",
-                    "printedName": "AppleBikeKitSourceCode.Tenant",
-                    "usr": "s:22AppleBikeKitSourceCode6TenantO"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Metatype",
-                    "printedName": "AppleBikeKitSourceCode.Tenant.Type",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Tenant",
-                        "printedName": "AppleBikeKitSourceCode.Tenant",
-                        "usr": "s:22AppleBikeKitSourceCode6TenantO"
-                      }
-                    ]
-                  }
-                ]
-              }
-            ],
-            "declKind": "EnumElement",
-            "usr": "s:22AppleBikeKitSourceCode6TenantO6orangeyA2CmF",
-            "mangledName": "$s22AppleBikeKitSourceCode6TenantO6orangeyA2CmF",
-            "moduleName": "AppleBikeKitSourceCode",
-            "declAttributes": [
-              "RawDocComment"
-            ]
-          },
-          {
-            "kind": "Var",
-            "name": "cherry",
-            "printedName": "cherry",
-            "children": [
-              {
-                "kind": "TypeFunc",
-                "name": "Function",
-                "printedName": "(AppleBikeKitSourceCode.Tenant.Type) -> AppleBikeKitSourceCode.Tenant",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Tenant",
-                    "printedName": "AppleBikeKitSourceCode.Tenant",
-                    "usr": "s:22AppleBikeKitSourceCode6TenantO"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Metatype",
-                    "printedName": "AppleBikeKitSourceCode.Tenant.Type",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Tenant",
-                        "printedName": "AppleBikeKitSourceCode.Tenant",
-                        "usr": "s:22AppleBikeKitSourceCode6TenantO"
-                      }
-                    ]
-                  }
-                ]
-              }
-            ],
-            "declKind": "EnumElement",
-            "usr": "s:22AppleBikeKitSourceCode6TenantO6cherryyA2CmF",
-            "mangledName": "$s22AppleBikeKitSourceCode6TenantO6cherryyA2CmF",
-            "moduleName": "AppleBikeKitSourceCode",
-            "declAttributes": [
-              "RawDocComment"
-            ]
-          },
-          {
-            "kind": "Var",
-            "name": "kiwi",
-            "printedName": "kiwi",
-            "children": [
-              {
-                "kind": "TypeFunc",
-                "name": "Function",
-                "printedName": "(AppleBikeKitSourceCode.Tenant.Type) -> AppleBikeKitSourceCode.Tenant",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Tenant",
-                    "printedName": "AppleBikeKitSourceCode.Tenant",
-                    "usr": "s:22AppleBikeKitSourceCode6TenantO"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Metatype",
-                    "printedName": "AppleBikeKitSourceCode.Tenant.Type",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Tenant",
-                        "printedName": "AppleBikeKitSourceCode.Tenant",
-                        "usr": "s:22AppleBikeKitSourceCode6TenantO"
-                      }
-                    ]
-                  }
-                ]
-              }
-            ],
-            "declKind": "EnumElement",
-            "usr": "s:22AppleBikeKitSourceCode6TenantO4kiwiyA2CmF",
-            "mangledName": "$s22AppleBikeKitSourceCode6TenantO4kiwiyA2CmF",
-            "moduleName": "AppleBikeKitSourceCode",
-            "declAttributes": [
-              "RawDocComment"
-            ]
-          },
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init(rawValue:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "AppleBikeKitSourceCode.Tenant?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Tenant",
-                    "printedName": "AppleBikeKitSourceCode.Tenant",
-                    "usr": "s:22AppleBikeKitSourceCode6TenantO"
-                  }
-                ],
-                "usr": "s:Sq"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "s:22AppleBikeKitSourceCode6TenantO8rawValueACSgSS_tcfc",
-            "mangledName": "$s22AppleBikeKitSourceCode6TenantO8rawValueACSgSS_tcfc",
-            "moduleName": "AppleBikeKitSourceCode",
-            "implicit": true,
-            "init_kind": "Designated"
-          },
-          {
-            "kind": "Var",
-            "name": "rawValue",
-            "printedName": "rawValue",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:22AppleBikeKitSourceCode6TenantO8rawValueSSvp",
-            "mangledName": "$s22AppleBikeKitSourceCode6TenantO8rawValueSSvp",
-            "moduleName": "AppleBikeKitSourceCode",
-            "implicit": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "String",
-                    "printedName": "Swift.String",
-                    "usr": "s:SS"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:22AppleBikeKitSourceCode6TenantO8rawValueSSvg",
-                "mangledName": "$s22AppleBikeKitSourceCode6TenantO8rawValueSSvg",
-                "moduleName": "AppleBikeKitSourceCode",
-                "implicit": true,
-                "accessorKind": "get"
-              }
-            ]
-          }
         ],
-        "declKind": "Enum",
-        "usr": "s:22AppleBikeKitSourceCode6TenantO",
-        "mangledName": "$s22AppleBikeKitSourceCode6TenantO",
-        "moduleName": "AppleBikeKitSourceCode",
-        "declAttributes": [
-          "AccessControl",
-          "RawDocComment"
-        ],
-        "enumRawTypeName": "String",
         "conformances": [
           {
             "kind": "Conformance",
-            "name": "Equatable",
-            "printedName": "Equatable",
-            "usr": "s:SQ",
-            "mangledName": "$sSQ"
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
           },
           {
             "kind": "Conformance",
-            "name": "Hashable",
-            "printedName": "Hashable",
-            "usr": "s:SH",
-            "mangledName": "$sSH"
-          },
-          {
-            "kind": "Conformance",
-            "name": "RawRepresentable",
-            "printedName": "RawRepresentable",
-            "children": [
-              {
-                "kind": "TypeWitness",
-                "name": "RawValue",
-                "printedName": "RawValue",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "String",
-                    "printedName": "Swift.String",
-                    "usr": "s:SS"
-                  }
-                ]
-              }
-            ],
-            "usr": "s:SY",
-            "mangledName": "$sSY"
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
           }
         ]
       }
@@ -755,41 +988,6 @@
     "json_format_version": 8
   },
   "ConstValues": [
-    {
-      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/Model\/Tenant.swift",
-      "kind": "StringLiteral",
-      "offset": 258,
-      "length": 9,
-      "value": "\"unknown\""
-    },
-    {
-      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/Model\/Tenant.swift",
-      "kind": "StringLiteral",
-      "offset": 320,
-      "length": 10,
-      "value": "\"farmland\""
-    },
-    {
-      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/Model\/Tenant.swift",
-      "kind": "StringLiteral",
-      "offset": 380,
-      "length": 6,
-      "value": "\"lexy\""
-    },
-    {
-      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/Model\/Tenant.swift",
-      "kind": "StringLiteral",
-      "offset": 438,
-      "length": 8,
-      "value": "\"mivice\""
-    },
-    {
-      "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/Model\/Tenant.swift",
-      "kind": "StringLiteral",
-      "offset": 496,
-      "length": 8,
-      "value": "\"merida\""
-    },
     {
       "filePath": "\/Users\/yves\/Project\/AppleBikeKit_Sandbox_SourceCode\/AppleBikeKitSourceCode\/AppleBikeKitSourceCode\/Model\/Tenant.swift",
       "kind": "StringLiteral",

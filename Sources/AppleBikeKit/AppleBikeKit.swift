@@ -22,8 +22,17 @@ open class AppleBikeKit: BaseAppleBikeKit {
     
     /// 用於緩存當前已連線裝置的實例。這允許應用快速訪問當前連線的藍牙裝置資訊。
     public private(set) lazy var connectedPeripheral: ConnectedPeripheral = {
-        .init()
+        if let target: String = Self.target {
+            self.setTarget(target)
+        }
+        return .init()
     }()
+    
+    public override func setTarget(_ target: String) {
+        super.setTarget(target)
+        self.coreSDKService.setTenant(target)
+        self.coreBluetoothService.setTenant(target)
+    }
     
     // MARK: - CoreSDKService
     
@@ -462,7 +471,7 @@ open class AppleBikeKit: BaseAppleBikeKit {
     // MARK: - CoreBluetoothService
     
     /// 操作 CoreBluetooth 的物件實例。
-    lazy var coreBluetoothService: CoreBluetoothService = {
+    public private(set) lazy var coreBluetoothService: CoreBluetoothService = {
         // 檢查 `BaseAppleBikeKit` 中的 `target` 是否已設置且非空，這是初始化 `coreBluetoothService` 的必要條件。
         guard let target: String = Self.target else {
             fatalError("配置目標(target)不可為空。")
@@ -482,7 +491,7 @@ open class AppleBikeKit: BaseAppleBikeKit {
     
     /// 掃描到的裝置的發佈者。
     public private(set) lazy var foundDevicesPublisher: AnyPublisher<Array<BluetoothPeripheral>, Never> = {
-        /// 過濾符合特定名稱前綴的藍牙裝置。
+        /// 過濾符合特定名稱前綴的藍牙裝置。 
         let filteredDevicesPublisher: AnyPublisher<Array<BluetoothPeripheral>, Never> = self.coreBluetoothService.foundDevicesSubject
             .map({ elements in
                 // 提取 BluetoothPeripheral 對象。
@@ -490,8 +499,12 @@ open class AppleBikeKit: BaseAppleBikeKit {
             })
             .map({ peripherals in
                 // 過濾裝置名稱符合指定前綴的裝置。
-                peripherals.filter({
-                    $0.deviceName != nil && ($0.deviceName!.hasPrefix("FL") || $0.deviceName!.hasPrefix("Farmland") || $0.deviceName!.hasPrefix("LEXY"))
+                return peripherals.filter({ peripheral in
+                    if let deviceName: String = peripheral.deviceName {
+                        return self.isDeviceNameValid(deviceName)
+                    } else {
+                        return false
+                    }
                 })
             })
             .eraseToAnyPublisher()
@@ -617,9 +630,5 @@ open class AppleBikeKit: BaseAppleBikeKit {
     
     public func setScreenAccessControl(_ accessControl: CoreSDKService.ScreenLockState) throws {
         try self.coreSDKService.setScreenAccessControl(accessControl)
-    }
-    
-    public func resetScreenAccessControl() throws {
-        try self.coreSDKService.resetScreenAccessControl()
     }
 }

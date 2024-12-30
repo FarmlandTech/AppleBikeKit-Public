@@ -84,6 +84,7 @@ public class AppleParameterDataRepository: BaseParameterDataRepository, Paramete
     /// 基礎部件的關鍵參數陣列。(應再根據類別再次拆分)
     public private(set) lazy var normalParameters: [ParameterData] = {
         self.hmiBank0Parameters +
+        [.init(name: ParameterData.Apple.Name.HmiSvrToken.rawValue, partType: .HMI, bank: 0, address: 365, length: 32, type: String.self)] +
         self.hmiBank2Parameters +
         self.controllerBank0Parameters +
         self.controllerBank1Parameters +

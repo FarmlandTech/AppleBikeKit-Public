@@ -61,6 +61,7 @@ extension ParameterData {
             case HmiParaVer
             case HmiProtocolVer
             case HmiBtDevName
+            case HmiSvrToken
             case DISP_UNIT_SW
             case HmiPasswordCode1  // 解鎖密碼。
             case HmiPasswordCode2  // 解鎖密碼。

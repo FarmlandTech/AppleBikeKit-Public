@@ -198,7 +198,7 @@ public struct MetaParameter {
     public fileprivate(set) var controllerBtDevName: String?
     
     internal fileprivate(set) var enablePartRawList: [UInt8]?
-    var enableParts: [EnablePart] {
+    public var enableParts: [MetaParameter.EnablePart] {
         var result: [EnablePart] = .init()
         if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 1, rawList[0] == 1 {
             result.append(.hmi)
@@ -374,13 +374,6 @@ extension MetaParameter: Equatable {
         let isControllerEqual: Bool = lhs.controllerSSN == rhs.controllerSSN && lhs.controllerDMID == rhs.controllerDMID && lhs.controllerDSN == rhs.controllerDSN && lhs.controllerSMID == rhs.controllerSMID
         let isEnablePartsEqual: Bool = lhs.enablePartRawList == rhs.enablePartRawList
         return isHmiEqual && isBatteryEqual && isControllerEqual && isEnablePartsEqual
-    }
-}
-
-extension Apple_Info_st {
-    public func getEnableParts() throws -> [MetaParameter.EnablePart] {
-//        try FarmLandBikeKit.sleipnir.checkVersion(part: .controller, version: "0.0.22")
-        return FarmLandBikeKit.sleipnir.metaParameter.enableParts
     }
 }
 
