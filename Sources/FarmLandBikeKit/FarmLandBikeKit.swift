@@ -415,4 +415,34 @@ open class FarmLandBikeKit: AppleBikeKit {
             })
             .eraseToAnyPublisher()
     }
+    
+    public func checkScreenLockTokenIsValid() -> AnyPublisher<Bool, Swift.Error> {
+        let name: ParameterData.Apple.Name = .HmiSvrToken
+        do {
+            try self.readParameter(name: name.rawValue, part: .HMI)
+        } catch {
+            return Fail<Bool, Swift.Error>(error: error)
+                .eraseToAnyPublisher()
+        }
+        return self.parameterDataPublisher
+            .filter({ $0.name == name.rawValue })
+            .first()
+            .map({ $0.value })
+            .map({
+                if let value: String = $0 as? String {
+                    let firstSegment: String = .init(value.prefix(8))
+                    let secondSegment: String = .init(value.dropFirst(8).prefix(4))
+                    let thirdSegment: String = .init(value.dropFirst(12).prefix(4))
+                    let fourthSegment: String = .init(value.dropFirst(16).prefix(4))
+                    let fifthSegment: String = .init(value.dropFirst(20))
+                    let token = "\(firstSegment)-\(secondSegment)-\(thirdSegment)-\(fourthSegment)-\(fifthSegment)"
+                    let uuid: UUID? = .init(uuidString: token)
+                    print(uuid)
+                    return uuid != nil
+                } else {
+                    return false
+                }
+            })
+            .eraseToAnyPublisher()
+    }
 }
