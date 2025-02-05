@@ -34,6 +34,12 @@ open class FarmLandBikeKit: AppleBikeKit {
         case deviceNotUnlocked
         case screenLockTokenCorrupted
         case screenLockTokenIsNotAllowed
+        /// 助力檔位超出定義範圍。
+        case assistLevelOutOfBounds
+        /// 非預期的助力檔位。
+        case assistLevelUnexpected
+        /// 檔位助力比超出定義範圍。
+        case speedOutOfLimitation
     }
     
     /// 關鍵參數(ssn或dmid等)的緩存值。
@@ -147,11 +153,10 @@ open class FarmLandBikeKit: AppleBikeKit {
         // 監聽連線狀態。
         self.peripheralPublisher.sink(receiveValue: { status in
             switch status {
-            case .unknown, .didConnect(_):
+            case .unknown:
                 break
-            case .didDisconnect(_):  // 清空緩存數據。
-                self.connectionMetaReadingHelper.metaSubject.send(.init())
-                self.systemTimeUpdateHelper.stateSubject.send(nil)
+            case .didConnect(_):
+                break
             case .prepared:  // 取得關鍵參數。
                 do {
                     try self.connectionMetaReadingHelper.doTask()
@@ -164,13 +169,16 @@ open class FarmLandBikeKit: AppleBikeKit {
                 } catch {
                     print(error)
                 }
+            case .didDisconnect(_):  // 清空緩存數據。
+                self.connectionMetaReadingHelper.metaSubject.send(.init())
+                self.systemTimeUpdateHelper.stateSubject.send(nil)
             }
         }).store(in: &self.subscriptions)
         
-        // 監聽裝置資訊。
-        self.deviceInfoPublisher().sink(receiveValue: { deviceInfo in
-
-        }).store(in: &self.subscriptions)
+//        // 監聽裝置資訊。
+//        self.deviceInfoPublisher().sink(receiveValue: { deviceInfo in
+//
+//        }).store(in: &self.subscriptions)
     }
     
     /**
@@ -286,25 +294,59 @@ open class FarmLandBikeKit: AppleBikeKit {
      - Throws: `FarmLandBikeKit.Error.deviceInfoUnavailable` 如果設備信息不可用。
               `FarmLandBikeKit.Error.unsupportedLevel` 如果輸入的等級超出設備支援範圍。
      */
-    public override func setAssistLevel(_ level: UInt8) throws {
-        guard let deviceInfo: DeviceInfo = self.info.deviceInfo else {
-            throw FarmLandBikeKit.Error.deviceInfoUnavailable
-        }
-        
-        if FarmLandBikeKit.tenant == .apple || FarmLandBikeKit.tenant == .kiwi {
-            let appleDeviceInfo: Apple_Info_st = try deviceInfo.asAppleDeviceInfo()
-            guard appleDeviceInfo.support_assist_lv >= UInt32(level) else {
-                throw FarmLandBikeKit.Error.unsupportedLevel
+    public override func setAssistLevel(_ level: UInt8) -> AnyPublisher<Void, Swift.Error> {
+        switch FarmLandBikeKit.tenant {
+        case .apple, .kiwi:
+            return self.deviceInfoPublisher()
+                .first()
+                .compactMap({ $0.deviceInfo })
+                .setFailureType(to: Swift.Error.self)
+                .tryMap({ try $0.asAppleDeviceInfo() })
+                .tryMap({ (appleDeviceInfo: Apple_Info_st) -> Apple_Info_st in
+                    switch appleDeviceInfo.screen_lock_state {
+                    case 0, 2:
+                        throw FarmLandBikeKit.Error.deviceNotUnlocked
+                    default:
+                        return appleDeviceInfo
+                    }
+                })
+                .tryMap({ (appleDeviceInfo: Apple_Info_st) -> Apple_Info_st in
+                    if appleDeviceInfo.support_assist_lv >= UInt32(level) {
+                        return appleDeviceInfo
+                    } else {
+                        throw FarmLandBikeKit.Error.unsupportedLevel
+                    }
+                })
+                .flatMap({ _ -> AnyPublisher<Void, Swift.Error> in
+                    super.setAssistLevel(level)
+                })
+                .eraseToAnyPublisher()
+        case .orange:
+            let name: ParameterData.Orange.Controller.Bank1 = .MAX_ASSIST_LV
+            do {
+                try self.readParameter(name: name.rawValue, part: .Controller)
+            } catch {
+                return Fail<Void, Swift.Error>(error: error)
+                    .eraseToAnyPublisher()
             }
-        } else if FarmLandBikeKit.tenant == .orange {
-            guard 9 >= UInt32(level) else {
-                throw FarmLandBikeKit.Error.unsupportedLevel
-            }
-        } else {
+            return self.parameterDataPublisher
+                .filter({ $0.name == name.rawValue && $0.partType == .Controller })
+                .first()
+                .compactMap({ $0.value as? UInt8 })
+                .tryMap({ (value: UInt8) -> Void in
+                    if value >= level {
+                        return Void()
+                    } else {
+                        throw FarmLandBikeKit.Error.unsupportedLevel
+                    }
+                })
+                .flatMap({ _ -> AnyPublisher<Void, Swift.Error> in
+                    super.setAssistLevel(level)
+                })
+                .eraseToAnyPublisher()
+        default:
             fatalError("未授權的使用： \(#function)")
         }
-        
-        try super.setAssistLevel(level)
     }
     
     public func getHmiPasswordCode() -> AnyPublisher<[Int]?, Swift.Error> {
@@ -377,6 +419,7 @@ open class FarmLandBikeKit: AppleBikeKit {
     public func setScreenLockToken(_ token: UUID) -> AnyPublisher<Bool, Swift.Error> {
         self.screenLockPublisher
             .compactMap({ $0.state })
+            .first()
             .tryMap({
                 if $0 == .lock || $0 == .disable {
                     throw FarmLandBikeKit.Error.deviceNotUnlocked
@@ -437,7 +480,6 @@ open class FarmLandBikeKit: AppleBikeKit {
                     let fifthSegment: String = .init(value.dropFirst(20))
                     let token = "\(firstSegment)-\(secondSegment)-\(thirdSegment)-\(fourthSegment)-\(fifthSegment)"
                     let uuid: UUID? = .init(uuidString: token)
-                    print(uuid)
                     return uuid != nil
                 } else {
                     return false

@@ -16,7 +16,7 @@ protocol DelegateFunction {
     
     func writeIntParameters(router: RouterType, target_device: SDKDeviceType_e, addr: UInt16, leng: UInt16, bank_index: UInt8, callback: fpCallback_WriteParameters?) throws -> Int32
     
-    func writeIntArrayParameters(router: RouterType, target_device: SDKDeviceType_e, addr: UInt16, leng: UInt16, bank_index: UInt8, callback: fpCallback_WriteParameters?) throws -> Int32
+    func writeIntArrayParameters(router: RouterType, target_device: SDKDeviceType_e, addr: UInt16, leng: UInt16, bank_index: UInt8, dividedParameters: [ParameterData], callback: fpCallback_WriteParameters?) throws -> Int32
     
     func restartDevice(router: RouterType, target_device: SDKDeviceType_e, callback: fpCallback_NoParamReturn?) throws -> Int32
     
@@ -67,7 +67,7 @@ extension Apple_DelegateFuncDefine_T: DelegateFunction {
      - parameter target_device: 目標設備
      - parameter addr: 寫入的起始位址
      - parameter leng: 總長度 (以 byte 計算)
-     - parameter bank_index: 銀行索引
+     - parameter bank_index: 索引
      - parameter callback: 寫入操作完成後的回調
      - Throws: 若處理過程中發生錯誤，將拋出錯誤
      - Returns: 操作的結果狀態碼
@@ -78,40 +78,34 @@ extension Apple_DelegateFuncDefine_T: DelegateFunction {
         addr: UInt16,
         leng: UInt16,
         bank_index: UInt8,
+        dividedParameters: [ParameterData],
         callback: fpCallback_WriteParameters?
     ) throws -> Int32 {
-
-        // 確保寫入的總長度正確
-        guard leng > 0 else {
-            throw NSError(domain: "WriteIntArrayParametersError", code: 2, userInfo: [NSLocalizedDescriptionKey: "Length must be greater than 0"])
-        }
-
-        // 計算需要的內存大小
-        let totalBytes = CoreSDKService.writingIntArrayData.reduce(0) { $0 + MemoryLayout.size(ofValue: $1) }
-        print("總共需要分配的內存長度：\(totalBytes) bytes")
-        
-        guard totalBytes == Int(leng) else {
-            throw NSError(domain: "WriteIntArrayParametersError", code: 3, userInfo: [NSLocalizedDescriptionKey: "Data length mismatch"])
-        }
-        
-        print("開始分配內存，總長度：\(totalBytes) bytes")
-        
-        // 分配內存
-        let buffer = UnsafeMutableRawPointer.allocate(byteCount: totalBytes, alignment: MemoryLayout<UInt8>.alignment)
+        let buffer: UnsafeMutableRawPointer = .allocate(byteCount: .init(leng), alignment: MemoryLayout<Int32>.alignment)
         
         defer {
+            // 檢查 buffer 中的內容是否正確
+            let rawBufferPointer: UnsafeRawBufferPointer = .init(start: buffer, count: Int(leng))
+            let bufferContent: [UnsafeRawBufferPointer.Element] = rawBufferPointer.map({ $0 })
+#if DEBUG
+            print("檢查 buffer 內容: \(bufferContent)")
+#endif
             buffer.deallocate()
+        }
+        
+        guard CoreSDKService.writingIntArrayData.count == dividedParameters.count else {
+            throw NSError(domain: "WriteIntArrayParametersError", code: 3, userInfo: [NSLocalizedDescriptionKey: "Memory mismatch detected"])
         }
         
         // 寫入數據
         var offset = 0
         for (index, value) in CoreSDKService.writingIntArrayData.enumerated() {
-            let length = MemoryLayout.size(ofValue: value)
+            let length: Int = .init(dividedParameters[index].length)
 
             print("正在處理第 \(index + 1) 筆數據，值：\(value)，長度：\(length) bytes，當前 offset: \(offset)")
 
-            if offset + length > totalBytes {
-                print("錯誤：當前 offset (\(offset)) 超過總內存大小 \(totalBytes)！")
+            if offset + length > .init(leng) {
+                print("錯誤：當前 offset (\(offset)) 超過總內存大小 \(leng)！")
                 throw NSError(domain: "WriteIntArrayParametersError", code: 4, userInfo: [NSLocalizedDescriptionKey: "Memory overflow detected"])
             }
 
@@ -124,7 +118,8 @@ extension Apple_DelegateFuncDefine_T: DelegateFunction {
         
         // 進行寫入操作
         print("數據寫入完成，開始進行 WriteParameters 操作")
-        return self.WriteParameters(router, target_device, addr, leng, bank_index, buffer.assumingMemoryBound(to: UInt8.self), callback)
+        
+        return self.WriteParameters(router, target_device, addr, leng, bank_index, buffer.assumingMemoryBound(to: Int32.self), callback)
     }
     
     func restartDevice(router: RouterType, target_device: SDKDeviceType_e, callback: fpCallback_NoParamReturn?) throws -> Int32 {
@@ -212,6 +207,7 @@ extension Orange_DelegateFuncDefine_T: DelegateFunction {
         addr: UInt16,
         leng: UInt16,
         bank_index: UInt8,
+        dividedParameters: [ParameterData],
         callback: fpCallback_WriteParameters?
     ) throws -> Int32 {
 
@@ -338,7 +334,7 @@ extension Cherry_DelegateFuncDefine_T: DelegateFunction {
         throw Tenant.Error.delegateFunctionNotExist(#function)
     }
     
-    func writeIntArrayParameters(router: RouterType, target_device: SDKDeviceType_e, addr: UInt16, leng: UInt16, bank_index: UInt8, callback: fpCallback_WriteParameters?) throws -> Int32 {
+    func writeIntArrayParameters(router: RouterType, target_device: SDKDeviceType_e, addr: UInt16, leng: UInt16, bank_index: UInt8, dividedParameters: [ParameterData], callback: fpCallback_WriteParameters?) throws -> Int32 {
         throw Tenant.Error.delegateFunctionNotExist(#function)
     }
     
