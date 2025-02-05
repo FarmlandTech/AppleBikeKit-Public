@@ -6,7 +6,7 @@
 	<dict>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/AppleBikeKitSourceCode</key>
 		<data>
-		yt5dlK0KXkRjvwaZQawVI5N1Irk=
+		+I9Hiwre0fqKD9/vq8xwsvGvLJw=
 		</data>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode-Swift.h</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/AppleBikeKitSourceCode</key>
 		<data>
-		zJllnEI95NSalby44kT8XdD7Cw8=
+		WcbZw24az7Bi6b/Tkh+22lZxa7w=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Headers/AppleBikeKitSourceCode-Swift.h</key>
 		<data>
@@ -102,7 +102,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/AppleBikeKitSourceCode</key>
 		<data>
-		GfZPhrNazmZDb0EHQSqIPuirRwk=
+		mXBPwMicxcNR/bPRz2zSp0wU5NE=
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode-Swift.h</key>
 		<data>
@@ -163,11 +163,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yt5dlK0KXkRjvwaZQawVI5N1Irk=
+			+I9Hiwre0fqKD9/vq8xwsvGvLJw=
 			</data>
 			<key>hash2</key>
 			<data>
-			WvXYQjS93mInVheglwRqzOolcLNF1MzmfR8pQ4FVvR0=
+			D13X3Nur/tU6WimLQr7ndpULaL6HzD86fNigHffBK8w=
 			</data>
 		</dict>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode-Swift.h</key>
@@ -293,11 +293,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			zJllnEI95NSalby44kT8XdD7Cw8=
+			WcbZw24az7Bi6b/Tkh+22lZxa7w=
 			</data>
 			<key>hash2</key>
 			<data>
-			985o+mH7iUW3osU1cH37h71RBwGQwaGzo/4y88z+shM=
+			v7QdnuuVD85qT6f0h9HP69H/uhk1MUwhA7vhHF1dxF8=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Headers/AppleBikeKitSourceCode-Swift.h</key>
@@ -452,11 +452,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			GfZPhrNazmZDb0EHQSqIPuirRwk=
+			mXBPwMicxcNR/bPRz2zSp0wU5NE=
 			</data>
 			<key>hash2</key>
 			<data>
-			6yEAuRRRBUgpcnYi1MvAIW7Aozmu1C5ZMAv58k82qSk=
+			vjRtiNrO1O+BPjpJV6x3544kRC22uPP14LN1960v3bg=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode-Swift.h</key>
