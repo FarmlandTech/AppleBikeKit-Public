@@ -78,7 +78,7 @@ final public class AssistPlanUpdateHelper {
                 
                 guard let self: AssistPlanUpdateHelper else { return }
                 
-                guard parameterData.name == ParameterData.Apple.Name.INTEGRATED_ASSIST_LEVEL.rawValue else { return }
+//                guard parameterData.name == ParameterData.Apple.Name.INTEGRATED_ASSIST_LEVEL.rawValue else { return }
                 
                 guard let parameters: [ParameterData] = parameterData.dividedParameters else { return }
                 
@@ -149,6 +149,7 @@ final public class AssistPlanUpdateHelper {
         self.subscriptions.forEach({ $0.cancel() })
     }
     
+    @available(*, deprecated, message: "別用！壞了不負責！")
     public func read() throws {
         
         let functionName: String = #function
@@ -163,6 +164,7 @@ final public class AssistPlanUpdateHelper {
         try self.recurReadValue()
     }
     
+    @available(*, deprecated, message: "別用！壞了不負責！")
     private func recurReadValue() throws {
         
         func doTask() throws {
@@ -172,7 +174,7 @@ final public class AssistPlanUpdateHelper {
                 throw FarmLandBikeKit.Error.functionNotExist(functionName)
             }
             
-            try FarmLandBikeKit.sleipnir.readParameter(name: ParameterData.Apple.Name.INTEGRATED_ASSIST_LEVEL.rawValue, part: .Controller)
+//            try FarmLandBikeKit.sleipnir.readParameter(name: ParameterData.Apple.Name.INTEGRATED_ASSIST_LEVEL.rawValue, part: .Controller)
             
             DispatchQueue.global().asyncAfter(deadline: .now() + 1.9) { [weak self] in
                 try? self?.recurReadValue()
@@ -191,6 +193,7 @@ final public class AssistPlanUpdateHelper {
         }
     }
     
+    @available(*, deprecated, message: "別用！壞了不負責！")
     public func write(
         LV1_MAX_AST_RATIO: Int,
         LV1_MIN_AST_RATIO: Int,
