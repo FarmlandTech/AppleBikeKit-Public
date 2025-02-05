@@ -279,7 +279,7 @@ public final class CoreSDKService: NSObject {
     
     internal static var writingIntData: Int = .init()
     
-    internal static var writingIntArrayData: [Int8] = .init()
+    internal static var writingIntArrayData: [Int] = .init()
     
     // 產生原始陣列建議 255 長度，丟給 bleSDK 可接受最大長度為 244 (遵從 hmi ble portocol)
     // Write w response
@@ -498,25 +498,27 @@ public final class CoreSDKService: NSObject {
             }
         } else if let _ = parameter.type as? [Int].Type {
             // 確認 parameter 的 value 屬性能成功轉型為 [Int]，且 dividedParameters 存在，否則拋出錯誤。
-            guard let values = parameter.value as? [Int], let dividedParameters = parameter.dividedParameters else {
+            guard let values = parameter.value as? [Int] else {
                 throw Self.Error.writeParameterWithNoValue
             }
             
+            guard let dividedParameters = parameter.dividedParameters else {
+                throw Self.Error.getNoDividedParameters
+            }
+            
             // 根據 values 的數量和 Int 的 stride 計算所需的內存大小。
-            let byteCount = MemoryLayout<Int8>.stride * values.count
+            let byteCount: Int = .init(parameter.length)
             
             // 確保計算出來的內存大小有效，否則拋出錯誤。
             guard byteCount > 0 else {
                 throw Self.Error.writeParameterWithInvalidSize
             }
             
-            print("總共需要分配的內存長度：\(byteCount) bytes")
-            
             // 將 values 存入 Self.writingIntArrayData 供後續操作使用。
-            Self.writingIntArrayData = values.map({ Int8($0) })
+            Self.writingIntArrayData = values.map({ Int($0) })
             
             // 分配 byteCount 大小的內存，並使用 Int 的對齊方式來進行內存分配。
-            let unsafeMutableRawPointer = UnsafeMutableRawPointer.allocate(byteCount: byteCount, alignment: MemoryLayout<Int>.alignment)
+            let unsafeMutableRawPointer: UnsafeMutableRawPointer = .allocate(byteCount: byteCount, alignment: MemoryLayout<Int32>.alignment)
             defer {
                 unsafeMutableRawPointer.deallocate() // 確保函數結束後內存能正確釋放。
             }
@@ -532,8 +534,9 @@ public final class CoreSDKService: NSObject {
                 router: SDK_ROUTER_BLE,
                 target_device: parameter.partType.coreType,
                 addr: parameter.address,
-                leng: UInt16(values.count), // 傳遞數據長度
+                leng: parameter.length, // 傳遞數據長度
                 bank_index: parameter.bank,
+                dividedParameters: dividedParameters,
                 callback: self.writeParameterEvent
             )
             
@@ -962,6 +965,8 @@ extension CoreSDKService {
         case writeTextOutOfRange
         /// 寫入參數失敗。
         case writeParameterFail(ParameterData)
+        
+        case getNoDividedParameters
         /// 重啟部件失敗。
         case restartPartFail(CommunicationPartType)
         /// 重置里程參數失敗。

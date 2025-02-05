@@ -20,10 +20,7 @@ public class ParameterData {
     public var value: Any?
     public private(set) var subject: CurrentValueSubject<Any?, Never> = .init(nil)
     
-    private var _dividedParameters: [ParameterData]?
-    public var dividedParameters: [ParameterData]? {
-        self._dividedParameters
-    }
+    public private(set) var dividedParameters: [ParameterData]?
     
     public init(name: String, partType: CommunicationPartType, bank: UInt8, address: UInt16, length: UInt16, type: Any, value: Any? = nil, dividedParameters: [ParameterData]? = nil) {
         self.name = name
@@ -33,20 +30,26 @@ public class ParameterData {
         self.length = length
         self.type = type
         self.value = value
-        self._dividedParameters = dividedParameters
+        self.dividedParameters = dividedParameters
     }
 }
 
 extension ParameterData {
     public struct Apple {
         public enum Name: String {
-            case INTEGRATED_MILEAGE_RECORD
-            case INTEGRATED_ASSIST_LEVEL
-            case INTEGRATED_PEDAL_ASSISTANCE
             case INTEGRATED_HMI_BANK0
+            case INTEGRATED_MILEAGE_RECORD
             case INTEGRATED_HMI_ACCESS  // 螢幕鎖相關參數。
-            case INTEGRATED_BATTERY_BANK0
             case INTEGRATED_CONTROLLER_BANK0
+            case INTEGRATED_ASSISTANCE_CONFIGURATION
+            case INTEGRATED_WALK_ASSISTANCE
+            case INTEGRATED_LV1_AST_RATIO_AND_SPD
+            case INTEGRATED_LV2_AST_RATIO_AND_SPD
+            case INTEGRATED_LV3_AST_RATIO_AND_SPD
+            case INTEGRATED_LV4_AST_RATIO_AND_SPD
+            case INTEGRATED_LV5_AST_RATIO_AND_SPD
+            case INTEGRATED_PEDAL_ASSISTANCE
+            case INTEGRATED_BATTERY_BANK0
             
             case HmiSMID
             case HmiDMID
@@ -85,6 +88,19 @@ extension ParameterData {
             case ControllerBtDevName
             case DISGUISE_BATT
             case INFO_ODO
+            
+            case Controller_SUP_ASSIST
+            case Controller_PEDAL_AST_MODE
+            case Controller_SUP_MAX_AST_SPD
+            case Controller_THROTTLE_AST_EN_MODE
+            case Controller_THROTTLE_AST_MODE
+            case Controller_W_AST_SPD
+            case Controller_W_AST_MAX_CUR
+            case Controller_W_AST_CTRL_FREQ
+            case Controller_W_AST_ACC_DEC
+            case Controller_W_AST_OCP_DEC
+            case Controller_W_AST_STOP_DEC
+
             case Controller_P_STR_MAX_DEG
             case Controller_P_STR_MIN_DEG
             case Controller_P_STR_MAX_TORQ
