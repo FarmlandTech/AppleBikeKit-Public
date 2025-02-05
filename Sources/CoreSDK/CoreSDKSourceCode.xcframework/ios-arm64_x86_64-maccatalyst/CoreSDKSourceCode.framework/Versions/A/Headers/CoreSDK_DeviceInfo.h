@@ -5,8 +5,8 @@
 #ifndef _FL_CORE_SDK_DEVICE_INFO_H
 #define _FL_CORE_SDK_DEVICE_INFO_H
 
-#include <CoreSDKSourceCode/Common.h>
-#include <CoreSDKSourceCode/CoreSDK_Common.h>
+#import <CoreSDKSourceCode/Common.h>
+#import <CoreSDKSourceCode/CoreSDK_Common.h>
 
 #define LOG_PRINT_ENABLE 1
 
@@ -100,7 +100,7 @@ struct DllExport Apple_Info_st
 	unsigned int key_8_count;
 	//HMI 密碼錯誤次數 
 	unsigned int screen_lock_error_count;
-	//HMI 狀態
+	//HMI 狀態 0:Lock , 1:Unlock , 2:Disabled , 255:未知狀態
 	unsigned int screen_lock_state;
 
 	//當前車速

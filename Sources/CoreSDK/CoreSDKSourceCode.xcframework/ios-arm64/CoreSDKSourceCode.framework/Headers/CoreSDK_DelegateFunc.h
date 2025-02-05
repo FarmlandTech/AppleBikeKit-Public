@@ -6,8 +6,8 @@
 #define _FL_CORE_SDK_DELEGATE_FUNC_H
 
 
-#include <CoreSDKSourceCode/Common.h>
-#include <CoreSDKSourceCode/CoreSDK_Common.h>
+#import <CoreSDKSourceCode/Common.h>
+#import <CoreSDKSourceCode/CoreSDK_Common.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -81,7 +81,7 @@ typedef struct DllExport FL_DelegateFuncDefine_st
 	int(__stdcall* ClearTripInfo)(RouterType router, fpCallback_NoParamReturn callback);
 	// 設定當前助力等級
 	int(__stdcall* SetAssistLV)(RouterType router, unsigned char set_level, fpCallback_NoParamReturn callback);
-	// HMI螢幕鎖解/上鎖
+	// HMI螢幕鎖解/上鎖 action = 1 Lock , action = 2 Unlock
 	int(__stdcall* SetScreenAccessCtrl)(RouterType router, SDKDeviceType_e target_device, int action, unsigned char* pwd, fpCallback_SetScreenAccessCtrl callback);
 	// 重置HMI螢幕
 	int(__stdcall* ResetScreenAccessCtrl)(RouterType router, SDKDeviceType_e target_device, fpCallback_ResetScreenAccessCtrl callback);
