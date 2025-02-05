@@ -35,6 +35,13 @@ public class AppleParameterDataRepository: BaseParameterDataRepository, Paramete
         .init(name: ParameterData.Apple.Name.HmiErrorCount.rawValue, partType: .HMI, bank: 2, address: 311, length: 1, type: Int.self)
     ]
     
+    public let himAccessControlParameters: [ParameterData] = [
+        .init(name: ParameterData.Apple.Name.HmiPasswordCode1.rawValue, partType: .HMI, bank: 2, address: 306, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.HmiPasswordCode2.rawValue, partType: .HMI, bank: 2, address: 307, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.HmiPasswordCode3.rawValue, partType: .HMI, bank: 2, address: 308, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.HmiPasswordCode4.rawValue, partType: .HMI, bank: 2, address: 309, length: 1, type: Int.self),
+    ]
+    
     public let controllerBank0Parameters: [ParameterData] = [
         .init(name: ParameterData.Apple.Name.ControllerSMID.rawValue, partType: .Controller, bank: 0, address: 0, length: 15, type: String.self),
         .init(name: ParameterData.Apple.Name.ControllerDMID.rawValue, partType: .Controller, bank: 0, address: 15, length: 17, type: String.self),
@@ -65,6 +72,90 @@ public class AppleParameterDataRepository: BaseParameterDataRepository, Paramete
         .init(name: ParameterData.Apple.Name.BACKUP_LAST_TIME_ODO.rawValue, partType: .Controller, bank: 2, address: 148, length: 4, type: Int.self)
     ]
     
+    public let assistanceConfigurationParameters: [ParameterData] = [
+        .init(name: ParameterData.Apple.Name.Controller_SUP_ASSIST.rawValue, partType: .Controller, bank: 2, address: 70, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_PEDAL_AST_MODE.rawValue, partType: .Controller, bank: 2, address: 71, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_SUP_MAX_AST_SPD.rawValue, partType: .Controller, bank: 2, address: 72, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_THROTTLE_AST_EN_MODE.rawValue, partType: .Controller, bank: 2, address: 74, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_THROTTLE_AST_MODE.rawValue, partType: .Controller, bank: 2, address: 75, length: 1, type: Int.self),
+    ]
+    
+    public let walkAssistanceParameters: [ParameterData] = [
+        .init(name: ParameterData.Apple.Name.Controller_W_AST_SPD.rawValue, partType: .Controller, bank: 2, address: 90, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_W_AST_MAX_CUR.rawValue, partType: .Controller, bank: 2, address: 92, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_W_AST_CTRL_FREQ.rawValue, partType: .Controller, bank: 2, address: 94, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_W_AST_ACC_DEC.rawValue, partType: .Controller, bank: 2, address: 96, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_W_AST_OCP_DEC.rawValue, partType: .Controller, bank: 2, address: 97, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_W_AST_STOP_DEC.rawValue, partType: .Controller, bank: 2, address: 98, length: 1, type: Int.self),
+    ]
+    
+    public let pedalAssistanceParameters: [ParameterData] = [
+//        .init(name: ParameterData.Apple.Name.Controller_P_STR_MAX_DEG.rawValue, partType: .Controller, bank: 2, address: 115, length: 2, type: Int.self),
+//        .init(name: ParameterData.Apple.Name.Controller_P_STR_MIN_DEG.rawValue, partType: .Controller, bank: 2, address: 117, length: 2, type: Int.self),
+//        .init(name: ParameterData.Apple.Name.Controller_P_STR_MAX_TORQ.rawValue, partType: .Controller, bank: 2, address: 119, length: 1, type: Int.self),
+//        .init(name: ParameterData.Apple.Name.Controller_P_STR_MIN_TORQ.rawValue, partType: .Controller, bank: 2, address: 120, length: 1, type: Int.self),
+//        .init(name: ParameterData.Apple.Name.Controller_P_STR_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 121, length: 2, type: Int.self),
+//        .init(name: ParameterData.Apple.Name.Controller_P_STR_END_SPD.rawValue, partType: .Controller, bank: 2, address: 123, length: 2, type: Int.self),
+//        .init(name: ParameterData.Apple.Name.Controller_P_STOP_MAX_CAD_SPD.rawValue, partType: .Controller, bank: 2, address: 125, length: 1, type: Int.self),
+//        .init(name: ParameterData.Apple.Name.Controller_P_STOP_MIN_CAD_SPD.rawValue, partType: .Controller, bank: 2, address: 126, length: 1, type: Int.self),
+//        .init(name: ParameterData.Apple.Name.Controller_P_STOP_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 127, length: 2, type: Int.self),
+//        .init(name: ParameterData.Apple.Name.Controller_P_STOP_END_SPD.rawValue, partType: .Controller, bank: 2, address: 129, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV1_STR_RANG.rawValue, partType: .Controller, bank: 2, address: 131, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV1_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 133, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV1_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 135, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV1_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 137, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV1_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 139, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV2_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 141, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV2_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 143, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV2_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 145, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV2_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 147, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV3_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 149, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV3_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 151, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV3_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 153, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV3_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 155, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV4_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 157, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV4_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 159, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV4_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 161, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV4_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 163, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV5_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 165, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV5_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 167, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV5_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 169, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_LV5_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 171, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_CTRL_FREQ.rawValue, partType: .Controller, bank: 2, address: 173, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV1_STR_ACC.rawValue, partType: .Controller, bank: 2, address: 175, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV1_STR_DEC.rawValue, partType: .Controller, bank: 2, address: 176, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV1_MAX_CUR.rawValue, partType: .Controller, bank: 2, address: 177, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV1_ACC.rawValue, partType: .Controller, bank: 2, address: 179, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV1_DEC.rawValue, partType: .Controller, bank: 2, address: 180, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV2_MAX_CUR.rawValue, partType: .Controller, bank: 2, address: 181, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV2_ACC.rawValue, partType: .Controller, bank: 2, address: 183, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV2_DEC.rawValue, partType: .Controller, bank: 2, address: 184, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV3_MAX_CUR.rawValue, partType: .Controller, bank: 2, address: 185, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV3_ACC.rawValue, partType: .Controller, bank: 2, address: 187, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV3_DEC.rawValue, partType: .Controller, bank: 2, address: 188, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV4_MAX_CUR.rawValue, partType: .Controller, bank: 2, address: 189, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV4_ACC.rawValue, partType: .Controller, bank: 2, address: 191, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV4_DEC.rawValue, partType: .Controller, bank: 2, address: 192, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV5_MAX_CUR.rawValue, partType: .Controller, bank: 2, address: 193, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV5_ACC.rawValue, partType: .Controller, bank: 2, address: 195, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV5_DEC.rawValue, partType: .Controller, bank: 2, address: 196, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_OSP_DEC.rawValue, partType: .Controller, bank: 2, address: 197, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_OCP_DEC.rawValue, partType: .Controller, bank: 2, address: 198, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_STOP_DEC.rawValue, partType: .Controller, bank: 2, address: 199, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV2_STR_RANG.rawValue, partType: .Controller, bank: 2, address: 200, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV3_STR_RANG.rawValue, partType: .Controller, bank: 2, address: 202, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV4_STR_RANG.rawValue, partType: .Controller, bank: 2, address: 204, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV5_STR_RANG.rawValue, partType: .Controller, bank: 2, address: 206, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV2_STR_ACC.rawValue, partType: .Controller, bank: 2, address: 208, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV2_STR_DEC.rawValue, partType: .Controller, bank: 2, address: 209, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV3_STR_ACC.rawValue, partType: .Controller, bank: 2, address: 210, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV3_STR_DEC.rawValue, partType: .Controller, bank: 2, address: 211, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV4_STR_ACC.rawValue, partType: .Controller, bank: 2, address: 212, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV4_STR_DEC.rawValue, partType: .Controller, bank: 2, address: 213, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV5_STR_ACC.rawValue, partType: .Controller, bank: 2, address: 214, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV5_STR_DEC.rawValue, partType: .Controller, bank: 2, address: 215, length: 1, type: Int.self),
+    ]
+    
     public let batteryBank0Parameters: [ParameterData] = [
         .init(name: ParameterData.Apple.Name.BattSMID.rawValue, partType: .MainBatt, bank: 0, address: 0, length: 15, type: String.self),
         .init(name: ParameterData.Apple.Name.BattDMID.rawValue, partType: .MainBatt, bank: 0, address: 15, length: 17, type: String.self),
@@ -79,34 +170,6 @@ public class AppleParameterDataRepository: BaseParameterDataRepository, Paramete
         .init(name: ParameterData.Apple.Name.BattParaVer.rawValue, partType: .MainBatt, bank: 0, address: 163, length: 6, type: String.self),
         .init(name: ParameterData.Apple.Name.BattProtocolVer.rawValue, partType: .MainBatt, bank: 0, address: 169, length: 11, type: String.self),
         .init(name: ParameterData.Apple.Name.BattBtDevName.rawValue, partType: .MainBatt, bank: 0, address: 180, length: 22, type: String.self),
-    ]
-    
-    /// 基礎部件的關鍵參數陣列。(應再根據類別再次拆分)
-    public private(set) lazy var normalParameters: [ParameterData] = {
-        self.hmiBank0Parameters +
-        [.init(name: ParameterData.Apple.Name.HmiSvrToken.rawValue, partType: .HMI, bank: 0, address: 365, length: 32, type: String.self)] +
-        self.hmiBank2Parameters +
-        self.controllerBank0Parameters +
-        self.controllerBank1Parameters +
-        self.controllerBank2Parameters +
-        self.controllerBank3Parameters +
-        self.batteryBank0Parameters
-    }()
-    
-    /// 助力方案相關的參數陣列。
-    public let assistLevelParameters:[ParameterData] = [
-        .init(name: ParameterData.Apple.Name.LV1_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 133, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.LV1_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 135, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.LV1_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 137, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.LV1_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 139, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.LV2_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 141, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.LV2_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 143, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.LV2_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 145, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.LV2_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 147, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.LV3_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 149, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.LV3_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 151, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.LV3_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 153, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.LV3_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 155, length: 2, type: Int.self),
     ]
     
     /// 里程相關的參數陣列。
@@ -175,98 +238,50 @@ public class AppleParameterDataRepository: BaseParameterDataRepository, Paramete
         .init(name: ParameterData.Apple.Name.RECORD_ODO_DAY31.rawValue, partType: .MainBatt, bank: 2, address: 244, length: 4, type: Int.self),
     ]
     
-    ///
-    public let pedalAssistanceParameters: [ParameterData] = [
-        .init(name: ParameterData.Apple.Name.Controller_P_STR_MAX_DEG.rawValue, partType: .Controller, bank: 2, address: 115, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_STR_MIN_DEG.rawValue, partType: .Controller, bank: 2, address: 117, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_STR_MAX_TORQ.rawValue, partType: .Controller, bank: 2, address: 119, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_STR_MIN_TORQ.rawValue, partType: .Controller, bank: 2, address: 120, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_STR_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 121, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_STR_END_SPD.rawValue, partType: .Controller, bank: 2, address: 123, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_STOP_MAX_CAD_SPD.rawValue, partType: .Controller, bank: 2, address: 125, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_STOP_MIN_CAD_SPD.rawValue, partType: .Controller, bank: 2, address: 126, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_STOP_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 127, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_STOP_END_SPD.rawValue, partType: .Controller, bank: 2, address: 129, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV1_STR_RANG.rawValue, partType: .Controller, bank: 2, address: 131, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV1_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 133, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV1_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 135, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV1_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 137, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV1_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 139, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV2_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 141, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV2_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 143, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV2_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 145, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV2_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 147, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV3_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 149, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV3_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 151, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV3_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 153, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV3_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 155, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV4_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 157, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV4_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 159, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV4_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 161, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV4_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 163, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV5_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 165, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV5_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 167, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV5_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 169, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_LV5_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 171, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_CTRL_FREQ.rawValue, partType: .Controller, bank: 2, address: 173, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV1_STR_ACC.rawValue, partType: .Controller, bank: 2, address: 175, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV1_STR_DEC.rawValue, partType: .Controller, bank: 2, address: 176, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV1_MAX_CUR.rawValue, partType: .Controller, bank: 2, address: 177, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV1_ACC.rawValue, partType: .Controller, bank: 2, address: 179, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV1_DEC.rawValue, partType: .Controller, bank: 2, address: 180, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV2_MAX_CUR.rawValue, partType: .Controller, bank: 2, address: 181, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV2_ACC.rawValue, partType: .Controller, bank: 2, address: 183, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV2_DEC.rawValue, partType: .Controller, bank: 2, address: 184, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV3_MAX_CUR.rawValue, partType: .Controller, bank: 2, address: 185, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV3_ACC.rawValue, partType: .Controller, bank: 2, address: 187, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV3_DEC.rawValue, partType: .Controller, bank: 2, address: 188, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV4_MAX_CUR.rawValue, partType: .Controller, bank: 2, address: 189, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV4_ACC.rawValue, partType: .Controller, bank: 2, address: 191, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV4_DEC.rawValue, partType: .Controller, bank: 2, address: 192, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV5_MAX_CUR.rawValue, partType: .Controller, bank: 2, address: 193, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV5_ACC.rawValue, partType: .Controller, bank: 2, address: 195, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV5_DEC.rawValue, partType: .Controller, bank: 2, address: 196, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_OSP_DEC.rawValue, partType: .Controller, bank: 2, address: 197, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_OCP_DEC.rawValue, partType: .Controller, bank: 2, address: 198, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_STOP_DEC.rawValue, partType: .Controller, bank: 2, address: 199, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV2_STR_RANG.rawValue, partType: .Controller, bank: 2, address: 200, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV3_STR_RANG.rawValue, partType: .Controller, bank: 2, address: 202, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV4_STR_RANG.rawValue, partType: .Controller, bank: 2, address: 204, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV5_STR_RANG.rawValue, partType: .Controller, bank: 2, address: 206, length: 2, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV2_STR_ACC.rawValue, partType: .Controller, bank: 2, address: 208, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV2_STR_DEC.rawValue, partType: .Controller, bank: 2, address: 209, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV3_STR_ACC.rawValue, partType: .Controller, bank: 2, address: 210, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV3_STR_DEC.rawValue, partType: .Controller, bank: 2, address: 211, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV4_STR_ACC.rawValue, partType: .Controller, bank: 2, address: 212, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV4_STR_DEC.rawValue, partType: .Controller, bank: 2, address: 213, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV5_STR_ACC.rawValue, partType: .Controller, bank: 2, address: 214, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LV5_STR_DEC.rawValue, partType: .Controller, bank: 2, address: 215, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_BRAKE_DEC.rawValue, partType: .Controller, bank: 2, address: 216, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.Controller_P_AST_LIM_CUR_DEC.rawValue, partType: .Controller, bank: 2, address: 217, length: 1, type: Int.self),
-    ]
-    
-    public let himAccessControlParameters: [ParameterData] = [
-        .init(name: ParameterData.Apple.Name.HmiPasswordCode1.rawValue, partType: .HMI, bank: 2, address: 306, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.HmiPasswordCode2.rawValue, partType: .HMI, bank: 2, address: 307, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.HmiPasswordCode3.rawValue, partType: .HMI, bank: 2, address: 308, length: 1, type: Int.self),
-        .init(name: ParameterData.Apple.Name.HmiPasswordCode4.rawValue, partType: .HMI, bank: 2, address: 309, length: 1, type: Int.self),
-    ]
+    /// 基礎部件的關鍵參數陣列。(應再根據類別再次拆分)
+    public private(set) lazy var normalParameters: [ParameterData] = {
+        self.hmiBank0Parameters +
+        [.init(name: ParameterData.Apple.Name.HmiSvrToken.rawValue, partType: .HMI, bank: 0, address: 365, length: 32, type: String.self)] +
+        self.hmiBank1Parameters +
+        self.hmiBank2Parameters +
+        self.himAccessControlParameters +
+        self.controllerBank0Parameters +
+        self.controllerBank1Parameters +
+        self.controllerBank2Parameters +
+        self.assistanceConfigurationParameters +
+        self.pedalAssistanceParameters +
+        self.walkAssistanceParameters +
+        self.controllerBank3Parameters +
+        self.batteryBank0Parameters +
+        self.mileageRecordParameters
+    }()
     
     /// 整合型的參數陣列。(基本上用於片段讀取參數)
     public var integratedParameters: [ParameterData] {
-        .init([
-            .init(name: ParameterData.Apple.Name.INTEGRATED_MILEAGE_RECORD.rawValue, partType: .MainBatt, bank: 2, address: 0, length: 248, type: Any.self, dividedParameters: self.mileageRecordParameters),
+        let hmiParameters: [ParameterData] = [
             .init(name: ParameterData.Apple.Name.INTEGRATED_HMI_BANK0.rawValue, partType: .HMI, bank: 0, address: 0, length: 202, type: Any.self, dividedParameters: self.hmiBank0Parameters),
+            .init(name: ParameterData.Apple.Name.INTEGRATED_MILEAGE_RECORD.rawValue, partType: .MainBatt, bank: 2, address: 0, length: 248, type: Any.self, dividedParameters: self.mileageRecordParameters),
             .init(name: ParameterData.Apple.Name.INTEGRATED_HMI_ACCESS.rawValue, partType: .HMI, bank: 2, address: 306, length: 4, type: [Int].self, dividedParameters: self.himAccessControlParameters),
+        ]
+        let controllerParameters: [ParameterData] = [
             .init(name: ParameterData.Apple.Name.INTEGRATED_CONTROLLER_BANK0.rawValue, partType: .Controller, bank: 0, address: 0, length: 202, type: Any.self, dividedParameters: self.controllerBank0Parameters),
+            .init(name: ParameterData.Apple.Name.INTEGRATED_ASSISTANCE_CONFIGURATION.rawValue, partType: .Controller, bank: 2, address: 70, length: 6, type: [Int].self, dividedParameters: self.assistanceConfigurationParameters),
+            .init(name: ParameterData.Apple.Name.INTEGRATED_WALK_ASSISTANCE.rawValue, partType: .Controller, bank: 2, address: 90, length: 9, type: [Int].self, dividedParameters: self.walkAssistanceParameters),
+            .init(name: ParameterData.Apple.Name.INTEGRATED_LV1_AST_RATIO_AND_SPD.rawValue, partType: .Controller, bank: 2, address: 133, length: 139-133+2, type: [Int].self, dividedParameters: self.lv1AstRatioAndSpdParameters),
+            .init(name: ParameterData.Apple.Name.INTEGRATED_LV2_AST_RATIO_AND_SPD.rawValue, partType: .Controller, bank: 2, address: 141, length: 147-141+2, type: [Int].self, dividedParameters: self.lv2AstRatioAndSpdParameters),
+            .init(name: ParameterData.Apple.Name.INTEGRATED_LV3_AST_RATIO_AND_SPD.rawValue, partType: .Controller, bank: 2, address: 149, length: 155-149+2, type: [Int].self, dividedParameters: self.lv3AstRatioAndSpdParameters),
+            .init(name: ParameterData.Apple.Name.INTEGRATED_LV4_AST_RATIO_AND_SPD.rawValue, partType: .Controller, bank: 2, address: 157, length: 163-157+2, type: [Int].self, dividedParameters: self.lv4AstRatioAndSpdParameters),
+            .init(name: ParameterData.Apple.Name.INTEGRATED_LV5_AST_RATIO_AND_SPD.rawValue, partType: .Controller, bank: 2, address: 165, length: 171-165+2, type: [Int].self, dividedParameters: self.lv5AstRatioAndSpdParameters),
+            .init(name: ParameterData.Apple.Name.INTEGRATED_PEDAL_ASSISTANCE.rawValue, partType: .Controller, bank: 2, address: 131, length: 215-131+1, type: [Int].self, dividedParameters: self.pedalAssistanceParameters),
+        ]
+        let bmsParameters: [ParameterData] = [
             .init(name: ParameterData.Apple.Name.INTEGRATED_BATTERY_BANK0.rawValue, partType: .MainBatt, bank: 0, address: 0, length: 202, type: Any.self, dividedParameters: self.batteryBank0Parameters),
-            .init(name: ParameterData.Apple.Name.INTEGRATED_ASSIST_LEVEL.rawValue, partType: .Controller, bank: 2, address: 133, length: 24, type: Any.self, dividedParameters: self.assistLevelParameters),
-            .init(name: ParameterData.Apple.Name.INTEGRATED_PEDAL_ASSISTANCE.rawValue, partType: .Controller, bank: 2, address: 115, length: 104, type: [Int].self, dividedParameters: self.pedalAssistanceParameters)
-        ])
+        ]
+        return hmiParameters + controllerParameters + bmsParameters
     }
     
     public var parameters: [ParameterData] {
-        self.normalParameters + self.assistLevelParameters + self.mileageRecordParameters + self.pedalAssistanceParameters + self.integratedParameters + self.himAccessControlParameters
+        self.normalParameters + self.integratedParameters
     }
     
     public func asAppleRepository() throws -> AppleParameterDataRepository {
@@ -279,5 +294,52 @@ public class AppleParameterDataRepository: BaseParameterDataRepository, Paramete
 
     public func asCherryRepository() throws -> CherryParameterDataRepository {
         throw BaseParameterDataRepository.Error.wrongType(type(of: self))
+    }
+}
+
+extension AppleParameterDataRepository {
+    fileprivate var lv1AstRatioAndSpdParameters: [ParameterData] {
+        [
+            .init(name: ParameterData.Apple.Name.Controller_P_AST_LV1_STR_RANG.rawValue, partType: .Controller, bank: 2, address: 133, length: 2, type: Int.self),
+            .init(name: ParameterData.Apple.Name.Controller_P_LV1_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 135, length: 2, type: Int.self),
+            .init(name: ParameterData.Apple.Name.Controller_P_LV1_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 137, length: 2, type: Int.self),
+            .init(name: ParameterData.Apple.Name.Controller_P_LV1_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 139, length: 2, type: Int.self)
+        ]
+    }
+    
+    fileprivate var lv2AstRatioAndSpdParameters: [ParameterData] {
+        [
+            .init(name: ParameterData.Apple.Name.Controller_P_LV2_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 141, length: 2, type: Int.self),
+            .init(name: ParameterData.Apple.Name.Controller_P_LV2_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 143, length: 2, type: Int.self),
+            .init(name: ParameterData.Apple.Name.Controller_P_LV2_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 145, length: 2, type: Int.self),
+            .init(name: ParameterData.Apple.Name.Controller_P_LV2_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 147, length: 2, type: Int.self)
+        ]
+    }
+    
+    fileprivate var lv3AstRatioAndSpdParameters: [ParameterData] {
+        [
+            .init(name: ParameterData.Apple.Name.Controller_P_LV3_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 149, length: 2, type: Int.self),
+            .init(name: ParameterData.Apple.Name.Controller_P_LV3_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 151, length: 2, type: Int.self),
+            .init(name: ParameterData.Apple.Name.Controller_P_LV3_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 153, length: 2, type: Int.self),
+            .init(name: ParameterData.Apple.Name.Controller_P_LV3_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 155, length: 2, type: Int.self)
+        ]
+    }
+    
+    fileprivate var lv4AstRatioAndSpdParameters: [ParameterData] {
+        [
+            .init(name: ParameterData.Apple.Name.Controller_P_LV4_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 157, length: 2, type: Int.self),
+            .init(name: ParameterData.Apple.Name.Controller_P_LV4_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 159, length: 2, type: Int.self),
+            .init(name: ParameterData.Apple.Name.Controller_P_LV4_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 161, length: 2, type: Int.self),
+            .init(name: ParameterData.Apple.Name.Controller_P_LV4_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 163, length: 2, type: Int.self)
+        ]
+    }
+    
+    fileprivate var lv5AstRatioAndSpdParameters: [ParameterData] {
+        [
+            .init(name: ParameterData.Apple.Name.Controller_P_LV5_MAX_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 165, length: 2, type: Int.self),
+            .init(name: ParameterData.Apple.Name.Controller_P_LV5_MIN_AST_RATIO.rawValue, partType: .Controller, bank: 2, address: 167, length: 2, type: Int.self),
+            .init(name: ParameterData.Apple.Name.Controller_P_LV5_AST_RATIO_STR_SPD.rawValue, partType: .Controller, bank: 2, address: 169, length: 2, type: Int.self),
+            .init(name: ParameterData.Apple.Name.Controller_P_LV5_AST_RATIO_END_SPD.rawValue, partType: .Controller, bank: 2, address: 171, length: 2, type: Int.self)
+        ]
     }
 }

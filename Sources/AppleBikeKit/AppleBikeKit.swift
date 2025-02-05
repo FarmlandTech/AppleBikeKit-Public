@@ -29,9 +29,11 @@ open class AppleBikeKit: BaseAppleBikeKit {
     }()
     
     public override func setTarget(_ target: String) {
+        print("target: \(target)")
         super.setTarget(target)
         self.coreSDKService.setTenant(target)
         self.coreBluetoothService.setTenant(target)
+        self.makeParameterDataRepository()
     }
     
     // MARK: - CoreSDKService
@@ -57,24 +59,7 @@ open class AppleBikeKit: BaseAppleBikeKit {
     }
     
     /// 用於 CoreSDK 的參數倉庫，包括定義與緩存，也實作部分的邏輯。
-    public private(set) lazy var parameterDataRepository: ParameterDataSource = {
-        switch Self.tenant {
-        case .apple, .kiwi:
-            return AppleParameterDataRepository()
-        case .orange:
-            return OrangeParameterDataRepository()
-        case .cherry:
-            return CherryParameterDataRepository()
-        case .unknown:
-            // 由於未知的配置目標，這裡採用了防禦式編程，直接觸發錯誤。
-            // 這確保了應用不會在未知的配置狀態下運行，避免可能的錯誤或不可預測的行為。
-            fallthrough
-        @unknown default:
-            // 為了未來擴展性，捕捉任何未知的配置案例。
-            // 直接觸發錯誤，因為未處理的配置可能會導致應用不穩定或數據處理問題。
-            fatalError("未知的配置目標(target)。")
-        }
-    }()
+    public private(set) lazy var parameterDataRepository: ParameterDataSource = self.makeParameterDataRepository()
     
     @available(*, deprecated, message: "该方法已被弃用，请改用 deviceInfoPublisher(throttle:) 方法。")
     /// 腳踏車裝置資訊的發佈者。
@@ -464,8 +449,35 @@ open class AppleBikeKit: BaseAppleBikeKit {
      - parameter level: 助力段數。
      - Throws: CoreSDK 執行失敗。
      */
-    open func setAssistLevel(_ level: UInt8) throws {
-        try self.coreSDKService.setAssistLevel(level)
+    open func setAssistLevel(_ level: UInt8) -> AnyPublisher<Void, Swift.Error> {
+        do {
+            try self.coreSDKService.setAssistLevel(level)
+            return Just(())
+                .setFailureType(to: Swift.Error.self)
+                .eraseToAnyPublisher()
+        } catch {
+            return Fail<Void, Swift.Error>(error: error)
+                .eraseToAnyPublisher()
+        }
+    }
+    
+    private func makeParameterDataRepository() -> ParameterDataSource {
+        switch Self.tenant {
+        case .apple, .kiwi:
+            return AppleParameterDataRepository()
+        case .orange:
+            return OrangeParameterDataRepository()
+        case .cherry:
+            return CherryParameterDataRepository()
+        case .unknown:
+            // 由於未知的配置目標，這裡採用了防禦式編程，直接觸發錯誤。
+            // 這確保了應用不會在未知的配置狀態下運行，避免可能的錯誤或不可預測的行為。
+            fallthrough
+        @unknown default:
+            // 為了未來擴展性，捕捉任何未知的配置案例。
+            // 直接觸發錯誤，因為未處理的配置可能會導致應用不穩定或數據處理問題。
+            fatalError("未知的配置目標(target)。")
+        }
     }
     
     // MARK: - CoreBluetoothService
