@@ -8,7 +8,7 @@
 // #include <iostream>
 #include <string.h>
 #include <sys/types.h>
-#include <CoreSDKSourceCode/CoreSDK_Common.h>
+#import <CoreSDKSourceCode/CoreSDK_Common.h>
 
 
 

@@ -14,7 +14,7 @@
 		</data>
 		<key>Headers/CoreSDK.h</key>
 		<data>
-		/TmSk8qbn5m5yDS9hc1uNU5u/Ow=
+		pwZm0e3nOkId/oTDE1KbwQHekyg=
 		</data>
 		<key>Headers/CoreSDKSourceCode.h</key>
 		<data>
@@ -22,15 +22,15 @@
 		</data>
 		<key>Headers/CoreSDK_Common.h</key>
 		<data>
-		ClBovi/AkoKHDjAza5Ifh3QZD5I=
+		KOJKTjU1KxmOXyl0++/Tuun1bXU=
 		</data>
 		<key>Headers/CoreSDK_DelegateFunc.h</key>
 		<data>
-		q6/EN8ujjALmknUxWBAv1awPmGU=
+		L3jZhL9KaOCj1LpVntnq5tc5ijc=
 		</data>
 		<key>Headers/CoreSDK_DeviceInfo.h</key>
 		<data>
-		5cT12L/zgN1MUph/0bccQC0bZik=
+		KidZpzS0R3BRZcHEcAsn7JWDwbA=
 		</data>
 		<key>Headers/FL_CANInfoStruct.h</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>Headers/LogPrinter.h</key>
 		<data>
-		xk2LVsT5vdvqlw7O9A7N6oowO40=
+		k5OEgDKsivS94dMfabHY5cJKl/Q=
 		</data>
 		<key>Headers/lib_event_scheduler.h</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		ZIjTVEmim8/BF49v8Rg+McvjRvM=
+		A6AHYz4Vu7D326xvaw0w20HpWxY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -77,7 +77,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			I6ouv2Lw5rBFzlBXSE2WvlcOIy7DYjo2HC/dYA7GPkI=
+			kOCieNLA70vHRxcPfuYWmqhgCj8DdXjStZjPPErU1T8=
 			</data>
 		</dict>
 		<key>Headers/CoreSDKSourceCode.h</key>
@@ -91,21 +91,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			TwADgzhoyn0o5hl6t9kdmx34n6Us78GanBeD9+/6Avk=
+			3VdqxG0iNDGyaVQtZ724qdOyKEkAER4g9ytsD3nFHpQ=
 			</data>
 		</dict>
 		<key>Headers/CoreSDK_DelegateFunc.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			8jOjScYczO12K1WHN16HN53vzke8lc9ETY2vD5gktIA=
+			/G/gNpPqzjY/Z4f6J9Lo8yAkac09Susm/ZNh4uoc0D0=
 			</data>
 		</dict>
 		<key>Headers/CoreSDK_DeviceInfo.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			8o9AAm6WdNeEJjXfnNmH5gG3BOLDyHVkZAf8x5byiOg=
+			dbDy2k8RW7/yBZEK347ydfxk6pmXJiKxUrHb6ZilBVs=
 			</data>
 		</dict>
 		<key>Headers/FL_CANInfoStruct.h</key>
@@ -126,7 +126,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Da9RGDJtzKZ2cCWk0rnEp65Lyhxc8nssfM+rR0pLq+k=
+			P7383W1ipKHrw+DPQp1R959dVPj2ad0FpR4FFFui668=
 			</data>
 		</dict>
 		<key>Headers/lib_event_scheduler.h</key>

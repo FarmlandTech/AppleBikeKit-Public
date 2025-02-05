@@ -6,7 +6,7 @@
 #define _FL_CORE_SDK_COMMON_H
 
 
-#include <CoreSDKSourceCode/Common.h>
+#import <CoreSDKSourceCode/Common.h>
 
 
 #ifdef __cplusplus
@@ -58,6 +58,20 @@ typedef DllExport enum ELockStates_enum
 	// 未知狀態或無法讀取到狀態
 	ELOCK_STATES_UNKNOW
 } ELockStates;
+
+// 螢幕鎖
+typedef DllExport enum ScreenLockStates_enum
+{
+	// Lock
+	SCREEN_LOCK_STATE_LOCK = 0,
+	// Unlock
+	SCREEN_LOCK_STATE_UNLOCK = 1,
+	// Disabled
+	SCREEN_LOCK_STATE_DISABLE = 2,
+	// 未知狀態
+	SCREEN_LOCK_STATE_UNKNOW = 255
+
+} ScreenLockStates;
 
 
 //裝置類型定義
