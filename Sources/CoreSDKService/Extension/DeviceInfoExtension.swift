@@ -11,70 +11,86 @@ import CoreSDKSourceCode
 
 public extension Apple_Info_st {
     
-    var hmiWarningCodes: [Int] {
+    public struct Code {
+        public enum Species {
+            case warning, error
+        }
+        
+        public let species: Apple_Info_st.Code.Species
+        public let source: DeviceType_enum
+        public let value: Int
+    }
+    
+    var hmiWarningCodes: [Apple_Info_st.Code] {
         withUnsafeBytes(of: self.HMI_warning_list, { [UInt8]($0) })
                     .chunked(into: 4)
                     .mapBytes
                     .filter({ $0 != 0 })
+                    .map({ .init(species: .warning, source: SDK_FL_HMI, value: $0) })
     }
     
-    var hmiErrorCodes: [Int] {
+    var hmiErrorCodes: [Apple_Info_st.Code] {
         withUnsafeBytes(of: self.HMI_error_list, { [UInt8]($0) })
             .chunked(into: 4)
             .mapBytes
             .filter({ $0 != 0 })
+            .map({ .init(species: .error, source: SDK_FL_HMI, value: $0) })
     }
     
-    var controllerWarningCodes: [Int] {
+    var controllerWarningCodes: [Apple_Info_st.Code] {
         withUnsafeBytes(of: self.controller_warning_list, { [UInt8]($0) })
                     .chunked(into: 4)
                     .mapBytes
                     .filter({ $0 != 0 })
+                    .map({ .init(species: .warning, source: SDK_FL_CONTROLLER, value: $0) })
     }
     
-    var controllerErrorCodes: [Int] {
+    var controllerErrorCodes: [Apple_Info_st.Code] {
         withUnsafeBytes(of: self.controller_error_list, { [UInt8]($0) })
             .chunked(into: 4)
             .mapBytes
             .filter({ $0 != 0 })
+            .map({ .init(species: .error, source: SDK_FL_CONTROLLER, value: $0) })
     }
     
-    var batteryWarningCodes: [Int] {
-        withUnsafeBytes(of: self.battery_warning_list, { [UInt8]($0) })
+    var mainBatteryWarningCodes: [Apple_Info_st.Code] {
+        withUnsafeBytes(of: self.m_batt_warning_list, { [UInt8]($0) })
                     .chunked(into: 4)
                     .mapBytes
                     .filter({ $0 != 0 })
+                    .map({ .init(species: .warning, source: SDK_FL_MAIN_BATT, value: $0) })
     }
     
-    var batteryErrorCodes: [Int] {
-        withUnsafeBytes(of: self.battery_error_list, { [UInt8]($0) })
+    var subBatteryWarningCodes: [Apple_Info_st.Code] {
+        withUnsafeBytes(of: self.s_batt_warning_list, { [UInt8]($0) })
+                    .chunked(into: 4)
+                    .mapBytes
+                    .filter({ $0 != 0 })
+                    .map({ .init(species: .warning, source: SDK_FL_SUB_BATT1, value: $0) })
+    }
+    
+    var mainBatteryErrorCodes: [Apple_Info_st.Code] {
+        withUnsafeBytes(of: self.m_batt_error_list, { [UInt8]($0) })
             .chunked(into: 4)
             .mapBytes
             .filter({ $0 != 0 })
+            .map({ .init(species: .error, source: SDK_FL_MAIN_BATT, value: $0) })
+    }
+    
+    var subBatteryErrorCodes: [Apple_Info_st.Code] {
+        withUnsafeBytes(of: self.s_batt_error_list, { [UInt8]($0) })
+            .chunked(into: 4)
+            .mapBytes
+            .filter({ $0 != 0 })
+            .map({ .init(species: .error, source: SDK_FL_SUB_BATT1, value: $0) })
     }
     
     private var hasWarning: Bool {
-        if self.HMI_warning_leng > 0 {
-            return true
-        } else if self.controller_warning_leng > 0 {
-            return true
-        } else if self.battery_warning_leng > 0 {
-            return true
-        } else {
-            return false
-        }
+        self.HMI_warning_leng + self.controller_warning_leng + self.m_batt_warning_leng + self.s_batt_warning_leng > 0
     }
     
     private var hasError: Bool {
-        if self.HMI_error_leng > 0 {
-            return true
-        } else if self.controller_error_leng > 0 {
-            return true
-        } else if self.battery_error_leng > 0 {
-            return true
-        } else {
-            return false
-        }
+        self.HMI_error_leng + self.controller_error_leng + self.m_batt_error_leng + self.s_batt_error_leng > 0
     }
     
     var hasWrongStatus: Bool {
@@ -84,40 +100,22 @@ public extension Apple_Info_st {
     var isAutoDiagnosePassesd: Bool {
         !self.hasError
     }
+    
+    var warningCodes: [Apple_Info_st.Code] {
+        self.hmiWarningCodes + self.mainBatteryWarningCodes + self.subBatteryWarningCodes + self.controllerWarningCodes
+    }
+    
+    var errorCodes: [Apple_Info_st.Code] {
+        self.hmiErrorCodes + self.mainBatteryErrorCodes + self.subBatteryErrorCodes + self.controllerErrorCodes
+    }
 }
 
 public extension Apple_Info_st {
-    var warningCodes: [Int] {
-        self.hmiWarningCodes + self.batteryWarningCodes + self.controllerWarningCodes
-    }
-    
-    var errorCodes: [Int] {
-        self.hmiErrorCodes + self.batteryErrorCodes + self.controllerErrorCodes
-    }
-    
     var ableRideRange: Double {
-        switch self.battery_rsoc {
-        case 0..<10:
-            return 2.2
-        case 10..<20:
-            return 4.4
-        case 20..<30:
-            return 6.6
-        case 30..<40:
-            return 8.8
-        case 40..<50:
-            return 11
-        case 50..<60:
-            return 13.2
-        case 60..<70:
-            return 15.4
-        case 70..<80:
-            return 17.6
-        case 80..<90:
-            return 19.8
-        case 90...100:
-            return 22
-        default :
+        let totalRsoc: Double = .init(self.m_batt_rsoc + self.s_batt_rsoc)
+        if totalRsoc <= 200 {
+            return 2.2 * Double(Int(totalRsoc / 10) + 1)
+        } else {
             return 0
         }
     }
