@@ -59,6 +59,20 @@ typedef DllExport enum ELockStates_enum
 	ELOCK_STATES_UNKNOW
 } ELockStates;
 
+// 螢幕鎖
+typedef DllExport enum ScreenLockStates_enum
+{
+	// Lock
+	SCREEN_LOCK_STATE_LOCK = 0,
+	// Unlock
+	SCREEN_LOCK_STATE_UNLOCK = 1,
+	// Disabled
+	SCREEN_LOCK_STATE_DISABLE = 2,
+	// 未知狀態
+	SCREEN_LOCK_STATE_UNKNOW = 255
+
+} ScreenLockStates;
+
 
 //裝置類型定義
 typedef DllExport enum DeviceType_enum
