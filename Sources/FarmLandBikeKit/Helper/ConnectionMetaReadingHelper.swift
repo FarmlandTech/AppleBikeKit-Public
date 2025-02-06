@@ -33,7 +33,7 @@ public struct MetaParameter {
         case IoT
         case undefined(Int)
         
-        public func getWarningCodes() throws -> [Int] {
+        public func getWarningCodes() throws -> [Apple_Info_st.Code] {
             guard let deviceInfo: DeviceInfo = FarmLandBikeKit.sleipnir.info.deviceInfo else {
                 return .init()
             }
@@ -42,37 +42,37 @@ public struct MetaParameter {
             
             switch self {
             case .hmi:
-                return appleDeviceInfo.warningCodes.filter({ $0.tranfer2WarningCodeType == .hmi })
+                return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2WarningCodeType == .hmi })
             case .controller:
-                return appleDeviceInfo.warningCodes.filter({ $0.tranfer2WarningCodeType == .controller })
+                return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2WarningCodeType == .controller })
             case .display:
                 return .init()
             case .motor:
-                return appleDeviceInfo.warningCodes.filter({ $0.tranfer2WarningCodeType == .motor })
+                return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2WarningCodeType == .motor })
             case .cadenceSensor:
                 return .init()
             case .torqueSensor:
-                return appleDeviceInfo.warningCodes.filter({ $0.tranfer2WarningCodeType == .torque })
+                return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2WarningCodeType == .torque })
             case .charger:
                 return .init()
             case .frontLight, .rearLight:
-                return appleDeviceInfo.warningCodes.filter({ $0.tranfer2WarningCodeType == .light })
+                return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2WarningCodeType == .light })
             case .throttle:
-                return appleDeviceInfo.warningCodes.filter({ $0.tranfer2WarningCodeType == .throttle })
+                return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2WarningCodeType == .throttle })
             case .eBrake:
                 return .init()
             case .eLock:
                 return .init()
             case .frontDerailleur, .rearDerailleur:
-                return appleDeviceInfo.warningCodes.filter({ $0.tranfer2WarningCodeType == .derailleur })
+                return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2WarningCodeType == .derailleur })
             case .IoT:
                 return .init()
             default:
-                return appleDeviceInfo.warningCodes.filter({ $0.tranfer2WarningCodeType == .unknown })
+                return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2WarningCodeType == .unknown })
             }
         }
         
-        public func getErrorCodes() throws -> [Int] {
+        public func getErrorCodes() throws -> [Apple_Info_st.Code] {
             guard let deviceInfo: DeviceInfo = FarmLandBikeKit.sleipnir.info.deviceInfo else {
                 return .init()
             }
@@ -81,33 +81,33 @@ public struct MetaParameter {
             
             switch self {
             case .hmi:
-                return appleDeviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .hmi })
+                return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .hmi })
             case .controller:
-                return appleDeviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .controller })
+                return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .controller })
             case .display:
                 return .init()
             case .motor:
-                return appleDeviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .motor })
+                return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .motor })
             case .cadenceSensor:
                 return .init()
             case .torqueSensor:
-                return appleDeviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .torque })
+                return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .torque })
             case .charger:
                 return .init()
             case .frontLight, .rearLight:
-                return appleDeviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .light })
+                return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .light })
             case .throttle:
-                return appleDeviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .throttle })
+                return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .throttle })
             case .eBrake:
                 return .init()
             case .eLock:
                 return .init()
             case .frontDerailleur, .rearDerailleur:
-                return appleDeviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .derailleur })
+                return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .derailleur })
             case .IoT:
                 return .init()
             default:
-                return appleDeviceInfo.errorCodes.filter({ $0.tranfer2ErrorCodeType == .unknown })
+                return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .unknown })
             }
         }
         
