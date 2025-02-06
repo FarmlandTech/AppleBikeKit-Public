@@ -100,7 +100,7 @@ struct DllExport Apple_Info_st
 	unsigned int key_8_count;
 	//HMI 密碼錯誤次數 
 	unsigned int screen_lock_error_count;
-	//HMI 狀態 0:Lock , 1:Unlock , 2:Disabled , 255:未知狀態
+	//HMI 狀態 0:Lock , 1:Unlock , 2:Disabled
 	unsigned int screen_lock_state;
 
 	//當前車速
@@ -185,110 +185,111 @@ struct DllExport Apple_Info_st
 	unsigned char hall_state;
 	//預估角度扇區狀態
 	unsigned char sector_state;
-	//當前充電MOSFET啟動狀態
-	bool charge_fet;
-	//當前是否為充電中
-	bool charging;
-	//是否已接近滿充電
-	bool fully_charged;
-	//是否偵測到充電器接入
-	bool charge_detected;
-	//放電MOSFET狀態
-	bool discharge_fet;
-	//當前是否為放電中
-	bool discharging;
-	//電量為低點
-	bool nearly_discharged;
-	//電量為空
-	bool fully_discharged;
-	//電池設計電壓值
-	unsigned int design_volt;
-	//電池設計容量值
-	float design_capacity;
-	//電池累積循環次數
-	unsigned int battery_cycle_count;
-	//電池累積未充電天數
-	unsigned int battery_uncharged_day;
-	//電池當前電壓值
-	unsigned int battery_actual_volt;
-	//電池當前電流值
-	unsigned int battery_actual_current;
-	//電池當前溫度值
-	signed char battery_temperature;
-	//電池當前相對容量
-	unsigned int battery_rsoc;
-	//電池當前實際容量
-	unsigned int battery_asoc;
-	//電池當前相對健康度
-	unsigned int battery_rsoh;
-	//電池當前實際健康度
-	unsigned int battery_asoh;
-	//系統當前UNIX時間
-	unsigned long long sys_unix_time;
-	//電池當前發送警告碼清單
-	unsigned int battery_warning_list[28];
-	//電池當前發送警告碼清單長度
-	unsigned int battery_warning_leng;
-	//電池當前發送錯誤碼清單
-	unsigned int battery_error_list[28];
-	//電池當前發送錯誤碼清單長度
-	unsigned int battery_error_leng;
-	//第1節電芯電壓值
-	unsigned int cell_1_volt;	// Unit:1mV
-	//第2節電芯電壓值
-	unsigned int cell_2_volt;	// Unit:1mV
-	//第3節電芯電壓值
-	unsigned int cell_3_volt;	// Unit:1mV
-	//第4節電芯電壓值
-	unsigned int cell_4_volt;	// Unit:1mV
-	//第5節電芯電壓值
-	unsigned int cell_5_volt;	// Unit:1mV
-	//第6節電芯電壓值
-	unsigned int cell_6_volt;	// Unit:1mV
-	//第7節電芯電壓值
-	unsigned int cell_7_volt;	// Unit:1mV
-	//第8節電芯電壓值
-	unsigned int cell_8_volt;	// Unit:1mV
-	//第9節電芯電壓值
-	unsigned int cell_9_volt;	// Unit:1mV
-	//第10節電芯電壓值
-	unsigned int cell_10_volt;	// Unit:1mV
-	//第11節電芯電壓值
-	unsigned int cell_11_volt;	// Unit:1mV
-	//第12節電芯電壓值
-	unsigned int cell_12_volt;	// Unit:1mV
-	//第13節電芯電壓值
-	unsigned int cell_13_volt;	// Unit:1mV
-	//第14節電芯電壓值
-	unsigned int cell_14_volt;	// Unit:1mV
-	//第15節電芯電壓值
-	unsigned int cell_15_volt;	// Unit:1mV
-	//第16節電芯電壓值
-	unsigned int cell_16_volt;	// Unit:1mV
-	//第17節電芯電壓值
-	unsigned int cell_17_volt;	// Unit:1mV
-	//第18節電芯電壓值
-	unsigned int cell_18_volt;	// Unit:1mV
-	//第19節電芯電壓值
-	unsigned int cell_19_volt;	// Unit:1mV
-	//第20節電芯電壓值
-	unsigned int cell_20_volt;	// Unit:1mV
-	//電池溫度感測器1 溫度值
-	int battery_temperature_1;
-	//電池溫度感測器2 溫度值
-	int battery_temperature_2;
-	//電池溫度感測器3 溫度值
-	int battery_temperature_3;
-	//電池溫度感測器4 溫度值
-	int battery_temperature_4;
-	//電池溫度感測器5 溫度值
-	int battery_temperature_5;
-	//電池溫度感測器6 溫度值
-	int battery_temperature_6;
-	//電池溫度感測器7 溫度值
-	int battery_temperature_7;
-	//電池溫度感測器8 溫度值
-	int battery_temperature_8;
+	//主電池當前充電MOSFET啟動狀態
+	bool m_batt_charge_fet;
+	//主電池當前是否為充電中
+	bool m_batt_charging;
+	//主電池是否已接近滿充電
+	bool m_batt_fully_charged;
+	//主電池是否偵測到充電器接入
+	bool m_batt_charge_detected;
+	//主電池放電MOSFET狀態
+	bool m_batt_discharge_fet;
+	//主電池當前是否為放電中
+	bool m_batt_discharging;
+	//主電池電量為低點
+	bool m_batt_nearly_discharged;
+	//主電池電量為空
+	bool m_batt_fully_discharged;
+	//主電池設計電壓值
+	unsigned int m_batt_design_volt;
+	//主電池設計容量值
+	float m_batt_design_capacity;
+	//主電池累積循環次數
+	unsigned int m_batt_cycle_count;
+	//主電池累積未充電天數
+	unsigned int m_batt_uncharged_day;
+	//主電池當前電壓值
+	unsigned int m_batt_actual_volt;
+	//主電池當前電流值
+	unsigned int m_batt_actual_current;
+	//主電池當前溫度值
+	signed char m_batt_temperature;
+	//主電池當前相對容量
+	unsigned int m_batt_rsoc;
+	//主電池當前實際容量
+	unsigned int m_batt_asoc;
+	//主電池當前相對健康度
+	unsigned int m_batt_rsoh;
+	//主電池當前實際健康度
+	unsigned int m_batt_asoh;
+	//主電池系統當前UNIX時間
+	//unsigned long long m_sys_unix_time;
+	unsigned long long m_batt_sys_unix_time;
+	//主電池當前發送警告碼清單
+	unsigned int m_batt_warning_list[28];
+	//主電池當前發送警告碼清單長度
+	unsigned int m_batt_warning_leng;
+	//主電池當前發送錯誤碼清單
+	unsigned int m_batt_error_list[28];
+	//主電池當前發送錯誤碼清單長度
+	unsigned int m_batt_error_leng;
+	//主電池第1節電芯電壓值
+	unsigned int m_batt_cell_1_volt;	// Unit:1mV
+	//主電池第2節電芯電壓值
+	unsigned int m_batt_cell_2_volt;	// Unit:1mV
+	//主電池第3節電芯電壓值
+	unsigned int m_batt_cell_3_volt;	// Unit:1mV
+	//主電池第4節電芯電壓值
+	unsigned int m_batt_cell_4_volt;	// Unit:1mV
+	//主電池第5節電芯電壓值
+	unsigned int m_batt_cell_5_volt;	// Unit:1mV
+	//主電池第6節電芯電壓值
+	unsigned int m_batt_cell_6_volt;	// Unit:1mV
+	//主電池第7節電芯電壓值
+	unsigned int m_batt_cell_7_volt;	// Unit:1mV
+	//主電池第8節電芯電壓值
+	unsigned int m_batt_cell_8_volt;	// Unit:1mV
+	//主電池第9節電芯電壓值
+	unsigned int m_batt_cell_9_volt;	// Unit:1mV
+	//主電池第10節電芯電壓值
+	unsigned int m_batt_cell_10_volt;	// Unit:1mV
+	//主電池第11節電芯電壓值
+	unsigned int m_batt_cell_11_volt;	// Unit:1mV
+	//主電池第12節電芯電壓值
+	unsigned int m_batt_cell_12_volt;	// Unit:1mV
+	//主電池第13節電芯電壓值
+	unsigned int m_batt_cell_13_volt;	// Unit:1mV
+	//主電池第14節電芯電壓值
+	unsigned int m_batt_cell_14_volt;	// Unit:1mV
+	//主電池第15節電芯電壓值
+	unsigned int m_batt_cell_15_volt;	// Unit:1mV
+	//主電池第16節電芯電壓值
+	unsigned int m_batt_cell_16_volt;	// Unit:1mV
+	//主電池第17節電芯電壓值
+	unsigned int m_batt_cell_17_volt;	// Unit:1mV
+	//主電池第18節電芯電壓值
+	unsigned int m_batt_cell_18_volt;	// Unit:1mV
+	//主電池第19節電芯電壓值
+	unsigned int m_batt_cell_19_volt;	// Unit:1mV
+	//主電池第20節電芯電壓值
+	unsigned int m_batt_cell_20_volt;	// Unit:1mV
+	//主電池溫度感測器1 溫度值
+	int m_batt_temperature_1;
+	//主電池溫度感測器2 溫度值
+	int m_batt_temperature_2;
+	//主電池溫度感測器3 溫度值
+	int m_batt_temperature_3;
+	//主電池溫度感測器4 溫度值
+	int m_batt_temperature_4;
+	//主電池溫度感測器5 溫度值
+	int m_batt_temperature_5;
+	//主電池溫度感測器6 溫度值
+	int m_batt_temperature_6;
+	//主電池溫度感測器7 溫度值
+	int m_batt_temperature_7;
+	//主電池溫度感測器8 溫度值
+	int m_batt_temperature_8;
 	
 	//E Lock當前狀態
 	//Enum C/C++ 可以指定型別為 Byte但是, 實際上編譯後所佔用記憶體長度(位元組)可能有所變化
@@ -327,6 +328,111 @@ struct DllExport Apple_Info_st
 	// 控制器霍爾排序校正數值
 	unsigned char tuning_hall_sensor_seq_result;
 
+	//副電池當前充電MOSFET啟動狀態
+	bool s_batt_charge_fet;
+	//副電池當前是否為充電中
+	bool s_batt_charging;
+	//副電池是否已接近滿充電
+	bool s_batt_fully_charged;
+	//副電池是否偵測到充電器接入
+	bool s_batt_charge_detected;
+	//副電池放電MOSFET狀態
+	bool s_batt_discharge_fet;
+	//副電池當前是否為放電中
+	bool s_batt_discharging;
+	//副電池電量為低點
+	bool s_batt_nearly_discharged;
+	//副電池電量為空
+	bool s_batt_fully_discharged;
+	//副電池設計電壓值
+	unsigned int s_batt_design_volt;
+	//副電池設計容量值
+	float s_batt_design_capacity;
+	//副電池累積循環次數
+	unsigned int s_batt_cycle_count;
+	//副電池累積未充電天數
+	unsigned int s_batt_uncharged_day;
+	//副電池當前電壓值
+	unsigned int s_batt_actual_volt;
+	//副電池當前電流值
+	unsigned int s_batt_actual_current;
+	//副電池當前溫度值
+	signed char s_batt_temperature;
+	//副電池當前相對容量
+	unsigned int s_batt_rsoc;
+	//副電池當前實際容量
+	unsigned int s_batt_asoc;
+	//副電池當前相對健康度
+	unsigned int s_batt_rsoh;
+	//副電池當前實際健康度
+	unsigned int s_batt_asoh;
+	//副電池系統當前UNIX時間
+	//unsigned long long s_sys_unix_time;
+	unsigned long long s_batt_sys_unix_time;
+	//副電池當前發送警告碼清單
+	unsigned int s_batt_warning_list[28];
+	//副電池當前發送警告碼清單長度
+	unsigned int s_batt_warning_leng;
+	//副電池當前發送錯誤碼清單
+	unsigned int s_batt_error_list[28];
+	//副電池當前發送錯誤碼清單長度
+	unsigned int s_batt_error_leng;
+	//副電池第1節電芯電壓值
+	unsigned int s_batt_cell_1_volt;	// Unit:1mV
+	//副電池第2節電芯電壓值
+	unsigned int s_batt_cell_2_volt;	// Unit:1mV
+	//副電池第3節電芯電壓值
+	unsigned int s_batt_cell_3_volt;	// Unit:1mV
+	//副電池第4節電芯電壓值
+	unsigned int s_batt_cell_4_volt;	// Unit:1mV
+	//副電池第5節電芯電壓值
+	unsigned int s_batt_cell_5_volt;	// Unit:1mV
+	//副電池第6節電芯電壓值
+	unsigned int s_batt_cell_6_volt;	// Unit:1mV
+	//副電池第7節電芯電壓值
+	unsigned int s_batt_cell_7_volt;	// Unit:1mV
+	//副電池第8節電芯電壓值
+	unsigned int s_batt_cell_8_volt;	// Unit:1mV
+	//副電池第9節電芯電壓值
+	unsigned int s_batt_cell_9_volt;	// Unit:1mV
+	//副電池第10節電芯電壓值
+	unsigned int s_batt_cell_10_volt;	// Unit:1mV
+	//副電池第11節電芯電壓值
+	unsigned int s_batt_cell_11_volt;	// Unit:1mV
+	//副電池第12節電芯電壓值
+	unsigned int s_batt_cell_12_volt;	// Unit:1mV
+	//副電池第13節電芯電壓值
+	unsigned int s_batt_cell_13_volt;	// Unit:1mV
+	//副電池第14節電芯電壓值
+	unsigned int s_batt_cell_14_volt;	// Unit:1mV
+	//副電池第15節電芯電壓值
+	unsigned int s_batt_cell_15_volt;	// Unit:1mV
+	//副電池第16節電芯電壓值
+	unsigned int s_batt_cell_16_volt;	// Unit:1mV
+	//副電池第17節電芯電壓值
+	unsigned int s_batt_cell_17_volt;	// Unit:1mV
+	//副電池第18節電芯電壓值
+	unsigned int s_batt_cell_18_volt;	// Unit:1mV
+	//副電池第19節電芯電壓值
+	unsigned int s_batt_cell_19_volt;	// Unit:1mV
+	//副電池第20節電芯電壓值
+	unsigned int s_batt_cell_20_volt;	// Unit:1mV
+	//副電池溫度感測器1 溫度值
+	int s_batt_temperature_1;
+	//副電池溫度感測器2 溫度值
+	int s_batt_temperature_2;
+	//副電池溫度感測器3 溫度值
+	int s_batt_temperature_3;
+	//副電池溫度感測器4 溫度值
+	int s_batt_temperature_4;
+	//副電池溫度感測器5 溫度值
+	int s_batt_temperature_5;
+	//副電池溫度感測器6 溫度值
+	int s_batt_temperature_6;
+	//副電池溫度感測器7 溫度值
+	int s_batt_temperature_7;
+	//副電池溫度感測器8 溫度值
+	int s_batt_temperature_8;
 
 };
 
