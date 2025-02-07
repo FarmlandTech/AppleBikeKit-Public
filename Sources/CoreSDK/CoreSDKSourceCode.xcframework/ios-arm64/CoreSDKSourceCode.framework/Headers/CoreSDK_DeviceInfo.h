@@ -100,7 +100,7 @@ struct DllExport Apple_Info_st
 	unsigned int key_8_count;
 	//HMI 密碼錯誤次數 
 	unsigned int screen_lock_error_count;
-	//HMI 狀態 0:Lock , 1:Unlock , 2:Disabled
+	//HMI 狀態 0:Lock , 1:Unlock , 2:Disabled , 255:未知狀態
 	unsigned int screen_lock_state;
 
 	//當前車速
