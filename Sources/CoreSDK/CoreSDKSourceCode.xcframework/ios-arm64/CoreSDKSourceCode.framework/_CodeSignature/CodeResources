@@ -10,11 +10,11 @@
 		</data>
 		<key>Headers/Common.h</key>
 		<data>
-		VIldTkbbMFTgz7BnFo0B08knexQ=
+		Gi40SkgcGsjZpCRu+rJKNiYnJj8=
 		</data>
 		<key>Headers/CoreSDK.h</key>
 		<data>
-		pwZm0e3nOkId/oTDE1KbwQHekyg=
+		Jf0j/zuv07HvOamE2Vuav/+fL0c=
 		</data>
 		<key>Headers/CoreSDKSourceCode.h</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Headers/CoreSDK_Common.h</key>
 		<data>
-		KOJKTjU1KxmOXyl0++/Tuun1bXU=
+		m4T0Ba/q4F+KXnZdi8szHLC4EhQ=
 		</data>
 		<key>Headers/CoreSDK_DelegateFunc.h</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Headers/FL_CANInfoStruct.h</key>
 		<data>
-		6GRFL3qyJrP6GelhAO24E7eOYVk=
+		Smq0+SrTyTzT0sL0+OS7IskgXpg=
 		</data>
 		<key>Headers/FL_Logs.h</key>
 		<data>
@@ -70,14 +70,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			rQm4KXsRTk179wCAaNMBUlWmedPrIUj3wiuxmNIgNik=
+			d+7dZC4gct+YXDzX45gPNLIgYzO+a6R7GjX7MdDyxAU=
 			</data>
 		</dict>
 		<key>Headers/CoreSDK.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			kOCieNLA70vHRxcPfuYWmqhgCj8DdXjStZjPPErU1T8=
+			4UQAWBFL/faGGeFvdT/3w68xrcNKma2fs1EpjICDD40=
 			</data>
 		</dict>
 		<key>Headers/CoreSDKSourceCode.h</key>
@@ -91,7 +91,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3VdqxG0iNDGyaVQtZ724qdOyKEkAER4g9ytsD3nFHpQ=
+			rXq3b6TykHFWUFsFhzyFMXkeZjWayE6C4ykUgcHll0w=
 			</data>
 		</dict>
 		<key>Headers/CoreSDK_DelegateFunc.h</key>
@@ -112,7 +112,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qQ21P9WpK6aFdZeco9cZxB3b6KOlLTj6vvJbamlwpd0=
+			ImASnNcTfrl7p9kaPpAN4wAOdqhNCYMa8pMY+MwN+t8=
 			</data>
 		</dict>
 		<key>Headers/FL_Logs.h</key>

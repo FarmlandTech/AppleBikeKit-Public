@@ -38,6 +38,8 @@ extension ParameterData {
     public struct Apple {
         public enum Name: String {
             case INTEGRATED_HMI_BANK0
+            case INTEGRATED_HMI_BANK1
+            case INTEGRATED_HMI_BANK2
             case INTEGRATED_MILEAGE_RECORD
             case INTEGRATED_HMI_ACCESS  // 螢幕鎖相關參數。
             case INTEGRATED_CONTROLLER_BANK0
@@ -65,7 +67,12 @@ extension ParameterData {
             case HmiProtocolVer
             case HmiBtDevName
             case HmiSvrToken
-            case DISP_UNIT_SW
+            case REC_MAINT_DIST  // 上次保養里程。
+            case METER_SLEEP_TIME  // 自動休眠時間，Max: 10800 Sec = 3小時。
+            case METER_MAINT_DIST  // 保養間隔里程。
+            case DISP_MAINT_MARK_SW  // 保養標誌顯示設定。
+            case DISP_UNIT_SW  // 單位選擇。
+            case DISP_BRIGHTNESS // 背光亮度設定。
             case HmiPasswordCode1  // 解鎖密碼。
             case HmiPasswordCode2  // 解鎖密碼。
             case HmiPasswordCode3  // 解鎖密碼。

@@ -64,6 +64,8 @@ struct DllExport Apple_DataBusDefine_st
 	int(__stdcall* BLEDataPacket_OUT)(unsigned char* data, unsigned int* leng);
 };
 
+typedef void (*fpParameterChangeNotify)(SDKDeviceType_e target_device, unsigned char bank_index, unsigned short addr, unsigned short leng);
+
 struct DllExport Cherry_DataBusDefine_st
 {
 	// CAN Bus封包輸入	
@@ -110,6 +112,8 @@ typedef DllExport struct FLCoreSDK_st
 	int (__stdcall *Disable)(void);
 	//當前資訊更新通知
 	void(__stdcall *InfoUpdateEvent)(ProtocolType Protocol, DeviceInformation_T DeviceInfo);
+	//參數變更通知
+	void(__stdcall* ParameterChangeNotify)(SDKDeviceType_e target_device, unsigned char bank_index, unsigned short addr, unsigned short leng);
 	//SDK接收及發送數據接口
 	DataBusDefine_T DataBus;
 	//委派SDK執行功能

@@ -18,26 +18,6 @@ extension CoreBLEServiceSourceCode.CoreBluetoothService : CoreBluetooth.CBCentra
   @objc dynamic public func centralManager(_ central: CoreBluetooth.CBCentralManager, didDisconnectPeripheral peripheral: CoreBluetooth.CBPeripheral, error: (any Swift.Error)?)
   @objc dynamic public func centralManager(_ central: CoreBluetooth.CBCentralManager, willRestoreState dict: [Swift.String : Any])
 }
-extension CoreBLEServiceSourceCode.CoreBluetoothService : CoreBluetooth.CBPeripheralDelegate {
-  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didDiscoverServices error: (any Swift.Error)?)
-  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didDiscoverCharacteristicsFor service: CoreBluetooth.CBService, error: (any Swift.Error)?)
-  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didDiscoverDescriptorsFor characteristic: CoreBluetooth.CBCharacteristic, error: (any Swift.Error)?)
-  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didUpdateValueFor characteristic: CoreBluetooth.CBCharacteristic, error: (any Swift.Error)?)
-  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didUpdateNotificationStateFor characteristic: CoreBluetooth.CBCharacteristic, error: (any Swift.Error)?)
-  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didWriteValueFor characteristic: CoreBluetooth.CBCharacteristic, error: (any Swift.Error)?)
-  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didReadRSSI RSSI: Foundation.NSNumber, error: (any Swift.Error)?)
-}
-public struct BluetoothPeripheral {
-  public let device: CoreBluetooth.CBPeripheral
-  public var rssi: Swift.Float?
-  public var deviceName: Swift.String?
-  public var localName: Swift.String?
-  public var uuid: Swift.String?
-  public var address: Swift.String {
-    get
-  }
-  public func writeValue(_ data: Foundation.Data, for characteristic: CoreBluetooth.CBCharacteristic)
-}
 @objc public class CoreBluetoothService : ObjectiveC.NSObject {
   public var centralManager: CoreBluetooth.CBCentralManager {
     get
@@ -72,6 +52,7 @@ public struct BluetoothPeripheral {
   public func stopScanning()
   public func retrivePeripheral(withIdentifiers identifiers: [Foundation.UUID])
   public func connect(peripheral: CoreBLEServiceSourceCode.BluetoothPeripheral)
+  public func cancelConnect(peripheral: CoreBLEServiceSourceCode.BluetoothPeripheral)
   public func disconnect(peripheral: CoreBLEServiceSourceCode.BluetoothPeripheral)
   @objc deinit
 }
@@ -83,6 +64,9 @@ extension CoreBLEServiceSourceCode.CoreBluetoothService {
     case prepared
   }
 }
+extension CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus : Swift.Equatable {
+  public static func == (lhs: CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus, rhs: CoreBLEServiceSourceCode.CoreBluetoothService.PeripheralStatus) -> Swift.Bool
+}
 extension CoreBLEServiceSourceCode.CoreBluetoothService {
   public struct CharacteristicWriteType {
     public let write: Swift.String
@@ -90,6 +74,15 @@ extension CoreBLEServiceSourceCode.CoreBluetoothService {
     public let notify: Swift.String
     public init(_ target: Swift.String) throws
   }
+}
+extension CoreBLEServiceSourceCode.CoreBluetoothService : CoreBluetooth.CBPeripheralDelegate {
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didDiscoverServices error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didDiscoverCharacteristicsFor service: CoreBluetooth.CBService, error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didDiscoverDescriptorsFor characteristic: CoreBluetooth.CBCharacteristic, error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didUpdateValueFor characteristic: CoreBluetooth.CBCharacteristic, error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didUpdateNotificationStateFor characteristic: CoreBluetooth.CBCharacteristic, error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didWriteValueFor characteristic: CoreBluetooth.CBCharacteristic, error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didReadRSSI RSSI: Foundation.NSNumber, error: (any Swift.Error)?)
 }
 extension Swift.String {
   public enum AdvertisementDataRetrievalKey {
@@ -103,6 +96,18 @@ extension Swift.String {
       get
     }
   }
+}
+public struct BluetoothPeripheral {
+  public let device: CoreBluetooth.CBPeripheral
+  public var rssi: Swift.Float?
+  public var deviceName: Swift.String?
+  public var localName: Swift.String?
+  public var uuid: Swift.String?
+  public var manufacturerInfo: Swift.String?
+  public var address: Swift.String {
+    get
+  }
+  public func writeValue(_ data: Foundation.Data, for characteristic: CoreBluetooth.CBCharacteristic)
 }
 extension Swift.String.AdvertisementDataRetrievalKey : Swift.Equatable {}
 extension Swift.String.AdvertisementDataRetrievalKey : Swift.Hashable {}

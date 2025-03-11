@@ -27,10 +27,16 @@ public class AppleParameterDataRepository: BaseParameterDataRepository, Paramete
         .init(name: ParameterData.Apple.Name.HmiBtDevName.rawValue, partType: .HMI, bank: 0, address: 180, length: 22, type: String.self)
     ]
     
-    public let hmiBank1Parameters: [ParameterData] = []
+    public let hmiBank1Parameters: [ParameterData] = [
+        .init(name: ParameterData.Apple.Name.REC_MAINT_DIST.rawValue, partType: .HMI, bank: 1, address: 273, length: 4, type: Int.self),
+        .init(name: ParameterData.Apple.Name.METER_SLEEP_TIME.rawValue, partType: .HMI, bank: 1, address: 341, length: 2, type: Int.self),
+        .init(name: ParameterData.Apple.Name.METER_MAINT_DIST.rawValue, partType: .HMI, bank: 1, address: 346, length: 4, type: Int.self),
+    ]
     
     public let hmiBank2Parameters: [ParameterData] = [
+        .init(name: ParameterData.Apple.Name.DISP_MAINT_MARK_SW.rawValue, partType: .HMI, bank: 2, address: 150, length: 1, type: Int.self),
         .init(name: ParameterData.Apple.Name.DISP_UNIT_SW.rawValue, partType: .HMI, bank: 2, address: 153, length: 1, type: Int.self),
+        .init(name: ParameterData.Apple.Name.DISP_BRIGHTNESS.rawValue, partType: .HMI, bank: 2, address: 154, length: 1, type: Int.self),
         .init(name: ParameterData.Apple.Name.HmiErrorLimit.rawValue, partType: .HMI, bank: 2, address: 310, length: 1, type: Int.self),
         .init(name: ParameterData.Apple.Name.HmiErrorCount.rawValue, partType: .HMI, bank: 2, address: 311, length: 1, type: Int.self)
     ]
@@ -61,6 +67,8 @@ public class AppleParameterDataRepository: BaseParameterDataRepository, Paramete
     public let controllerBank1Parameters: [ParameterData] = [
         .init(name: ParameterData.Apple.Name.DISGUISE_BATT.rawValue, partType: .Controller, bank: 1, address: 0, length: 1, type: Int.self),
         .init(name: ParameterData.Apple.Name.INFO_ODO.rawValue, partType: .Controller, bank: 1, address: 217, length: 4, type: Int.self),
+        .init(name: ParameterData.Apple.Name.REC_MAINT_DIST.rawValue, partType: .Controller, bank: 1, address: 273, length: 4, type: Int.self),
+        .init(name: ParameterData.Apple.Name.METER_MAINT_DIST.rawValue, partType: .Controller, bank: 1, address: 346, length: 4, type: Int.self),
     ]
     
     public let controllerBank2Parameters: [ParameterData] = [
@@ -260,7 +268,8 @@ public class AppleParameterDataRepository: BaseParameterDataRepository, Paramete
     public var integratedParameters: [ParameterData] {
         let hmiParameters: [ParameterData] = [
             .init(name: ParameterData.Apple.Name.INTEGRATED_HMI_BANK0.rawValue, partType: .HMI, bank: 0, address: 0, length: 202, type: Any.self, dividedParameters: self.hmiBank0Parameters),
-            .init(name: ParameterData.Apple.Name.INTEGRATED_MILEAGE_RECORD.rawValue, partType: .MainBatt, bank: 2, address: 0, length: 248, type: Any.self, dividedParameters: self.mileageRecordParameters),
+            .init(name: ParameterData.Apple.Name.INTEGRATED_HMI_BANK1.rawValue, partType: .HMI, bank: 1, address: 273, length: 346-273+4, type: [Int].self, dividedParameters: self.hmiBank1Parameters),
+            .init(name: ParameterData.Apple.Name.INTEGRATED_HMI_BANK2.rawValue, partType: .HMI, bank: 2, address: 150, length: 311-150+1, type: [Int].self, dividedParameters: self.hmiBank2Parameters),
             .init(name: ParameterData.Apple.Name.INTEGRATED_HMI_ACCESS.rawValue, partType: .HMI, bank: 2, address: 306, length: 4, type: [Int].self, dividedParameters: self.himAccessControlParameters),
         ]
         let controllerParameters: [ParameterData] = [
@@ -276,6 +285,7 @@ public class AppleParameterDataRepository: BaseParameterDataRepository, Paramete
         ]
         let bmsParameters: [ParameterData] = [
             .init(name: ParameterData.Apple.Name.INTEGRATED_BATTERY_BANK0.rawValue, partType: .MainBatt, bank: 0, address: 0, length: 202, type: Any.self, dividedParameters: self.batteryBank0Parameters),
+            .init(name: ParameterData.Apple.Name.INTEGRATED_MILEAGE_RECORD.rawValue, partType: .MainBatt, bank: 2, address: 0, length: 248, type: Any.self, dividedParameters: self.mileageRecordParameters),
         ]
         return hmiParameters + controllerParameters + bmsParameters
     }

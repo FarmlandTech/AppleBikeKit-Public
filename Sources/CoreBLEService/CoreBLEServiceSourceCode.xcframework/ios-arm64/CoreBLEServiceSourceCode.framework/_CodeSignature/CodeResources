@@ -18,11 +18,11 @@
 		</data>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		diMyQY3VDpJ/AMRwm/hyl9f0oAA=
+		sMum1NLWW3u1CHVeX4vfhoD73H8=
 		</data>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		n0juogPVOyfvra/5fAutm5VbNA0=
+		bW7piyFq3z+W+IA3wEYSoreY0gA=
 		</data>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
@@ -30,11 +30,11 @@
 		</data>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		n0juogPVOyfvra/5fAutm5VbNA0=
+		bW7piyFq3z+W+IA3wEYSoreY0gA=
 		</data>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		06H2l0ukVQewnyGdc09tUCiBzJQ=
+		k5Rgbgebj2xeJKaDsK3IFHTaTX4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -61,14 +61,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ricBrwpcSOpR3r69YbaYCQZBCd72yCDSE59JTN7Buik=
+			5EFJIks6Llr4ELBRJ2eeE4MqdVYsMSDkX7XB4ah/Bn4=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			k2a0MIg3SMIFfO6kfkw1Vqeo4zemRcE3jk01NJbun38=
+			heJ8TXF20tZFI0LaviJcYtBRBhnloBhm5FBrBKsC9mg=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios.swiftdoc</key>
@@ -82,14 +82,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			k2a0MIg3SMIFfO6kfkw1Vqeo4zemRcE3jk01NJbun38=
+			heJ8TXF20tZFI0LaviJcYtBRBhnloBhm5FBrBKsC9mg=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			XzHWAheEFoQhsqeVz/AJELc286fLImacrzTMTWDa4BI=
+			FT2G3Zd2vyp2LBOOGCmwa76wOH3ETRBXSFyKSSudXIM=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

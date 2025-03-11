@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import MapKit
 
 import CoreSDKSourceCode
 import CoreSDKService
@@ -17,7 +18,7 @@ public struct MetaParameter {
     public enum EnablePart: Equatable {
         case hmi
         case controller
-        case battery
+        case mainBattery
         case display
         case motor
         case cadenceSensor
@@ -31,6 +32,10 @@ public struct MetaParameter {
         case frontDerailleur
         case rearDerailleur
         case IoT
+        case hallSensor
+        case speedSensor
+        case subBattery1
+        case subBattery2
         case undefined(Int)
         
         public func getWarningCodes() throws -> [Apple_Info_st.Code] {
@@ -45,14 +50,16 @@ public struct MetaParameter {
                 return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2WarningCodeType == .hmi })
             case .controller:
                 return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2WarningCodeType == .controller })
+            case .mainBattery:
+                return appleDeviceInfo.mainBatteryWarningCodes.filter({ $0.value.tranfer2WarningCodeType == .battery })
             case .display:
                 return .init()
             case .motor:
                 return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2WarningCodeType == .motor })
             case .cadenceSensor:
-                return .init()
+                return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2WarningCodeType == .cadenceSensor })
             case .torqueSensor:
-                return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2WarningCodeType == .torque })
+                return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2WarningCodeType == .torqueSensor })
             case .charger:
                 return .init()
             case .frontLight, .rearLight:
@@ -66,6 +73,14 @@ public struct MetaParameter {
             case .frontDerailleur, .rearDerailleur:
                 return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2WarningCodeType == .derailleur })
             case .IoT:
+                return .init()
+            case .hallSensor:
+                return .init()
+            case .speedSensor:
+                return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2ErrorCodeType == .speedSensor })
+            case .subBattery1:
+                return appleDeviceInfo.subBatteryWarningCodes.filter({ $0.value.tranfer2WarningCodeType == .battery })
+            case .subBattery2:
                 return .init()
             default:
                 return appleDeviceInfo.warningCodes.filter({ $0.value.tranfer2WarningCodeType == .unknown })
@@ -84,14 +99,16 @@ public struct MetaParameter {
                 return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .hmi })
             case .controller:
                 return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .controller })
+            case .mainBattery:
+                return appleDeviceInfo.mainBatteryErrorCodes.filter({ $0.value.tranfer2ErrorCodeType == .battery })
             case .display:
                 return .init()
             case .motor:
                 return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .motor })
             case .cadenceSensor:
-                return .init()
+                return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .cadenceSensor })
             case .torqueSensor:
-                return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .torque })
+                return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .torqueSensor })
             case .charger:
                 return .init()
             case .frontLight, .rearLight:
@@ -106,6 +123,14 @@ public struct MetaParameter {
                 return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .derailleur })
             case .IoT:
                 return .init()
+            case .hallSensor:
+                return .init()
+            case .speedSensor:
+                return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .speedSensor })
+            case .subBattery1:
+                return appleDeviceInfo.subBatteryErrorCodes.filter({ $0.value.tranfer2ErrorCodeType == .battery })
+            case .subBattery2:
+                return .init()
             default:
                 return appleDeviceInfo.errorCodes.filter({ $0.value.tranfer2ErrorCodeType == .unknown })
             }
@@ -116,7 +141,7 @@ public struct MetaParameter {
                 return true
             } else if case .controller = lhs, case .controller = rhs {
                 return true
-            } else if case .battery = lhs, case .battery = rhs {
+            } else if case .mainBattery = lhs, case .mainBattery = rhs {
                 return true
             } else if case .display = lhs, case .display = rhs {
                 return true
@@ -144,6 +169,14 @@ public struct MetaParameter {
                 return true
             } else if case .IoT = lhs, case .IoT = rhs {
                 return true
+            } else if case .hallSensor = lhs, case .hallSensor = rhs {
+                return true
+            } else if case .speedSensor = lhs, case .speedSensor = rhs {
+                return true
+            } else if case .subBattery1 = lhs, case .subBattery1 = rhs {
+                return true
+            } else if case .subBattery2 = lhs, case .subBattery2 = rhs {
+                return true
             } else if case .undefined(let lhsPosition) = lhs, case .undefined(let rhsPosition) = rhs, lhsPosition == rhsPosition {
                 return true
             } else {
@@ -167,7 +200,7 @@ public struct MetaParameter {
     public fileprivate(set) var hmiBtDevName: String?
     
     /// 距離單位為公制或英制。
-    public fileprivate(set) var distanceUint: Bool?
+    public fileprivate(set) var distanceUint: MKDistanceFormatter.Units?
     
     public fileprivate(set) var batterySSN: String?
     public fileprivate(set) var batteryDMID: String?
@@ -207,7 +240,7 @@ public struct MetaParameter {
             result.append(.controller)
         }
         if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 3, rawList[2] == 1 {
-            result.append(.battery)
+            result.append(.mainBattery)
         }
         if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 4, rawList[3] == 1 {
             result.append(.display)
@@ -249,16 +282,16 @@ public struct MetaParameter {
             result.append(.IoT)
         }
         if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 17, rawList[16] == 1 {
-            result.append(.undefined(16))
+            result.append(.hallSensor)
         }
         if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 18, rawList[17] == 1 {
-            result.append(.undefined(17))
+            result.append(.speedSensor)
         }
         if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 19, rawList[18] == 1 {
-            result.append(.undefined(18))
+            result.append(.subBattery1)
         }
         if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 20, rawList[19] == 1 {
-            result.append(.undefined(19))
+            result.append(.subBattery2)
         }
         if let rawList: [UInt8] = self.enablePartRawList, rawList.count > 21, rawList[20] == 1 {
             result.append(.undefined(20))
@@ -413,6 +446,9 @@ final public class ConnectionMetaReadingHelper {
         }
     }()
     
+    // 定義白名單(依照執行順序)
+    var parameterWhitelist: [(name: String, part: CommunicationPartType)]?
+    
     /**
      建構子。
      */
@@ -495,14 +531,11 @@ final public class ConnectionMetaReadingHelper {
                     self.metaSubject.value.hmiBtDevName = output as? String
                 case ParameterData.Apple.Name.DISP_UNIT_SW.rawValue:
                     guard let value: Int = output as? Int else { return }
-                    var isMetricSystem: Bool?
                     if value == 0 {
-                        isMetricSystem = true
+                        self.metaSubject.value.distanceUint = .metric
                     } else if value == 1 {
-                        isMetricSystem = false
+                        self.metaSubject.value.distanceUint = .imperial
                     }
-                    guard let isMetricSystem: Bool else { return }
-                    self.metaSubject.value.distanceUint = isMetricSystem
                 case ParameterData.Apple.Name.BattSSN.rawValue:
                     self.metaSubject.value.batterySSN = output as? String
                 case ParameterData.Apple.Name.BattDMID.rawValue:
@@ -562,7 +595,7 @@ final public class ConnectionMetaReadingHelper {
                 }
             case .orange:
                 switch name {
-                // HMI Bank0
+                    // HMI Bank0
                 case ParameterData.Orange.HMI.Bank0.PRO_SSN.rawValue:
                     self.metaSubject.value.hmiSSN = output as? String
                 case ParameterData.Orange.HMI.Bank0.PRO_DMID.rawValue:
@@ -577,7 +610,7 @@ final public class ConnectionMetaReadingHelper {
                     self.metaSubject.value.hmiHWVer = output as? String
                 case ParameterData.Orange.HMI.Bank0.PRO_MANUFACTURE_DATE.rawValue:
                     self.metaSubject.value.hmiSaleDate = output as? String
-                // Controller Bank0
+                    // Controller Bank0
                 case ParameterData.Orange.Controller.Bank0.PRO_SSN.rawValue:
                     self.metaSubject.value.hmiSSN = output as? String
                 case ParameterData.Orange.Controller.Bank0.PRO_DMID.rawValue:
@@ -592,7 +625,7 @@ final public class ConnectionMetaReadingHelper {
                     self.metaSubject.value.hmiHWVer = output as? String
                 case ParameterData.Orange.Controller.Bank0.PRO_MANUFACTURE_DATE.rawValue:
                     self.metaSubject.value.hmiSaleDate = output as? String
-                // BMS1 Bank0
+                    // BMS1 Bank0
                 case ParameterData.Orange.BMS1.Bank0.PRO_SSN.rawValue:
                     self.metaSubject.value.hmiSSN = output as? String
                 case ParameterData.Orange.BMS1.Bank0.PRO_DMID.rawValue:
@@ -607,17 +640,14 @@ final public class ConnectionMetaReadingHelper {
                     self.metaSubject.value.hmiHWVer = output as? String
                 case ParameterData.Orange.BMS1.Bank0.PRO_MANUFACTURE_DATE.rawValue:
                     self.metaSubject.value.hmiSaleDate = output as? String
-                // DISP UNIT SW
+                    // DISP UNIT SW
                 case ParameterData.Orange.HMI.Bank2.DISP_UNIT_SW.rawValue:
                     guard let value: Int = output as? Int else { return }
-                    var isMetricSystem: Bool?
                     if value == 0 {
-                        isMetricSystem = true
+                        self.metaSubject.value.distanceUint = .metric
                     } else if value == 1 {
-                        isMetricSystem = false
+                        self.metaSubject.value.distanceUint = .imperial
                     }
-                    guard let isMetricSystem: Bool else { return }
-                    self.metaSubject.value.distanceUint = isMetricSystem
                 default:
                     return
                 }
@@ -636,66 +666,79 @@ final public class ConnectionMetaReadingHelper {
     private func recurFetchMeta() throws {
         switch FarmLandBikeKit.tenant {
         case .apple, .kiwi:
-            for name in self.taskNames {
-                if name == ParameterData.Apple.Name.INTEGRATED_HMI_BANK0.rawValue, !self.metaSubject.value.isHMIOmit { 
-                    continue
-                } else if name == ParameterData.Apple.Name.INTEGRATED_HMI_BANK0.rawValue {
-                    try FarmLandBikeKit.sleipnir.readParameter(name: name, part: .HMI)
-                }
-                if name == ParameterData.Apple.Name.DISP_UNIT_SW.rawValue, !self.metaSubject.value.isDistanceUintOmit {
-                    continue
-                } else if name == ParameterData.Apple.Name.DISP_UNIT_SW.rawValue {
-                    try FarmLandBikeKit.sleipnir.readParameter(name: name, part: .HMI)
-                }
-                if name == ParameterData.Apple.Name.INTEGRATED_BATTERY_BANK0.rawValue, !self.metaSubject.value.isBatteryOmit {
-                    continue
-                } else if name == ParameterData.Apple.Name.INTEGRATED_BATTERY_BANK0.rawValue {
-                    try FarmLandBikeKit.sleipnir.readParameter(name: name, part: .MainBatt)
-                }
-                if name == ParameterData.Apple.Name.INTEGRATED_CONTROLLER_BANK0.rawValue, !self.metaSubject.value.isControllerOmit {
-                    continue
-                } else if name == ParameterData.Apple.Name.INTEGRATED_CONTROLLER_BANK0.rawValue {
-                    try FarmLandBikeKit.sleipnir.readParameter(name: name, part: .Controller)
-                }
-                if name == ParameterData.Apple.Name.SYS_PART_EN.rawValue, !self.metaSubject.value.isEnablePartsOmit {
-                    continue
-                } else if name == ParameterData.Apple.Name.SYS_PART_EN.rawValue {
-                    try FarmLandBikeKit.sleipnir.readParameter(name: name, part: .Controller)
-                }
+            let whitelist: [(name: String, part: CommunicationPartType)] = self.parameterWhitelist ?? [
+                (ParameterData.Apple.Name.INTEGRATED_HMI_BANK0.rawValue, .HMI),
+                (ParameterData.Apple.Name.DISP_UNIT_SW.rawValue, .HMI),
+                (ParameterData.Apple.Name.INTEGRATED_BATTERY_BANK0.rawValue, .MainBatt),
+                (ParameterData.Apple.Name.INTEGRATED_CONTROLLER_BANK0.rawValue, .Controller),
+                (ParameterData.Apple.Name.SYS_PART_EN.rawValue, .Controller)
+            ]
+            // 動態建立 Publisher 陣列。
+            let publishers: [AnyPublisher<ParameterData, Swift.Error>] = whitelist
+                .map({ (parameter) -> AnyPublisher<ParameterData, Swift.Error> in
+                    Just(())
+                        .setFailureType(to: Swift.Error.self)
+                        .tryMap({ try FarmLandBikeKit.sleipnir.readParameter(name: parameter.name, part: parameter.part) })
+                        .flatMap({ _ in FarmLandBikeKit.sleipnir.parameterDataPublisher })
+                        .filter({ $0.name == parameter.name && $0.partType == parameter.part })
+                        .eraseToAnyPublisher()
+                })
+            // 使用 `reduce` + `flatMap` 來確保逐一執行。
+            guard let firstPublisher = publishers.first else {
+                break
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
-                guard self.metaSubject.value.isOmit else { return }
-                try? self.recurFetchMeta()
-            }
+            publishers
+                .dropFirst()
+                .reduce(firstPublisher, { previous, next in
+                    previous.flatMap { _ in next }.eraseToAnyPublisher()
+                })
+                .first()
+                .sink(receiveCompletion: { completion in
+                    
+                }, receiveValue: { parameterData in
+                    
+                })
+                .store(in: &self.subscriptions)
         case .orange:
             for (index, name) in self.taskNames.enumerated() {
-//                if name == ParameterData.Orange.Integrated.HMI_BANK0.rawValue, !self.metaSubject.value.isHMIOmit {
-//                    break
-//                } else if name == ParameterData.Orange.Integrated.HMI_BANK0.rawValue {
-//                    try FarmLandBikeKit.sleipnir.readParameter(name: name, part: .HMI)
-//                }
-//                if name == ParameterData.Orange.Integrated.CONTROLLER_BANK0.rawValue, !self.metaSubject.value.isControllerOmit {
-//                    break
-//                } else if name == ParameterData.Orange.Integrated.CONTROLLER_BANK0.rawValue {
-//                    try FarmLandBikeKit.sleipnir.readParameter(name: name, part: .Controller)
-//                }
-//                if name == ParameterData.Orange.Integrated.BATTERY_BANK0.rawValue, !self.metaSubject.value.isBatteryOmit {
-//                    break
-//                } else if name == ParameterData.Orange.Integrated.BATTERY_BANK0.rawValue {
-//                    try FarmLandBikeKit.sleipnir.readParameter(name: name, part: .MainBatt)
-//                }
-//                if name == ParameterData.Orange.HMI.Bank2.DISP_UNIT_SW.rawValue, !self.metaSubject.value.isDistanceUintOmit {
-//                    break
-//                } else if name == ParameterData.Orange.HMI.Bank2.DISP_UNIT_SW.rawValue {
-//                    try FarmLandBikeKit.sleipnir.readParameter(name: name, part: .HMI)
-//                }
+                //                if name == ParameterData.Orange.Integrated.HMI_BANK0.rawValue, !self.metaSubject.value.isHMIOmit {
+                //                    break
+                //                } else if name == ParameterData.Orange.Integrated.HMI_BANK0.rawValue {
+                //                    try FarmLandBikeKit.sleipnir.readParameter(name: name, part: .HMI)
+                //                }
+                //                if name == ParameterData.Orange.Integrated.CONTROLLER_BANK0.rawValue, !self.metaSubject.value.isControllerOmit {
+                //                    break
+                //                } else if name == ParameterData.Orange.Integrated.CONTROLLER_BANK0.rawValue {
+                //                    try FarmLandBikeKit.sleipnir.readParameter(name: name, part: .Controller)
+                //                }
+                //                if name == ParameterData.Orange.Integrated.BATTERY_BANK0.rawValue, !self.metaSubject.value.isBatteryOmit {
+                //                    break
+                //                } else if name == ParameterData.Orange.Integrated.BATTERY_BANK0.rawValue {
+                //                    try FarmLandBikeKit.sleipnir.readParameter(name: name, part: .MainBatt)
+                //                }
+                //                if name == ParameterData.Orange.HMI.Bank2.DISP_UNIT_SW.rawValue, !self.metaSubject.value.isDistanceUintOmit {
+                //                    break
+                //                } else if name == ParameterData.Orange.HMI.Bank2.DISP_UNIT_SW.rawValue {
+                //                    try FarmLandBikeKit.sleipnir.readParameter(name: name, part: .HMI)
+                //                }
             }
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 * Double(self.taskNames.count) + 1.7) {
-//                guard self.metaSubject.value.isOmit else { return }
-//                try? self.recurFetchMeta()
-//            }
+            //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 * Double(self.taskNames.count) + 1.7) {
+            //                guard self.metaSubject.value.isOmit else { return }
+            //                try? self.recurFetchMeta()
+            //            }
         default:
             throw FarmLandBikeKit.Error.functionNotExist(#function)
+        }
+    }
+}
+
+extension MKDistanceFormatter.Units {
+    mutating
+    public func toggle() {
+        if self == .metric {
+            self = .imperial
+        } else if self == .imperial {
+            self = .metric
         }
     }
 }

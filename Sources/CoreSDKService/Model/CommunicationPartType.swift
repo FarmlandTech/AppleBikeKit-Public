@@ -22,7 +22,9 @@ public enum CommunicationPartType: Int {
     case ELock = 9
     case Dongle = 10
     case Unknown = 255
-    
+}
+
+extension CommunicationPartType {
     /// 由 swift 的 communication part type enum 去回推 CoreSDK 的 DeviceType_enum 。
     public var coreType: DeviceType_enum {
         switch self {
@@ -51,3 +53,35 @@ public enum CommunicationPartType: Int {
         }
     }
 }
+
+extension DeviceType_enum {
+    public var sdkType: CommunicationPartType {
+        switch self {
+        case SDK_FL_HMI:
+            return .HMI
+        case SDK_FL_CONTROLLER:
+            return .Controller
+        case SDK_FL_MAIN_BATT:
+            return .MainBatt
+        case SDK_FL_SUB_BATT1:
+            return .SubBatt1
+        case SDK_FL_SUB_BATT2:
+            return .SubBatt2
+        case SDK_FL_DISPLAY:
+            return .Display
+        case SDK_FL_IOT:
+            return .IOT
+        case SDK_FL_E_DERAILLEUR:
+            return .EDerailleur
+        case SDK_FL_E_LOCK:
+            return .ELock
+        case SDK_FL_DONGLE:
+            return .Dongle
+        case SDK_UNKNOWN:
+            return .Unknown
+        default:
+            return .Unknown
+        }
+    }
+}
+

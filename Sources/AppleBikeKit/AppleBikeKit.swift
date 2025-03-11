@@ -20,6 +20,8 @@ open class AppleBikeKit: BaseAppleBikeKit {
     /// 提供一個單例實例，用於全局訪問 `AppleBikeKit` 的功能。
     public static let shared: AppleBikeKit = .init()
     
+    public var isPramaChgAutoReload: Bool = false
+    
     /// 用於緩存當前已連線裝置的實例。這允許應用快速訪問當前連線的藍牙裝置資訊。
     public private(set) lazy var connectedPeripheral: ConnectedPeripheral = {
         if let target: String = Self.target {
@@ -80,6 +82,11 @@ open class AppleBikeKit: BaseAppleBikeKit {
                 .eraseToAnyPublisher()
         }
     }
+    
+    public private(set) lazy var parameterNotifyPublisher: AnyPublisher<CoreSDKService.ParameterNotify?, Never> = {
+        self.coreSDKService.parameterNotifySubject
+            .eraseToAnyPublisher()
+    }()
     
     /// 讀取參數時，電控回傳數據的發佈者。
     private let parameterDataSubject: PassthroughSubject<ParameterData, Swift.Error> = .init()
@@ -346,6 +353,22 @@ open class AppleBikeKit: BaseAppleBikeKit {
     
     override open func doTasks() {
         super.doTasks()
+        self.parameterNotifyPublisher
+            .filter({ [weak self] _ in
+                guard let self: AppleBikeKit else { return false }
+                return self.isPramaChgAutoReload
+            })
+            .compactMap({ $0 })
+            .handleEvents(receiveOutput: { notify in
+                guard let parameter: ParameterData = try? self.parameterDataRepository.findParameterData(type: notify.type, bank: notify.bank, address: notify.address, length: notify.length) else { return }
+                try? self.readParameter(name: parameter.name, part: parameter.partType)
+            })
+            .sink(receiveCompletion: { _ in
+                
+            }, receiveValue: { notify in
+                
+            })
+            .store(in: &self.subscriptions)
     }
     
     /**
@@ -362,9 +385,11 @@ open class AppleBikeKit: BaseAppleBikeKit {
      - Throws: 未定義的部件名稱，將會導致錯誤的拋出。
      - Throws: 來自 CoreSDK 判定的錯誤，應該是肇因於參數的錯誤。
      */
-    public func readParameter(name: String, part: CommunicationPartType) throws {
+    @discardableResult
+    public func readParameter(name: String, part: CommunicationPartType) throws -> ParameterData {
         let parameterData: ParameterData = try self.parameterDataRepository.findParameterData(name: name, part: part)
         try self.coreSDKService.read(parameter: parameterData)
+        return parameterData
     }
     
     /**
@@ -374,10 +399,12 @@ open class AppleBikeKit: BaseAppleBikeKit {
      - Returns: 未定義的部件名稱，將會導致錯誤的拋出。
      - Throws: 參數的型別或數值等各分面可能導致的錯誤。
      */
-    public func writeParameter(name: String, part: CommunicationPartType, value: Any) throws {
+    @discardableResult
+    public func writeParameter(name: String, part: CommunicationPartType, value: Any) throws -> ParameterData {
         let parameterData: ParameterData = try self.parameterDataRepository.findParameterData(name: name, part: part)
         parameterData.value = value
         try self.coreSDKService.write(parameter: parameterData)
+        return parameterData
     }
     
     /**
@@ -616,6 +643,10 @@ open class AppleBikeKit: BaseAppleBikeKit {
         self.connectedPeripheral.currentPeripheralSubject.value = bluetoothPeripheral
         self.coreBluetoothService.connect(peripheral: bluetoothPeripheral)
         self.coreSDKService.startReadWriteChannel()
+    }
+    
+    public func cancelConnect(_ bluetoothPeripheral: BluetoothPeripheral) {
+        self.coreBluetoothService.cancelConnect(peripheral: bluetoothPeripheral)
     }
     
     /**
