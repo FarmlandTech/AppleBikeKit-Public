@@ -39,6 +39,13 @@ public final class CoreSDKService: NSObject {
         CoreSDKService.dataSource?.updateDeviceInfo(deviceInfo: $1)
     }
     
+    /// 刷新腳踏車資訊時，回調的別名。
+    private typealias UpdateParameterNotifyEvent = @convention(c) (SDKDeviceType_e, UInt8, UInt16, UInt16) -> Void
+    /// 刷新腳踏車資訊時的回調。
+    private let updateParameterNotifyEvent: UpdateParameterNotifyEvent = {
+        CoreSDKService.dataSource?.updateParameterNotify(notify: .init(type: $0, bank: $1, address: $2, length: $3))
+    }
+    
     /// 讀取參數時的回調。
     private let readParameterEvent: fpCallback_ReadParameters = {
         guard let pointer: UnsafeMutablePointer<UInt8> = $2 else { return }
@@ -165,6 +172,10 @@ public final class CoreSDKService: NSObject {
     public private(set) lazy var deviceInfoSubject: CurrentValueSubject<(deviceInfo: DeviceInfo?, timestamp: Date), Never> = {
         let value: (DeviceInfo?, Date) = (nil, .init())
         return .init(value)
+    }()
+    
+    public private(set) lazy var parameterNotifySubject: CurrentValueSubject<CoreSDKService.ParameterNotify?, Never> = {
+        return .init(nil)
     }()
     
     /// 讀取參數的數據流。
@@ -415,6 +426,7 @@ public final class CoreSDKService: NSObject {
     private func initCoreSDK() {
         print("AppleBikeKit[InitializingCoreSDK]: \(String(describing: self.sdkVersion))")
         self.coreSDKInst.InfoUpdateEvent = self.updateDeviceInfoEvent
+        self.coreSDKInst.ParameterChangeNotify = self.updateParameterNotifyEvent
         FarmLandCoreSDK_Init(&self.coreSDKInst)
     }
     
@@ -860,6 +872,25 @@ extension CoreSDKService: CoreSDKDataSource {
         }
     }
     
+    func updateParameterNotify(notify: ParameterNotify) {
+        switch self.tenant {
+        case .farmland, .merida:
+            self.parameterNotifySubject.send(notify)
+        case .lexy:
+            fatalError("未授權的使用： \(#function)")
+        case .mivice:
+            fatalError("未授權的使用： \(#function)")
+        case .unknown:
+            // 由於未知的配置目標，這裡採用了防禦式編程，直接觸發錯誤。
+            // 這確保了應用不會在未知的配置狀態下運行，避免可能的錯誤或不可預測的行為。
+            fallthrough
+        @unknown default:
+            // 為了未來擴展性，捕捉任何未知的配置案例。
+            // 直接觸發錯誤，因為未處理的配置可能會導致應用不穩定或數據處理問題。
+            fatalError("未知的配置目標(target)。")
+        }
+    }
+    
     func readParameter(rawData: ReadingRawData) {
         self.readingRawDataSubject.send(rawData)
     }
@@ -1010,11 +1041,22 @@ extension CoreSDKService {
 
 // MARK: - 取得 CoreSDK 回調的委派協定
 
+public extension CoreSDKService {
+    public struct ParameterNotify {
+        public let type: SDKDeviceType_e
+        public let bank: UInt8
+        public let address: UInt16
+        public let length: UInt16
+    }
+}
+
 /// CoreSDKService 操作 CoreSDK 時，需透過委派來取得回調的資訊。
 private protocol CoreSDKDataSource: AnyObject {
     
     /// 刷新腳踏車資訊時，回調的資訊。
     func updateDeviceInfo(deviceInfo: DeviceInformation_T)
+    
+    func updateParameterNotify(notify: CoreSDKService.ParameterNotify)
     /// 讀取參數時，回調的資訊。
     func readParameter(rawData: ReadingRawData)
     /// 寫入參數時，回調的資訊。

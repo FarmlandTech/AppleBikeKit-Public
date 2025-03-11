@@ -39,11 +39,11 @@ extension Array where Element == UInt8 {
             }).map({
                 $0.map({ UInt8(String($0)) ?? 0 })
             }).map({
-                var target = Array($0.reversed())
+                var target: Array = .init($0.reversed())
                 while target.count < 8 {
                     target.append(0)
                 }
-                return target
+                return Array(target.reversed())
             }).flatMap({ $0 })
         } else {
             throw Self.Error.readParamterWithUnexpectedType

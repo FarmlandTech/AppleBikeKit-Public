@@ -27,11 +27,15 @@ extension Int {
         case battery
         case controller
         case motor
-        case torque
+        // 2025.2.28 在 FW 的文件當中，將 torque 與 cadence 定義在同一個 Category 當中，無法區別兩個部件，所以在此分開定義。
+        case torqueSensor
+        case cadenceSensor
         case throttle
         case light
+        case speedSensor
         case derailleur
         case tpms
+        case noCategory  // 2025.2.28 在 FW 的文件當中 Category 為空，但有定義錯誤碼。
         case unknown
     }
     
@@ -39,8 +43,12 @@ extension Int {
         switch self {
         case 1:
             return .hmi
-        case 2:
+        case 21...22:
+            return .battery
+        case 41:
             return .controller
+        case 61:
+            return .motor
         case 101:
             return .light
         case 151...152:
@@ -66,22 +74,28 @@ extension Int {
         switch self {
         case 1:
             return .hmi
-        case 21...37:
+        case 21...40:
             return .battery
-        case 41...52:
+        case 41...55:
             return .controller
         case 61...66:
             return .motor
-        case 81...83:
-            return .torque
+        case 81...82:
+            return .torqueSensor
+        case 83:
+            return .cadenceSensor
         case 91...92:
             return .throttle
-        case 101...102:
+        case 101:
             return .light
+        case 111:
+            return .speedSensor
         case 131:
             return .derailleur
         case 151...158:
             return .tpms
+        case 161...180:
+            return .noCategory
         default:
             return .unknown
         }
