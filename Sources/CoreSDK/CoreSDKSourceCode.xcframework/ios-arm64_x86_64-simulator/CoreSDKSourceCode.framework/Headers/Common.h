@@ -80,6 +80,7 @@ typedef void (*ErrorCallback_t)(uint32_t err_code);
 typedef void (*RequestDoneCallback_t)(void);
 typedef void (*RequestDoneCallbackWithParam_t)(struct FunctionParameterDefine param);
 
+
 unsigned int FarmlandCalCrc32(const unsigned char* buf, unsigned int len, unsigned int init);
 unsigned char ELockCalCheckSum(const unsigned char* buf, unsigned int len);
 

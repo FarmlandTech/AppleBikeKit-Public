@@ -309,6 +309,23 @@ typedef union HOST_TripReset_st
 } HOST_DEVICE_TRIP_RESET_T;
 
 
+
+#define FL_CANID_HOST_PARAM_CHANGE_NOTIF	(uint32_t)0x92
+typedef union HOST_ParameterChangeNotify_st
+{
+	uint8_t bytes[6];
+
+	struct
+	{
+		uint8_t device_type;
+		uint8_t bank_index;
+		uint16_t addr;
+		uint16_t len;
+	} bits;
+
+} HOST_DEVICE_PARAM_CHANGE_NOTIF_T;
+
+
 #define FL_CANID_HMI_INFO_00	(uint32_t)0x100
 typedef union HMI_Info00_st
 {

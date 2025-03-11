@@ -128,7 +128,6 @@ typedef DllExport enum light_control_enum
 	LIGHT_CONTROL_REAR
 } light_control_parts;
 
-
 // ReadParameter讀取回傳結構定義
 typedef DllExport struct fReadParameter_Params_st
 {

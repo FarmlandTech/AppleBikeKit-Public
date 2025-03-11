@@ -6,7 +6,7 @@
 	<dict>
 		<key>ios-arm64/CoreSDKSourceCode.framework/CoreSDKSourceCode</key>
 		<data>
-		fYwVjUdRTX4U+HOsGHYCee+rFDA=
+		04PUTylWguZCBNELM/eoSnKZzYg=
 		</data>
 		<key>ios-arm64/CoreSDKSourceCode.framework/Headers/CAN_ISO_TP.h</key>
 		<data>
@@ -14,11 +14,11 @@
 		</data>
 		<key>ios-arm64/CoreSDKSourceCode.framework/Headers/Common.h</key>
 		<data>
-		VIldTkbbMFTgz7BnFo0B08knexQ=
+		Gi40SkgcGsjZpCRu+rJKNiYnJj8=
 		</data>
 		<key>ios-arm64/CoreSDKSourceCode.framework/Headers/CoreSDK.h</key>
 		<data>
-		pwZm0e3nOkId/oTDE1KbwQHekyg=
+		Jf0j/zuv07HvOamE2Vuav/+fL0c=
 		</data>
 		<key>ios-arm64/CoreSDKSourceCode.framework/Headers/CoreSDKSourceCode.h</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>ios-arm64/CoreSDKSourceCode.framework/Headers/CoreSDK_Common.h</key>
 		<data>
-		KOJKTjU1KxmOXyl0++/Tuun1bXU=
+		m4T0Ba/q4F+KXnZdi8szHLC4EhQ=
 		</data>
 		<key>ios-arm64/CoreSDKSourceCode.framework/Headers/CoreSDK_DelegateFunc.h</key>
 		<data>
@@ -38,7 +38,7 @@
 		</data>
 		<key>ios-arm64/CoreSDKSourceCode.framework/Headers/FL_CANInfoStruct.h</key>
 		<data>
-		6GRFL3qyJrP6GelhAO24E7eOYVk=
+		Smq0+SrTyTzT0sL0+OS7IskgXpg=
 		</data>
 		<key>ios-arm64/CoreSDKSourceCode.framework/Headers/FL_Logs.h</key>
 		<data>
@@ -62,11 +62,11 @@
 		</data>
 		<key>ios-arm64/CoreSDKSourceCode.framework/_CodeSignature/CodeResources</key>
 		<data>
-		wJzEWe1Ygh/DmGdOemjZzZxKJeY=
+		Lrwx7FyGRycgT7w9ZVy/zVlalio=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/CoreSDKSourceCode</key>
 		<data>
-		uxtxoyHbn8sgeUzH5bY7jJQiv2g=
+		VS89UP/UUEN6DNXOURwtjU9/6L0=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/Headers/CAN_ISO_TP.h</key>
 		<data>
@@ -74,11 +74,11 @@
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/Headers/Common.h</key>
 		<data>
-		VIldTkbbMFTgz7BnFo0B08knexQ=
+		Gi40SkgcGsjZpCRu+rJKNiYnJj8=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/Headers/CoreSDK.h</key>
 		<data>
-		pwZm0e3nOkId/oTDE1KbwQHekyg=
+		Jf0j/zuv07HvOamE2Vuav/+fL0c=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/Headers/CoreSDKSourceCode.h</key>
 		<data>
@@ -86,7 +86,7 @@
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/Headers/CoreSDK_Common.h</key>
 		<data>
-		KOJKTjU1KxmOXyl0++/Tuun1bXU=
+		m4T0Ba/q4F+KXnZdi8szHLC4EhQ=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/Headers/CoreSDK_DelegateFunc.h</key>
 		<data>
@@ -98,7 +98,7 @@
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/Headers/FL_CANInfoStruct.h</key>
 		<data>
-		6GRFL3qyJrP6GelhAO24E7eOYVk=
+		Smq0+SrTyTzT0sL0+OS7IskgXpg=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/Headers/FL_Logs.h</key>
 		<data>
@@ -122,11 +122,11 @@
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/_CodeSignature/CodeResources</key>
 		<data>
-		DCpquYbNET6GU5FVwBeFU9I5bAA=
+		Emc4SR129zBjt2GTjnZur1sEVyQ=
 		</data>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/CoreSDKSourceCode</key>
 		<data>
-		fwhBiRcacAAy6gdy2xQhadHQXow=
+		1B2iLRqlC6h7jundVurSfaUaZg0=
 		</data>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/Headers/CAN_ISO_TP.h</key>
 		<data>
@@ -134,11 +134,11 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/Headers/Common.h</key>
 		<data>
-		VIldTkbbMFTgz7BnFo0B08knexQ=
+		Gi40SkgcGsjZpCRu+rJKNiYnJj8=
 		</data>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/Headers/CoreSDK.h</key>
 		<data>
-		pwZm0e3nOkId/oTDE1KbwQHekyg=
+		Jf0j/zuv07HvOamE2Vuav/+fL0c=
 		</data>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/Headers/CoreSDKSourceCode.h</key>
 		<data>
@@ -146,7 +146,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/Headers/CoreSDK_Common.h</key>
 		<data>
-		KOJKTjU1KxmOXyl0++/Tuun1bXU=
+		m4T0Ba/q4F+KXnZdi8szHLC4EhQ=
 		</data>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/Headers/CoreSDK_DelegateFunc.h</key>
 		<data>
@@ -158,7 +158,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/Headers/FL_CANInfoStruct.h</key>
 		<data>
-		6GRFL3qyJrP6GelhAO24E7eOYVk=
+		Smq0+SrTyTzT0sL0+OS7IskgXpg=
 		</data>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/Headers/FL_Logs.h</key>
 		<data>
@@ -182,7 +182,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/_CodeSignature/CodeResources</key>
 		<data>
-		JaqcRSETdTCb+c3AOWNiLDYZI48=
+		bD1b5UhaSCuHZpZ5t7mlGTf0roo=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -191,11 +191,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			fYwVjUdRTX4U+HOsGHYCee+rFDA=
+			04PUTylWguZCBNELM/eoSnKZzYg=
 			</data>
 			<key>hash2</key>
 			<data>
-			unxpCOrUq8K38AkT2dPRyx99r8IgAJepJwsxpBMZ5ag=
+			3UFzvbNyd4dvcOv2xTmlMZFoNFjoGvuOialZh7w9JRs=
 			</data>
 		</dict>
 		<key>ios-arm64/CoreSDKSourceCode.framework/Headers/CAN_ISO_TP.h</key>
@@ -213,22 +213,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			VIldTkbbMFTgz7BnFo0B08knexQ=
+			Gi40SkgcGsjZpCRu+rJKNiYnJj8=
 			</data>
 			<key>hash2</key>
 			<data>
-			rQm4KXsRTk179wCAaNMBUlWmedPrIUj3wiuxmNIgNik=
+			d+7dZC4gct+YXDzX45gPNLIgYzO+a6R7GjX7MdDyxAU=
 			</data>
 		</dict>
 		<key>ios-arm64/CoreSDKSourceCode.framework/Headers/CoreSDK.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pwZm0e3nOkId/oTDE1KbwQHekyg=
+			Jf0j/zuv07HvOamE2Vuav/+fL0c=
 			</data>
 			<key>hash2</key>
 			<data>
-			kOCieNLA70vHRxcPfuYWmqhgCj8DdXjStZjPPErU1T8=
+			4UQAWBFL/faGGeFvdT/3w68xrcNKma2fs1EpjICDD40=
 			</data>
 		</dict>
 		<key>ios-arm64/CoreSDKSourceCode.framework/Headers/CoreSDKSourceCode.h</key>
@@ -246,11 +246,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KOJKTjU1KxmOXyl0++/Tuun1bXU=
+			m4T0Ba/q4F+KXnZdi8szHLC4EhQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			3VdqxG0iNDGyaVQtZ724qdOyKEkAER4g9ytsD3nFHpQ=
+			rXq3b6TykHFWUFsFhzyFMXkeZjWayE6C4ykUgcHll0w=
 			</data>
 		</dict>
 		<key>ios-arm64/CoreSDKSourceCode.framework/Headers/CoreSDK_DelegateFunc.h</key>
@@ -279,11 +279,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6GRFL3qyJrP6GelhAO24E7eOYVk=
+			Smq0+SrTyTzT0sL0+OS7IskgXpg=
 			</data>
 			<key>hash2</key>
 			<data>
-			qQ21P9WpK6aFdZeco9cZxB3b6KOlLTj6vvJbamlwpd0=
+			ImASnNcTfrl7p9kaPpAN4wAOdqhNCYMa8pMY+MwN+t8=
 			</data>
 		</dict>
 		<key>ios-arm64/CoreSDKSourceCode.framework/Headers/FL_Logs.h</key>
@@ -345,11 +345,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wJzEWe1Ygh/DmGdOemjZzZxKJeY=
+			Lrwx7FyGRycgT7w9ZVy/zVlalio=
 			</data>
 			<key>hash2</key>
 			<data>
-			/EGV2b3SyVhPTfOIIkRdt3STgsoA6ZrEKdhSJUFu6Fc=
+			EAPTJJTLTzo/fcoKFkKluuKddWonVQ1t4JWo0xpEBm0=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/CoreSDKSourceCode</key>
@@ -376,11 +376,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			uxtxoyHbn8sgeUzH5bY7jJQiv2g=
+			VS89UP/UUEN6DNXOURwtjU9/6L0=
 			</data>
 			<key>hash2</key>
 			<data>
-			e66qwIHojlPwTU9eUKDF+Vcr5SESzhEYG1RF4JtLBu0=
+			1faAnyhsomH7OzOXc78I88r1M66QmGh91a/rmf51EQE=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/Headers/CAN_ISO_TP.h</key>
@@ -398,22 +398,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			VIldTkbbMFTgz7BnFo0B08knexQ=
+			Gi40SkgcGsjZpCRu+rJKNiYnJj8=
 			</data>
 			<key>hash2</key>
 			<data>
-			rQm4KXsRTk179wCAaNMBUlWmedPrIUj3wiuxmNIgNik=
+			d+7dZC4gct+YXDzX45gPNLIgYzO+a6R7GjX7MdDyxAU=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/Headers/CoreSDK.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pwZm0e3nOkId/oTDE1KbwQHekyg=
+			Jf0j/zuv07HvOamE2Vuav/+fL0c=
 			</data>
 			<key>hash2</key>
 			<data>
-			kOCieNLA70vHRxcPfuYWmqhgCj8DdXjStZjPPErU1T8=
+			4UQAWBFL/faGGeFvdT/3w68xrcNKma2fs1EpjICDD40=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/Headers/CoreSDKSourceCode.h</key>
@@ -431,11 +431,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KOJKTjU1KxmOXyl0++/Tuun1bXU=
+			m4T0Ba/q4F+KXnZdi8szHLC4EhQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			3VdqxG0iNDGyaVQtZ724qdOyKEkAER4g9ytsD3nFHpQ=
+			rXq3b6TykHFWUFsFhzyFMXkeZjWayE6C4ykUgcHll0w=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/Headers/CoreSDK_DelegateFunc.h</key>
@@ -464,11 +464,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6GRFL3qyJrP6GelhAO24E7eOYVk=
+			Smq0+SrTyTzT0sL0+OS7IskgXpg=
 			</data>
 			<key>hash2</key>
 			<data>
-			qQ21P9WpK6aFdZeco9cZxB3b6KOlLTj6vvJbamlwpd0=
+			ImASnNcTfrl7p9kaPpAN4wAOdqhNCYMa8pMY+MwN+t8=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/Headers/FL_Logs.h</key>
@@ -530,11 +530,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			DCpquYbNET6GU5FVwBeFU9I5bAA=
+			Emc4SR129zBjt2GTjnZur1sEVyQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			ImiWZYhYapI6SekkCN2djQXugzPZx2C7lpEJ/bn1VfQ=
+			GR22qEBiWnwsmpeOmRJrU5mEYsBXPu8nxlSi6b6anVM=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/Current</key>
@@ -546,11 +546,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			fwhBiRcacAAy6gdy2xQhadHQXow=
+			1B2iLRqlC6h7jundVurSfaUaZg0=
 			</data>
 			<key>hash2</key>
 			<data>
-			GHnm4S/cu4klY1RQfe6cgHjrqotjs3DMlMciqIvRNuw=
+			bkSqVsesGWSYMSdveGDojyCXFRNBNyI4/JK5QfEP/78=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/Headers/CAN_ISO_TP.h</key>
@@ -568,22 +568,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			VIldTkbbMFTgz7BnFo0B08knexQ=
+			Gi40SkgcGsjZpCRu+rJKNiYnJj8=
 			</data>
 			<key>hash2</key>
 			<data>
-			rQm4KXsRTk179wCAaNMBUlWmedPrIUj3wiuxmNIgNik=
+			d+7dZC4gct+YXDzX45gPNLIgYzO+a6R7GjX7MdDyxAU=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/Headers/CoreSDK.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pwZm0e3nOkId/oTDE1KbwQHekyg=
+			Jf0j/zuv07HvOamE2Vuav/+fL0c=
 			</data>
 			<key>hash2</key>
 			<data>
-			kOCieNLA70vHRxcPfuYWmqhgCj8DdXjStZjPPErU1T8=
+			4UQAWBFL/faGGeFvdT/3w68xrcNKma2fs1EpjICDD40=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/Headers/CoreSDKSourceCode.h</key>
@@ -601,11 +601,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KOJKTjU1KxmOXyl0++/Tuun1bXU=
+			m4T0Ba/q4F+KXnZdi8szHLC4EhQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			3VdqxG0iNDGyaVQtZ724qdOyKEkAER4g9ytsD3nFHpQ=
+			rXq3b6TykHFWUFsFhzyFMXkeZjWayE6C4ykUgcHll0w=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/Headers/CoreSDK_DelegateFunc.h</key>
@@ -634,11 +634,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6GRFL3qyJrP6GelhAO24E7eOYVk=
+			Smq0+SrTyTzT0sL0+OS7IskgXpg=
 			</data>
 			<key>hash2</key>
 			<data>
-			qQ21P9WpK6aFdZeco9cZxB3b6KOlLTj6vvJbamlwpd0=
+			ImASnNcTfrl7p9kaPpAN4wAOdqhNCYMa8pMY+MwN+t8=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/Headers/FL_Logs.h</key>
@@ -700,11 +700,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			JaqcRSETdTCb+c3AOWNiLDYZI48=
+			bD1b5UhaSCuHZpZ5t7mlGTf0roo=
 			</data>
 			<key>hash2</key>
 			<data>
-			NXQ2r5/GChjls0y5Waeh1fnSQvWgkjSImemaUOadCQY=
+			5WPh0umbzBMEnJ0NMHBeP54Rt/vAjAlXpCzqf4Bwl/0=
 			</data>
 		</dict>
 	</dict>
