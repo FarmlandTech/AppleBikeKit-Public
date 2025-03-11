@@ -8,6 +8,7 @@
 import Foundation
 
 import CoreSDKService
+import MapKit
 
 extension Array where Element == MileageRecord {
     /**
@@ -68,7 +69,7 @@ extension Array where Element == ParameterData {
                 continue
             }
             
-            if let isMetricSystem: Bool = FarmLandBikeKit.sleipnir.metaParameter.distanceUint, !isMetricSystem {
+            if let isMetricSystem: MKDistanceFormatter.Units = FarmLandBikeKit.sleipnir.metaParameter.distanceUint, isMetricSystem == .imperial {
                 odographValue = Int(Double(odographValue).toMile)
             }
             

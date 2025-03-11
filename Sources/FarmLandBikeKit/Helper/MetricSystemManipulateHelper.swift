@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import MapKit
 
 import CoreSDKService
 
@@ -20,7 +21,7 @@ final public class MetricSystemManipulateHelper {
     }
     
     /// 是否為公制。
-    public var isMetricSystem: Bool? {
+    public var isMetricSystem: MKDistanceFormatter.Units? {
         FarmLandBikeKit.sleipnir.metaParameter.distanceUint
     }
     
@@ -62,7 +63,7 @@ final public class MetricSystemManipulateHelper {
      - parameter isMetricSystem: 是否為公制。
      - Throws: 上次的寫入仍然在執行(或重試)，便會拋出錯誤；如果底層 AppleBikeKit 寫入參數時，設定錯誤，也可能會拋出錯誤。
      */
-    public func write(_ isMetricSystem: Bool) throws {
+    public func write(_ isMetricSystem: MKDistanceFormatter.Units) throws {
         guard !self.isWriteRecursively else {
             throw Self.Error.isWriteRecursively
         }
@@ -76,8 +77,8 @@ final public class MetricSystemManipulateHelper {
      - parameter isMetricSystem: 是否為公制。
      - Throws: 上次的寫入仍然在執行(或重試)，便會拋出錯誤；如果底層 AppleBikeKit 寫入參數時，設定錯誤，也可能會拋出錯誤。
      */
-    private func recurWriteValue(_ isMetricSystem: Bool) throws {
-        if let _isMetricSystem: Bool = self.isMetricSystem, _isMetricSystem == isMetricSystem {
+    private func recurWriteValue(_ isMetricSystem: MKDistanceFormatter.Units) throws {
+        if let _isMetricSystem: MKDistanceFormatter.Units = self.isMetricSystem, _isMetricSystem == isMetricSystem {
             self.isWriteRecursively = false
         } else {
             let name: String!
@@ -90,7 +91,12 @@ final public class MetricSystemManipulateHelper {
                 throw FarmLandBikeKit.Error.functionNotExist(#function)
             }
             
-            try FarmLandBikeKit.sleipnir.writeParameter(name: name, part: .HMI, value: isMetricSystem ? 0 : 1)
+            if isMetricSystem == .metric {
+                try FarmLandBikeKit.sleipnir.writeParameter(name: name, part: .HMI, value: 0)
+            } else if isMetricSystem == .imperial {
+                try FarmLandBikeKit.sleipnir.writeParameter(name: name, part: .HMI, value: 1)
+            }
+            
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 try? FarmLandBikeKit.sleipnir.readParameter(name: name, part: .HMI)

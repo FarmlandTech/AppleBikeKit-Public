@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import MapKit
 
 import CoreBLEServiceSourceCode
 import AppleBikeKit
@@ -40,6 +41,13 @@ open class FarmLandBikeKit: AppleBikeKit {
         case assistLevelUnexpected
         /// 檔位助力比超出定義範圍。
         case speedOutOfLimitation
+        /// 自動休眠時間超出定義範圍
+        case sleepTimeOutOfBounds
+        
+        case isBLEDisconnecting
+        
+        case getNoAssistParameterName
+        case getNoAssistValue(ParameterData.Apple.Name)
     }
     
     /// 關鍵參數(ssn或dmid等)的緩存值。
@@ -184,8 +192,31 @@ open class FarmLandBikeKit: AppleBikeKit {
     /**
      執行藍牙連線。
      */
-    public func connectBike(_ peripheral: BluetoothPeripheral) {
-        self.connect(peripheral)
+    public func connectBike(_ peripheral: BluetoothPeripheral) -> AnyPublisher<Int, Swift.Error> {
+        self.scanningPublisher
+            .first()
+            .flatMap({
+                if $0 {
+                    self.stopScan()
+                    return self.scanningPublisher
+                        .filter({ !$0 })
+                        .first()
+                        .setFailureType(to: Swift.Error.self)
+                        .eraseToAnyPublisher()
+                } else {
+                    return Just(false)
+                        .setFailureType(to: Swift.Error.self)
+                        .eraseToAnyPublisher()
+                }
+            })
+            .handleEvents(receiveOutput: { _ in
+                self.connect(peripheral)
+            })
+            .map({ _ in
+                let mtuSize = peripheral.device.maximumWriteValueLength(for: .withoutResponse) + 3
+                return mtuSize
+            })
+            .eraseToAnyPublisher()
     }
     
     /**
@@ -211,7 +242,7 @@ open class FarmLandBikeKit: AppleBikeKit {
      - parameter isMetricSystem: 是否為公制。
      - Throws: 上次的寫入仍然在執行(或重試)，便會拋出錯誤；如果底層 AppleBikeKit 寫入參數時，設定錯誤，也可能會拋出錯誤。
      */
-    public func writeMetricSystem(_ isMetricSystem: Bool) throws {
+    public func writeMetricSystem(_ isMetricSystem: MKDistanceFormatter.Units) throws {
         try self.metricSystemManipulateHelper.write(isMetricSystem)
     }
     
@@ -485,6 +516,50 @@ open class FarmLandBikeKit: AppleBikeKit {
                     return false
                 }
             })
+            .eraseToAnyPublisher()
+    }
+    
+    public func getTimeToSleep() -> AnyPublisher<Int, Swift.Error> {
+        let name: ParameterData.Apple.Name = .METER_SLEEP_TIME
+        do {
+            try self.readParameter(name: name.rawValue, part: .HMI)
+        } catch {
+            return Fail<Int, Swift.Error>(error: error)
+                .eraseToAnyPublisher()
+        }
+        return self.parameterDataPublisher
+            .filter({ $0.name == name.rawValue })
+            .filter({ $0.partType == .HMI })
+            .compactMap({ $0.value as? Int })
+            .first()
+            .eraseToAnyPublisher()
+    }
+    
+    public func setTimeToSleep(_ second: Int) -> AnyPublisher<Bool, Swift.Error> {
+        guard second <= 10800, second >= 10 else {
+            return Fail<Bool, Swift.Error>(error: FarmLandBikeKit.Error.sleepTimeOutOfBounds)
+                .eraseToAnyPublisher()
+        }
+        let name: ParameterData.Apple.Name = .METER_SLEEP_TIME
+        do {
+            try self.writeParameter(name: name.rawValue, part: .HMI, value: second)
+        } catch {
+            return Fail<Bool, Swift.Error>(error: error)
+                .eraseToAnyPublisher()
+        }
+        return self.writingParameterStatePublisher
+            .compactMap({ $0 })
+            .filter({
+                do {
+                    let parameterData: ParameterData = try self.parameterDataRepository.findParameterData(type: $0.device, bank: $0.bank, address: $0.address, length: $0.length)
+                    return parameterData.name == name.rawValue
+                } catch {
+                    return false
+                }
+            })
+            .first()
+            .map({ $0.state })
+            .setFailureType(to: Swift.Error.self)
             .eraseToAnyPublisher()
     }
 }
