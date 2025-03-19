@@ -40,8 +40,7 @@ let package = Package(
             dependencies: ["CoreSDK", "CoreSDKService", "CoreBLEService", "AppleBikeKitSourceCode"],
             path: "Sources/AppleBikeKit",
             swiftSettings: [
-                .define("APPLICATION_EXTENSION_API_ONLY=YES"),
-                .unsafeFlags(["-application-extension"])
+                .define("APPLICATION_EXTENSION_API_ONLY=YES")
             ],
             linkerSettings: [
                 .linkedFramework("SwiftUI", .when(platforms: [.iOS])),
@@ -52,13 +51,11 @@ let package = Package(
             dependencies: ["AppleBikeKit"],
             path: "Sources/FarmLandBikeKit",
             swiftSettings: [
-                .define("APPLICATION_EXTENSION_API_ONLY=YES"),
-                .unsafeFlags(["-application-extension"])
+                .define("APPLICATION_EXTENSION_API_ONLY=YES")
             ]),
         .testTarget(
             name: "AppleBikeKitTests",
-            dependencies: ["AppleBikeKit"],
-            swiftSettings: [.unsafeFlags(["-suppress-warnings"])]),
+            dependencies: ["AppleBikeKit"]),
     ],
     swiftLanguageVersions: [.v5]
 )
