@@ -24,10 +24,8 @@ open class FarmLandBikeKit: AppleBikeKit {
         case unknown
     }
     
-    /// 單例。
-    public static let sleipnir: FarmLandBikeKit = .init()
-    
-    enum Error: Swift.Error {
+    /// 自定義錯誤。
+    public enum Error: Swift.Error {
         case DisguiseBatteryHelperIsNil
         case unsupportedLevel
         case deviceInfoUnavailable
@@ -40,15 +38,24 @@ open class FarmLandBikeKit: AppleBikeKit {
         /// 非預期的助力檔位。
         case assistLevelUnexpected
         /// 檔位助力比超出定義範圍。
+        case assistRatioOutOfBounds
+        /// 檔位速限超出定義範圍。
         case speedOutOfLimitation
         /// 自動休眠時間超出定義範圍
-        case sleepTimeOutOfBounds
+        case sleepTimeOutOfBounds(TimeInterval)
         
         case isBLEDisconnecting
         
         case getNoAssistParameterName
         case getNoAssistValue(ParameterData.Apple.Name)
+        /// 緩啟動檔位超出定義範圍。
+        case staOutOfBounds
+        /// 邏輯進行中。(避免重複的異步操作)
+        case isProccessing
     }
+    
+    /// 單例。
+    public static let sleipnir: FarmLandBikeKit = .init()
     
     /// 關鍵參數(ssn或dmid等)的緩存值。
     public var metaParameter: MetaParameter {
@@ -187,6 +194,10 @@ open class FarmLandBikeKit: AppleBikeKit {
 //        self.deviceInfoPublisher().sink(receiveValue: { deviceInfo in
 //
 //        }).store(in: &self.subscriptions)
+    }
+    
+    public func setMetaWhitelist(_ whitelist: [(name: String, part: CommunicationPartType)]) {
+        self.connectionMetaReadingHelper.parameterWhitelist = whitelist
     }
     
     /**
@@ -476,8 +487,8 @@ open class FarmLandBikeKit: AppleBikeKit {
                 .eraseToAnyPublisher()
         }
         return self.parameterDataPublisher
-            .filter({ $0.name == name.rawValue })
-            .first()
+            .filter({ $0.name == name.rawValue && $0.partType == .HMI })
+            .prefix(1)
             .tryMap({
                 guard let uuid: String = $0.value as? String else {
                     throw FarmLandBikeKit.Error.screenLockTokenCorrupted
@@ -537,7 +548,9 @@ open class FarmLandBikeKit: AppleBikeKit {
     
     public func setTimeToSleep(_ second: Int) -> AnyPublisher<Bool, Swift.Error> {
         guard second <= 10800, second >= 10 else {
-            return Fail<Bool, Swift.Error>(error: FarmLandBikeKit.Error.sleepTimeOutOfBounds)
+            let timeinterval: TimeInterval = .init(second)
+            let error: FarmLandBikeKit.Error = .sleepTimeOutOfBounds(timeinterval)
+            return Fail<Bool, Swift.Error>(error: error)
                 .eraseToAnyPublisher()
         }
         let name: ParameterData.Apple.Name = .METER_SLEEP_TIME
@@ -560,6 +573,12 @@ open class FarmLandBikeKit: AppleBikeKit {
             .first()
             .map({ $0.state })
             .setFailureType(to: Swift.Error.self)
+            .eraseToAnyPublisher()
+    }
+    
+    public func appleDeviceInfoPublisher(throttle milliseconds: Int = 0) -> AnyPublisher<Apple_Info_st, Swift.Error> {
+        self.deviceInfoPublisher(throttle: milliseconds)
+            .tryCompactMap({ try $0.deviceInfo?.asAppleDeviceInfo() })
             .eraseToAnyPublisher()
     }
 }

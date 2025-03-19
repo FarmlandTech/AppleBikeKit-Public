@@ -410,6 +410,82 @@ extension MetaParameter: Equatable {
     }
 }
 
+//extension MetaParameter {
+//    
+//    private mutating func setHMIProperties(_ parameterData: ParameterData) {
+//        switch parameterData.name {
+//        case ParameterData.Apple.Name.HmiSSN.rawValue:
+//            self.hmiSSN = parameterData.value as? String
+//        case ParameterData.Apple.Name.HmiDMID.rawValue:
+//            self.hmiDMID = parameterData.value as? String
+//        case ParameterData.Apple.Name.HmiDSN.rawValue:
+//            self.hmiDSN = parameterData.value as? String
+//        case ParameterData.Apple.Name.HmiSMID.rawValue:
+//            self.hmiSMID = parameterData.value as? String
+//        case ParameterData.Apple.Name.HmiFrame.rawValue:
+//            self.hmiFrame = parameterData.value as? String
+//        case ParameterData.Apple.Name.HmiSaleDate.rawValue:
+//            self.hmiSaleDate = parameterData.value as? String
+//        case ParameterData.Apple.Name.HmiFWAppVer.rawValue:
+//            self.hmiFWAppVer = parameterData.value as? String
+//        case ParameterData.Apple.Name.HmiFWBtlVer.rawValue:
+//            self.hmiFWBtlVer = parameterData.value as? String
+//        case ParameterData.Apple.Name.HmiFWSdkVer.rawValue:
+//            self.hmiFWSdkVer = parameterData.value as? String
+//        case ParameterData.Apple.Name.HmiHWVer.rawValue:
+//            self.hmiHWVer = parameterData.value as? String
+//        case ParameterData.Apple.Name.HmiParaVer.rawValue:
+//            self.hmiParaVer = parameterData.value as? String
+//        case ParameterData.Apple.Name.HmiProtocolVer.rawValue:
+//            self.hmiProtocolVer = parameterData.value as? String
+//        case ParameterData.Apple.Name.HmiBtDevName.rawValue:
+//            self.hmiBtDevName = parameterData.value as? String
+//        default:
+//            break
+//        }
+//    }
+//    
+//    private mutating func setDistanceUint(_ parameterData: ParameterData) {
+//        if let value = parameterData.value as? Int {
+//            self.distanceUint = .metric
+//        } else {
+//            self.distanceUint = .imperial
+//        }
+//    }
+//    
+//    private mutating func setBMSProperties(_ parameterData: ParameterData) {
+//        
+//    }
+//    
+//    private mutating func setControllerProperties(_ parameterData: ParameterData) {
+//        
+//    }
+//    
+//    private mutating func setEnableParts(_ parameterData: ParameterData) {
+//        self.enablePartRawList = parameterData.value as? [UInt8]
+//    }
+//    
+//    mutating func setProperties(_ parameterData: ParameterData) {
+//        guard let name: ParameterData.Apple.Name = .init(rawValue: parameterData.name) else {
+//            return
+//        }
+//        switch name {
+//        case .INTEGRATED_HMI_BANK0:
+//            self.setHMIProperties(parameterData)
+//        case .DISP_UNIT_SW:
+//            self.setDistanceUint(parameterData)
+//        case .INTEGRATED_BATTERY_BANK0:
+//            self.setBMSProperties(parameterData)
+//        case .INTEGRATED_CONTROLLER_BANK0:
+//            self.setControllerProperties(parameterData)
+//        case .SYS_PART_EN:
+//            self.setEnableParts(parameterData)
+//        default:
+//            break
+//        }
+//    }
+//}
+
 /// 取得關鍵參數(ssn或dmid等)的處理物件。
 final public class ConnectionMetaReadingHelper {
     
@@ -423,51 +499,29 @@ final public class ConnectionMetaReadingHelper {
         .init()
     }()
     
+    /// 定義白名單(依照執行順序)
+    var parameterWhitelist: [(name: String, part: CommunicationPartType)]? {
+        didSet {
+            self.subscriptions.forEach({ $0.cancel() })
+            self.subscriptions = .init()
+            self.subscribe()
+        }
+    }
+    
     /// 需執行的所有任務陣列。
-    lazy private var taskNames: [String] = {
-        switch FarmLandBikeKit.tenant {
-        case .apple, .kiwi:
-            return [
-                ParameterData.Apple.Name.INTEGRATED_HMI_BANK0.rawValue,
-                ParameterData.Apple.Name.DISP_UNIT_SW.rawValue,
-                ParameterData.Apple.Name.INTEGRATED_BATTERY_BANK0.rawValue,
-                ParameterData.Apple.Name.INTEGRATED_CONTROLLER_BANK0.rawValue,
-                ParameterData.Apple.Name.SYS_PART_EN.rawValue,
-            ]
-        case .orange:
-            return [
-                ParameterData.Orange.Integrated.HMI_BANK0.rawValue,
-                ParameterData.Orange.Integrated.CONTROLLER_BANK0.rawValue,
-                ParameterData.Orange.Integrated.BATTERY_BANK0.rawValue,
-                ParameterData.Orange.HMI.Bank2.DISP_UNIT_SW.rawValue,
-            ]
-        default:
+    private var taskNames: [String] {
+        if let parameterWhitelist: [(name: String, part: CommunicationPartType)] = self.parameterWhitelist {
+            return parameterWhitelist.map { $0.name }
+        } else {
             return .init()
         }
-    }()
-    
-    // 定義白名單(依照執行順序)
-    var parameterWhitelist: [(name: String, part: CommunicationPartType)]?
+    }
     
     /**
      建構子。
      */
     init() {
-        // 對個別參數，進行訂閱。
-        for name in self.taskNames {
-            if FarmLandBikeKit.sleipnir.parameterDataRepository.integratedParameters.contains(where: { $0.name == name }) {
-                // 讀取區段參數的流程。
-                let index: Int? = FarmLandBikeKit.sleipnir.parameterDataRepository.parameters.firstIndex(where: { $0.name == name })
-                guard let index: Int else { continue }
-                guard let dividedParameters: [ParameterData] = FarmLandBikeKit.sleipnir.parameterDataRepository.parameters[index].dividedParameters else { continue }
-                for parameterData in dividedParameters {
-                    self.sink(parameterData.name)
-                }
-            } else {
-                // 讀取單一參數的流程。
-                self.sink(name)
-            }
-        }
+        self.subscribe()
     }
     
     /**
@@ -489,6 +543,24 @@ final public class ConnectionMetaReadingHelper {
     public func doTask() throws {
         self.metaSubject.send(.init())
         try self.recurFetchMeta()
+    }
+    
+    /// 對個別參數，進行訂閱。
+    private func subscribe() {
+        for name in self.taskNames {
+            if FarmLandBikeKit.sleipnir.parameterDataRepository.integratedParameters.contains(where: { $0.name == name }) {
+                // 讀取區段參數的流程。
+                let index: Int? = FarmLandBikeKit.sleipnir.parameterDataRepository.parameters.firstIndex(where: { $0.name == name })
+                guard let index: Int else { continue }
+                guard let dividedParameters: [ParameterData] = FarmLandBikeKit.sleipnir.parameterDataRepository.parameters[index].dividedParameters else { continue }
+                for parameterData in dividedParameters {
+                    self.sink(parameterData.name)
+                }
+            } else {
+                // 讀取單一參數的流程。
+                self.sink(name)
+            }
+        }
     }
     
     /**
@@ -657,6 +729,55 @@ final public class ConnectionMetaReadingHelper {
         }).store(in: &self.subscriptions)
     }
     
+//    public var appleMetaParameterPublisher: AnyPublisher<MetaParameter, Swift.Error> {
+//        func zipPublishers(metaParameter: MetaParameter) -> AnyPublisher<(ParameterData, MetaParameter), Swift.Error> {
+//            Publishers.Zip(
+//                FarmLandBikeKit.sleipnir.parameterDataPublisher,
+//                Just(metaParameter).setFailureType(to: Swift.Error.self)
+//            )
+//                .eraseToAnyPublisher()
+//        }
+//        func updateParameterData(parameterData: ParameterData, metaParameter: MetaParameter) -> MetaParameter {
+//            var metaParameter: MetaParameter = .init()
+//            metaParameter.setProperties(parameterData)
+//            return metaParameter
+//        }
+//        let whitelist: [(name: String, part: CommunicationPartType)] = [
+//            (ParameterData.Apple.Name.INTEGRATED_HMI_BANK0.rawValue, .HMI),
+//            (ParameterData.Apple.Name.DISP_UNIT_SW.rawValue, .HMI),
+//            (ParameterData.Apple.Name.INTEGRATED_BATTERY_BANK0.rawValue, .MainBatt),
+//            (ParameterData.Apple.Name.INTEGRATED_CONTROLLER_BANK0.rawValue, .Controller),
+//            (ParameterData.Apple.Name.SYS_PART_EN.rawValue, .Controller)
+//        ]
+//        // 動態建立 Publisher 陣列。
+//        let publishers: [AnyPublisher<ParameterData, Swift.Error>] = whitelist
+//            .map({ (element: (name: String, part: CommunicationPartType)) -> AnyPublisher<ParameterData, Swift.Error> in
+//                Just<MetaParameter>(.init())
+//                    .setFailureType(to: Swift.Error.self)
+//                    .tryMap({ _ in
+//                        try FarmLandBikeKit.sleipnir.readParameter(name: element.name, part: element.part)
+//                    })
+//                    .flatMap(zipPublishers)
+//                    .filter({ $0.name == element.name && $0.partType == element.part })
+//                    .map(updateParameterData)
+//                    .prefix(1)
+//                    .eraseToAnyPublisher()
+//            })
+//        // 使用 `reduce` + `flatMap` 來確保逐一執行。
+//        guard let firstPublisher = publishers.first else {
+//            return Empty()
+//        }
+//        return publishers
+//            .dropFirst()
+//            .reduce(firstPublisher, { previous, next in
+//                previous
+//                    .append(next)
+//                    .eraseToAnyPublisher()
+//            })
+//            .collect()
+//            .eraseToAnyPublisher()
+//    }
+    
     /**
      讀取參數的任務，具體執行內容。
      
@@ -666,21 +787,45 @@ final public class ConnectionMetaReadingHelper {
     private func recurFetchMeta() throws {
         switch FarmLandBikeKit.tenant {
         case .apple, .kiwi:
-            let whitelist: [(name: String, part: CommunicationPartType)] = self.parameterWhitelist ?? [
-                (ParameterData.Apple.Name.INTEGRATED_HMI_BANK0.rawValue, .HMI),
-                (ParameterData.Apple.Name.DISP_UNIT_SW.rawValue, .HMI),
-                (ParameterData.Apple.Name.INTEGRATED_BATTERY_BANK0.rawValue, .MainBatt),
-                (ParameterData.Apple.Name.INTEGRATED_CONTROLLER_BANK0.rawValue, .Controller),
-                (ParameterData.Apple.Name.SYS_PART_EN.rawValue, .Controller)
-            ]
+            var whitelist: [(name: String, part: CommunicationPartType)] = .init()
+            if let parameterWhitelist: [(name: String, part: CommunicationPartType)] {
+                whitelist = parameterWhitelist
+            } else {
+                whitelist = [
+                    (ParameterData.Apple.Name.INTEGRATED_HMI_BANK0.rawValue, .HMI),
+                    (ParameterData.Apple.Name.DISP_UNIT_SW.rawValue, .HMI),
+                    (ParameterData.Apple.Name.INTEGRATED_BATTERY_BANK0.rawValue, .MainBatt),
+                    (ParameterData.Apple.Name.INTEGRATED_CONTROLLER_BANK0.rawValue, .Controller),
+                    (ParameterData.Apple.Name.SYS_PART_EN.rawValue, .Controller)
+                ]
+                self.subscriptions.forEach({ $0.cancel() })
+                self.subscriptions = .init()
+                for name in whitelist.map({ $0.name }) {
+                    if FarmLandBikeKit.sleipnir.parameterDataRepository.integratedParameters.contains(where: { $0.name == name }) {
+                        // 讀取區段參數的流程。
+                        let index: Int? = FarmLandBikeKit.sleipnir.parameterDataRepository.parameters.firstIndex(where: { $0.name == name })
+                        guard let index: Int else { continue }
+                        guard let dividedParameters: [ParameterData] = FarmLandBikeKit.sleipnir.parameterDataRepository.parameters[index].dividedParameters else { continue }
+                        for parameterData in dividedParameters {
+                            self.sink(parameterData.name)
+                        }
+                    } else {
+                        // 讀取單一參數的流程。
+                        self.sink(name)
+                    }
+                }
+            }
             // 動態建立 Publisher 陣列。
             let publishers: [AnyPublisher<ParameterData, Swift.Error>] = whitelist
-                .map({ (parameter) -> AnyPublisher<ParameterData, Swift.Error> in
+                .map({ (element: (name: String, part: CommunicationPartType)) -> AnyPublisher<ParameterData, Swift.Error> in
                     Just(())
                         .setFailureType(to: Swift.Error.self)
-                        .tryMap({ try FarmLandBikeKit.sleipnir.readParameter(name: parameter.name, part: parameter.part) })
+                        .tryMap({
+                            try FarmLandBikeKit.sleipnir.readParameter(name: element.name, part: element.part)
+                        })
                         .flatMap({ _ in FarmLandBikeKit.sleipnir.parameterDataPublisher })
-                        .filter({ $0.name == parameter.name && $0.partType == parameter.part })
+                        .filter({ $0.name == element.name && $0.partType == element.part })
+                        .prefix(1)
                         .eraseToAnyPublisher()
                 })
             // 使用 `reduce` + `flatMap` 來確保逐一執行。
@@ -690,12 +835,14 @@ final public class ConnectionMetaReadingHelper {
             publishers
                 .dropFirst()
                 .reduce(firstPublisher, { previous, next in
-                    previous.flatMap { _ in next }.eraseToAnyPublisher()
+                    previous
+                        .append(next)
+                        .eraseToAnyPublisher()
                 })
-                .first()
+                .collect()
                 .sink(receiveCompletion: { completion in
                     
-                }, receiveValue: { parameterData in
+                }, receiveValue: { _ in
                     
                 })
                 .store(in: &self.subscriptions)

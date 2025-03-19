@@ -107,49 +107,49 @@ public class OrangeParameterDataRepository: BaseParameterDataRepository, Paramet
         .init(name: ParameterData.Orange.Controller.Bank1.LV1_ASSIST_STA_LV.rawValue, partType: .Controller, bank: 1, address: 23, length: 1, type: Int.self),
     ]
     
-    lazy public private(set) var controllerBank2Lv1AssistParameters: [ParameterData] = [
+    lazy public private(set) var controllerBank1Lv2AssistParameters: [ParameterData] = [
         .init(name: ParameterData.Orange.Controller.Bank1.LV2_ASSIST_RADIO.rawValue, partType: .Controller, bank: 1, address: 53, length: 1, type: Int.self),
         .init(name: ParameterData.Orange.Controller.Bank1.LV2_ASSIST_MAX_SPD.rawValue, partType: .Controller, bank: 1, address: 54, length: 1, type: Int.self),
         .init(name: ParameterData.Orange.Controller.Bank1.LV2_ASSIST_STA_LV.rawValue, partType: .Controller, bank: 1, address: 55, length: 1, type: Int.self),
     ]
     
-    lazy public private(set) var controllerBank3Lv1AssistParameters: [ParameterData] = [
+    lazy public private(set) var controllerBank1Lv3AssistParameters: [ParameterData] = [
         .init(name: ParameterData.Orange.Controller.Bank1.LV3_ASSIST_RADIO.rawValue, partType: .Controller, bank: 1, address: 85, length: 1, type: Int.self),
         .init(name: ParameterData.Orange.Controller.Bank1.LV3_ASSIST_MAX_SPD.rawValue, partType: .Controller, bank: 1, address: 86, length: 1, type: Int.self),
         .init(name: ParameterData.Orange.Controller.Bank1.LV3_ASSIST_STA_LV.rawValue, partType: .Controller, bank: 1, address: 87, length: 1, type: Int.self),
     ]
     
-    lazy public private(set) var controllerBank4Lv1AssistParameters: [ParameterData] = [
+    lazy public private(set) var controllerBank1Lv4AssistParameters: [ParameterData] = [
         .init(name: ParameterData.Orange.Controller.Bank1.LV4_ASSIST_RADIO.rawValue, partType: .Controller, bank: 1, address: 117, length: 1, type: Int.self),
         .init(name: ParameterData.Orange.Controller.Bank1.LV4_ASSIST_MAX_SPD.rawValue, partType: .Controller, bank: 1, address: 118, length: 1, type: Int.self),
         .init(name: ParameterData.Orange.Controller.Bank1.LV4_ASSIST_STA_LV.rawValue, partType: .Controller, bank: 1, address: 119, length: 1, type: Int.self),
     ]
     
-    lazy public private(set) var controllerBank5Lv1AssistParameters: [ParameterData] = [
+    lazy public private(set) var controllerBank1Lv5AssistParameters: [ParameterData] = [
         .init(name: ParameterData.Orange.Controller.Bank1.LV5_ASSIST_RADIO.rawValue, partType: .Controller, bank: 1, address: 149, length: 1, type: Int.self),
         .init(name: ParameterData.Orange.Controller.Bank1.LV5_ASSIST_MAX_SPD.rawValue, partType: .Controller, bank: 1, address: 150, length: 1, type: Int.self),
         .init(name: ParameterData.Orange.Controller.Bank1.LV5_ASSIST_STA_LV.rawValue, partType: .Controller, bank: 1, address: 151, length: 1, type: Int.self),
     ]
     
-    lazy public private(set) var controllerBank6Lv1AssistParameters: [ParameterData] = [
+    lazy public private(set) var controllerBank1Lv6AssistParameters: [ParameterData] = [
         .init(name: ParameterData.Orange.Controller.Bank1.LV6_ASSIST_RADIO.rawValue, partType: .Controller, bank: 1, address: 181, length: 1, type: Int.self),
         .init(name: ParameterData.Orange.Controller.Bank1.LV6_ASSIST_MAX_SPD.rawValue, partType: .Controller, bank: 1, address: 182, length: 1, type: Int.self),
         .init(name: ParameterData.Orange.Controller.Bank1.LV6_ASSIST_STA_LV.rawValue, partType: .Controller, bank: 1, address: 183, length: 1, type: Int.self),
     ]
     
-    lazy public private(set) var controllerBank7Lv1AssistParameters: [ParameterData] = [
+    lazy public private(set) var controllerBank1Lv7AssistParameters: [ParameterData] = [
         .init(name: ParameterData.Orange.Controller.Bank1.LV7_ASSIST_RADIO.rawValue, partType: .Controller, bank: 1, address: 213, length: 1, type: Int.self),
         .init(name: ParameterData.Orange.Controller.Bank1.LV7_ASSIST_MAX_SPD.rawValue, partType: .Controller, bank: 1, address: 214, length: 1, type: Int.self),
         .init(name: ParameterData.Orange.Controller.Bank1.LV7_ASSIST_STA_LV.rawValue, partType: .Controller, bank: 1, address: 215, length: 1, type: Int.self),
     ]
     
-    lazy public private(set) var controllerBank8Lv1AssistParameters: [ParameterData] = [
+    lazy public private(set) var controllerBank1Lv8AssistParameters: [ParameterData] = [
         .init(name: ParameterData.Orange.Controller.Bank1.LV8_ASSIST_RADIO.rawValue, partType: .Controller, bank: 1, address: 245, length: 1, type: Int.self),
         .init(name: ParameterData.Orange.Controller.Bank1.LV8_ASSIST_MAX_SPD.rawValue, partType: .Controller, bank: 1, address: 246, length: 1, type: Int.self),
         .init(name: ParameterData.Orange.Controller.Bank1.LV8_ASSIST_STA_LV.rawValue, partType: .Controller, bank: 1, address: 247, length: 1, type: Int.self),
     ]
     
-    lazy public private(set) var controllerBank9Lv1AssistParameters: [ParameterData] = [
+    lazy public private(set) var controllerBank1Lv9AssistParameters: [ParameterData] = [
         .init(name: ParameterData.Orange.Controller.Bank1.LV9_ASSIST_RADIO.rawValue, partType: .Controller, bank: 1, address: 277, length: 1, type: Int.self),
         .init(name: ParameterData.Orange.Controller.Bank1.LV9_ASSIST_MAX_SPD.rawValue, partType: .Controller, bank: 1, address: 278, length: 1, type: Int.self),
         .init(name: ParameterData.Orange.Controller.Bank1.LV9_ASSIST_STA_LV.rawValue, partType: .Controller, bank: 1, address: 279, length: 1, type: Int.self),
@@ -161,14 +161,14 @@ public class OrangeParameterDataRepository: BaseParameterDataRepository, Paramet
             .init(name: ParameterData.Orange.Controller.Bank1.SPD_MAX_LIMIT.rawValue, partType: .Controller, bank: 1, address: 3, length: 2, type: Int.self),
         ] 
         + controllerBank1Lv1AssistParameters
-        + controllerBank2Lv1AssistParameters
-        + controllerBank3Lv1AssistParameters
-        + controllerBank4Lv1AssistParameters
-        + controllerBank5Lv1AssistParameters
-        + controllerBank6Lv1AssistParameters
-        + controllerBank7Lv1AssistParameters
-        + controllerBank8Lv1AssistParameters
-        + controllerBank9Lv1AssistParameters
+        + controllerBank1Lv2AssistParameters
+        + controllerBank1Lv3AssistParameters
+        + controllerBank1Lv4AssistParameters
+        + controllerBank1Lv5AssistParameters
+        + controllerBank1Lv6AssistParameters
+        + controllerBank1Lv7AssistParameters
+        + controllerBank1Lv8AssistParameters
+        + controllerBank1Lv9AssistParameters
     }()
     
     lazy public private(set) var controllerBank2Parameters: [ParameterData] = []
@@ -223,24 +223,23 @@ public class OrangeParameterDataRepository: BaseParameterDataRepository, Paramet
     
     public var integratedParameters: [ParameterData] {
         [
-            .init(name: ParameterData.Orange.Integrated.HMI_BANK0.rawValue, partType: .HMI, bank: 0, address: 0, length: 1024, type: Any.self, dividedParameters: self.hmiBank0Parameters),
-            .init(name: ParameterData.Orange.Integrated.HMI_BANK2.rawValue, partType: .HMI, bank: 2, address: 0, length: 153, type: Any.self, dividedParameters: self.hmiBank2Parameters),
-            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK0.rawValue, partType: .Controller, bank: 0, address: 0, length: 1024, type: Any.self, dividedParameters: self.controllerBank0Parameters),
-            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1.rawValue, partType: .Controller, bank: 1, address: 0, length: 279+1, type: Any.self, dividedParameters: self.controllerBank1Parameters),
-            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV1_ASSIST.rawValue, partType: .Controller, bank: 1, address: 21, length: 3, type: [Int].self, dividedParameters: self.controllerBank0Parameters),
-            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV2_ASSIST.rawValue, partType: .Controller, bank: 1, address: 53, length: 3, type: [Int].self, dividedParameters: self.controllerBank0Parameters),
-            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV3_ASSIST.rawValue, partType: .Controller, bank: 1, address: 85, length: 3, type: [Int].self, dividedParameters: self.controllerBank0Parameters),
-            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV4_ASSIST.rawValue, partType: .Controller, bank: 1, address: 117, length: 3, type: [Int].self, dividedParameters: self.controllerBank0Parameters),
-            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV5_ASSIST.rawValue, partType: .Controller, bank: 1, address: 149, length: 3, type: [Int].self, dividedParameters: self.controllerBank0Parameters),
-            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV6_ASSIST.rawValue, partType: .Controller, bank: 1, address: 181, length: 3, type: [Int].self, dividedParameters: self.controllerBank0Parameters),
-            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV7_ASSIST.rawValue, partType: .Controller, bank: 1, address: 213, length: 3, type: [Int].self, dividedParameters: self.controllerBank0Parameters),
-            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV8_ASSIST.rawValue, partType: .Controller, bank: 1, address: 245, length: 3, type: [Int].self, dividedParameters: self.controllerBank0Parameters),
-            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV9_ASSIST.rawValue, partType: .Controller, bank: 1, address: 277, length: 3, type: [Int].self, dividedParameters: self.controllerBank0Parameters),
-            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK3.rawValue, partType: .Controller, bank: 3, address: 0, length: 596+32, type: Any.self, dividedParameters: self.controllerBank3Parameters),
-            .init(name: ParameterData.Orange.Integrated.BATTERY_BANK0.rawValue, partType: .MainBatt, bank: 0, address: 0, length: 1024, type: Any.self, dividedParameters: self.batteryBank0Parameters),
+            .init(name: ParameterData.Orange.Integrated.HMI_BANK0.rawValue, partType: .HMI, bank: 0, address: 0, length: 1024, type: [Int].self, dividedParameters: self.hmiBank0Parameters),
+            .init(name: ParameterData.Orange.Integrated.HMI_BANK2.rawValue, partType: .HMI, bank: 2, address: 0, length: 153, type: [Int].self, dividedParameters: self.hmiBank2Parameters),
+            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK0.rawValue, partType: .Controller, bank: 0, address: 0, length: 1024, type: [Int].self, dividedParameters: self.controllerBank0Parameters),
+            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1.rawValue, partType: .Controller, bank: 1, address: 0, length: 279+1, type: [Int].self, dividedParameters: self.controllerBank1Parameters),
+            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV1_ASSIST.rawValue, partType: .Controller, bank: 1, address: 21, length: 3, type: [Int].self, dividedParameters: self.controllerBank1Lv1AssistParameters),
+            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV2_ASSIST.rawValue, partType: .Controller, bank: 1, address: 53, length: 3, type: [Int].self, dividedParameters: self.controllerBank1Lv2AssistParameters),
+            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV3_ASSIST.rawValue, partType: .Controller, bank: 1, address: 85, length: 3, type: [Int].self, dividedParameters: self.controllerBank1Lv3AssistParameters),
+            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV4_ASSIST.rawValue, partType: .Controller, bank: 1, address: 117, length: 3, type: [Int].self, dividedParameters: self.controllerBank1Lv4AssistParameters),
+            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV5_ASSIST.rawValue, partType: .Controller, bank: 1, address: 149, length: 3, type: [Int].self, dividedParameters: self.controllerBank1Lv5AssistParameters),
+            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV6_ASSIST.rawValue, partType: .Controller, bank: 1, address: 181, length: 3, type: [Int].self, dividedParameters: self.controllerBank1Lv6AssistParameters),
+            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV7_ASSIST.rawValue, partType: .Controller, bank: 1, address: 213, length: 3, type: [Int].self, dividedParameters: self.controllerBank1Lv7AssistParameters),
+            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV8_ASSIST.rawValue, partType: .Controller, bank: 1, address: 245, length: 3, type: [Int].self, dividedParameters: self.controllerBank1Lv8AssistParameters),
+            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK1_LV9_ASSIST.rawValue, partType: .Controller, bank: 1, address: 277, length: 3, type: [Int].self, dividedParameters: self.controllerBank1Lv9AssistParameters),
+            .init(name: ParameterData.Orange.Integrated.CONTROLLER_BANK3.rawValue, partType: .Controller, bank: 3, address: 0, length: 596+32, type: [Int].self, dividedParameters: self.controllerBank3Parameters),
+            .init(name: ParameterData.Orange.Integrated.BATTERY_BANK0.rawValue, partType: .MainBatt, bank: 0, address: 0, length: 1024, type: [Int].self, dividedParameters: self.batteryBank0Parameters),
         ]
     }
-    
     
     public var parameters: [ParameterData] {
         self.normalParameters + self.integratedParameters
