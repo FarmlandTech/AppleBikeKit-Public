@@ -6,7 +6,7 @@
 	<dict>
 		<key>ios-arm64/CoreSDKSourceCode.framework/CoreSDKSourceCode</key>
 		<data>
-		04PUTylWguZCBNELM/eoSnKZzYg=
+		1iPvHol5whXLPdvQX1cqnId+i6c=
 		</data>
 		<key>ios-arm64/CoreSDKSourceCode.framework/Headers/CAN_ISO_TP.h</key>
 		<data>
@@ -66,7 +66,7 @@
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/CoreSDKSourceCode</key>
 		<data>
-		VS89UP/UUEN6DNXOURwtjU9/6L0=
+		rtvm8tmpWjnm7IaPd/E98BVu0hI=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/Headers/CAN_ISO_TP.h</key>
 		<data>
@@ -126,7 +126,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/CoreSDKSourceCode</key>
 		<data>
-		1B2iLRqlC6h7jundVurSfaUaZg0=
+		r6Q1hldKJU3GBUPymhfg6mUPR2E=
 		</data>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/Headers/CAN_ISO_TP.h</key>
 		<data>
@@ -191,11 +191,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			04PUTylWguZCBNELM/eoSnKZzYg=
+			1iPvHol5whXLPdvQX1cqnId+i6c=
 			</data>
 			<key>hash2</key>
 			<data>
-			3UFzvbNyd4dvcOv2xTmlMZFoNFjoGvuOialZh7w9JRs=
+			OFQObSXsPMIlFAElr+PWbAO5ZtzTNpMDt7+Wd54j9yY=
 			</data>
 		</dict>
 		<key>ios-arm64/CoreSDKSourceCode.framework/Headers/CAN_ISO_TP.h</key>
@@ -376,11 +376,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			VS89UP/UUEN6DNXOURwtjU9/6L0=
+			rtvm8tmpWjnm7IaPd/E98BVu0hI=
 			</data>
 			<key>hash2</key>
 			<data>
-			1faAnyhsomH7OzOXc78I88r1M66QmGh91a/rmf51EQE=
+			T9X9LW0bM8BUeOgieMmMQyWQh9Sd/mQcH0n4naqhVNM=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/CoreSDKSourceCode.framework/Versions/A/Headers/CAN_ISO_TP.h</key>
@@ -546,11 +546,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			1B2iLRqlC6h7jundVurSfaUaZg0=
+			r6Q1hldKJU3GBUPymhfg6mUPR2E=
 			</data>
 			<key>hash2</key>
 			<data>
-			bkSqVsesGWSYMSdveGDojyCXFRNBNyI4/JK5QfEP/78=
+			grCN3DlZsxOk/4rOKushzrzIRMidjnJlZywi6ffqhEw=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/CoreSDKSourceCode.framework/Headers/CAN_ISO_TP.h</key>
