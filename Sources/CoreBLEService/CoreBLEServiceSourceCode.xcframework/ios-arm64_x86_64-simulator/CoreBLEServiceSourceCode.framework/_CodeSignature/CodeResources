@@ -18,11 +18,11 @@
 		</data>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		sMum1NLWW3u1CHVeX4vfhoD73H8=
+		fZBLQSvXi7Fh/hOLOam/Sk1dUDA=
 		</data>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		oxPJgnzVFb8q+PMYy25akFELYVI=
+		f9oBW8L1eKzA0a5dc0xtOAbdoPg=
 		</data>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -30,19 +30,19 @@
 		</data>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		oxPJgnzVFb8q+PMYy25akFELYVI=
+		f9oBW8L1eKzA0a5dc0xtOAbdoPg=
 		</data>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		waQJ5zECw4IKff4IllSo8F5GoTM=
+		f1U/PW3rFjbOh0uRFExYXdFAJHs=
 		</data>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		sMum1NLWW3u1CHVeX4vfhoD73H8=
+		fZBLQSvXi7Fh/hOLOam/Sk1dUDA=
 		</data>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		4k4DQjzTbOy4Pmhf6pbi2Trhdp8=
+		vvXlOPaO8zdgZuLMv47D8eFEnsQ=
 		</data>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -50,11 +50,11 @@
 		</data>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		4k4DQjzTbOy4Pmhf6pbi2Trhdp8=
+		vvXlOPaO8zdgZuLMv47D8eFEnsQ=
 		</data>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		2pNtNNvL90q9+ZvwR37uF9bIj6c=
+		Mqph1Vacbr8u6e0dtYLgyEt7iJo=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -81,14 +81,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			5EFJIks6Llr4ELBRJ2eeE4MqdVYsMSDkX7XB4ah/Bn4=
+			fAbnGkM/i+IlKLNIBwaUvMMr17iCz/tDQfJxU0gJbZs=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			mTfftebHlYwiuzkcMl5fyOYkgKemulbQbczPJwxmuhY=
+			qcJRJdaoLF4NR7YDMU2y1RJZSqcufb4RBje9sBrbqDo=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -102,28 +102,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			mTfftebHlYwiuzkcMl5fyOYkgKemulbQbczPJwxmuhY=
+			qcJRJdaoLF4NR7YDMU2y1RJZSqcufb4RBje9sBrbqDo=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			B0Bjji/2g4A6bmcX6gRU4mH2+gkCKRyoeyv1bswUkhY=
+			AiIOYt/ELuXFw5NlaTxTJXoAYtV0VXi9gdvnrgjDSQc=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5EFJIks6Llr4ELBRJ2eeE4MqdVYsMSDkX7XB4ah/Bn4=
+			fAbnGkM/i+IlKLNIBwaUvMMr17iCz/tDQfJxU0gJbZs=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			YS8oeglbfGekeYv/wsuZ92xctxrL2oz5swrUB/MDRfs=
+			Kg/RKE9flmRVSyEd0nwh0YqX94CnU2VL6oJ0BAAIwT4=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -137,14 +137,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			YS8oeglbfGekeYv/wsuZ92xctxrL2oz5swrUB/MDRfs=
+			Kg/RKE9flmRVSyEd0nwh0YqX94CnU2VL6oJ0BAAIwT4=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			99XmK32BNoRoHE62nPUT0HjoiEz0VJePZRjrOdxquNQ=
+			5NypMongUXo/zYBHo55SMgEW1MgOSHYy177aKFo/6XI=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -29,14 +29,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			5EFJIks6Llr4ELBRJ2eeE4MqdVYsMSDkX7XB4ah/Bn4=
+			fAbnGkM/i+IlKLNIBwaUvMMr17iCz/tDQfJxU0gJbZs=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios-macabi.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			icJSJXTzyekVx/xpaE8Fi4rBy+Zg4rjHAczB99WHPZw=
+			17R0pU+al07oxoU4+Tg5Jo25mbxOCnjqPU+nejiUS+Q=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios-macabi.swiftdoc</key>
@@ -50,28 +50,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			icJSJXTzyekVx/xpaE8Fi4rBy+Zg4rjHAczB99WHPZw=
+			17R0pU+al07oxoU4+Tg5Jo25mbxOCnjqPU+nejiUS+Q=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/arm64-apple-ios-macabi.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			lU3I4z6wgKxReMyDvMYvHmRzyrTfIJsmrMshtF4kwTM=
+			dnPeDZ19LOdoZwSHqwJDiup/uDpCPcpBbfUNJWcUSWM=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-macabi.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5EFJIks6Llr4ELBRJ2eeE4MqdVYsMSDkX7XB4ah/Bn4=
+			fAbnGkM/i+IlKLNIBwaUvMMr17iCz/tDQfJxU0gJbZs=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-macabi.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			vTVpOltBS/0dBZVp1O9tjhC+OqgXZi1GvvsaHaN1MtE=
+			alTA1dBaCGZ/AzlCY8Nm/zogXGOT2Ox1O2EK2xoZZ/k=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-macabi.swiftdoc</key>
@@ -85,14 +85,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			vTVpOltBS/0dBZVp1O9tjhC+OqgXZi1GvvsaHaN1MtE=
+			alTA1dBaCGZ/AzlCY8Nm/zogXGOT2Ox1O2EK2xoZZ/k=
 			</data>
 		</dict>
 		<key>Modules/CoreBLEServiceSourceCode.swiftmodule/x86_64-apple-ios-macabi.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			m9cAQKUhCGgOHcoSW+xvYqg3TFWk3hh5UJOBsjBdVUY=
+			eMC4k+CSrvUtgn/+iCsdR8+ipnmVA1yLnZSHPmmDuqw=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

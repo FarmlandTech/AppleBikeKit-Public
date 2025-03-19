@@ -6,7 +6,7 @@
 	<dict>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/AppleBikeKitSourceCode</key>
 		<data>
-		pkL6hQ9ytZQXne9qkXNoTkdjDNk=
+		vCMnuLf+r3RioPsdpppxKpIxyuY=
 		</data>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode-Swift.h</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/AppleBikeKitSourceCode</key>
 		<data>
-		OsYch9VMxd+lvwl6HxU60XdAIA4=
+		SaZjPit7XshVyYzs2n0YQxUSzH0=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Headers/AppleBikeKitSourceCode-Swift.h</key>
 		<data>
@@ -163,11 +163,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			pkL6hQ9ytZQXne9qkXNoTkdjDNk=
+			vCMnuLf+r3RioPsdpppxKpIxyuY=
 			</data>
 			<key>hash2</key>
 			<data>
-			nl3FdZ/jULxS2MORXcLzCvW4zjx+jznUF1Xqjqw+mls=
+			uJymk6D7fO2d+CKngZT21s01l1tNN+jFP9fHS7QY8oQ=
 			</data>
 		</dict>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode-Swift.h</key>
@@ -293,11 +293,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			OsYch9VMxd+lvwl6HxU60XdAIA4=
+			SaZjPit7XshVyYzs2n0YQxUSzH0=
 			</data>
 			<key>hash2</key>
 			<data>
-			a1vUijIr+08zFHadhR196AC18DRjolDDRhYdlSjA3P0=
+			c3xkN5Ni5Z3PMFydD87arrc10tbGPkL3n7PQO87OLE0=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Headers/AppleBikeKitSourceCode-Swift.h</key>
