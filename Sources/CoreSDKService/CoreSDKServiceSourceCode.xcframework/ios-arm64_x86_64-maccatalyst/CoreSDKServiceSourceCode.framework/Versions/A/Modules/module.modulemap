@@ -1,0 +1,6 @@
+framework module CoreSDKServiceSourceCode {
+  umbrella header "CoreSDKServiceSourceCode.h"
+  export *
+
+  module * { export * }
+}
