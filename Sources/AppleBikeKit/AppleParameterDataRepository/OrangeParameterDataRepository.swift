@@ -7,7 +7,7 @@
 
 import Foundation
 
-import CoreSDKService
+import CoreSDKServiceSourceCode
 
 public class OrangeParameterDataRepository: BaseParameterDataRepository, ParameterDataSource {
     

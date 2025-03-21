@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-import CoreSDKService
+import CoreSDKServiceSourceCode
 
 /// 判斷 BMS 是否具有通訊功能的處理物件。
 final public class DisguiseBatteryHelper {

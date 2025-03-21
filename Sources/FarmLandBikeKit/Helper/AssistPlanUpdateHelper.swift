@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-import CoreSDKService
+import CoreSDKServiceSourceCode
 
 /// 助力等級的數據。
 public struct AssistLevelRepository: Equatable {

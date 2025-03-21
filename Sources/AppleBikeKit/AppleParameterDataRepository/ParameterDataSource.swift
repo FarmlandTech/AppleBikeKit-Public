@@ -8,7 +8,7 @@
 import Foundation
 
 import CoreSDKSourceCode
-import CoreSDKService
+import CoreSDKServiceSourceCode
 
 public protocol ParameterDataSource {
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-import CoreSDKService
+import CoreSDKServiceSourceCode
 import MapKit
 
 extension Array where Element == MileageRecord {

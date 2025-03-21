@@ -25,10 +25,9 @@ let package = Package(
         .binaryTarget(
             name: "CoreSDK",
             path: "Sources/CoreSDK/CoreSDKSourceCode.xcframework"),
-        .target(
+        .binaryTarget(
             name: "CoreSDKService",
-            dependencies: ["CoreSDK"],
-            path: "Sources/CoreSDKService"),
+            path: "Sources/CoreSDKService/CoreSDKServiceSourceCode.xcframework"),
         .binaryTarget(
             name: "CoreBLEService",
             path: "Sources/CoreBLEService/CoreBLEServiceSourceCode.xcframework"),
