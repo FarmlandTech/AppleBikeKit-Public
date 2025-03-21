@@ -10,7 +10,7 @@ import Combine
 import CoreBluetooth
 
 import CoreSDKSourceCode
-import CoreSDKService
+import CoreSDKServiceSourceCode
 import CoreBLEServiceSourceCode
 import AppleBikeKitSourceCode
 

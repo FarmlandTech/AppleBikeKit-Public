@@ -12,7 +12,7 @@ import MapKit
 import CoreBLEServiceSourceCode
 import AppleBikeKit
 import CoreSDKSourceCode
-import CoreSDKService
+import CoreSDKServiceSourceCode
 
 /// 農田應用程式開發套件，常見需求的集成。
 open class FarmLandBikeKit: AppleBikeKit {

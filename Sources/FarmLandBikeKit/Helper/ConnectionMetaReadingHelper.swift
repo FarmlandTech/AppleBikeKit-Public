@@ -10,7 +10,7 @@ import Combine
 import MapKit
 
 import CoreSDKSourceCode
-import CoreSDKService
+import CoreSDKServiceSourceCode
 
 /// 緩存關鍵參數的物件。
 public struct MetaParameter {

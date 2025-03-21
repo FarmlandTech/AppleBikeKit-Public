@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import MapKit
 
-import CoreSDKService
+import CoreSDKServiceSourceCode
 
 /// 存取距離單位(公制or英制)座標系統的處理物件。
 final public class MetricSystemManipulateHelper {

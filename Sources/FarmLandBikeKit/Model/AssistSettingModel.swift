@@ -5,7 +5,7 @@
 //  Created by Yves Tsai on 2025/2/26.
 //
 
-import CoreSDKService
+import CoreSDKServiceSourceCode
 
 public struct AssistSettingModel {
     public let lv1: AssistSettingModel.LevelSettingModel?
