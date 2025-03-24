@@ -1,0 +1,2196 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+// swift-module-flags: -target x86_64-apple-ios16-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name AppleBikeKitSourceCode
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
+@_exported import AppleBikeKitSourceCode
+import Combine
+import CoreBluetooth
+import CoreSDKSourceCode
+import Foundation
+import MapKit
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class AppleParameterDataRepository : AppleBikeKitSourceCode.BaseParameterDataRepository, AppleBikeKitSourceCode.ParameterDataSource {
+  final public let hmiBank0Parameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let hmiBank1Parameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let hmiBank2Parameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let himAccessControlParameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let controllerBank0Parameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let controllerBank1Parameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let controllerBank2Parameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let controllerBank3Parameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let assistanceConfigurationParameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let walkAssistanceParameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let pedalAssistanceParameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let batteryBank0Parameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let mileageRecordParameters: [AppleBikeKitSourceCode.ParameterData]
+  public var normalParameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var integratedParameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var parameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public func asAppleRepository() throws -> AppleBikeKitSourceCode.AppleParameterDataRepository
+  public func asOrangeRepository() throws -> AppleBikeKitSourceCode.OrangeParameterDataRepository
+  public func asCherryRepository() throws -> AppleBikeKitSourceCode.CherryParameterDataRepository
+  @objc deinit
+}
+@objc public class CoreBluetoothService : ObjectiveC.NSObject {
+  public var centralManager: CoreBluetooth.CBCentralManager {
+    get
+  }
+  public init(target: Swift.String)
+  public var stateSubject: Combine.CurrentValueSubject<CoreBluetooth.CBManagerState, Swift.Never> {
+    get
+  }
+  public var scanningSubject: Combine.CurrentValueSubject<Swift.Bool, Swift.Never> {
+    get
+  }
+  public var foundDevicesSubject: Combine.CurrentValueSubject<Swift.Array<(peripheral: AppleBikeKitSourceCode.BluetoothPeripheral, date: Foundation.Date)>, Swift.Never> {
+    get
+  }
+  public var peripheralSubject: Combine.CurrentValueSubject<AppleBikeKitSourceCode.CoreBluetoothService.PeripheralStatus, Swift.Never> {
+    get
+  }
+  public var characteristicsSubject: Combine.CurrentValueSubject<CoreBluetooth.CBPeripheral?, Swift.Never> {
+    get
+  }
+  public var didUpdateValueForCharacteristicsSubject: Combine.CurrentValueSubject<Swift.Result<CoreBluetooth.CBCharacteristic, any Swift.Error>?, Swift.Never> {
+    get
+  }
+  public var didWriteValueForCharacteristicsSubject: Combine.CurrentValueSubject<Swift.Result<CoreBluetooth.CBCharacteristic, any Swift.Error>?, Swift.Never> {
+    get
+  }
+  public var rssiSubject: Combine.CurrentValueSubject<Foundation.NSNumber?, Swift.Never> {
+    get
+  }
+  public func setTenant(_ target: Swift.String)
+  public func startScanning(serviceUUIDs: [CoreBluetooth.CBUUID]?) throws
+  public func stopScanning()
+  public func retrivePeripheral(withIdentifiers identifiers: [Foundation.UUID])
+  public func connect(peripheral: AppleBikeKitSourceCode.BluetoothPeripheral)
+  public func cancelConnect(peripheral: AppleBikeKitSourceCode.BluetoothPeripheral)
+  public func disconnect(peripheral: AppleBikeKitSourceCode.BluetoothPeripheral)
+  @objc deinit
+}
+extension AppleBikeKitSourceCode.CoreBluetoothService {
+  public enum PeripheralStatus {
+    case unknown
+    case didConnect(AppleBikeKitSourceCode.BluetoothPeripheral)
+    case didDisconnect(AppleBikeKitSourceCode.BluetoothPeripheral)
+    case prepared
+  }
+}
+extension AppleBikeKitSourceCode.CoreBluetoothService.PeripheralStatus : Swift.Equatable {
+  public static func == (lhs: AppleBikeKitSourceCode.CoreBluetoothService.PeripheralStatus, rhs: AppleBikeKitSourceCode.CoreBluetoothService.PeripheralStatus) -> Swift.Bool
+}
+extension AppleBikeKitSourceCode.CoreBluetoothService {
+  public struct CharacteristicWriteType {
+    public let write: Swift.String
+    public let writeWithoutResponse: Swift.String
+    public let notify: Swift.String
+    public init(_ target: Swift.String) throws
+  }
+}
+public protocol ParameterDataSource {
+  var hmiBank0Parameters: [AppleBikeKitSourceCode.ParameterData] { get }
+  var hmiBank1Parameters: [AppleBikeKitSourceCode.ParameterData] { get }
+  var hmiBank2Parameters: [AppleBikeKitSourceCode.ParameterData] { get }
+  var controllerBank0Parameters: [AppleBikeKitSourceCode.ParameterData] { get }
+  var controllerBank1Parameters: [AppleBikeKitSourceCode.ParameterData] { get }
+  var controllerBank2Parameters: [AppleBikeKitSourceCode.ParameterData] { get }
+  var batteryBank0Parameters: [AppleBikeKitSourceCode.ParameterData] { get }
+  var integratedParameters: [AppleBikeKitSourceCode.ParameterData] { get }
+  var parameters: [AppleBikeKitSourceCode.ParameterData] { get }
+  func asAppleRepository() throws -> AppleBikeKitSourceCode.AppleParameterDataRepository
+  func asOrangeRepository() throws -> AppleBikeKitSourceCode.OrangeParameterDataRepository
+  func asCherryRepository() throws -> AppleBikeKitSourceCode.CherryParameterDataRepository
+  func findParameterData(name: Swift.String, part: AppleBikeKitSourceCode.CommunicationPartType) throws -> AppleBikeKitSourceCode.ParameterData
+  func findParameterData(type: CoreSDKSourceCode.DeviceType_enum, bank: Swift.UInt8, address: Swift.UInt16, length: Swift.UInt16) throws -> AppleBikeKitSourceCode.ParameterData
+}
+extension AppleBikeKitSourceCode.ParameterDataSource {
+  public func findParameterData(name: Swift.String, part: AppleBikeKitSourceCode.CommunicationPartType) throws -> AppleBikeKitSourceCode.ParameterData
+  public func findParameterData(type: CoreSDKSourceCode.DeviceType_enum, bank: Swift.UInt8, address: Swift.UInt16, length: Swift.UInt16) throws -> AppleBikeKitSourceCode.ParameterData
+}
+public struct WritingRawData {
+  public let device: CoreSDKSourceCode.DeviceType_enum
+  public let bank: Swift.UInt8
+  public let address: Swift.UInt16
+  public let length: Swift.UInt16
+  public let state: Swift.Bool
+}
+#if compiler(>=5.3) && $NoncopyableGenerics
+extension Swift.UnsafeMutablePointer where Pointee == Swift.UInt8 {
+  public func convert2Bytes(length: Swift.Int) -> Swift.Array<Swift.UInt8>
+}
+#else
+extension Swift.UnsafeMutablePointer where Pointee == Swift.UInt8 {
+  public func convert2Bytes(length: Swift.Int) -> Swift.Array<Swift.UInt8>
+}
+#endif
+@_hasMissingDesignatedInitializers final public class SystemTimeUpdateHelper {
+  final public var stateSubject: Combine.CurrentValueSubject<Swift.Bool?, Swift.Never> {
+    get
+  }
+  @objc deinit
+  final public func doTask() throws
+}
+extension AppleBikeKitSourceCode.MetaParameter {
+  public protocol Part {
+    var dmid: Swift.String? { get }
+    var dsn: Swift.String? { get }
+    var fwAppVer: Swift.String? { get }
+    var hwVer: Swift.String? { get }
+  }
+  public struct OrangeMetaParameter {
+    public struct HMI : AppleBikeKitSourceCode.MetaParameter.Part {
+      public let dmid: Swift.String?
+      public let dsn: Swift.String?
+      public let fwAppVer: Swift.String?
+      public let hwVer: Swift.String?
+      public let ssn: Swift.String?
+      public let frameNumber: Swift.String?
+    }
+    public struct Controller : AppleBikeKitSourceCode.MetaParameter.Part {
+      public let dmid: Swift.String?
+      public let dsn: Swift.String?
+      public let fwAppVer: Swift.String?
+      public let hwVer: Swift.String?
+      public let maxAssistLv: Swift.Int?
+      public let spdMaxLimit: Swift.Int?
+      public let proTorqueDsn: Swift.String?
+    }
+    public struct BMS : AppleBikeKitSourceCode.MetaParameter.Part {
+      public let dmid: Swift.String?
+      public let dsn: Swift.String?
+      public let fwAppVer: Swift.String?
+      public let hwVer: Swift.String?
+    }
+    public let hmi: AppleBikeKitSourceCode.MetaParameter.OrangeMetaParameter.HMI
+    public let controller: AppleBikeKitSourceCode.MetaParameter.OrangeMetaParameter.Controller
+    public let bms: AppleBikeKitSourceCode.MetaParameter.OrangeMetaParameter.BMS
+    public init(hmi: AppleBikeKitSourceCode.MetaParameter.OrangeMetaParameter.HMI, controller: AppleBikeKitSourceCode.MetaParameter.OrangeMetaParameter.Controller, bms: AppleBikeKitSourceCode.MetaParameter.OrangeMetaParameter.BMS)
+  }
+}
+extension AppleBikeKitSourceCode.FarmLandBikeKit {
+  public func getOrangeMetaParameter() -> Combine.AnyPublisher<AppleBikeKitSourceCode.MetaParameter.OrangeMetaParameter, any Swift.Error>
+  public func getOrangeMetaHMIParameter() -> Combine.AnyPublisher<AppleBikeKitSourceCode.MetaParameter.OrangeMetaParameter.HMI, any Swift.Error>
+  public func getOrangeMetaBMSParameter() -> Combine.AnyPublisher<AppleBikeKitSourceCode.MetaParameter.OrangeMetaParameter.BMS, any Swift.Error>
+}
+public struct Version {
+  public enum Error : Swift.Error {
+    case digitOfVersionMismatch
+    case hmiFWAppVerIsNil, controllerFWAppVerIsNil, batteryFWAppVerIsNil
+    case ridiculous
+    case notSupport(AppleBikeKitSourceCode.Version.Part, Swift.String)
+  }
+  public enum Part {
+    case hmi, battery, controller
+    public static func == (a: AppleBikeKitSourceCode.Version.Part, b: AppleBikeKitSourceCode.Version.Part) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+extension AppleBikeKitSourceCode.FarmLandBikeKit {
+  public func checkVersion(part: AppleBikeKitSourceCode.Version.Part, version: Swift.String) throws
+}
+@objc final public class CoreSDKService : ObjectiveC.NSObject {
+  public enum ScreenLockState {
+    case lock
+    case unlock(Swift.String)
+  }
+  final public var commandPacketSubject: Combine.CurrentValueSubject<[Swift.UInt8], Swift.Never> {
+    get
+  }
+  final public var dataPacketSubject: Combine.CurrentValueSubject<[Swift.UInt8], Swift.Never> {
+    get
+  }
+  final public var deviceInfoSubject: Combine.CurrentValueSubject<(deviceInfo: (any AppleBikeKitSourceCode.DeviceInfo)?, timestamp: Foundation.Date), Swift.Never> {
+    get
+  }
+  final public var parameterNotifySubject: Combine.CurrentValueSubject<AppleBikeKitSourceCode.CoreSDKService.ParameterNotify?, Swift.Never> {
+    get
+  }
+  final public var readingRawDataSubject: Combine.CurrentValueSubject<AppleBikeKitSourceCode.ReadingRawData?, Swift.Never> {
+    get
+  }
+  final public var writingParameterStateSubject: Combine.CurrentValueSubject<AppleBikeKitSourceCode.WritingRawData?, Swift.Never> {
+    get
+  }
+  final public var restartingPartStateSubject: Combine.CurrentValueSubject<Swift.Bool?, Swift.Never> {
+    get
+  }
+  final public var resetTripInfoSubject: Combine.CurrentValueSubject<Swift.Bool?, Swift.Never> {
+    get
+  }
+  final public var resetingPartParameterStateSubject: Combine.CurrentValueSubject<AppleBikeKitSourceCode.ResetingRawData?, Swift.Never> {
+    get
+  }
+  final public var updatingSystemTimeStateSubject: Combine.CurrentValueSubject<Swift.Bool?, Swift.Never> {
+    get
+  }
+  final public var lightControlStateSubject: Combine.CurrentValueSubject<Swift.Bool?, Swift.Never> {
+    get
+  }
+  final public var upgradeFirmwareProgressSubject: Combine.CurrentValueSubject<AppleBikeKitSourceCode.UpgradingRawData?, Swift.Never> {
+    get
+  }
+  final public var upgradeFirmwareStateSubject: Combine.CurrentValueSubject<Swift.Int32?, Swift.Never> {
+    get
+  }
+  final public var getElockStateSubject: Combine.CurrentValueSubject<CoreSDKSourceCode.ELockStates, Swift.Never> {
+    get
+  }
+  final public var setELockStateSubject: Combine.CurrentValueSubject<Swift.Bool?, Swift.Never> {
+    get
+  }
+  final public var setAssistLevelStateSubject: Combine.CurrentValueSubject<Swift.Bool?, Swift.Never> {
+    get
+  }
+  final public var resetDeviceParameterStateSubject: Combine.CurrentValueSubject<Swift.Bool?, Swift.Never> {
+    get
+  }
+  final public var setBikeStatusStateSubject: Combine.CurrentValueSubject<Swift.Bool?, Swift.Never> {
+    get
+  }
+  final public var setManualTestStateSubject: Combine.CurrentValueSubject<Swift.Bool?, Swift.Never> {
+    get
+  }
+  final public var readBatteryInfoStateSubject: Combine.CurrentValueSubject<Swift.Bool?, Swift.Never> {
+    get
+  }
+  final public var resetRideConfigStateSubject: Combine.CurrentValueSubject<Swift.Bool?, Swift.Never> {
+    get
+  }
+  final public var resetMaintenanceMileageStateSubject: Combine.CurrentValueSubject<Swift.Bool?, Swift.Never> {
+    get
+  }
+  final public var setScreenAccessControlStateSubject: Combine.CurrentValueSubject<AppleBikeKitSourceCode.CoreSDKService.ScreenLockState?, any Swift.Error> {
+    get
+  }
+  final public var sdkVersion: Swift.String? {
+    get
+  }
+  final public func commandPacketIn(dataPacket: [Swift.UInt8])
+  final public func stopReadWriteChannel()
+  final public func startReadWriteChannel()
+  public init(target: Swift.String)
+  @objc deinit
+  final public func setTenant(_ target: Swift.String)
+  final public func read(parameter: AppleBikeKitSourceCode.ParameterData) throws
+  final public func write(parameter: AppleBikeKitSourceCode.ParameterData) throws
+  final public func restartPart(_ part: AppleBikeKitSourceCode.CommunicationPartType) throws
+  final public func resetTripInfo() throws
+  final public func resetPartParameter(part: AppleBikeKitSourceCode.CommunicationPartType, bank: Swift.Int) throws
+  final public func updateSystemTime() throws
+  final public func lightControl(part: CoreSDKSourceCode.light_control_parts = LIGHT_CONTROL_FRONT, isOn: Swift.Bool) throws
+  final public func upgradeFirmware(part: AppleBikeKitSourceCode.CommunicationPartType, data: Foundation.Data) throws
+  final public func getELock() throws
+  final public func setELock(release: Swift.Bool, unlocked: Swift.Bool) throws
+  final public func setAssistLevel(_ level: Swift.UInt8) throws
+  final public func configSystemTime() throws
+  final public func resetDeviceParameter() throws
+  final public func setBikeStatus(_ status: CoreSDKSourceCode.ORANGE_BIKE_STATUS_E = ORANGE_BIKE_STATUS_AUTO_TEST) throws
+  final public func setManualTest(type: CoreSDKSourceCode.ORANGE_MANUAL_TEST_TYPE_E) throws
+  final public func readBatteryInfo() throws
+  final public func resetBikeSettings(_ type: Swift.UInt8) throws
+  final public func setScreenAccessControl(_ accessControl: AppleBikeKitSourceCode.CoreSDKService.ScreenLockState) throws
+  final public func resetScreenAccessControl() throws
+}
+extension AppleBikeKitSourceCode.CoreSDKService {
+  public enum Error : Swift.Error {
+    case readParameterFail(AppleBikeKitSourceCode.ParameterData)
+    case writeParameterWithUnexpectedType
+    case writeParameterWithNoValue
+    case writeParameterWithWrongType
+    case writeTextOutOfRange
+    case writeParameterFail(AppleBikeKitSourceCode.ParameterData)
+    case getNoDividedParameters
+    case restartPartFail(AppleBikeKitSourceCode.CommunicationPartType)
+    case resetTripInfoFail
+    case resetPartParameterFail(AppleBikeKitSourceCode.CommunicationPartType, Swift.Int)
+    case updateSystemTimeFail
+    case lightControlFail
+    case upgradeFirmwareFail(AppleBikeKitSourceCode.CommunicationPartType)
+    case getELockFail
+    case setELockFail
+    case setAssistLevelFail
+    case castingDelegateFunctionFail
+    case resetDeviceParameterFail
+    case setBikeStatusFail
+    case setManualTestFail
+    case readBatteryInfoFail
+    case resetRideConfigFail
+    case resetMaintenanceMileageFail
+    case writeParameterWithInvalidSize
+    case setHMIAccessControlFail
+    case resetScreenAccessControlFail
+  }
+}
+extension AppleBikeKitSourceCode.CoreSDKService {
+  public struct ParameterNotify {
+    public let type: CoreSDKSourceCode.SDKDeviceType_e
+    public let bank: Swift.UInt8
+    public let address: Swift.UInt16
+    public let length: Swift.UInt16
+  }
+}
+@_hasMissingDesignatedInitializers final public class DisguiseBatteryHelper {
+  public enum ReadingResult<T> {
+    case prepared
+    case `try`(Swift.Int)
+    case done(T)
+  }
+  public enum Error : Swift.Error {
+    case parameterNotFound
+    case isReadRecursively
+    public static func == (a: AppleBikeKitSourceCode.DisguiseBatteryHelper.Error, b: AppleBikeKitSourceCode.DisguiseBatteryHelper.Error) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  final public var readingSubject: Combine.CurrentValueSubject<AppleBikeKitSourceCode.DisguiseBatteryHelper.ReadingResult<Swift.Bool?>, Swift.Never> {
+    get
+  }
+  final public func read() throws
+  @objc deinit
+}
+extension AppleBikeKitSourceCode.FarmLandBikeKit {
+  public struct BikeSettingModel {
+    public let meterSleepTime: Swift.Int?
+    public let dispMaintMarkSw: Swift.Int?
+    public let dispBrightness: Swift.Int?
+    public var units: MapKit.MKDistanceFormatter.Units? {
+      get
+    }
+    public var nextOdoToMaintain: Swift.Int? {
+      get
+    }
+    public init(meterSleepTime: Swift.Int? = nil, dispUnitSw: MapKit.MKDistanceFormatter.Units? = nil, dispMaintMarkSw: Swift.Bool? = nil, dispBrightness: Swift.Int? = nil)
+  }
+}
+public struct AssistSettingModel {
+  public let lv1: AppleBikeKitSourceCode.AssistSettingModel.LevelSettingModel?
+  public let lv2: AppleBikeKitSourceCode.AssistSettingModel.LevelSettingModel?
+  public let lv3: AppleBikeKitSourceCode.AssistSettingModel.LevelSettingModel?
+  public let lv4: AppleBikeKitSourceCode.AssistSettingModel.LevelSettingModel?
+  public let lv5: AppleBikeKitSourceCode.AssistSettingModel.LevelSettingModel?
+  public init(lv1: AppleBikeKitSourceCode.AssistSettingModel.LevelSettingModel? = nil, lv2: AppleBikeKitSourceCode.AssistSettingModel.LevelSettingModel? = nil, lv3: AppleBikeKitSourceCode.AssistSettingModel.LevelSettingModel? = nil, lv4: AppleBikeKitSourceCode.AssistSettingModel.LevelSettingModel? = nil, lv5: AppleBikeKitSourceCode.AssistSettingModel.LevelSettingModel? = nil)
+}
+extension AppleBikeKitSourceCode.AssistSettingModel {
+  public struct LevelSettingModel {
+    public let ratio: Swift.Double?
+    public let maxSpeed: Swift.Double?
+    public init(ratio: Swift.Double?, maxSpeed: Swift.Double?)
+  }
+}
+extension AppleBikeKitSourceCode.FarmLandBikeKit {
+  public enum Time {
+    case deactivate
+    case activate(Swift.Int)
+  }
+  public enum Unit {
+    case metricSystem
+    case imperialSystem
+    public static func == (a: AppleBikeKitSourceCode.FarmLandBikeKit.Unit, b: AppleBikeKitSourceCode.FarmLandBikeKit.Unit) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum Part {
+    case chg
+    case motor
+    case torque
+    case frontLight
+    case rearLight
+    case throttle
+    public static func == (a: AppleBikeKitSourceCode.FarmLandBikeKit.Part, b: AppleBikeKitSourceCode.FarmLandBikeKit.Part) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public func orangeDeviceInfoPublisher(throttle milliseconds: Swift.Int = 0) -> Combine.AnyPublisher<CoreSDKSourceCode.Orange_Info_st, any Swift.Error>
+  public func getAutoBrightnessEnabledMark() throws
+  public func setAutoBrightnessEnabledMark(_ isEnable: Swift.Bool) throws
+  public func getCurrentBrightness() throws
+  public func setCurrentBrightness(percentage: Swift.Int) throws
+  public func getSleepTime() throws
+  public func setSleepTime(_ time: AppleBikeKitSourceCode.FarmLandBikeKit.Time) throws
+  public func getMaintenanceMileage() throws
+  public func getMaintenanceMileagePublisher() throws -> Combine.AnyPublisher<Swift.Result<Swift.Int, any Swift.Error>, Swift.Never>
+  @available(*, deprecated, message: "別用！壞了不負責！")
+  public func setMaintenanceMileage(_ handler: ((Swift.Int?, (any Swift.Error)?) -> Swift.Void)? = nil) throws
+  public func getDistanceMeasurementUnit() throws
+  public func setDistanceMeasurementUnit(_ unit: AppleBikeKitSourceCode.FarmLandBikeKit.Unit) throws
+  public func getMaintainMark() throws
+  public func setMaintainMark(_ isDisplay: Swift.Bool) throws
+  public func getHMIBank2() throws -> Combine.AnyPublisher<AppleBikeKitSourceCode.FarmLandBikeKit.TripData, any Swift.Error>
+  public func getMaxAssistLevel() throws
+  public func getAssistRatio(_ level: Swift.Int) throws
+  public func getAssistSpeedLimitPublusher() throws -> Combine.AnyPublisher<(lv1: Swift.Double?, lv2: Swift.Double?, lv3: Swift.Double?, lv4: Swift.Double?, lv5: Swift.Double?, lv6: Swift.Double?, lv7: Swift.Double?, lv8: Swift.Double?, lv9: Swift.Double?), any Swift.Error>
+  public func getTotalODO() throws
+  public func getTotalTime() throws
+  public func getPartDSN(_ part: AppleBikeKitSourceCode.FarmLandBikeKit.Part) throws
+}
+extension AppleBikeKitSourceCode.FarmLandBikeKit {
+  public func configSystemTime() throws
+  public func resetDeviceParameter() throws
+  public func setBikeStatus(_ status: CoreSDKSourceCode.ORANGE_BIKE_STATUS_E = ORANGE_BIKE_STATUS_AUTO_TEST) throws
+  public func setManualTest(type: CoreSDKSourceCode.ORANGE_MANUAL_TEST_TYPE_E) throws
+  public func readBatteryInfo() throws
+  public func resetBikeSettings(type: Swift.UInt8) throws
+  public func autoDiagnose() -> Combine.AnyPublisher<CoreSDKSourceCode.Orange_Info_st, any Swift.Error>
+  public func resetAutoDiagnose()
+  public func setBikeStatusWhenStopCycling() -> Combine.AnyPublisher<Swift.UInt8, any Swift.Error>
+}
+extension AppleBikeKitSourceCode.FarmLandBikeKit {
+  public struct TripData {
+    public var totDist: Swift.Int? {
+      get
+    }
+    public var totTime: Swift.Int? {
+      get
+    }
+    public var avgSpd: Swift.Int? {
+      get
+    }
+    public var maxSpd: Swift.Int? {
+      get
+    }
+    public var avgCur: Swift.Int? {
+      get
+    }
+    public var maxCur: Swift.Int? {
+      get
+    }
+    public var avgCadSpd: Swift.Int? {
+      get
+    }
+    public var maxCadSpd: Swift.Int? {
+      get
+    }
+    public var avgTorq: Swift.Int? {
+      get
+    }
+    public var maxTorq: Swift.Int? {
+      get
+    }
+    public var avgPedalWatt: Swift.Int? {
+      get
+    }
+    public var maxPedalWatt: Swift.Int? {
+      get
+    }
+    public var avgMotorWatt: Swift.Int? {
+      get
+    }
+    public var maxMotorWatt: Swift.Int? {
+      get
+    }
+    public var cer: Swift.Int? {
+      get
+    }
+    public var calorie: Swift.Int? {
+      get
+    }
+    public var level0Time: Swift.Int? {
+      get
+    }
+    public var level1Time: Swift.Int? {
+      get
+    }
+    public var level2Time: Swift.Int? {
+      get
+    }
+    public var level3Time: Swift.Int? {
+      get
+    }
+    public var level4Time: Swift.Int? {
+      get
+    }
+    public var level5Time: Swift.Int? {
+      get
+    }
+    public var level6Time: Swift.Int? {
+      get
+    }
+    public var level7Time: Swift.Int? {
+      get
+    }
+    public var level8Time: Swift.Int? {
+      get
+    }
+    public var level9Time: Swift.Int? {
+      get
+    }
+    public var isDataLoaded: Swift.Bool {
+      get
+    }
+    public var levelTimes: [Swift.Int?] {
+      get
+    }
+    public init(totDist: Swift.Int? = nil, totTime: Swift.Int? = nil, avgSpd: Swift.Int? = nil, maxSpd: Swift.Int? = nil, avgCur: Swift.Int? = nil, maxCur: Swift.Int? = nil, avgCadSpd: Swift.Int? = nil, maxCadSpd: Swift.Int? = nil, avgTorq: Swift.Int? = nil, maxTorq: Swift.Int? = nil, avgPedalWatt: Swift.Int? = nil, maxPedalWatt: Swift.Int? = nil, avgMotorWatt: Swift.Int? = nil, maxMotorWatt: Swift.Int? = nil, cer: Swift.Int? = nil, calorie: Swift.Int? = nil, level0Time: Swift.Int? = nil, level1Time: Swift.Int? = nil, level2Time: Swift.Int? = nil, level3Time: Swift.Int? = nil, level4Time: Swift.Int? = nil, level5Time: Swift.Int? = nil, level6Time: Swift.Int? = nil, level7Time: Swift.Int? = nil, level8Time: Swift.Int? = nil, level9Time: Swift.Int? = nil)
+  }
+}
+public struct BluetoothPeripheral {
+  public let device: CoreBluetooth.CBPeripheral
+  public var rssi: Swift.Float?
+  public var deviceName: Swift.String?
+  public var localName: Swift.String?
+  public var uuid: Swift.String?
+  public var manufacturerInfo: Swift.String?
+  public var address: Swift.String {
+    get
+  }
+  public func writeValue(_ data: Foundation.Data, for characteristic: CoreBluetooth.CBCharacteristic)
+}
+public struct MileageRecord : Swift.Identifiable {
+  public enum Error : Swift.Error {
+    case numberOfRawDataShouldBeEven
+    case accumulatedODOMisSequence(AppleBikeKitSourceCode.MileageRecord, AppleBikeKitSourceCode.MileageRecord)
+  }
+  public let id: Foundation.UUID
+  public let name: Swift.String
+  public let date: Foundation.Date
+  public let odograph: Swift.Int
+  public var dateContent: Swift.String {
+    get
+  }
+  public typealias ID = Foundation.UUID
+}
+extension AppleBikeKitSourceCode.CoreBluetoothService : CoreBluetooth.CBPeripheralDelegate {
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didDiscoverServices error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didDiscoverCharacteristicsFor service: CoreBluetooth.CBService, error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didDiscoverDescriptorsFor characteristic: CoreBluetooth.CBCharacteristic, error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didUpdateValueFor characteristic: CoreBluetooth.CBCharacteristic, error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didUpdateNotificationStateFor characteristic: CoreBluetooth.CBCharacteristic, error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didWriteValueFor characteristic: CoreBluetooth.CBCharacteristic, error: (any Swift.Error)?)
+  @objc dynamic public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didReadRSSI RSSI: Foundation.NSNumber, error: (any Swift.Error)?)
+}
+public class ParameterData {
+  public var name: Swift.String {
+    get
+  }
+  public var partType: AppleBikeKitSourceCode.CommunicationPartType {
+    get
+  }
+  public var bank: Swift.UInt8 {
+    get
+  }
+  public var address: Swift.UInt16 {
+    get
+  }
+  public var length: Swift.UInt16 {
+    get
+  }
+  public var type: Any {
+    get
+  }
+  public var value: Any?
+  public var subject: Combine.CurrentValueSubject<Any?, Swift.Never> {
+    get
+  }
+  public var dividedParameters: [AppleBikeKitSourceCode.ParameterData]? {
+    get
+  }
+  public init(name: Swift.String, partType: AppleBikeKitSourceCode.CommunicationPartType, bank: Swift.UInt8, address: Swift.UInt16, length: Swift.UInt16, type: Any, value: Any? = nil, dividedParameters: [AppleBikeKitSourceCode.ParameterData]? = nil)
+  @objc deinit
+}
+extension AppleBikeKitSourceCode.ParameterData {
+  public struct Apple {
+    public enum Name : Swift.String {
+      case INTEGRATED_HMI_BANK0
+      case INTEGRATED_HMI_BANK1
+      case INTEGRATED_HMI_BANK2
+      case INTEGRATED_MILEAGE_RECORD
+      case INTEGRATED_HMI_ACCESS
+      case INTEGRATED_CONTROLLER_BANK0
+      case INTEGRATED_ASSISTANCE_CONFIGURATION
+      case INTEGRATED_WALK_ASSISTANCE
+      case INTEGRATED_LV1_AST_RATIO_AND_SPD
+      case INTEGRATED_LV2_AST_RATIO_AND_SPD
+      case INTEGRATED_LV3_AST_RATIO_AND_SPD
+      case INTEGRATED_LV4_AST_RATIO_AND_SPD
+      case INTEGRATED_LV5_AST_RATIO_AND_SPD
+      case INTEGRATED_PEDAL_ASSISTANCE
+      case INTEGRATED_BATTERY_BANK0
+      case HmiSMID
+      case HmiDMID
+      case HmiSSN
+      case HmiDSN
+      case HmiFrame
+      case HmiSaleDate
+      case HmiFWAppVer
+      case HmiFWBtlVer
+      case HmiFWSdkVer
+      case HmiHWVer
+      case HmiParaVer
+      case HmiProtocolVer
+      case HmiBtDevName
+      case HmiSvrToken
+      case REC_MAINT_DIST
+      case METER_SLEEP_TIME
+      case METER_MAINT_DIST
+      case DISP_MAINT_MARK_SW
+      case DISP_UNIT_SW
+      case DISP_BRIGHTNESS
+      case HmiPasswordCode1
+      case HmiPasswordCode2
+      case HmiPasswordCode3
+      case HmiPasswordCode4
+      case HmiErrorLimit
+      case HmiErrorCount
+      case ControllerSMID
+      case ControllerDMID
+      case ControllerSSN
+      case ControllerDSN
+      case ControllerFrame
+      case ControllerSaleDate
+      case ControllerFWAppVer
+      case ControllerFWBtlVer
+      case ControllerFWSdkVer
+      case ControllerHWVer
+      case ControllerParaVer
+      case ControllerProtocolVer
+      case ControllerBtDevName
+      case DISGUISE_BATT
+      case INFO_ODO
+      case Controller_SUP_ASSIST
+      case Controller_PEDAL_AST_MODE
+      case Controller_SUP_MAX_AST_SPD
+      case Controller_THROTTLE_AST_EN_MODE
+      case Controller_THROTTLE_AST_MODE
+      case Controller_W_AST_SPD
+      case Controller_W_AST_MAX_CUR
+      case Controller_W_AST_CTRL_FREQ
+      case Controller_W_AST_ACC_DEC
+      case Controller_W_AST_OCP_DEC
+      case Controller_W_AST_STOP_DEC
+      case Controller_P_STR_MAX_DEG
+      case Controller_P_STR_MIN_DEG
+      case Controller_P_STR_MAX_TORQ
+      case Controller_P_STR_MIN_TORQ
+      case Controller_P_STR_STR_SPD
+      case Controller_P_STR_END_SPD
+      case Controller_P_STOP_MAX_CAD_SPD
+      case Controller_P_STOP_MIN_CAD_SPD
+      case Controller_P_STOP_STR_SPD
+      case Controller_P_STOP_END_SPD
+      case Controller_P_AST_LV1_STR_RANG
+      case Controller_P_LV1_MAX_AST_RATIO
+      case Controller_P_LV1_MIN_AST_RATIO
+      case Controller_P_LV1_AST_RATIO_STR_SPD
+      case Controller_P_LV1_AST_RATIO_END_SPD
+      case Controller_P_LV2_MAX_AST_RATIO
+      case Controller_P_LV2_MIN_AST_RATIO
+      case Controller_P_LV2_AST_RATIO_STR_SPD
+      case Controller_P_LV2_AST_RATIO_END_SPD
+      case Controller_P_LV3_MAX_AST_RATIO
+      case Controller_P_LV3_MIN_AST_RATIO
+      case Controller_P_LV3_AST_RATIO_STR_SPD
+      case Controller_P_LV3_AST_RATIO_END_SPD
+      case Controller_P_LV4_MAX_AST_RATIO
+      case Controller_P_LV4_MIN_AST_RATIO
+      case Controller_P_LV4_AST_RATIO_STR_SPD
+      case Controller_P_LV4_AST_RATIO_END_SPD
+      case Controller_P_LV5_MAX_AST_RATIO
+      case Controller_P_LV5_MIN_AST_RATIO
+      case Controller_P_LV5_AST_RATIO_STR_SPD
+      case Controller_P_LV5_AST_RATIO_END_SPD
+      case Controller_P_AST_CTRL_FREQ
+      case Controller_P_AST_LV1_STR_ACC
+      case Controller_P_AST_LV1_STR_DEC
+      case Controller_P_AST_LV1_MAX_CUR
+      case Controller_P_AST_LV1_ACC
+      case Controller_P_AST_LV1_DEC
+      case Controller_P_AST_LV2_MAX_CUR
+      case Controller_P_AST_LV2_ACC
+      case Controller_P_AST_LV2_DEC
+      case Controller_P_AST_LV3_MAX_CUR
+      case Controller_P_AST_LV3_ACC
+      case Controller_P_AST_LV3_DEC
+      case Controller_P_AST_LV4_MAX_CUR
+      case Controller_P_AST_LV4_ACC
+      case Controller_P_AST_LV4_DEC
+      case Controller_P_AST_LV5_MAX_CUR
+      case Controller_P_AST_LV5_ACC
+      case Controller_P_AST_LV5_DEC
+      case Controller_P_AST_OSP_DEC
+      case Controller_P_AST_OCP_DEC
+      case Controller_P_AST_STOP_DEC
+      case Controller_P_AST_LV2_STR_RANG
+      case Controller_P_AST_LV3_STR_RANG
+      case Controller_P_AST_LV4_STR_RANG
+      case Controller_P_AST_LV5_STR_RANG
+      case Controller_P_AST_LV2_STR_ACC
+      case Controller_P_AST_LV2_STR_DEC
+      case Controller_P_AST_LV3_STR_ACC
+      case Controller_P_AST_LV3_STR_DEC
+      case Controller_P_AST_LV4_STR_ACC
+      case Controller_P_AST_LV4_STR_DEC
+      case Controller_P_AST_LV5_STR_ACC
+      case Controller_P_AST_LV5_STR_DEC
+      case Controller_P_AST_BRAKE_DEC
+      case Controller_P_AST_LIM_CUR_DEC
+      case SYS_PART_EN
+      case BACKUP_ODO
+      case BACKUP_LAST_TIME_ODO
+      case BattSMID
+      case BattDMID
+      case BattSSN
+      case BattDSN
+      case BattFrame
+      case BattSaleDate
+      case BattFWAppVer
+      case BattFWBtlVer
+      case BattFWSdkVer
+      case BattHWVer
+      case BattParaVer
+      case BattProtocolVer
+      case BattBtDevName
+      case UNIX_TIME_DAY1
+      case RECORD_ODO_DAY1
+      case UNIX_TIME_DAY2
+      case RECORD_ODO_DAY2
+      case UNIX_TIME_DAY3
+      case RECORD_ODO_DAY3
+      case UNIX_TIME_DAY4
+      case RECORD_ODO_DAY4
+      case UNIX_TIME_DAY5
+      case RECORD_ODO_DAY5
+      case UNIX_TIME_DAY6
+      case RECORD_ODO_DAY6
+      case UNIX_TIME_DAY7
+      case RECORD_ODO_DAY7
+      case UNIX_TIME_DAY8
+      case RECORD_ODO_DAY8
+      case UNIX_TIME_DAY9
+      case RECORD_ODO_DAY9
+      case UNIX_TIME_DAY10
+      case RECORD_ODO_DAY10
+      case UNIX_TIME_DAY11
+      case RECORD_ODO_DAY11
+      case UNIX_TIME_DAY12
+      case RECORD_ODO_DAY12
+      case UNIX_TIME_DAY13
+      case RECORD_ODO_DAY13
+      case UNIX_TIME_DAY14
+      case RECORD_ODO_DAY14
+      case UNIX_TIME_DAY15
+      case RECORD_ODO_DAY15
+      case UNIX_TIME_DAY16
+      case RECORD_ODO_DAY16
+      case UNIX_TIME_DAY17
+      case RECORD_ODO_DAY17
+      case UNIX_TIME_DAY18
+      case RECORD_ODO_DAY18
+      case UNIX_TIME_DAY19
+      case RECORD_ODO_DAY19
+      case UNIX_TIME_DAY20
+      case RECORD_ODO_DAY20
+      case UNIX_TIME_DAY21
+      case RECORD_ODO_DAY21
+      case UNIX_TIME_DAY22
+      case RECORD_ODO_DAY22
+      case UNIX_TIME_DAY23
+      case RECORD_ODO_DAY23
+      case UNIX_TIME_DAY24
+      case RECORD_ODO_DAY24
+      case UNIX_TIME_DAY25
+      case RECORD_ODO_DAY25
+      case UNIX_TIME_DAY26
+      case RECORD_ODO_DAY26
+      case UNIX_TIME_DAY27
+      case RECORD_ODO_DAY27
+      case UNIX_TIME_DAY28
+      case RECORD_ODO_DAY28
+      case UNIX_TIME_DAY29
+      case RECORD_ODO_DAY29
+      case UNIX_TIME_DAY30
+      case RECORD_ODO_DAY30
+      case UNIX_TIME_DAY31
+      case RECORD_ODO_DAY31
+      case LV1_MAX_AST_RATIO
+      case LV1_MIN_AST_RATIO
+      case LV1_AST_RATIO_STR_SPD
+      case LV1_AST_RATIO_END_SPD
+      case LV2_MAX_AST_RATIO
+      case LV2_MIN_AST_RATIO
+      case LV2_AST_RATIO_STR_SPD
+      case LV2_AST_RATIO_END_SPD
+      case LV3_MAX_AST_RATIO
+      case LV3_MIN_AST_RATIO
+      case LV3_AST_RATIO_STR_SPD
+      case LV3_AST_RATIO_END_SPD
+      public init?(rawValue: Swift.String)
+      public typealias RawValue = Swift.String
+      public var rawValue: Swift.String {
+        get
+      }
+    }
+  }
+}
+extension AppleBikeKitSourceCode.ParameterData {
+  public struct Orange {
+    public struct HMI {
+      public enum Bank0 : Swift.String {
+        case PRO_SMID
+        case PRO_DMID
+        case PRO_SSN
+        case PRO_DSN
+        case PRO_FRAME
+        case PRO_SALE_DATE
+        case PRO_FW_APP_VER
+        case PRO_FW_BTL_VER
+        case PRO_FW_SDK_VER
+        case PRO_HW_VER
+        case PRO_PARA_VER
+        case PRO_PROTOCOL_VER
+        case PRO_BT_DEV_NAME
+        case PRO_MANUFACTURE_DATE
+        case PRO_CORE_SDK_VER
+        case PRO_CUST_PART_NUM
+        case PRO_CUST_PART_NAME
+        case PRO_CUST_PROJ_CODE
+        case PRO_END_CUST
+        case PRO_SUPPLIER
+        case PRO_CUST_HW_VER
+        case PRO_PROG_SEC
+        public init?(rawValue: Swift.String)
+        public typealias RawValue = Swift.String
+        public var rawValue: Swift.String {
+          get
+        }
+      }
+      public enum Bank1 : Swift.String {
+        case RIDE_LV0_TOT_DIST
+        case RIDE_LV0_TOT_TIME
+        case RIDE_LV0_AVG_SPD
+        case RIDE_LV0_MAX_SPD
+        case RIDE_LV1_TOT_DIST
+        case RIDE_LV1_TOT_TIME
+        case RIDE_LV1_AVG_SPD
+        case RIDE_LV1_MAX_SPD
+        case RIDE_LV2_TOT_DIST
+        case RIDE_LV2_TOT_TIME
+        case RIDE_LV2_AVG_SPD
+        case RIDE_LV2_MAX_SPD
+        case RIDE_LV3_TOT_DIST
+        case RIDE_LV3_TOT_TIME
+        case RIDE_LV3_AVG_SPD
+        case RIDE_LV3_MAX_SPD
+        case RIDE_LV4_TOT_DIST
+        case RIDE_LV4_TOT_TIME
+        case RIDE_LV4_AVG_SPD
+        case RIDE_LV4_MAX_SPD
+        case RIDE_LV5_TOT_DIST
+        case RIDE_LV5_TOT_TIME
+        case RIDE_LV5_AVG_SPD
+        case RIDE_LV5_MAX_SPD
+        case RIDE_LV6_TOT_DIST
+        case RIDE_LV6_TOT_TIME
+        case RIDE_LV6_AVG_SPD
+        case RIDE_LV6_MAX_SPD
+        case RIDE_LV7_TOT_DIST
+        case RIDE_LV7_TOT_TIME
+        case RIDE_LV7_AVG_SPD
+        case RIDE_LV7_MAX_SPD
+        case RIDE_LV8_TOT_DIST
+        case RIDE_LV8_TOT_TIME
+        case RIDE_LV8_AVG_SPD
+        case RIDE_LV8_MAX_SPD
+        case RIDE_LV9_TOT_DIST
+        case RIDE_LV9_TOT_TIME
+        case RIDE_LV9_AVG_SPD
+        case RIDE_LV9_MAX_SPD
+        case RIDE_LEVEL_ALL
+        case KEY_POWER_CNT
+        case KEY_UP_CNT
+        case KEY_DOWN_CNT
+        case KEY_WALK_CNT
+        case KEY_LIGHT_CNT
+        case KEY_MODE_CNT
+        case REC_LT_STATE
+        case REC_MAINT_DIST
+        case METER_SLEEP_TIME
+        case METER_BRIGHT_DAYTIME
+        case METER_BRIGHT_NIGHT
+        case METER_INIT_LIGHT
+        case METER_MAINT_DIST
+        case METER_BRIGHT_AUTO_EN
+        case METER_BRIGHT_NOW
+        public init?(rawValue: Swift.String)
+        public typealias RawValue = Swift.String
+        public var rawValue: Swift.String {
+          get
+        }
+      }
+      public enum Bank2 : Swift.String {
+        case TRIP_TOT_DIST
+        case TRIP_TOT_TIME
+        case TRIP_AVG_SPD
+        case TRIP_MAX_SPD
+        case TRIP_AVG_CUR
+        case TRIP_MAX_CUR
+        case TRIP_AVG_CAD_SPD
+        case TRIP_MAX_CAD_SPD
+        case TRIP_AVG_TORQ
+        case TRIP_MAX_TORQ
+        case TRIP_AVG_PEDAL_WATT
+        case TRIP_MAX_PEDAL_WATT
+        case TRIP_AVG_MOTOR_WATT
+        case TRIP_MAX_MOTOR_WATT
+        case TRIP_CER
+        case TRIP_CALORIE
+        case TRIP_LEVEL0_TIME
+        case TRIP_LEVEL1_TIME
+        case TRIP_LEVEL2_TIME
+        case TRIP_LEVEL3_TIME
+        case TRIP_LEVEL4_TIME
+        case TRIP_LEVEL5_TIME
+        case TRIP_LEVEL6_TIME
+        case TRIP_LEVEL7_TIME
+        case TRIP_LEVEL8_TIME
+        case TRIP_LEVEL9_TIME
+        case DISP_MAINT_MARK_SW
+        case DISP_RANGE_SW
+        case DISP_UNIT_SW
+        public init?(rawValue: Swift.String)
+        public typealias RawValue = Swift.String
+        public var rawValue: Swift.String {
+          get
+        }
+      }
+      public enum Bank3 : Swift.String {
+        case FW_PARA_VER
+        public init?(rawValue: Swift.String)
+        public typealias RawValue = Swift.String
+        public var rawValue: Swift.String {
+          get
+        }
+      }
+    }
+    public struct Controller {
+      public enum Bank0 : Swift.String {
+        case PRO_SMID
+        case PRO_DMID
+        case PRO_SSN
+        case PRO_DSN
+        case PRO_FRAME
+        case PRO_SALE_DATE
+        case PRO_FW_APP_VER
+        case PRO_FW_BTL_VER
+        case PRO_FW_SDK_VER
+        case PRO_HW_VER
+        case PRO_PARA_VER
+        case PRO_PROTOCOL_VER
+        case PRO_BT_DEV_NAME
+        case PRO_MANUFACTURE_DATE
+        case PRO_CORE_SDK_VER
+        case PRO_CUST_PART_NUM
+        case PRO_CUST_PART_NAME
+        case PRO_CUST_PROJ_CODE
+        case PRO_END_CUST
+        case PRO_SUPPLIER
+        case PRO_CUST_HW_VER
+        case PRO_PROG_SEC
+        public init?(rawValue: Swift.String)
+        public typealias RawValue = Swift.String
+        public var rawValue: Swift.String {
+          get
+        }
+      }
+      public enum Bank1 : Swift.String {
+        case MAX_ASSIST_LV
+        case SPD_MAG_NUM
+        case CRUISE_ENABLE
+        case SPD_MAX_LIMIT
+        case BUSCUR_MAX_MOTOR
+        case TH_LV_ENABLE
+        case SPD_LIMIT_LV_ENABLE
+        case CUR_LIMIT_LV_ENABLE
+        case RADIO_LV_ENABLE
+        case SOFTSTART_LV_ENABLE
+        case TS_UP_FILTER_DELAY
+        case TS_DOWN_FILTER_DELAY
+        case MOTORPOWER_TS_WEAK
+        case ASSIST_AC_SLOPE
+        case ASSIST_DE_SLOPE
+        case LV1_ASSIST_MAX_CUR
+        case LV1_ASSIST_RADIO
+        case LV1_ASSIST_MAX_SPD
+        case LV1_ASSIST_STA_LV
+        case LV2_ASSIST_MAX_CUR
+        case LV2_ASSIST_RADIO
+        case LV2_ASSIST_MAX_SPD
+        case LV2_ASSIST_STA_LV
+        case LV3_ASSIST_MAX_CUR
+        case LV3_ASSIST_RADIO
+        case LV3_ASSIST_MAX_SPD
+        case LV3_ASSIST_STA_LV
+        case LV4_ASSIST_MAX_CUR
+        case LV4_ASSIST_RADIO
+        case LV4_ASSIST_MAX_SPD
+        case LV4_ASSIST_STA_LV
+        case LV5_ASSIST_MAX_CUR
+        case LV5_ASSIST_RADIO
+        case LV5_ASSIST_MAX_SPD
+        case LV5_ASSIST_STA_LV
+        case LV6_ASSIST_MAX_CUR
+        case LV6_ASSIST_RADIO
+        case LV6_ASSIST_MAX_SPD
+        case LV6_ASSIST_STA_LV
+        case LV7_ASSIST_MAX_CUR
+        case LV7_ASSIST_RADIO
+        case LV7_ASSIST_MAX_SPD
+        case LV7_ASSIST_STA_LV
+        case LV8_ASSIST_MAX_CUR
+        case LV8_ASSIST_RADIO
+        case LV8_ASSIST_MAX_SPD
+        case LV8_ASSIST_STA_LV
+        case LV9_ASSIST_MAX_CUR
+        case LV9_ASSIST_RADIO
+        case LV9_ASSIST_MAX_SPD
+        case LV9_ASSIST_STA_LV
+        case STA_SIGNAL_NUM
+        case TS_STA_MODE
+        case TS_ZERO_FIND
+        case TS_ZERO_VAL
+        case TS_STA_ADD_VAL
+        case STA_SPD_COMP_MAX
+        case STA_SPD_COMP_MIN
+        case PEDAL_END_MOTOR_DELAY
+        case ASSIST_BRAKE_DE_SLOPE
+        case WL_CIRCUMFERENCE
+        case BAT_LOW_MIN_POWER
+        case GEAR_RADIO_ENABLE
+        case FRONT_FLUTED_DISC_STAGE
+        case LV1_FRONT_FLUTED_NUM
+        case LV2_FRONT_FLUTED_NUM
+        case LV3_FRONT_FLUTED_NUM
+        case LV4_FRONT_FLUTED_NUM
+        case FREEWHEEL_STAGE
+        case LV1_FREEWHEEL_NUM
+        case LV2_FREEWHEEL_NUM
+        case LV3_FREEWHEEL_NUM
+        case LV4_FREEWHEEL_NUM
+        case LV5_FREEWHEEL_NUM
+        case LV6_FREEWHEEL_NUM
+        case LV7_FREEWHEEL_NUM
+        case LV8_FREEWHEEL_NUM
+        case LV9_FREEWHEEL_NUM
+        case LV10_FREEWHEEL_NUM
+        case LV11_FREEWHEEL_NUM
+        case LV12_FREEWHEEL_NUM
+        case LV13_FREEWHEEL_NUM
+        case LV14_FREEWHEEL_NUM
+        case LV15_FREEWHEEL_NUM
+        case TS_ZERO_VOLT_GAP
+        case CS_STOP_SPD
+        case TS_MAX_VOLT
+        case TS_MIN_VOLT
+        case TS_FAIL_TIME
+        case CS_TS_TH
+        case CS_SPD_TH
+        case CS_FAIL_TIME
+        public init?(rawValue: Swift.String)
+        public typealias RawValue = Swift.String
+        public var rawValue: Swift.String {
+          get
+        }
+      }
+      public enum Bank2 : Swift.String {
+        case MOTOR_PRO_TEMP
+        case MOTOR_REC_TEMP
+        case CONTROLLER_PRO_TEMP
+        case CONTROLLER_REC_TEMP
+        case SUP_ASSIST
+        case PEDAL_AST_MODE
+        case SUP_MAX_AST_SPD
+        case W_AST_SPD
+        case W_AST_MAX_CUR
+        case W_AST_ACC_DEC
+        case T_MIN_VOLT
+        case T_MAX_VOLT
+        case T_ERR_VOLT
+        case T_AC_SLOPE
+        case T_DE_SLOPE
+        case T_FAIL_TIME_TH
+        public init?(rawValue: Swift.String)
+        public typealias RawValue = Swift.String
+        public var rawValue: Swift.String {
+          get
+        }
+      }
+      public enum Bank3 : Swift.String {
+        case TOTAL_ODO
+        case BACKUP_TOTAL_ODO
+        case TOTAL_TIME
+        case PRO_CHG_DMID
+        case PRO_CHG_DSN
+        case PRO_CHG_CSN
+        case PRO_MOTOR_DMID
+        case PRO_MOTOR_DSN
+        case PRO_MOTOR_CSN
+        case PRO_TORQUE_DMID
+        case PRO_TORQUE_DSN
+        case PRO_TORQUE_CSN
+        case PRO_FLIGHT_DMID
+        case PRO_FLIGHT_DSN
+        case PRO_FLIGHT_CSN
+        case PRO_RLIGHT_DMID
+        case PRO_RLIGHT_DSN
+        case PRO_RLIGHT_CSN
+        case PRO_THROTTLE_DMID
+        case PRO_THROTTLE_DSN
+        case PRO_THROTTLE_CSN
+        public init?(rawValue: Swift.String)
+        public typealias RawValue = Swift.String
+        public var rawValue: Swift.String {
+          get
+        }
+      }
+    }
+    public struct BMS1 {
+      public enum Bank0 : Swift.String {
+        case PRO_SMID
+        case PRO_DMID
+        case PRO_SSN
+        case PRO_DSN
+        case PRO_FRAME
+        case PRO_SALE_DATE
+        case PRO_FW_APP_VER
+        case PRO_FW_BTL_VER
+        case PRO_FW_SDK_VER
+        case PRO_HW_VER
+        case PRO_PARA_VER
+        case PRO_PROTOCOL_VER
+        case PRO_BT_DEV_NAME
+        case PRO_MANUFACTURE_DATE
+        case PRO_CORE_SDK_VER
+        case PRO_CUST_PART_NUM
+        case PRO_CUST_PART_NAME
+        case PRO_CUST_PROJ_CODE
+        case PRO_END_CUST
+        case PRO_SUPPLIER
+        case PRO_CUST_HW_VER
+        case PRO_PROG_SEC
+        public init?(rawValue: Swift.String)
+        public typealias RawValue = Swift.String
+        public var rawValue: Swift.String {
+          get
+        }
+      }
+      public enum Bank1 : Swift.String {
+        case UNIX_TIME_DAY1
+        case RECORD_ODO_DAY1
+        case UNIX_TIME_DAY2
+        case RECORD_ODO_DAY2
+        case UNIX_TIME_DAY3
+        case RECORD_ODO_DAY3
+        case UNIX_TIME_DAY4
+        case RECORD_ODO_DAY4
+        case UNIX_TIME_DAY5
+        case RECORD_ODO_DAY5
+        case UNIX_TIME_DAY6
+        case RECORD_ODO_DAY6
+        case UNIX_TIME_DAY7
+        case RECORD_ODO_DAY7
+        case UNIX_TIME_DAY8
+        case RECORD_ODO_DAY8
+        case UNIX_TIME_DAY9
+        case RECORD_ODO_DAY9
+        case UNIX_TIME_DAY10
+        case RECORD_ODO_DAY10
+        case UNIX_TIME_DAY11
+        case RECORD_ODO_DAY11
+        case UNIX_TIME_DAY12
+        case RECORD_ODO_DAY12
+        case UNIX_TIME_DAY13
+        case RECORD_ODO_DAY13
+        case UNIX_TIME_DAY14
+        case RECORD_ODO_DAY14
+        case UNIX_TIME_DAY15
+        case RECORD_ODO_DAY15
+        case UNIX_TIME_DAY16
+        case RECORD_ODO_DAY16
+        case UNIX_TIME_DAY17
+        case RECORD_ODO_DAY17
+        case UNIX_TIME_DAY18
+        case RECORD_ODO_DAY18
+        case UNIX_TIME_DAY19
+        case RECORD_ODO_DAY19
+        case UNIX_TIME_DAY20
+        case RECORD_ODO_DAY20
+        case UNIX_TIME_DAY21
+        case RECORD_ODO_DAY21
+        case UNIX_TIME_DAY22
+        case RECORD_ODO_DAY22
+        case UNIX_TIME_DAY23
+        case RECORD_ODO_DAY23
+        case UNIX_TIME_DAY24
+        case RECORD_ODO_DAY24
+        case UNIX_TIME_DAY25
+        case RECORD_ODO_DAY25
+        case UNIX_TIME_DAY26
+        case RECORD_ODO_DAY26
+        case UNIX_TIME_DAY27
+        case RECORD_ODO_DAY27
+        case UNIX_TIME_DAY28
+        case RECORD_ODO_DAY28
+        case UNIX_TIME_DAY29
+        case RECORD_ODO_DAY29
+        case UNIX_TIME_DAY30
+        case RECORD_ODO_DAY30
+        case UNIX_TIME_DAY31
+        case RECORD_ODO_DAY31
+        case GMT_TIME_HR
+        public init?(rawValue: Swift.String)
+        public typealias RawValue = Swift.String
+        public var rawValue: Swift.String {
+          get
+        }
+      }
+      public enum Bank3 : Swift.String {
+        case BAT_VOLT
+        case BAT_LOW_VOLT
+        case BAT_UNDER_VOLT
+        case LAST_CC_YEAR
+        case LAST_CC_MONTH
+        case LAST_CC_DAY
+        case SECOND_LAST_CC_YEAR
+        case SECOND_LAST_CC_MONTH
+        case SECOND_LAST_CC_DAY
+        case LAST_DISC_YEAR
+        case LAST_DISC_MONTH
+        case LAST_DISC_DAY
+        case LAST_DISC_HR
+        case LAST_DISC_MIN
+        case LAST_DISC_SEC
+        case CCI_FCC_TIME
+        case CCI_OVER_70_TIME
+        case CCI_OVER_15_TIME
+        case CELL_LAST_STORAGE_CAP
+        case DIS_ACCUMULATION_MAH
+        case LAST_CC_VOLT
+        case LAST_CC_CAPACITY
+        case SECOND_LAST_CC_VOLT
+        case SECOND_LAST_CC_CAPACITY
+        case LAST_DISC_VOLT
+        case LAST_DISC_CAPACITY
+        public init?(rawValue: Swift.String)
+        public typealias RawValue = Swift.String
+        public var rawValue: Swift.String {
+          get
+        }
+      }
+    }
+    public struct BMS2 {
+    }
+    public enum Integrated : Swift.String {
+      case HMI_BANK0
+      case HMI_BANK2
+      case BATTERY_BANK0
+      case CONTROLLER_BANK0
+      case CONTROLLER_BANK1
+      case CONTROLLER_BANK1_LV1_ASSIST
+      case CONTROLLER_BANK1_LV2_ASSIST
+      case CONTROLLER_BANK1_LV3_ASSIST
+      case CONTROLLER_BANK1_LV4_ASSIST
+      case CONTROLLER_BANK1_LV5_ASSIST
+      case CONTROLLER_BANK1_LV6_ASSIST
+      case CONTROLLER_BANK1_LV7_ASSIST
+      case CONTROLLER_BANK1_LV8_ASSIST
+      case CONTROLLER_BANK1_LV9_ASSIST
+      case CONTROLLER_BANK3
+      public init?(rawValue: Swift.String)
+      public typealias RawValue = Swift.String
+      public var rawValue: Swift.String {
+        get
+      }
+    }
+  }
+}
+@_inheritsConvenienceInitializers open class AppleBikeKit : AppleBikeKitSourceCode.BaseAppleBikeKit {
+  public static let shared: AppleBikeKitSourceCode.AppleBikeKit
+  public var isPramaChgAutoReload: Swift.Bool
+  public var connectedPeripheral: AppleBikeKitSourceCode.ConnectedPeripheral {
+    get
+  }
+  override public func setTarget(_ target: Swift.String)
+  public var coreSDKService: AppleBikeKitSourceCode.CoreSDKService {
+    get
+  }
+  public var sdkVersion: Swift.String? {
+    get
+  }
+  public var info: (deviceInfo: (any AppleBikeKitSourceCode.DeviceInfo)?, timestamp: Foundation.Date) {
+    get
+  }
+  public var parameterDataRepository: any AppleBikeKitSourceCode.ParameterDataSource {
+    get
+  }
+  @available(*, deprecated, message: "该方法已被弃用，请改用 deviceInfoPublisher(throttle:) 方法。")
+  public var deviceInfoPublisher: Combine.AnyPublisher<(deviceInfo: (any AppleBikeKitSourceCode.DeviceInfo)?, timestamp: Foundation.Date), Swift.Never> {
+    get
+  }
+  public func deviceInfoPublisher(throttle milliseconds: Swift.Int = 0) -> Combine.AnyPublisher<(deviceInfo: (any AppleBikeKitSourceCode.DeviceInfo)?, timestamp: Foundation.Date), Swift.Never>
+  public var parameterNotifyPublisher: Combine.AnyPublisher<AppleBikeKitSourceCode.CoreSDKService.ParameterNotify?, Swift.Never> {
+    get
+  }
+  public var parameterDataPublisher: Combine.AnyPublisher<AppleBikeKitSourceCode.ParameterData, any Swift.Error> {
+    get
+  }
+  public var writingParameterStatePublisher: Combine.AnyPublisher<AppleBikeKitSourceCode.WritingRawData?, Swift.Never> {
+    get
+  }
+  public var restartDeviceStatePublisher: Combine.AnyPublisher<Swift.Bool?, Swift.Never> {
+    get
+  }
+  public var resetTripInfoStatePublisher: Combine.AnyPublisher<Swift.Bool, Swift.Never> {
+    get
+  }
+  public var resetParameterStatePublisher: Combine.AnyPublisher<AppleBikeKitSourceCode.ResetingRawData?, Swift.Never> {
+    get
+  }
+  public var updatingSystemTimeStatePublisher: Combine.AnyPublisher<Swift.Bool?, Swift.Never> {
+    get
+  }
+  public var lightControlStatePublisher: Combine.AnyPublisher<Swift.Bool?, Swift.Never> {
+    get
+  }
+  public var upgradeFirmwareProgressPublisher: Combine.AnyPublisher<AppleBikeKitSourceCode.UpgradingRawData?, Swift.Never> {
+    get
+  }
+  public var upgradeFirmwareStatePublisher: Combine.AnyPublisher<Swift.Int32?, Swift.Never> {
+    get
+  }
+  public var getELockStatePublisher: Combine.AnyPublisher<CoreSDKSourceCode.ELockStates, Swift.Never> {
+    get
+  }
+  public var setELockStatePublisher: Combine.AnyPublisher<Swift.Bool?, Swift.Never> {
+    get
+  }
+  override open func subscribeCoreSDKServiceSubjects()
+  override open func subscribeCoreBLEServiceSubjects()
+  override open func doTasks()
+  public func resetUpgradeFirmwareState()
+  @discardableResult
+  public func readParameter(name: Swift.String, part: AppleBikeKitSourceCode.CommunicationPartType) throws -> AppleBikeKitSourceCode.ParameterData
+  @discardableResult
+  public func writeParameter(name: Swift.String, part: AppleBikeKitSourceCode.CommunicationPartType, value: Any) throws -> AppleBikeKitSourceCode.ParameterData
+  public func restartDevice(partType: AppleBikeKitSourceCode.CommunicationPartType) throws
+  public func resetTripInfo() throws
+  public func getELock() throws
+  public func setELock(release: Swift.Bool, unlocked: Swift.Bool) throws
+  public func updateSystemTime() throws
+  open func lightControl(part: CoreSDKSourceCode.light_control_parts = LIGHT_CONTROL_FRONT, isOn: Swift.Bool) throws
+  open func upgradeFirmware(part: AppleBikeKitSourceCode.CommunicationPartType, firmware: Foundation.Data) throws
+  open func setAssistLevel(_ level: Swift.UInt8) -> Combine.AnyPublisher<Swift.Void, any Swift.Error>
+  public var coreBluetoothService: AppleBikeKitSourceCode.CoreBluetoothService {
+    get
+  }
+  public var statePublisher: Combine.AnyPublisher<CoreBluetooth.CBManagerState, Swift.Never> {
+    get
+  }
+  public var scanningPublisher: Combine.AnyPublisher<Swift.Bool, Swift.Never> {
+    get
+  }
+  public var foundDevicesPublisher: Combine.AnyPublisher<Swift.Array<AppleBikeKitSourceCode.BluetoothPeripheral>, Swift.Never> {
+    get
+  }
+  public var peripheralPublisher: Combine.AnyPublisher<AppleBikeKitSourceCode.CoreBluetoothService.PeripheralStatus, Swift.Never> {
+    get
+  }
+  public var characteristicsPublisher: Combine.AnyPublisher<CoreBluetooth.CBPeripheral?, Swift.Never> {
+    get
+  }
+  public var didUpdateValueForCharacteristicsPublisher: Combine.AnyPublisher<Swift.Result<CoreBluetooth.CBCharacteristic, any Swift.Error>?, Swift.Never> {
+    get
+  }
+  public var didWriteValueForCharacteristicsPublisher: Combine.AnyPublisher<Swift.Result<CoreBluetooth.CBCharacteristic, any Swift.Error>?, Swift.Never> {
+    get
+  }
+  public var rssiPublisher: Combine.AnyPublisher<Foundation.NSNumber?, Swift.Never> {
+    get
+  }
+  public func retrivePeripheral(withIdentifiers identifiers: [Foundation.UUID])
+  public func startScan() throws
+  public func stopScan()
+  public func connect(_ bluetoothPeripheral: AppleBikeKitSourceCode.BluetoothPeripheral)
+  public func cancelConnect(_ bluetoothPeripheral: AppleBikeKitSourceCode.BluetoothPeripheral)
+  public func disconnect(_ bluetoothPeripheral: AppleBikeKitSourceCode.BluetoothPeripheral)
+  public func readRSSI()
+  public func setScreenAccessControl(_ accessControl: AppleBikeKitSourceCode.CoreSDKService.ScreenLockState) throws
+  override public init()
+  @objc deinit
+}
+extension Swift.Array where Element == Swift.UInt8 {
+  public func convert2Value(type: Any, length: Swift.Int? = nil) throws -> Any
+  public func convert2Bytes(length: Swift.Int) -> Swift.Array<Swift.UInt8>
+}
+extension Swift.Int {
+  public enum StatusCodeType {
+    case hmi
+    case battery
+    case controller
+    case motor
+    case torqueSensor
+    case cadenceSensor
+    case throttle
+    case light
+    case speedSensor
+    case derailleur
+    case tpms
+    case noCategory
+    case unknown
+    public static func == (a: Swift.Int.StatusCodeType, b: Swift.Int.StatusCodeType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public var tranfer2WarningCodeType: Swift.Int.StatusCodeType {
+    get
+  }
+  @available(*, deprecated, message: "經過會議，已重新定義診斷流程，所以完全不應該使用到此方法！")
+  public var tranfer2DismaWarningCodeType: Swift.Int.StatusCodeType {
+    get
+  }
+  public var tranfer2ErrorCodeType: Swift.Int.StatusCodeType {
+    get
+  }
+  @available(*, deprecated, message: "經過會議，已重新定義診斷流程，所以完全不應該使用到此方法！")
+  public var tranfer2DismatchErrorCodeType: Swift.Int.StatusCodeType {
+    get
+  }
+}
+extension AppleBikeKitSourceCode.FarmLandBikeKit {
+  public func getPadalAssistanceCategory() throws
+  public var bikeSettingPublisher: Combine.AnyPublisher<AppleBikeKitSourceCode.FarmLandBikeKit.BikeSettingModel, any Swift.Error> {
+    get
+  }
+  public func resetNextOdoToMaintain() -> Combine.AnyPublisher<Swift.Bool, any Swift.Error>
+  public func writeBikeSetting(_ setting: AppleBikeKitSourceCode.FarmLandBikeKit.BikeSettingModel) -> Combine.AnyPublisher<Swift.Bool, any Swift.Error>
+}
+extension AppleBikeKitSourceCode.ParameterData {
+  public enum Error : Swift.Error {
+    case dividedParametersNotExist
+    case readParamterWithWrongLength
+    public static func == (a: AppleBikeKitSourceCode.ParameterData.Error, b: AppleBikeKitSourceCode.ParameterData.Error) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public func dividIntoMultiParameters(rawData: AppleBikeKitSourceCode.ReadingRawData) throws -> [AppleBikeKitSourceCode.ParameterData]
+}
+extension Swift.String {
+  public enum AdvertisementDataRetrievalKey {
+    case localName
+    case manufacturerData
+    case serviceUUIDsKey
+    case isConnectable
+    public static func == (a: Swift.String.AdvertisementDataRetrievalKey, b: Swift.String.AdvertisementDataRetrievalKey) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+@_hasMissingDesignatedInitializers final public class MetricSystemManipulateHelper {
+  final public var isMetricSystem: MapKit.MKDistanceFormatter.Units? {
+    get
+  }
+  @objc deinit
+  final public func write(_ isMetricSystem: MapKit.MKDistanceFormatter.Units) throws
+}
+@_hasMissingDesignatedInitializers public class BaseParameterDataRepository {
+  public enum Error : Swift.Error {
+    case parameterDataNotFoundByName(Swift.String)
+    case parameterDataNotFoundByArguments(CoreSDKSourceCode.DeviceType_enum, Swift.UInt8, Swift.UInt16, Swift.UInt16)
+    case exception(any Swift.Error)
+    case wrongType(AppleBikeKitSourceCode.BaseParameterDataRepository.Type)
+  }
+  @objc deinit
+}
+@_inheritsConvenienceInitializers open class FarmLandBikeKit : AppleBikeKitSourceCode.AppleBikeKit {
+  public enum HMIAccessControl : Swift.UInt32 {
+    case lock
+    case unlock
+    case disable
+    case unknown
+    public init?(rawValue: Swift.UInt32)
+    public typealias RawValue = Swift.UInt32
+    public var rawValue: Swift.UInt32 {
+      get
+    }
+  }
+  public enum Error : Swift.Error {
+    case DisguiseBatteryHelperIsNil
+    case unsupportedLevel
+    case deviceInfoUnavailable
+    case functionNotExist(Swift.String)
+    case deviceNotUnlocked
+    case screenLockTokenCorrupted
+    case screenLockTokenIsNotAllowed
+    case assistLevelOutOfBounds
+    case assistLevelUnexpected
+    case assistRatioOutOfBounds
+    case speedOutOfLimitation
+    case sleepTimeOutOfBounds(Foundation.TimeInterval)
+    case isBLEDisconnecting
+    case getNoAssistParameterName
+    case getNoAssistValue(AppleBikeKitSourceCode.ParameterData.Apple.Name)
+    case staOutOfBounds
+    case isProccessing
+  }
+  public static let sleipnir: AppleBikeKitSourceCode.FarmLandBikeKit
+  public var metaParameter: AppleBikeKitSourceCode.MetaParameter {
+    get
+  }
+  public var metaPublisher: Combine.AnyPublisher<AppleBikeKitSourceCode.MetaParameter, Swift.Never> {
+    get
+  }
+  public var assistLevelRepositoryReadingPublisher: Combine.AnyPublisher<AppleBikeKitSourceCode.AssistPlanUpdateHelper.ReadingResult<AppleBikeKitSourceCode.AssistLevelRepository?>, Swift.Never> {
+    get
+  }
+  public var assistLevelRepositoryWritingPublisher: Combine.AnyPublisher<AppleBikeKitSourceCode.AssistPlanUpdateHelper.WritingResult<AppleBikeKitSourceCode.AssistLevelRepository?>, Swift.Never> {
+    get
+  }
+  public var odoChartDataPublisher: Combine.AnyPublisher<Swift.Result<[AppleBikeKitSourceCode.MileageRecord], any Swift.Error>, any Swift.Error> {
+    get
+  }
+  public var disguiseBatteryPublisher: Combine.AnyPublisher<AppleBikeKitSourceCode.DisguiseBatteryHelper.ReadingResult<Swift.Bool?>, Swift.Never>? {
+    get
+  }
+  public var screenLockPublisher: Combine.AnyPublisher<(errorCount: Swift.Int, state: AppleBikeKitSourceCode.FarmLandBikeKit.HMIAccessControl), any Swift.Error> {
+    get
+  }
+  override public func doTasks()
+  public func setMetaWhitelist(_ whitelist: [(name: Swift.String, part: AppleBikeKitSourceCode.CommunicationPartType)])
+  public func connectBike(_ peripheral: AppleBikeKitSourceCode.BluetoothPeripheral) -> Combine.AnyPublisher<Swift.Int, any Swift.Error>
+  public func disconnectBike()
+  public func updateMetaParameter() throws
+  public func writeMetricSystem(_ isMetricSystem: MapKit.MKDistanceFormatter.Units) throws
+  public func readAssistLevel() throws
+  public func writeAssistLevel(LV1_AST_RATIO: Swift.Int, LV2_AST_RATIO: Swift.Int, LV3_AST_RATIO: Swift.Int) throws
+  public func readODOChartData() throws
+  override public func lightControl(part: CoreSDKSourceCode.light_control_parts = LIGHT_CONTROL_FRONT, isOn: Swift.Bool) throws
+  public func readDisguiseBatteryStatus() throws
+  override public func setAssistLevel(_ level: Swift.UInt8) -> Combine.AnyPublisher<Swift.Void, any Swift.Error>
+  public func getHmiPasswordCode() -> Combine.AnyPublisher<[Swift.Int]?, any Swift.Error>
+  public func setHmiPasswordCode(_ passwords: [Swift.Int]) -> Combine.AnyPublisher<Swift.String, any Swift.Error>
+  public func getHmiErrorLimit() -> Combine.AnyPublisher<Swift.Int?, any Swift.Error>
+  public func setHmiErrorLimit(_ limitation: Swift.Int) -> Combine.AnyPublisher<Swift.String, any Swift.Error>
+  public func setScreenLockToken(_ token: Foundation.UUID) -> Combine.AnyPublisher<Swift.Bool, any Swift.Error>
+  public func resetScreenAccessControl(_ token: Foundation.UUID) -> Combine.AnyPublisher<Swift.Void, any Swift.Error>
+  public func checkScreenLockTokenIsValid() -> Combine.AnyPublisher<Swift.Bool, any Swift.Error>
+  public func getTimeToSleep() -> Combine.AnyPublisher<Swift.Int, any Swift.Error>
+  public func setTimeToSleep(_ second: Swift.Int) -> Combine.AnyPublisher<Swift.Bool, any Swift.Error>
+  public func appleDeviceInfoPublisher(throttle milliseconds: Swift.Int = 0) -> Combine.AnyPublisher<CoreSDKSourceCode.Apple_Info_st, any Swift.Error>
+  override public init()
+  @objc deinit
+}
+public struct UpgradingRawData : Swift.CustomStringConvertible {
+  public let progress: Swift.Int32
+  public var message: Swift.String? {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+}
+public struct ErrorCode : Swift.Identifiable {
+  public let id: Foundation.UUID
+  public let code: Swift.Int
+  public let hint: Swift.String
+  public init(code: Swift.Int, hint: Swift.String)
+  public typealias ID = Foundation.UUID
+}
+extension AppleBikeKitSourceCode.ErrorCode {
+  public init(_ code: Swift.Int)
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class OrangeParameterDataRepository : AppleBikeKitSourceCode.BaseParameterDataRepository, AppleBikeKitSourceCode.ParameterDataSource {
+  public var hmiBank0Parameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var hmiBank1Parameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var hmiBank2Parameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var controllerBank0Parameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var controllerBank1Lv1AssistParameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var controllerBank1Lv2AssistParameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var controllerBank1Lv3AssistParameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var controllerBank1Lv4AssistParameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var controllerBank1Lv5AssistParameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var controllerBank1Lv6AssistParameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var controllerBank1Lv7AssistParameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var controllerBank1Lv8AssistParameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var controllerBank1Lv9AssistParameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var controllerBank1Parameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var controllerBank2Parameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var controllerBank3Parameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var batteryBank0Parameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var normalParameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var integratedParameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public var parameters: [AppleBikeKitSourceCode.ParameterData] {
+    get
+  }
+  public func asAppleRepository() throws -> AppleBikeKitSourceCode.AppleParameterDataRepository
+  public func asOrangeRepository() throws -> AppleBikeKitSourceCode.OrangeParameterDataRepository
+  public func asCherryRepository() throws -> AppleBikeKitSourceCode.CherryParameterDataRepository
+  @objc deinit
+}
+public struct WarningCode : Swift.Identifiable {
+  public let id: Foundation.UUID
+  public let code: Swift.Int
+  public let hint: Swift.String
+  public init(code: Swift.Int, hint: Swift.String)
+  public typealias ID = Foundation.UUID
+}
+extension AppleBikeKitSourceCode.WarningCode {
+  public init(_ code: Swift.Int)
+}
+public enum CommunicationPartType : Swift.Int {
+  case HMI
+  case Controller
+  case MainBatt
+  case SubBatt1
+  case SubBatt2
+  case Display
+  case IOT
+  case EDerailleur
+  case ELock
+  case Dongle
+  case Unknown
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension AppleBikeKitSourceCode.CommunicationPartType {
+  public var coreType: CoreSDKSourceCode.DeviceType_enum {
+    get
+  }
+}
+extension CoreSDKSourceCode.DeviceType_enum {
+  public var sdkType: AppleBikeKitSourceCode.CommunicationPartType {
+    get
+  }
+}
+open class BaseAppleBikeKit {
+  public static var assignedValidBikeList: [Swift.String]?
+  public static var target: Swift.String? {
+    get
+    set
+  }
+  public static var tenant: AppleBikeKitSourceCode.Tenant {
+    get
+  }
+  open var subscriptions: Swift.Set<Combine.AnyCancellable>
+  public init()
+  @objc deinit
+  open func setTarget(_ target: Swift.String)
+  public func isDeviceNameValid(_ deviceName: Swift.String) -> Swift.Bool
+  open func subscribeCoreSDKServiceSubjects()
+  open func subscribeCoreBLEServiceSubjects()
+  open func doTasks()
+}
+@_hasMissingDesignatedInitializers public class ConnectedPeripheral {
+  public var currentPeripheral: AppleBikeKitSourceCode.BluetoothPeripheral? {
+    get
+  }
+  public var currentPeripheralSubject: Combine.CurrentValueSubject<AppleBikeKitSourceCode.BluetoothPeripheral?, Swift.Never> {
+    get
+  }
+  public var writeCharacteristicSubject: Combine.CurrentValueSubject<CoreBluetooth.CBCharacteristic?, Swift.Never> {
+    get
+  }
+  public var writeWithoutResponseCharacteristicSubject: Combine.CurrentValueSubject<CoreBluetooth.CBCharacteristic?, Swift.Never> {
+    get
+  }
+  public var notifyCharacteristicSubject: Combine.CurrentValueSubject<CoreBluetooth.CBCharacteristic?, Swift.Never> {
+    get
+  }
+  @objc deinit
+  public func reset()
+}
+public struct AssistLevelRepository : Swift.Equatable {
+  public let LV1_MAX_AST_RATIO: Swift.Int
+  public let LV1_MIN_AST_RATIO: Swift.Int
+  public let LV2_MAX_AST_RATIO: Swift.Int
+  public let LV2_MIN_AST_RATIO: Swift.Int
+  public let LV3_MAX_AST_RATIO: Swift.Int
+  public let LV3_MIN_AST_RATIO: Swift.Int
+  public static func == (lhs: AppleBikeKitSourceCode.AssistLevelRepository, rhs: AppleBikeKitSourceCode.AssistLevelRepository) -> Swift.Bool
+}
+@_hasMissingDesignatedInitializers final public class AssistPlanUpdateHelper {
+  public enum ReadingResult<T> {
+    case prepared
+    case `try`(Swift.Int)
+    case done(T)
+  }
+  public enum WritingResult<T> {
+    case prepared
+    case `try`(Swift.Int, T)
+    case done(T)
+  }
+  public enum Error : Swift.Error {
+    case isReadRecursively
+    case isWriteRecursively
+    public static func == (a: AppleBikeKitSourceCode.AssistPlanUpdateHelper.Error, b: AppleBikeKitSourceCode.AssistPlanUpdateHelper.Error) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  final public var readingSubject: Combine.CurrentValueSubject<AppleBikeKitSourceCode.AssistPlanUpdateHelper.ReadingResult<AppleBikeKitSourceCode.AssistLevelRepository?>, Swift.Never> {
+    get
+  }
+  final public var writingSubject: Combine.CurrentValueSubject<AppleBikeKitSourceCode.AssistPlanUpdateHelper.WritingResult<AppleBikeKitSourceCode.AssistLevelRepository?>, Swift.Never> {
+    get
+  }
+  @objc deinit
+  @available(*, deprecated, message: "別用！壞了不負責！")
+  final public func read() throws
+  @available(*, deprecated, message: "別用！壞了不負責！")
+  final public func write(LV1_MAX_AST_RATIO: Swift.Int, LV1_MIN_AST_RATIO: Swift.Int, LV2_MAX_AST_RATIO: Swift.Int, LV2_MIN_AST_RATIO: Swift.Int, LV3_MAX_AST_RATIO: Swift.Int, LV3_MIN_AST_RATIO: Swift.Int) throws
+}
+extension CoreSDKSourceCode.Apple_Info_st {
+  public struct Code {
+    public enum Species {
+      case warning, error
+      public static func == (a: CoreSDKSourceCode.Apple_Info_st.Code.Species, b: CoreSDKSourceCode.Apple_Info_st.Code.Species) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
+      public var hashValue: Swift.Int {
+        get
+      }
+    }
+    public let species: CoreSDKSourceCode.Apple_Info_st.Code.Species
+    public let source: CoreSDKSourceCode.DeviceType_enum
+    public let value: Swift.Int
+  }
+  public var hmiWarningCodes: [CoreSDKSourceCode.Apple_Info_st.Code] {
+    get
+  }
+  public var hmiErrorCodes: [CoreSDKSourceCode.Apple_Info_st.Code] {
+    get
+  }
+  public var controllerWarningCodes: [CoreSDKSourceCode.Apple_Info_st.Code] {
+    get
+  }
+  public var controllerErrorCodes: [CoreSDKSourceCode.Apple_Info_st.Code] {
+    get
+  }
+  public var mainBatteryWarningCodes: [CoreSDKSourceCode.Apple_Info_st.Code] {
+    get
+  }
+  public var subBatteryWarningCodes: [CoreSDKSourceCode.Apple_Info_st.Code] {
+    get
+  }
+  public var mainBatteryErrorCodes: [CoreSDKSourceCode.Apple_Info_st.Code] {
+    get
+  }
+  public var subBatteryErrorCodes: [CoreSDKSourceCode.Apple_Info_st.Code] {
+    get
+  }
+  public var hasWrongStatus: Swift.Bool {
+    get
+  }
+  public var isAutoDiagnosePassesd: Swift.Bool {
+    get
+  }
+  public var warningCodes: [CoreSDKSourceCode.Apple_Info_st.Code] {
+    get
+  }
+  public var errorCodes: [CoreSDKSourceCode.Apple_Info_st.Code] {
+    get
+  }
+}
+extension CoreSDKSourceCode.Apple_Info_st {
+  public var ableRideRange: Swift.Double {
+    get
+  }
+}
+public protocol DeviceInfo {
+  func asAppleDeviceInfo() throws -> CoreSDKSourceCode.Apple_Info_st
+  func asOrangeDeviceInfo() throws -> CoreSDKSourceCode.Orange_Info_st
+  func asCherryDeviceInfo() throws -> CoreSDKSourceCode.Cherry_Info_st
+}
+extension CoreSDKSourceCode.Apple_Info_st : AppleBikeKitSourceCode.DeviceInfo {
+  public func asAppleDeviceInfo() throws -> CoreSDKSourceCode.Apple_Info_st
+  public func asOrangeDeviceInfo() throws -> CoreSDKSourceCode.Orange_Info_st
+  public func asCherryDeviceInfo() throws -> CoreSDKSourceCode.Cherry_Info_st
+}
+extension CoreSDKSourceCode.Orange_Info_st : AppleBikeKitSourceCode.DeviceInfo {
+  public func asAppleDeviceInfo() throws -> CoreSDKSourceCode.Apple_Info_st
+  public func asCherryDeviceInfo() throws -> CoreSDKSourceCode.Cherry_Info_st
+  public func asOrangeDeviceInfo() throws -> CoreSDKSourceCode.Orange_Info_st
+}
+extension CoreSDKSourceCode.Cherry_Info_st : AppleBikeKitSourceCode.DeviceInfo {
+  public func asAppleDeviceInfo() throws -> CoreSDKSourceCode.Apple_Info_st
+  public func asOrangeDeviceInfo() throws -> CoreSDKSourceCode.Orange_Info_st
+  public func asCherryDeviceInfo() throws -> CoreSDKSourceCode.Cherry_Info_st
+}
+extension AppleBikeKitSourceCode.CoreBluetoothService : CoreBluetooth.CBCentralManagerDelegate {
+  @objc dynamic public func centralManagerDidUpdateState(_ central: CoreBluetooth.CBCentralManager)
+  @objc dynamic public func centralManager(_ central: CoreBluetooth.CBCentralManager, didDiscover peripheral: CoreBluetooth.CBPeripheral, advertisementData: [Swift.String : Any], rssi RSSI: Foundation.NSNumber)
+  @objc dynamic public func centralManager(_ central: CoreBluetooth.CBCentralManager, didConnect peripheral: CoreBluetooth.CBPeripheral)
+  @objc dynamic public func centralManager(_ central: CoreBluetooth.CBCentralManager, didFailToConnect peripheral: CoreBluetooth.CBPeripheral, error: (any Swift.Error)?)
+  @objc dynamic public func centralManager(_ central: CoreBluetooth.CBCentralManager, didDisconnectPeripheral peripheral: CoreBluetooth.CBPeripheral, error: (any Swift.Error)?)
+  @objc dynamic public func centralManager(_ central: CoreBluetooth.CBCentralManager, willRestoreState dict: [Swift.String : Any])
+}
+public struct ReadingRawData {
+  public let device: CoreSDKSourceCode.DeviceType_enum
+  public let bank: Swift.UInt8
+  public let address: Swift.UInt16
+  public let length: Swift.UInt16
+  public let state: Swift.Bool
+  public var bytes: [Swift.UInt8] {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class CherryParameterDataRepository : AppleBikeKitSourceCode.BaseParameterDataRepository, AppleBikeKitSourceCode.ParameterDataSource {
+  final public let hmiBank0Parameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let hmiBank1Parameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let hmiBank2Parameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let controllerBank0Parameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let controllerBank1Parameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let controllerBank2Parameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let batteryBank0Parameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let integratedParameters: [AppleBikeKitSourceCode.ParameterData]
+  final public let parameters: [AppleBikeKitSourceCode.ParameterData]
+  public func asAppleRepository() throws -> AppleBikeKitSourceCode.AppleParameterDataRepository
+  public func asOrangeRepository() throws -> AppleBikeKitSourceCode.OrangeParameterDataRepository
+  public func asCherryRepository() throws -> AppleBikeKitSourceCode.CherryParameterDataRepository
+  @objc deinit
+}
+public enum Tenant : Swift.String {
+  case unknown
+  case apple
+  case orange
+  case cherry
+  case kiwi
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+extension AppleBikeKitSourceCode.FarmLandBikeKit {
+  public var supportedAssistLevelPublisher: Combine.AnyPublisher<Swift.Int, any Swift.Error> {
+    get
+  }
+  public var supportedMaxAssistSpeedPublisher: Combine.AnyPublisher<Swift.Int, any Swift.Error> {
+    get
+  }
+  public var assistSettingsPublisher: Combine.AnyPublisher<AppleBikeKitSourceCode.AssistSettingModel, any Swift.Error> {
+    get
+  }
+  public var allAssistSettingsPublisher: Combine.AnyPublisher<(Swift.Int, Swift.Int, AppleBikeKitSourceCode.AssistSettingModel), any Swift.Error> {
+    get
+  }
+}
+extension AppleBikeKitSourceCode.FarmLandBikeKit {
+  public func setAssistSettings(_ settings: AppleBikeKitSourceCode.AssistSettingModel) -> Combine.AnyPublisher<Swift.Void, any Swift.Error>
+}
+public struct ResetingRawData {
+  public let device: CoreSDKSourceCode.DeviceType_enum
+  public let bank: Swift.UInt8
+  public let state: Swift.Bool
+}
+public struct MetaParameter {
+  public enum EnablePart : Swift.Equatable {
+    case hmi
+    case controller
+    case mainBattery
+    case display
+    case motor
+    case cadenceSensor
+    case torqueSensor
+    case charger
+    case frontLight
+    case rearLight
+    case throttle
+    case eBrake
+    case eLock
+    case frontDerailleur
+    case rearDerailleur
+    case IoT
+    case hallSensor
+    case speedSensor
+    case subBattery1
+    case subBattery2
+    case undefined(Swift.Int)
+    public func getWarningCodes() throws -> [CoreSDKSourceCode.Apple_Info_st.Code]
+    public func getErrorCodes() throws -> [CoreSDKSourceCode.Apple_Info_st.Code]
+    public static func == (lhs: AppleBikeKitSourceCode.MetaParameter.EnablePart, rhs: AppleBikeKitSourceCode.MetaParameter.EnablePart) -> Swift.Bool
+  }
+  public var hmiSSN: Swift.String? {
+    get
+  }
+  public var hmiDMID: Swift.String? {
+    get
+  }
+  public var hmiDSN: Swift.String? {
+    get
+  }
+  public var hmiSMID: Swift.String? {
+    get
+  }
+  public var hmiFrame: Swift.String? {
+    get
+  }
+  public var hmiSaleDate: Swift.String? {
+    get
+  }
+  public var hmiFWAppVer: Swift.String? {
+    get
+  }
+  public var hmiFWBtlVer: Swift.String? {
+    get
+  }
+  public var hmiFWSdkVer: Swift.String? {
+    get
+  }
+  public var hmiHWVer: Swift.String? {
+    get
+  }
+  public var hmiParaVer: Swift.String? {
+    get
+  }
+  public var hmiProtocolVer: Swift.String? {
+    get
+  }
+  public var hmiBtDevName: Swift.String? {
+    get
+  }
+  public var distanceUint: MapKit.MKDistanceFormatter.Units? {
+    get
+  }
+  public var batterySSN: Swift.String? {
+    get
+  }
+  public var batteryDMID: Swift.String? {
+    get
+  }
+  public var batteryDSN: Swift.String? {
+    get
+  }
+  public var batterySMID: Swift.String? {
+    get
+  }
+  public var batteryFrame: Swift.String? {
+    get
+  }
+  public var batterySaleDate: Swift.String? {
+    get
+  }
+  public var batteryFWAppVer: Swift.String? {
+    get
+  }
+  public var batteryFWBtlVer: Swift.String? {
+    get
+  }
+  public var batteryFWSdkVer: Swift.String? {
+    get
+  }
+  public var batteryHWVer: Swift.String? {
+    get
+  }
+  public var batteryParaVer: Swift.String? {
+    get
+  }
+  public var batteryProtocolVer: Swift.String? {
+    get
+  }
+  public var batteryBtDevName: Swift.String? {
+    get
+  }
+  public var controllerSSN: Swift.String? {
+    get
+  }
+  public var controllerDMID: Swift.String? {
+    get
+  }
+  public var controllerDSN: Swift.String? {
+    get
+  }
+  public var controllerSMID: Swift.String? {
+    get
+  }
+  public var controllerFrame: Swift.String? {
+    get
+  }
+  public var controllerSaleDate: Swift.String? {
+    get
+  }
+  public var controllerFWAppVer: Swift.String? {
+    get
+  }
+  public var controllerFWBtlVer: Swift.String? {
+    get
+  }
+  public var controllerFWSdkVer: Swift.String? {
+    get
+  }
+  public var controllerHWVer: Swift.String? {
+    get
+  }
+  public var controllerParaVer: Swift.String? {
+    get
+  }
+  public var controllerProtocolVer: Swift.String? {
+    get
+  }
+  public var controllerBtDevName: Swift.String? {
+    get
+  }
+  public var enableParts: [AppleBikeKitSourceCode.MetaParameter.EnablePart] {
+    get
+  }
+}
+extension AppleBikeKitSourceCode.MetaParameter : Swift.Equatable {
+  public var isHMIOmit: Swift.Bool {
+    get
+  }
+  public var isDistanceUintOmit: Swift.Bool {
+    get
+  }
+  public var isBatteryOmit: Swift.Bool {
+    get
+  }
+  public var isControllerOmit: Swift.Bool {
+    get
+  }
+  public var isEnablePartsOmit: Swift.Bool {
+    get
+  }
+  public var isOmit: Swift.Bool {
+    get
+  }
+  public static func == (lhs: AppleBikeKitSourceCode.MetaParameter, rhs: AppleBikeKitSourceCode.MetaParameter) -> Swift.Bool
+}
+@_hasMissingDesignatedInitializers final public class ConnectionMetaReadingHelper {
+  final public var metaSubject: Combine.CurrentValueSubject<AppleBikeKitSourceCode.MetaParameter, Swift.Never> {
+    get
+  }
+  @objc deinit
+  final public func doTask() throws
+}
+extension MapKit.MKDistanceFormatter.Units {
+  public mutating func toggle()
+}
+extension AppleBikeKitSourceCode.Version.Part : Swift.Equatable {}
+extension AppleBikeKitSourceCode.Version.Part : Swift.Hashable {}
+extension AppleBikeKitSourceCode.DisguiseBatteryHelper.Error : Swift.Equatable {}
+extension AppleBikeKitSourceCode.DisguiseBatteryHelper.Error : Swift.Hashable {}
+extension AppleBikeKitSourceCode.FarmLandBikeKit.Unit : Swift.Equatable {}
+extension AppleBikeKitSourceCode.FarmLandBikeKit.Unit : Swift.Hashable {}
+extension AppleBikeKitSourceCode.FarmLandBikeKit.Part : Swift.Equatable {}
+extension AppleBikeKitSourceCode.FarmLandBikeKit.Part : Swift.Hashable {}
+extension AppleBikeKitSourceCode.ParameterData.Apple.Name : Swift.Equatable {}
+extension AppleBikeKitSourceCode.ParameterData.Apple.Name : Swift.Hashable {}
+extension AppleBikeKitSourceCode.ParameterData.Apple.Name : Swift.RawRepresentable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.HMI.Bank0 : Swift.Equatable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.HMI.Bank0 : Swift.Hashable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.HMI.Bank0 : Swift.RawRepresentable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.HMI.Bank1 : Swift.Equatable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.HMI.Bank1 : Swift.Hashable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.HMI.Bank1 : Swift.RawRepresentable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.HMI.Bank2 : Swift.Equatable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.HMI.Bank2 : Swift.Hashable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.HMI.Bank2 : Swift.RawRepresentable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.HMI.Bank3 : Swift.Equatable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.HMI.Bank3 : Swift.Hashable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.HMI.Bank3 : Swift.RawRepresentable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.Controller.Bank0 : Swift.Equatable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.Controller.Bank0 : Swift.Hashable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.Controller.Bank0 : Swift.RawRepresentable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.Controller.Bank1 : Swift.Equatable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.Controller.Bank1 : Swift.Hashable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.Controller.Bank1 : Swift.RawRepresentable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.Controller.Bank2 : Swift.Equatable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.Controller.Bank2 : Swift.Hashable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.Controller.Bank2 : Swift.RawRepresentable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.Controller.Bank3 : Swift.Equatable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.Controller.Bank3 : Swift.Hashable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.Controller.Bank3 : Swift.RawRepresentable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.BMS1.Bank0 : Swift.Equatable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.BMS1.Bank0 : Swift.Hashable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.BMS1.Bank0 : Swift.RawRepresentable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.BMS1.Bank1 : Swift.Equatable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.BMS1.Bank1 : Swift.Hashable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.BMS1.Bank1 : Swift.RawRepresentable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.BMS1.Bank3 : Swift.Equatable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.BMS1.Bank3 : Swift.Hashable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.BMS1.Bank3 : Swift.RawRepresentable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.Integrated : Swift.Equatable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.Integrated : Swift.Hashable {}
+extension AppleBikeKitSourceCode.ParameterData.Orange.Integrated : Swift.RawRepresentable {}
+extension Swift.Int.StatusCodeType : Swift.Equatable {}
+extension Swift.Int.StatusCodeType : Swift.Hashable {}
+extension AppleBikeKitSourceCode.ParameterData.Error : Swift.Equatable {}
+extension AppleBikeKitSourceCode.ParameterData.Error : Swift.Hashable {}
+extension Swift.String.AdvertisementDataRetrievalKey : Swift.Equatable {}
+extension Swift.String.AdvertisementDataRetrievalKey : Swift.Hashable {}
+extension AppleBikeKitSourceCode.FarmLandBikeKit.HMIAccessControl : Swift.Equatable {}
+extension AppleBikeKitSourceCode.FarmLandBikeKit.HMIAccessControl : Swift.Hashable {}
+extension AppleBikeKitSourceCode.FarmLandBikeKit.HMIAccessControl : Swift.RawRepresentable {}
+extension AppleBikeKitSourceCode.CommunicationPartType : Swift.Equatable {}
+extension AppleBikeKitSourceCode.CommunicationPartType : Swift.Hashable {}
+extension AppleBikeKitSourceCode.CommunicationPartType : Swift.RawRepresentable {}
+extension AppleBikeKitSourceCode.AssistPlanUpdateHelper.Error : Swift.Equatable {}
+extension AppleBikeKitSourceCode.AssistPlanUpdateHelper.Error : Swift.Hashable {}
+extension CoreSDKSourceCode.Apple_Info_st.Code.Species : Swift.Equatable {}
+extension CoreSDKSourceCode.Apple_Info_st.Code.Species : Swift.Hashable {}
+extension AppleBikeKitSourceCode.Tenant : Swift.Equatable {}
+extension AppleBikeKitSourceCode.Tenant : Swift.Hashable {}
+extension AppleBikeKitSourceCode.Tenant : Swift.RawRepresentable {}

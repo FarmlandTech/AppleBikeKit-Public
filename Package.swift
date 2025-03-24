@@ -12,8 +12,8 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "AppleBikeKit",
-            targets: ["CoreSDK", "CoreSDKService", "CoreBLEService", "AppleBikeKit", "FarmLandBikeKit"]),
+            name: "FarmLandBikeKit",
+            targets: ["FarmLandBikeKit"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -23,38 +23,11 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .binaryTarget(
-            name: "CoreSDK",
-            path: "Sources/CoreSDK/CoreSDKSourceCode.xcframework"),
-        .binaryTarget(
-            name: "CoreSDKService",
-            path: "Sources/CoreSDKService/CoreSDKServiceSourceCode.xcframework"),
-        .binaryTarget(
-            name: "CoreBLEService",
-            path: "Sources/CoreBLEService/CoreBLEServiceSourceCode.xcframework"),
-        .binaryTarget(
-            name: "AppleBikeKitSourceCode",
-            path: "Sources/AppleBikeKitSourceCode/AppleBikeKitSourceCode.xcframework"),
-        .target(
-            name: "AppleBikeKit",
-            dependencies: ["CoreSDK", "CoreSDKService", "CoreBLEService", "AppleBikeKitSourceCode"],
-            path: "Sources/AppleBikeKit",
-            swiftSettings: [
-                .define("APPLICATION_EXTENSION_API_ONLY=YES")
-            ],
-            linkerSettings: [
-                .linkedFramework("SwiftUI", .when(platforms: [.iOS])),
-                .linkedFramework("AppKit", .when(platforms: [.macOS]))
-            ]),
-        .target(
             name: "FarmLandBikeKit",
-            dependencies: ["AppleBikeKit"],
-            path: "Sources/FarmLandBikeKit",
-            swiftSettings: [
-                .define("APPLICATION_EXTENSION_API_ONLY=YES")
-            ]),
+            path: "Sources/FarmLandBikeKitSourceCode/AppleBikeKitSourceCode.xcframework"),
         .testTarget(
             name: "AppleBikeKitTests",
-            dependencies: ["AppleBikeKit"]),
+            dependencies: ["FarmLandBikeKit"]),
     ],
     swiftLanguageVersions: [.v5]
 )
