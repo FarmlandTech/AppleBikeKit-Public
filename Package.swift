@@ -12,7 +12,7 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "FarmLandBikeKit",
+            name: "AppleBikeKit",
             targets: ["CoreSDK", "FarmLandBikeKit"]),
     ],
     dependencies: [
@@ -27,7 +27,7 @@ let package = Package(
             path: "Sources/CoreSDK/CoreSDKSourceCode.xcframework"),
         .binaryTarget(
             name: "FarmLandBikeKit",
-            path: "Sources/FarmLandBikeKitSourceCode/AppleBikeKitSourceCode.xcframework"),
+            path: "Sources/FarmLandBikeKit/AppleBikeKitSourceCode.xcframework"),
         .testTarget(
             name: "AppleBikeKitTests",
             dependencies: ["FarmLandBikeKit"]),
