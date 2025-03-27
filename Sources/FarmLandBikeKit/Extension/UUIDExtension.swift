@@ -9,6 +9,6 @@ import Foundation
 
 extension UUID {
     var toToken: String {
-        self.uuidString.replacingOccurrences(of: "-", with: "")
+        self.uuidString.replacingOccurrences(of: "-", with: "").lowercased()
     }
 }
