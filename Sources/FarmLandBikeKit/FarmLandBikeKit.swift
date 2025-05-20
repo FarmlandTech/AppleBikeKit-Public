@@ -144,19 +144,19 @@ open class FarmLandBikeKit: AppleBikeKit {
         self.deviceInfoPublisher()
             .compactMap({ $0.deviceInfo })
             .tryMap({ try $0.asAppleDeviceInfo() })
-            .removeDuplicates(by: {
-                $0.screen_lock_error_count == $1.screen_lock_error_count && $0.screen_lock_state == $1.screen_lock_state
+            .removeDuplicates(by: { (lhs: Apple_Info_st, rhs: Apple_Info_st) -> Bool in
+                lhs.screen_lock_error_count == rhs.screen_lock_error_count && lhs.screen_lock_state == rhs.screen_lock_state
             })
-            .map({
-                switch $0.screen_lock_state {
+            .map({ (deviceInfo: Apple_Info_st) -> (errorCount: Int, state: FarmLandBikeKit.HMIAccessControl) in
+                switch deviceInfo.screen_lock_state {
                 case 0:
-                    return (errorCount: .init($0.screen_lock_error_count), state: FarmLandBikeKit.HMIAccessControl.lock)
+                    return (.init(deviceInfo.screen_lock_error_count), FarmLandBikeKit.HMIAccessControl.lock)
                 case 1:
-                    return (errorCount: .init($0.screen_lock_error_count), state: FarmLandBikeKit.HMIAccessControl.unlock)
+                    return (.init(deviceInfo.screen_lock_error_count), FarmLandBikeKit.HMIAccessControl.unlock)
                 case 2:
-                    return (errorCount: .init($0.screen_lock_error_count), state: FarmLandBikeKit.HMIAccessControl.disable)
+                    return (.init(deviceInfo.screen_lock_error_count), FarmLandBikeKit.HMIAccessControl.disable)
                 default:
-                    return (errorCount: .init($0.screen_lock_error_count), state: FarmLandBikeKit.HMIAccessControl.unknown)
+                    return (.init(deviceInfo.screen_lock_error_count), FarmLandBikeKit.HMIAccessControl.unknown)
                 }
             })
             .eraseToAnyPublisher()
