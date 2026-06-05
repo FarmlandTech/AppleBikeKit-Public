@@ -58,6 +58,7 @@ typedef enum DEVICE_OBJ_TYPE_E
 	DEVICE_OBJ_IOT,
 	DEVICE_OBJ_E_DERAILLEUR,
 	DEVICE_OBJ_E_LOCK,
+	DEVICE_OBJ_TORQUE,
 	DEVICE_OBJ_UNKNOWN = (uint8_t)255,
 } DeviceObjTypes;
 
@@ -73,6 +74,9 @@ typedef enum DEVICE_OBJ_TYPE_E
 #define FL_ISOTP_CANID_DFU_ANY_2_SUBBATT2		(uint32_t)0x10040
 #define FL_ISOTP_CANID_DFU_SUBBATT2_2_ANY		(uint32_t)0x10041
 
+#define FL_ISOTP_CANID_DFU_ANY_2_TORQUE			(uint32_t)0x10070
+#define FL_ISOTP_CANID_DFU_TORQUE_2_ANY			(uint32_t)0x10071
+
 #define FL_ISOTP_CANID_PARAM_ANY_2_HMI			(uint32_t)0x10002
 #define FL_ISOTP_CANID_PARAM_HMI_2_ANY			(uint32_t)0x10003
 #define FL_ISOTP_CANID_PARAM_ANY_2_CONTROLLER	(uint32_t)0x10012
@@ -83,6 +87,9 @@ typedef enum DEVICE_OBJ_TYPE_E
 #define FL_ISOTP_CANID_PARAM_SUBBATT1_2_ANY		(uint32_t)0x10033
 #define FL_ISOTP_CANID_PARAM_ANY_2_SUBBATT2		(uint32_t)0x10042
 #define FL_ISOTP_CANID_PARAM_SUBBATT2_2_ANY		(uint32_t)0x10043
+#define FL_ISOTP_CANID_PARAM_ANY_2_TORQUE		(uint32_t)0x10072
+#define FL_ISOTP_CANID_PARAM_TORQUE_2_ANY		(uint32_t)0x10073
+
 
 #define FL_ISOTP_CANID_LOG_ANY_2_MAINBATT		(uint32_t)0x10024
 #define FL_ISOTP_CANID_LOG_MAINBATT_2_ANY		(uint32_t)0x10025
@@ -326,6 +333,33 @@ typedef union HOST_ParameterChangeNotify_st
 } HOST_DEVICE_PARAM_CHANGE_NOTIF_T;
 
 
+#define FL_CANID_MOTOR_SENSOR_INFO  (uint32_t)0xC0
+typedef union MotorSensor_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+		uint16_t tire_speed;
+		int8_t motor_temp;
+		uint8_t motor_model;
+		uint32_t wheel_rotate_laps;
+	} bits;
+
+} MOTOR_SENSOR_INFO_T;
+
+
+// HMI Protocol packet struct
+typedef enum hmi_display_state_en
+{
+	HMI_DISPLAY_OFF = (uint8_t)0U,
+	HMI_DISPLAY_NORMAL,
+	HMI_DISPLAY_UPDATING,
+	HMI_DISPLAY_LOADING,
+	HMI_DISPLAY_TESTMODE
+} HMI_DISPLAY_STATE_E;
+
+
 #define FL_CANID_HMI_INFO_00	(uint32_t)0x100
 typedef union HMI_Info00_st
 {
@@ -364,7 +398,7 @@ typedef union HMI_Info00_st
 		uint8_t parking_on : 1;
 		uint8_t reserved_2 : 4;
 		//Byte 6
-		uint8_t reserved_3;
+		uint8_t display_state;
 		//Byte 7
 		uint8_t alive_count;
 	} bits;
@@ -1136,6 +1170,76 @@ typedef union S1BAT_ErrorInfo_st
 	} bits;
 
 } SLAVE1_BAT_ERRORINFO_T;
+
+
+#define FL_CANID_TORQUE_INFO_00	(uint32_t)0x600
+typedef union Torque_Info_00_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+		//Byte 0
+		uint8_t forward_rotation : 1;
+		uint8_t switch_chain_trigger : 1;
+		uint8_t pedal_angle : 6;
+		//Byte 12
+		uint16_t pedal_cadence_speed;
+		//Byte 34
+		uint16_t zero_torque_voltage;
+		//Byte 56
+		uint16_t current_torque_voltage;
+		//Byte 7
+		uint8_t torque_slope;
+	} bits;
+
+} TORQUE_INFO_00_T;
+
+#define FL_CANID_TORQUE_WARNING_INFO	(uint32_t)0x61E
+typedef union Torque_WarningInfo_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+		//Byte 0
+		uint8_t page_num : 3;
+		uint8_t total_leng : 5;
+
+		uint8_t warning_0;
+		uint8_t warning_1;
+		uint8_t warning_2;
+		uint8_t warning_3;
+		uint8_t warning_4;
+		uint8_t warning_5;
+		uint8_t warning_6;
+	} bits;
+
+} TORQUE_WARNINGINFO_T;
+
+
+#define FL_CANID_TORQUE_ERROR_INFO	(uint32_t)0x61F
+typedef union Torque_ErrorInfo_st
+{
+	uint8_t bytes[8];
+
+	struct
+	{
+		//Byte 0
+		uint8_t page_num : 3;
+		uint8_t total_leng : 5;
+
+		uint8_t error_0;
+		uint8_t error_1;
+		uint8_t error_2;
+		uint8_t error_3;
+		uint8_t error_4;
+		uint8_t error_5;
+		uint8_t error_6;
+	} bits;
+
+} TORQUE_ERRORINFO_T;
+
 
 
 #define FL_CANID_S1BAT_DEBUGINFO_00	(uint32_t)0x1280

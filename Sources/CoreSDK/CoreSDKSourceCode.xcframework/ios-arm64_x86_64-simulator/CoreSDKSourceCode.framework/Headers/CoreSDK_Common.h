@@ -6,7 +6,7 @@
 #define _FL_CORE_SDK_COMMON_H
 
 
-#import <CoreSDKSourceCode/Common.h>
+#include <CoreSDKSourceCode/Common.h>
 
 
 #ifdef __cplusplus
@@ -87,6 +87,7 @@ typedef DllExport enum DeviceType_enum
 	SDK_FL_E_DERAILLEUR,
 	SDK_FL_E_LOCK,
 	SDK_FL_DONGLE,
+	SDK_FL_TORQUE,
 	SDK_UNKNOWN = 255U
 } SDKDeviceType_e;
 

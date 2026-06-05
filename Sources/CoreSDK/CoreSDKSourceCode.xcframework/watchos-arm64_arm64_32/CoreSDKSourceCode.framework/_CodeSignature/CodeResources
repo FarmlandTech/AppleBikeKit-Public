@@ -4,15 +4,67 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Resources/Info.plist</key>
+		<key>Headers/CAN_ISO_TP.h</key>
 		<data>
-		lnQMzgH4jjZmBBf70qAyG93zPwI=
+		C5SPdLfxEYzJQP5tLsRcAhCWjEg=
+		</data>
+		<key>Headers/Common.h</key>
+		<data>
+		Gi40SkgcGsjZpCRu+rJKNiYnJj8=
+		</data>
+		<key>Headers/CoreSDK.h</key>
+		<data>
+		7Rz6I+pATVa9v+M5f908JDfDmiw=
+		</data>
+		<key>Headers/CoreSDKSourceCode.h</key>
+		<data>
+		tRpClW6C7SeasGw/mv8+Y1LdYPc=
+		</data>
+		<key>Headers/CoreSDK_Common.h</key>
+		<data>
+		Q5+sJ5W5Ax1P94JikJJQy0V2ZkI=
+		</data>
+		<key>Headers/CoreSDK_DelegateFunc.h</key>
+		<data>
+		tmObG1M1oiwd/6VvAVlxsg4R3dk=
+		</data>
+		<key>Headers/CoreSDK_DeviceInfo.h</key>
+		<data>
+		LQ5K9ET9Doow4axWLilKl4jY2iU=
+		</data>
+		<key>Headers/FL_CANInfoStruct.h</key>
+		<data>
+		PhoBTcFKmEF6n4dmAZY+p/OpzfQ=
+		</data>
+		<key>Headers/FL_Logs.h</key>
+		<data>
+		eGofeNz2tp2tafT1XGM+wWvXTEY=
+		</data>
+		<key>Headers/LogPrinter.h</key>
+		<data>
+		5Exf9E7ne4zJAV6jRR+5omf0ea4=
+		</data>
+		<key>Headers/lib_event_scheduler.h</key>
+		<data>
+		TVdXOCxJ5VaNsJwyncBtbgvArT4=
+		</data>
+		<key>Info.plist</key>
+		<data>
+		JXUU4a9XiQuqh4ZXrGQvBVKISfY=
+		</data>
+		<key>Modules/module.modulemap</key>
+		<data>
+		n8IwFye5Yi2enfauS9hesXqsZP8=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
 		<key>Headers/CAN_ISO_TP.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			C5SPdLfxEYzJQP5tLsRcAhCWjEg=
+			</data>
 			<key>hash2</key>
 			<data>
 			iVmPkud1i9NG0DwN9u4/4TZxMUgGHp3PZyOyGiQI6hM=
@@ -20,6 +72,10 @@
 		</dict>
 		<key>Headers/Common.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			Gi40SkgcGsjZpCRu+rJKNiYnJj8=
+			</data>
 			<key>hash2</key>
 			<data>
 			d+7dZC4gct+YXDzX45gPNLIgYzO+a6R7GjX7MdDyxAU=
@@ -27,6 +83,10 @@
 		</dict>
 		<key>Headers/CoreSDK.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			7Rz6I+pATVa9v+M5f908JDfDmiw=
+			</data>
 			<key>hash2</key>
 			<data>
 			BvV56kWJtPOC4XtgfL1RX5yS9P0ypsqUrEdso/XCkbk=
@@ -34,6 +94,10 @@
 		</dict>
 		<key>Headers/CoreSDKSourceCode.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			tRpClW6C7SeasGw/mv8+Y1LdYPc=
+			</data>
 			<key>hash2</key>
 			<data>
 			+9s+A7V9XQlb4dY6/gKQMhEnYCtGUARp3AAHENuoLkM=
@@ -41,6 +105,10 @@
 		</dict>
 		<key>Headers/CoreSDK_Common.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			Q5+sJ5W5Ax1P94JikJJQy0V2ZkI=
+			</data>
 			<key>hash2</key>
 			<data>
 			elpxNj9B/sjIiCCgZJDJGWUjY0WSxx6w1wzYH0Oz1hA=
@@ -48,6 +116,10 @@
 		</dict>
 		<key>Headers/CoreSDK_DelegateFunc.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			tmObG1M1oiwd/6VvAVlxsg4R3dk=
+			</data>
 			<key>hash2</key>
 			<data>
 			z7F1fAiSDsZ7CSZfjMZROEv0SYxouX+EmF2Xe1p3nXM=
@@ -55,6 +127,10 @@
 		</dict>
 		<key>Headers/CoreSDK_DeviceInfo.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			LQ5K9ET9Doow4axWLilKl4jY2iU=
+			</data>
 			<key>hash2</key>
 			<data>
 			Grwgn7ZusobhO8/nGgsfhaxTrYNesCrtP/sEeDcXRik=
@@ -62,6 +138,10 @@
 		</dict>
 		<key>Headers/FL_CANInfoStruct.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			PhoBTcFKmEF6n4dmAZY+p/OpzfQ=
+			</data>
 			<key>hash2</key>
 			<data>
 			/T7V5bOyTL6+qRf9g2UMEaYhS/x2yFa2P4bWlRtMlLU=
@@ -69,6 +149,10 @@
 		</dict>
 		<key>Headers/FL_Logs.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			eGofeNz2tp2tafT1XGM+wWvXTEY=
+			</data>
 			<key>hash2</key>
 			<data>
 			w4TbrvxKtS2u80I1yn94ngQihJbQxycFlAT7U+miFLQ=
@@ -76,6 +160,10 @@
 		</dict>
 		<key>Headers/LogPrinter.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			5Exf9E7ne4zJAV6jRR+5omf0ea4=
+			</data>
 			<key>hash2</key>
 			<data>
 			w1QKkUJ3J1Yq4hH+8h039uHu0oLr0pMQaijwrABX3l4=
@@ -83,6 +171,10 @@
 		</dict>
 		<key>Headers/lib_event_scheduler.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			TVdXOCxJ5VaNsJwyncBtbgvArT4=
+			</data>
 			<key>hash2</key>
 			<data>
 			I7BzZA1A0fIzVeG/IDObp9F2xZ5rEZEax62ojjYbFoY=
@@ -90,38 +182,35 @@
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			n8IwFye5Yi2enfauS9hesXqsZP8=
+			</data>
 			<key>hash2</key>
 			<data>
 			36ODXvHvO5uoD1IBwhWn2R91/Z7ZyHXBuyZFWWtEoek=
 			</data>
 		</dict>
-		<key>Resources/Info.plist</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			0nsrz/05yKmSkeBKu5vLtpVWAewcqzZeBGWL3qtsnC4=
-			</data>
-		</dict>
 	</dict>
 	<key>rules</key>
 	<dict>
-		<key>^Resources/</key>
+		<key>^.*</key>
 		<true/>
-		<key>^Resources/.*\.lproj/</key>
+		<key>^.*\.lproj/</key>
 		<dict>
 			<key>optional</key>
 			<true/>
 			<key>weight</key>
 			<real>1000</real>
 		</dict>
-		<key>^Resources/.*\.lproj/locversion.plist$</key>
+		<key>^.*\.lproj/locversion.plist$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
 		</dict>
-		<key>^Resources/Base\.lproj/</key>
+		<key>^Base\.lproj/</key>
 		<dict>
 			<key>weight</key>
 			<real>1010</real>
@@ -143,15 +232,27 @@
 			<key>weight</key>
 			<real>2000</real>
 		</dict>
-		<key>^(Frameworks|SharedFrameworks|PlugIns|Plug-ins|XPCServices|Helpers|MacOS|Library/(Automator|Spotlight|LoginItems))/</key>
-		<dict>
-			<key>nested</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
-		</dict>
 		<key>^.*</key>
 		<true/>
+		<key>^.*\.lproj/</key>
+		<dict>
+			<key>optional</key>
+			<true/>
+			<key>weight</key>
+			<real>1000</real>
+		</dict>
+		<key>^.*\.lproj/locversion.plist$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>1100</real>
+		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
+		</dict>
 		<key>^Info\.plist$</key>
 		<dict>
 			<key>omit</key>
@@ -165,37 +266,6 @@
 			<true/>
 			<key>weight</key>
 			<real>20</real>
-		</dict>
-		<key>^Resources/</key>
-		<dict>
-			<key>weight</key>
-			<real>20</real>
-		</dict>
-		<key>^Resources/.*\.lproj/</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>1000</real>
-		</dict>
-		<key>^Resources/.*\.lproj/locversion.plist$</key>
-		<dict>
-			<key>omit</key>
-			<true/>
-			<key>weight</key>
-			<real>1100</real>
-		</dict>
-		<key>^Resources/Base\.lproj/</key>
-		<dict>
-			<key>weight</key>
-			<real>1010</real>
-		</dict>
-		<key>^[^/]+$</key>
-		<dict>
-			<key>nested</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
 		</dict>
 		<key>^embedded\.provisionprofile$</key>
 		<dict>

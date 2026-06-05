@@ -5,8 +5,7 @@
 #ifndef _FL_CORE_SDK_DEVICE_INFO_H
 #define _FL_CORE_SDK_DEVICE_INFO_H
 
-#import <CoreSDKSourceCode/Common.h>
-#import <CoreSDKSourceCode/CoreSDK_Common.h>
+#include <CoreSDKSourceCode/CoreSDK_Common.h>
 
 #define LOG_PRINT_ENABLE 1
 
@@ -434,6 +433,15 @@ struct DllExport Apple_Info_st
 	//副電池溫度感測器8 溫度值
 	int s_batt_temperature_8;
 
+	//塔基轉速
+	unsigned int cassette_cadence;
+	//塔基扭矩
+	float cassette_torque;
+	//塔基輸入功率
+	float cassette_power;
+
+	//馬達溫度值
+	int motor_temperature;
 };
 
 // 系統即時資訊
