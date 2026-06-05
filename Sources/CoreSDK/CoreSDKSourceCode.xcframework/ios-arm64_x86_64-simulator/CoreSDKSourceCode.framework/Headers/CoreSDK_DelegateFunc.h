@@ -5,9 +5,7 @@
 #ifndef _FL_CORE_SDK_DELEGATE_FUNC_H
 #define _FL_CORE_SDK_DELEGATE_FUNC_H
 
-
-#import <CoreSDKSourceCode/Common.h>
-#import <CoreSDKSourceCode/CoreSDK_Common.h>
+#include <CoreSDKSourceCode/CoreSDK_Common.h>
 
 #ifdef __cplusplus
 extern "C" {

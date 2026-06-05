@@ -7,15 +7,15 @@
 
   
 
-#import <CoreSDKSourceCode/lib_event_scheduler.h>
-#import <CoreSDKSourceCode/FL_CANInfoStruct.h>
-#import <CoreSDKSourceCode/CoreSDK_Common.h>
-#import <CoreSDKSourceCode/CAN_ISO_TP.h>
-#import <CoreSDKSourceCode/FL_Logs.h>
+#include <CoreSDKSourceCode/lib_event_scheduler.h>
+#include <CoreSDKSourceCode/FL_CANInfoStruct.h>
+#include <CoreSDKSourceCode/CoreSDK_Common.h>
+#include <CoreSDKSourceCode/CAN_ISO_TP.h>
+#include <CoreSDKSourceCode/FL_Logs.h>
 
-#import <CoreSDKSourceCode/CoreSDK_DeviceInfo.h>
-#import <CoreSDKSourceCode/CoreSDK_DelegateFunc.h>
-#import <CoreSDKSourceCode/LogPrinter.h>
+#include <CoreSDKSourceCode/CoreSDK_DeviceInfo.h>
+#include <CoreSDKSourceCode/CoreSDK_DelegateFunc.h>
+#include <CoreSDKSourceCode/LogPrinter.h>
 #define LOG_PRINT_ENABLE 1
 
 

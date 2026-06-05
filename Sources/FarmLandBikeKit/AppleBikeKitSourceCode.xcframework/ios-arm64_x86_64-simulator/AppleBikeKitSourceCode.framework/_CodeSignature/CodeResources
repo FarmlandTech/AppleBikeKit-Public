@@ -6,19 +6,19 @@
 	<dict>
 		<key>Frameworks/CoreSDKSourceCode.framework/CoreSDKSourceCode</key>
 		<data>
-		57VyMnKqF4EhD72IVhlo5M/fQv8=
+		BQH3IyYqK2vS5qPaIYYotDSdd/w=
 		</data>
 		<key>Frameworks/CoreSDKSourceCode.framework/Info.plist</key>
 		<data>
-		A6AHYz4Vu7D326xvaw0w20HpWxY=
+		ZkY3vx6E9PsxXsf+nqsHsHOmHF8=
 		</data>
 		<key>Frameworks/CoreSDKSourceCode.framework/_CodeSignature/CodeResources</key>
 		<data>
-		+a+O3IVk5jPsC96qQwEJibtnWGU=
+		ISHzmV5fAzdkHb3IfE6CA+nmpmU=
 		</data>
 		<key>Headers/AppleBikeKitSourceCode-Swift.h</key>
 		<data>
-		+vSNmRgjm7MpPTxbCWD7VbXa2zw=
+		K8RM+JmxR9oefofUvx96+pilsUk=
 		</data>
 		<key>Headers/AppleBikeKitSourceCode.h</key>
 		<data>
@@ -26,47 +26,47 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		D4CnJmX7mUni+O8wWrZkvV4bpXE=
+		iMOt3ttjfGvg2oOxwHFVSmOeeZE=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		GB5zMQcpda7bKqZDbj7HPvP3zg4=
+		PH13KxHHw82N9m19Rf1EjVUZYeM=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		dll67Kk9RA2s9dIssmgH8yxh4Fo=
+		OcVUafGiqGUU8z2xyGlZO+RjWMw=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		25Q+NCc5qSVOOCBzsWwP2J5pW7g=
+		ckBU6DrWxlneYaDV7KFH8/S169s=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		dll67Kk9RA2s9dIssmgH8yxh4Fo=
+		OcVUafGiqGUU8z2xyGlZO+RjWMw=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		LzHE2xFk2MNmbk/vVaUxQspodhg=
+		C4Bz0m62RddrrazP4my0WqyuBso=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		GB5zMQcpda7bKqZDbj7HPvP3zg4=
+		PH13KxHHw82N9m19Rf1EjVUZYeM=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		vj4nT5by/iFjurJrMTlQUGazxjk=
+		iGTrwSoWLBlNKWkAr11WWhhzx6E=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		pVR6HN4Ua8y5IkUxG3/+ExdclNI=
+		dILXNlWKCI7E0YD0jRI7upfrc54=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		vj4nT5by/iFjurJrMTlQUGazxjk=
+		iGTrwSoWLBlNKWkAr11WWhhzx6E=
 		</data>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		j9gzZ78B6CPYQ8Y8c/boFk58vLs=
+		K6Rljwg3uePvpW7+auWQzIwiLGM=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -79,28 +79,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			1t+JdJYK4t+PlM7wiGeNNy+f3n8tEz70JUPqLQmZSFo=
+			rpvmIjDbEllJuymRQ8xSYdPG8oOB088Pvvl+vYgZkqk=
 			</data>
 		</dict>
 		<key>Frameworks/CoreSDKSourceCode.framework/Info.plist</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			81uayPQ7TAEIBBu5ld3mWsaV6jT7hQ7JxorBsYjs0EY=
+			vw/ZQdBuDEexmwIWkY5ioVzy8Lbmu4vHbtm1seMUcEo=
 			</data>
 		</dict>
 		<key>Frameworks/CoreSDKSourceCode.framework/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			lbRaUcMRo35nUwe2b9j1uqFKoPtlTWp7eOKAtMbG9rQ=
+			jfqfUsQrsM39TCk+XG8NzMS9iOKPeRVyJUFvMJZ5xaI=
 			</data>
 		</dict>
 		<key>Headers/AppleBikeKitSourceCode-Swift.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			GdcXDIylssBG01ESJvjYjt1NlMXEbvs5T+oFf5jODP4=
+			men9l2RB3sLxmOfVdj6S/z3Nz9eMK6utsw0qAy1wtes=
 			</data>
 		</dict>
 		<key>Headers/AppleBikeKitSourceCode.h</key>
@@ -114,70 +114,70 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			pJ7UBfTGWoOuCGSD1lynu3xPxhFhFX9om91O49M2lUQ=
+			kfXmj/KIP2yHTAX+O/EG4/GEVpVZEhTHzysSsOgO6R8=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			MNbLcLk2ZCiOrN/ieNOB+dpbYWS/RmT8qgDpKsydpwM=
+			nmR+zTSK2oFXnQVtZ7SalE1pFnOWCvn3QxZMr169LtM=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TtjuHby4G3H563GjqWSAuD0159eI3i5Hg+g/jAjko3k=
+			FWBy0AruwCTg6/tICpNO1RHL0cf4IiUn0LE910iP1Zg=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			MNbLcLk2ZCiOrN/ieNOB+dpbYWS/RmT8qgDpKsydpwM=
+			nmR+zTSK2oFXnQVtZ7SalE1pFnOWCvn3QxZMr169LtM=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			WDjQ6j4V3LY2AQdAigE8i78Bkx/ZuZO283Wh0C9mHUk=
+			0yHIqDriJWcTlBFbhWJYykirwEGNSDqpmenUKx71/dg=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			pJ7UBfTGWoOuCGSD1lynu3xPxhFhFX9om91O49M2lUQ=
+			kfXmj/KIP2yHTAX+O/EG4/GEVpVZEhTHzysSsOgO6R8=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			iKcjBnrGo5D37EG6tgBTL9sOwnBm6P6q1jMwaupaOvE=
+			vcJgiKDVgVws8EmigGSjb+dv4KBg1DH99Gi1hxzF2cY=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			863jSNCJbzQXc+ThgGx+OnsteOQP1anetGQ2KBHQt+E=
+			/xE+I7u/zJ5npcdTqq3zBvNbE0EH3/Jf50FNWf0U2ks=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			iKcjBnrGo5D37EG6tgBTL9sOwnBm6P6q1jMwaupaOvE=
+			vcJgiKDVgVws8EmigGSjb+dv4KBg1DH99Gi1hxzF2cY=
 			</data>
 		</dict>
 		<key>Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			/bBcBAlnj3O0fi5Hlmrbs5Ht0Wx7OE4+EF+whX6xDOU=
+			UBGZSQPE46jfIOW/zsQSB/I2nUjAGI5qq0utvHNK45Q=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -6,23 +6,23 @@
 	<dict>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/AppleBikeKitSourceCode</key>
 		<data>
-		WrfZ7RKosQzHMWHC17vCej0I+pg=
+		9ZLVvxRPUGz2eQvKbPusRNF7Tk8=
 		</data>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/CoreSDKSourceCode</key>
 		<data>
-		sTtoJBiI6gQZaGvNcrKyY2j06n8=
+		U+DF8OWbyd3XiWAeFARjsWUNIdo=
 		</data>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/Info.plist</key>
 		<data>
-		otkNGTaUwNF+5Xrz/gv1Ro5QM40=
+		fT1ZIzPRvlLmWJguVws1+LgeuWI=
 		</data>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/_CodeSignature/CodeResources</key>
 		<data>
-		+H3ZPYx/UcfZ8+UlCPnjhfhYYJg=
+		d/x/UaUSvP5PtE6WIbQOSAnL/MU=
 		</data>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode-Swift.h</key>
 		<data>
-		3XvpLUsn7zTPplnpEzlB3c33W3k=
+		2xcR3YtuIhiLUG5fhUmxYbjSf/I=
 		</data>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode.h</key>
 		<data>
@@ -30,23 +30,23 @@
 		</data>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Info.plist</key>
 		<data>
-		ExcpGs/pTihdrgZ85DYRd59dIMI=
+		07V0XzIN3Z1eQBJmDjrZ9+Aj590=
 		</data>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		GB5zMQcpda7bKqZDbj7HPvP3zg4=
+		PH13KxHHw82N9m19Rf1EjVUZYeM=
 		</data>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		fJddUCNzWW1sJTR2KDAOJFuXsgU=
+		8mD/4LKuhuS3IPGFtWout9JUen4=
 		</data>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		MCFbVFgeMyUBP/LirWooP9mEVww=
+		xWfPqbUMyn8iHBRYnPX9lDwuYkg=
 		</data>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		fJddUCNzWW1sJTR2KDAOJFuXsgU=
+		8mD/4LKuhuS3IPGFtWout9JUen4=
 		</data>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Modules/module.modulemap</key>
 		<data>
@@ -54,27 +54,39 @@
 		</data>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/_CodeSignature/CodeResources</key>
 		<data>
-		FuWuvHYx93dtIwmdBedqk+X/c4Q=
+		csVplunSC49fSa0ggVM1GCmJ/gs=
+		</data>
+		<key>ios-arm64/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Info.plist</key>
+		<data>
+		nkSPgjS1Ry0SFJmMmTVqqL4VfrU=
+		</data>
+		<key>ios-arm64/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/DWARF/AppleBikeKitSourceCode</key>
+		<data>
+		P47v5F85wCffJGyjtgASvEamGI0=
+		</data>
+		<key>ios-arm64/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/aarch64/AppleBikeKitSourceCode.yml</key>
+		<data>
+		YwVp9MdqGKX8PuuzFW8suzqLuVM=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/AppleBikeKitSourceCode</key>
 		<data>
-		uXEbjme/y/RSHhpYtaWHimcr45I=
+		A2j5QVPeMUHITD4Ds/QDxEzB3Cc=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Frameworks/CoreSDKSourceCode.framework/Versions/A/CoreSDKSourceCode</key>
 		<data>
-		JgVTdM+B8w2CVPiwRFsPkN/7rys=
+		fxjzjparS8bPCIwwNUSIpl+XjYQ=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Frameworks/CoreSDKSourceCode.framework/Versions/A/Resources/Info.plist</key>
 		<data>
-		59x8s9xw3nTfI7cUH9Gg5HYXcr0=
+		lnQMzgH4jjZmBBf70qAyG93zPwI=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Frameworks/CoreSDKSourceCode.framework/Versions/A/_CodeSignature/CodeResources</key>
 		<data>
-		29q5klFastldPicY07GyBIi0ymA=
+		20+Osco3CqzSv9eUuEeNPnhMEqs=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Headers/AppleBikeKitSourceCode-Swift.h</key>
 		<data>
-		+vSNmRgjm7MpPTxbCWD7VbXa2zw=
+		K8RM+JmxR9oefofUvx96+pilsUk=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Headers/AppleBikeKitSourceCode.h</key>
 		<data>
@@ -82,35 +94,35 @@
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-macabi.abi.json</key>
 		<data>
-		ftn3AUfbZTkfoSbOCSNlRZsnAKE=
+		I520r4ItlchQxSAV/vo3t3xLDY0=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-macabi.private.swiftinterface</key>
 		<data>
-		QlwgnzvLXiqZDU9LoNldPloWHw4=
+		FKjMx1Q4c7cfYOEVx2CpA7hjStU=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-macabi.swiftdoc</key>
 		<data>
-		+xjhbCCe5nbcP9RJeMRFK/GaMIk=
+		Y9yj+7ATt9Fx4tOd+R2Hx14M8xs=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-macabi.swiftinterface</key>
 		<data>
-		QlwgnzvLXiqZDU9LoNldPloWHw4=
+		FKjMx1Q4c7cfYOEVx2CpA7hjStU=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-macabi.abi.json</key>
 		<data>
-		ftn3AUfbZTkfoSbOCSNlRZsnAKE=
+		I520r4ItlchQxSAV/vo3t3xLDY0=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-macabi.private.swiftinterface</key>
 		<data>
-		Oe5ovxHQKIsZz3M80HKx5zN1bP8=
+		KOTvwDD5oMuDceXyLX8VtW1A/s0=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-macabi.swiftdoc</key>
 		<data>
-		qqDaB5sqqkmu8ctJ3Crud3V2W8o=
+		b4cJAiUl54j4HaGJSt4fZTS2e6A=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-macabi.swiftinterface</key>
 		<data>
-		Oe5ovxHQKIsZz3M80HKx5zN1bP8=
+		KOTvwDD5oMuDceXyLX8VtW1A/s0=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/module.modulemap</key>
 		<data>
@@ -118,31 +130,47 @@
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Resources/Info.plist</key>
 		<data>
-		D4kTI0SBWNW9pGgtXsM7crsF4kA=
+		uC4DUKauTXHZBjIC6PBeFpNM5mo=
 		</data>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/_CodeSignature/CodeResources</key>
 		<data>
-		zlWAkoBbcL+thbvrs2kktcf6UuE=
+		XH4uem9z1iMETp6Mi0uZduuboQs=
+		</data>
+		<key>ios-arm64_x86_64-maccatalyst/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Info.plist</key>
+		<data>
+		nkSPgjS1Ry0SFJmMmTVqqL4VfrU=
+		</data>
+		<key>ios-arm64_x86_64-maccatalyst/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/DWARF/AppleBikeKitSourceCode</key>
+		<data>
+		z/XNOi5vK0Yx4kQlL3D7RMBNuSk=
+		</data>
+		<key>ios-arm64_x86_64-maccatalyst/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/aarch64/AppleBikeKitSourceCode.yml</key>
+		<data>
+		rpcrWsJqtv0i9YraEhdHrJpjQwo=
+		</data>
+		<key>ios-arm64_x86_64-maccatalyst/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/x86_64/AppleBikeKitSourceCode.yml</key>
+		<data>
+		uYGm7zoqiggU2SLJjuBjWWSIEV0=
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/AppleBikeKitSourceCode</key>
 		<data>
-		z9SnwyLoSLBx1mxp9jWWnx2iImw=
+		guPN8xynTdMaCHH8E0cBcbP6x6Y=
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/CoreSDKSourceCode</key>
 		<data>
-		57VyMnKqF4EhD72IVhlo5M/fQv8=
+		BQH3IyYqK2vS5qPaIYYotDSdd/w=
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/Info.plist</key>
 		<data>
-		A6AHYz4Vu7D326xvaw0w20HpWxY=
+		ZkY3vx6E9PsxXsf+nqsHsHOmHF8=
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/_CodeSignature/CodeResources</key>
 		<data>
-		+a+O3IVk5jPsC96qQwEJibtnWGU=
+		ISHzmV5fAzdkHb3IfE6CA+nmpmU=
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode-Swift.h</key>
 		<data>
-		+vSNmRgjm7MpPTxbCWD7VbXa2zw=
+		K8RM+JmxR9oefofUvx96+pilsUk=
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode.h</key>
 		<data>
@@ -150,39 +178,39 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Info.plist</key>
 		<data>
-		D4CnJmX7mUni+O8wWrZkvV4bpXE=
+		iMOt3ttjfGvg2oOxwHFVSmOeeZE=
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		GB5zMQcpda7bKqZDbj7HPvP3zg4=
+		PH13KxHHw82N9m19Rf1EjVUZYeM=
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		dll67Kk9RA2s9dIssmgH8yxh4Fo=
+		OcVUafGiqGUU8z2xyGlZO+RjWMw=
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		25Q+NCc5qSVOOCBzsWwP2J5pW7g=
+		ckBU6DrWxlneYaDV7KFH8/S169s=
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		dll67Kk9RA2s9dIssmgH8yxh4Fo=
+		OcVUafGiqGUU8z2xyGlZO+RjWMw=
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		GB5zMQcpda7bKqZDbj7HPvP3zg4=
+		PH13KxHHw82N9m19Rf1EjVUZYeM=
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		vj4nT5by/iFjurJrMTlQUGazxjk=
+		iGTrwSoWLBlNKWkAr11WWhhzx6E=
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		pVR6HN4Ua8y5IkUxG3/+ExdclNI=
+		dILXNlWKCI7E0YD0jRI7upfrc54=
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		vj4nT5by/iFjurJrMTlQUGazxjk=
+		iGTrwSoWLBlNKWkAr11WWhhzx6E=
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/module.modulemap</key>
 		<data>
@@ -190,7 +218,191 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/_CodeSignature/CodeResources</key>
 		<data>
-		m68Oy9klz6M2NdkX7HMYO9O32tg=
+		Itwt8n0na+eNId9S7O1U+eqfbnc=
+		</data>
+		<key>ios-arm64_x86_64-simulator/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Info.plist</key>
+		<data>
+		nkSPgjS1Ry0SFJmMmTVqqL4VfrU=
+		</data>
+		<key>ios-arm64_x86_64-simulator/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/DWARF/AppleBikeKitSourceCode</key>
+		<data>
+		uQidueTVhEww6V7Jck76Vl0ACeA=
+		</data>
+		<key>ios-arm64_x86_64-simulator/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/aarch64/AppleBikeKitSourceCode.yml</key>
+		<data>
+		1n2bsHkmgqf6I+YoIG7EuSLZaIM=
+		</data>
+		<key>ios-arm64_x86_64-simulator/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/x86_64/AppleBikeKitSourceCode.yml</key>
+		<data>
+		rIH2e4v/Dto9nDPu6Xz4eXlxX6A=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/AppleBikeKitSourceCode</key>
+		<data>
+		YRoW+oM0j/0rkWwL8a3OrPSuf3E=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/CoreSDKSourceCode</key>
+		<data>
+		/t5hNeeDivtFaeMtA6PfsIZtVG0=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/Info.plist</key>
+		<data>
+		JXUU4a9XiQuqh4ZXrGQvBVKISfY=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/_CodeSignature/CodeResources</key>
+		<data>
+		YMH0bY6t80srmlmlhncp2SLIfcI=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode-Swift.h</key>
+		<data>
+		Q3Gjr3a7k+q4DHG3x8lklZSZnEA=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode.h</key>
+		<data>
+		cLPBmxsnRYrCe3robFx0Yzv9HdA=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Info.plist</key>
+		<data>
+		NkVLFnI+xAGiHwkPbG32dhV22J4=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-watchos.abi.json</key>
+		<data>
+		xnZn5dqr/8q2bRjJHhoud/ay3WE=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-watchos.private.swiftinterface</key>
+		<data>
+		uaF1o+LngPcxNiypxOeWcFQzimM=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-watchos.swiftdoc</key>
+		<data>
+		aZQ3hHEwveYkRF1oFosRaJ36o2M=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-watchos.swiftinterface</key>
+		<data>
+		uaF1o+LngPcxNiypxOeWcFQzimM=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64_32-apple-watchos.abi.json</key>
+		<data>
+		xnZn5dqr/8q2bRjJHhoud/ay3WE=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64_32-apple-watchos.private.swiftinterface</key>
+		<data>
+		RpfCyxhiPgD6s1LyNHnrxVoKwwg=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64_32-apple-watchos.swiftdoc</key>
+		<data>
+		uVRan77W4tp4D/fVgE1IUC3mfHU=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64_32-apple-watchos.swiftinterface</key>
+		<data>
+		RpfCyxhiPgD6s1LyNHnrxVoKwwg=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/module.modulemap</key>
+		<data>
+		2t51b9+Ed1K0s+7xlnW+aEH8/Rk=
+		</data>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/_CodeSignature/CodeResources</key>
+		<data>
+		zYQl4ozkh78ZUsdqVa7vuVXrj7E=
+		</data>
+		<key>watchos-arm64_arm64_32/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Info.plist</key>
+		<data>
+		nkSPgjS1Ry0SFJmMmTVqqL4VfrU=
+		</data>
+		<key>watchos-arm64_arm64_32/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/DWARF/AppleBikeKitSourceCode</key>
+		<data>
+		yL9LNGv9oEm0Yd0NQa4a5ZcavM0=
+		</data>
+		<key>watchos-arm64_arm64_32/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/aarch64/AppleBikeKitSourceCode.yml</key>
+		<data>
+		NG6nhzs3BxEGj3+DA0xUtjGosFc=
+		</data>
+		<key>watchos-arm64_arm64_32/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/aarch64_32/AppleBikeKitSourceCode.yml</key>
+		<data>
+		ZDsypgaBT0U1uiqqzbO09sLvWGo=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/AppleBikeKitSourceCode</key>
+		<data>
+		MoqVyRXJTyQCYT9i4CMXD+cR9ww=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/CoreSDKSourceCode</key>
+		<data>
+		F3BGWStM5uQYQhHAfbPpNo2cP0w=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/Info.plist</key>
+		<data>
+		oh5VxxdYle6BUVV4hGjxwx+/8B8=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/_CodeSignature/CodeResources</key>
+		<data>
+		05MVHqijuUUiL/JRpyG2spyeSzQ=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode-Swift.h</key>
+		<data>
+		K8RM+JmxR9oefofUvx96+pilsUk=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode.h</key>
+		<data>
+		cLPBmxsnRYrCe3robFx0Yzv9HdA=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Info.plist</key>
+		<data>
+		P000oIYlP/Ya8TxFC7/3zG1yzB8=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-watchos-simulator.abi.json</key>
+		<data>
+		xnZn5dqr/8q2bRjJHhoud/ay3WE=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-watchos-simulator.private.swiftinterface</key>
+		<data>
+		wceBh8IyzXnTM0JYEOcuWSz4R4M=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-watchos-simulator.swiftdoc</key>
+		<data>
+		Em0Gv4WEvVoHMv+K9kWzufra+Xk=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-watchos-simulator.swiftinterface</key>
+		<data>
+		wceBh8IyzXnTM0JYEOcuWSz4R4M=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-watchos-simulator.abi.json</key>
+		<data>
+		xnZn5dqr/8q2bRjJHhoud/ay3WE=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-watchos-simulator.private.swiftinterface</key>
+		<data>
+		p/sm0E+7EsW3VT5L9X2/Ko9FLAc=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-watchos-simulator.swiftdoc</key>
+		<data>
+		7ZYt5vblRwO7qrkKiNQuAg3ldTo=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-watchos-simulator.swiftinterface</key>
+		<data>
+		p/sm0E+7EsW3VT5L9X2/Ko9FLAc=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/module.modulemap</key>
+		<data>
+		2t51b9+Ed1K0s+7xlnW+aEH8/Rk=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/_CodeSignature/CodeResources</key>
+		<data>
+		SDrbDv1dEeq8qqXBj3+vNnLoHEA=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Info.plist</key>
+		<data>
+		nkSPgjS1Ry0SFJmMmTVqqL4VfrU=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/DWARF/AppleBikeKitSourceCode</key>
+		<data>
+		2luaSia34EK9donZN/aV4oceWPU=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/aarch64/AppleBikeKitSourceCode.yml</key>
+		<data>
+		NG6nhzs3BxEGj3+DA0xUtjGosFc=
+		</data>
+		<key>watchos-arm64_x86_64-simulator/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/x86_64/AppleBikeKitSourceCode.yml</key>
+		<data>
+		E6WM8HqTokkUsvjqYQpA735BqIw=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -199,55 +411,55 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			WrfZ7RKosQzHMWHC17vCej0I+pg=
+			9ZLVvxRPUGz2eQvKbPusRNF7Tk8=
 			</data>
 			<key>hash2</key>
 			<data>
-			wZDEoUtb7DMdBVu6ljzdmA/fnXP7p+czzXoLKnRwOxQ=
+			thAt7iwxufg/uA/l1xUVXSO7k7dVxTafTqNUAxSCO3o=
 			</data>
 		</dict>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/CoreSDKSourceCode</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			sTtoJBiI6gQZaGvNcrKyY2j06n8=
+			U+DF8OWbyd3XiWAeFARjsWUNIdo=
 			</data>
 			<key>hash2</key>
 			<data>
-			hF+6oge0mxpaaD9tVzKIDkQ2fcOKsiXFycrz1MBiMDQ=
+			KyCa+N22SoHMw2zngdYxgj19FRMnrLl5nrGGDhSCqg4=
 			</data>
 		</dict>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			otkNGTaUwNF+5Xrz/gv1Ro5QM40=
+			fT1ZIzPRvlLmWJguVws1+LgeuWI=
 			</data>
 			<key>hash2</key>
 			<data>
-			FaqA1X+u0n4FO6ol5ikY2yXyL/dQGXMY5qlY1F5bjYs=
+			xQlv4m4UzBLt5eqfU3tRasrfVaVHA22AAHs5cKinhBc=
 			</data>
 		</dict>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+H3ZPYx/UcfZ8+UlCPnjhfhYYJg=
+			d/x/UaUSvP5PtE6WIbQOSAnL/MU=
 			</data>
 			<key>hash2</key>
 			<data>
-			N56AruCQgiyzoQ7p6WtLURqXvaT3lwTn2Ytn+Te85CI=
+			/5uHteHTXYqCJIgzICUQscqmQldai1gxLoWomFw5w+Y=
 			</data>
 		</dict>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode-Swift.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			3XvpLUsn7zTPplnpEzlB3c33W3k=
+			2xcR3YtuIhiLUG5fhUmxYbjSf/I=
 			</data>
 			<key>hash2</key>
 			<data>
-			8nuHxij+LNH57sdzfO2x7GQNfmZk3L1XGBodbuw2UIA=
+			/gK6x6ZyJG9NH2HKm5SoDycnddlHYsr+63uEX6syihA=
 			</data>
 		</dict>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode.h</key>
@@ -265,55 +477,55 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ExcpGs/pTihdrgZ85DYRd59dIMI=
+			07V0XzIN3Z1eQBJmDjrZ9+Aj590=
 			</data>
 			<key>hash2</key>
 			<data>
-			FZYdLRHr0CNXhEbvgwZw6hwb2R0Nl2tIlrJea223V4U=
+			I8PyYbJ7W8qfptzoRYiPnyGSqO9Lg7Fsh0lY93xitec=
 			</data>
 		</dict>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios.abi.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			GB5zMQcpda7bKqZDbj7HPvP3zg4=
+			PH13KxHHw82N9m19Rf1EjVUZYeM=
 			</data>
 			<key>hash2</key>
 			<data>
-			pJ7UBfTGWoOuCGSD1lynu3xPxhFhFX9om91O49M2lUQ=
+			kfXmj/KIP2yHTAX+O/EG4/GEVpVZEhTHzysSsOgO6R8=
 			</data>
 		</dict>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			fJddUCNzWW1sJTR2KDAOJFuXsgU=
+			8mD/4LKuhuS3IPGFtWout9JUen4=
 			</data>
 			<key>hash2</key>
 			<data>
-			gnW+6kaCkZ0oIMst+wpN7Xf9KaMLZEb4b9gLKIws9/I=
+			o2R0GYGJnz0uAwsdr5ZLCx06iWCc5GiRbLBi3Wcpnf4=
 			</data>
 		</dict>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MCFbVFgeMyUBP/LirWooP9mEVww=
+			xWfPqbUMyn8iHBRYnPX9lDwuYkg=
 			</data>
 			<key>hash2</key>
 			<data>
-			KWB4d9b154oHHI7fw9EjAWdW9NWIDFJpM8UlDUiYrEM=
+			nVeR7lJDLeUBmJVKj1EXXf4mMzIWVTXSeN1gBDbDk/E=
 			</data>
 		</dict>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			fJddUCNzWW1sJTR2KDAOJFuXsgU=
+			8mD/4LKuhuS3IPGFtWout9JUen4=
 			</data>
 			<key>hash2</key>
 			<data>
-			gnW+6kaCkZ0oIMst+wpN7Xf9KaMLZEb4b9gLKIws9/I=
+			o2R0GYGJnz0uAwsdr5ZLCx06iWCc5GiRbLBi3Wcpnf4=
 			</data>
 		</dict>
 		<key>ios-arm64/AppleBikeKitSourceCode.framework/Modules/module.modulemap</key>
@@ -331,17 +543,55 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			FuWuvHYx93dtIwmdBedqk+X/c4Q=
+			csVplunSC49fSa0ggVM1GCmJ/gs=
 			</data>
 			<key>hash2</key>
 			<data>
-			T0S7wlEIZFbPfOxP0Ko0R/pIqYR/cucwf6C+/PvMx5k=
+			PExXXW7bc+luP1DcPzOG1JwI9wGdYvurU+GK64eo5sA=
+			</data>
+		</dict>
+		<key>ios-arm64/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			nkSPgjS1Ry0SFJmMmTVqqL4VfrU=
+			</data>
+			<key>hash2</key>
+			<data>
+			n3vxFpuyvTu7dfTn5bnOxELTEzPcuSyRfoaoN8XwCic=
+			</data>
+		</dict>
+		<key>ios-arm64/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/DWARF/AppleBikeKitSourceCode</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			P47v5F85wCffJGyjtgASvEamGI0=
+			</data>
+			<key>hash2</key>
+			<data>
+			gtO00Vx71URbtJ1m92xg6uIKq5Tx8Wy84PNc9H24DeE=
+			</data>
+		</dict>
+		<key>ios-arm64/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/aarch64/AppleBikeKitSourceCode.yml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			YwVp9MdqGKX8PuuzFW8suzqLuVM=
+			</data>
+			<key>hash2</key>
+			<data>
+			XhvvsyAf7PbakxiYB1sdMgPYkXGk2Q8psv9MRos8HZA=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/AppleBikeKitSourceCode</key>
 		<dict>
 			<key>symlink</key>
 			<string>Versions/Current/AppleBikeKitSourceCode</string>
+		</dict>
+		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Frameworks</key>
+		<dict>
+			<key>symlink</key>
+			<string>Versions/Current/Frameworks</string>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Headers</key>
 		<dict>
@@ -362,11 +612,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			uXEbjme/y/RSHhpYtaWHimcr45I=
+			A2j5QVPeMUHITD4Ds/QDxEzB3Cc=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZR3P1t3drl8SlIRSHYF6oJOqJa+fzjj++7LXAdvyV8A=
+			oQS1cIHJxfIg/unfYFUhliepVDpgOSrA5cROiVXlTAs=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Frameworks/CoreSDKSourceCode.framework/CoreSDKSourceCode</key>
@@ -383,33 +633,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			JgVTdM+B8w2CVPiwRFsPkN/7rys=
+			fxjzjparS8bPCIwwNUSIpl+XjYQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			ie1JQUZQOzJVA3OB/uHxQIUaWIYAK8VYjajLPVgm3UE=
+			iYAtmjTmzcPHVY09ScVs59nV6JHD9ipE2hHyFVYLpqU=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Frameworks/CoreSDKSourceCode.framework/Versions/A/Resources/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			59x8s9xw3nTfI7cUH9Gg5HYXcr0=
+			lnQMzgH4jjZmBBf70qAyG93zPwI=
 			</data>
 			<key>hash2</key>
 			<data>
-			SvBP7qpKTE2XiEgyODzH6gAYwohprO3A3QVdCsJUvic=
+			0nsrz/05yKmSkeBKu5vLtpVWAewcqzZeBGWL3qtsnC4=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Frameworks/CoreSDKSourceCode.framework/Versions/A/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			29q5klFastldPicY07GyBIi0ymA=
+			20+Osco3CqzSv9eUuEeNPnhMEqs=
 			</data>
 			<key>hash2</key>
 			<data>
-			/tI7dPZtTJtHn9dn/iMpiN1Llpu2sjKSlCl5oVT0a8c=
+			wCGED9lNIUuRmEQ5ckQ4q4pvvnu38sZ1Xu+Xy3197P4=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Frameworks/CoreSDKSourceCode.framework/Versions/Current</key>
@@ -421,11 +671,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+vSNmRgjm7MpPTxbCWD7VbXa2zw=
+			K8RM+JmxR9oefofUvx96+pilsUk=
 			</data>
 			<key>hash2</key>
 			<data>
-			GdcXDIylssBG01ESJvjYjt1NlMXEbvs5T+oFf5jODP4=
+			men9l2RB3sLxmOfVdj6S/z3Nz9eMK6utsw0qAy1wtes=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Headers/AppleBikeKitSourceCode.h</key>
@@ -443,88 +693,88 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ftn3AUfbZTkfoSbOCSNlRZsnAKE=
+			I520r4ItlchQxSAV/vo3t3xLDY0=
 			</data>
 			<key>hash2</key>
 			<data>
-			bxa93mOSLiHUwbpd6cjClEQ15VTfhQQjDR6vjjWr4yc=
+			7tN6nz1wjFj31qQ2sPeD976khoB1lZUeseRn3sKW9TQ=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-macabi.private.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QlwgnzvLXiqZDU9LoNldPloWHw4=
+			FKjMx1Q4c7cfYOEVx2CpA7hjStU=
 			</data>
 			<key>hash2</key>
 			<data>
-			RyoZUNJI3KLemwbLeneZ/lWUoDMahpd8LTSUUxU694g=
+			8pIAidlSd33HR86Coj25GTiBbTvmGDdoGrJlXr+0Ogk=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-macabi.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+xjhbCCe5nbcP9RJeMRFK/GaMIk=
+			Y9yj+7ATt9Fx4tOd+R2Hx14M8xs=
 			</data>
 			<key>hash2</key>
 			<data>
-			8eMxN5Q7C09DUczpDa2+gEF9N0UPOHjglvcN4V1UFzg=
+			AQcEtKsn16K2Gchop2Q8JgtdRHZ1W4nYuvM4ClAzpOs=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-macabi.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QlwgnzvLXiqZDU9LoNldPloWHw4=
+			FKjMx1Q4c7cfYOEVx2CpA7hjStU=
 			</data>
 			<key>hash2</key>
 			<data>
-			RyoZUNJI3KLemwbLeneZ/lWUoDMahpd8LTSUUxU694g=
+			8pIAidlSd33HR86Coj25GTiBbTvmGDdoGrJlXr+0Ogk=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-macabi.abi.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ftn3AUfbZTkfoSbOCSNlRZsnAKE=
+			I520r4ItlchQxSAV/vo3t3xLDY0=
 			</data>
 			<key>hash2</key>
 			<data>
-			bxa93mOSLiHUwbpd6cjClEQ15VTfhQQjDR6vjjWr4yc=
+			7tN6nz1wjFj31qQ2sPeD976khoB1lZUeseRn3sKW9TQ=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-macabi.private.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Oe5ovxHQKIsZz3M80HKx5zN1bP8=
+			KOTvwDD5oMuDceXyLX8VtW1A/s0=
 			</data>
 			<key>hash2</key>
 			<data>
-			DCjdTjT0LgtQcbHdz+kJkT8RH6JLi2drlPK8OLza+Z0=
+			ElsIlIe5Mv4OC/TSudbzKKF9Jdq04FssLp8W2vzrggg=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-macabi.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			qqDaB5sqqkmu8ctJ3Crud3V2W8o=
+			b4cJAiUl54j4HaGJSt4fZTS2e6A=
 			</data>
 			<key>hash2</key>
 			<data>
-			iT6O+7UCCVtJiZYpbsmYvSjJpsxc0lXKFP65eJ/pRs4=
+			RoGVnwkTG0s3wI/4N+HOmlJ7Q8t6MyT0w8a2TEE0ohI=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-macabi.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Oe5ovxHQKIsZz3M80HKx5zN1bP8=
+			KOTvwDD5oMuDceXyLX8VtW1A/s0=
 			</data>
 			<key>hash2</key>
 			<data>
-			DCjdTjT0LgtQcbHdz+kJkT8RH6JLi2drlPK8OLza+Z0=
+			ElsIlIe5Mv4OC/TSudbzKKF9Jdq04FssLp8W2vzrggg=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/Modules/module.modulemap</key>
@@ -542,22 +792,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			D4kTI0SBWNW9pGgtXsM7crsF4kA=
+			uC4DUKauTXHZBjIC6PBeFpNM5mo=
 			</data>
 			<key>hash2</key>
 			<data>
-			2eZmlMdeJAMfkfIyMt1d4cC4pW6neLrvSOD8snjYph4=
+			YzLhz8LM29hnyU1zlVxSCkyDyKcCnlDHu6pMumWU0XE=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/A/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			zlWAkoBbcL+thbvrs2kktcf6UuE=
+			XH4uem9z1iMETp6Mi0uZduuboQs=
 			</data>
 			<key>hash2</key>
 			<data>
-			Tl9H6IbKOmVBc+c5xFmrFTOaOxjrvySdZ5vm3xhLXTg=
+			W6C1yMWNG+S73lcnsiw9nEDB78rNh2xbW/phkYlDEaA=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/AppleBikeKitSourceCode.framework/Versions/Current</key>
@@ -565,59 +815,103 @@
 			<key>symlink</key>
 			<string>A</string>
 		</dict>
+		<key>ios-arm64_x86_64-maccatalyst/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			nkSPgjS1Ry0SFJmMmTVqqL4VfrU=
+			</data>
+			<key>hash2</key>
+			<data>
+			n3vxFpuyvTu7dfTn5bnOxELTEzPcuSyRfoaoN8XwCic=
+			</data>
+		</dict>
+		<key>ios-arm64_x86_64-maccatalyst/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/DWARF/AppleBikeKitSourceCode</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			z/XNOi5vK0Yx4kQlL3D7RMBNuSk=
+			</data>
+			<key>hash2</key>
+			<data>
+			hM9FT42dA9RdZw982mOzWAOJgZyY2c5gCxSEeh0W6MA=
+			</data>
+		</dict>
+		<key>ios-arm64_x86_64-maccatalyst/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/aarch64/AppleBikeKitSourceCode.yml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rpcrWsJqtv0i9YraEhdHrJpjQwo=
+			</data>
+			<key>hash2</key>
+			<data>
+			LHTbs/bcVsqeqhfTrFci8PLyClh2x807KYLCCrLbDH4=
+			</data>
+		</dict>
+		<key>ios-arm64_x86_64-maccatalyst/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/x86_64/AppleBikeKitSourceCode.yml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			uYGm7zoqiggU2SLJjuBjWWSIEV0=
+			</data>
+			<key>hash2</key>
+			<data>
+			Eybt6JkvUtXXpcTn1p3IanWbOL6XI7MzYtNtMmf+zI4=
+			</data>
+		</dict>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/AppleBikeKitSourceCode</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			z9SnwyLoSLBx1mxp9jWWnx2iImw=
+			guPN8xynTdMaCHH8E0cBcbP6x6Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			PO6DFJxf3zti7doavKZ1Zr16iMVhLgfbo+Pl26vWUJs=
+			TEj5CTH3DvAItqVlLqVJrPMtXMdmswK1D2bnye2unZc=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/CoreSDKSourceCode</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			57VyMnKqF4EhD72IVhlo5M/fQv8=
+			BQH3IyYqK2vS5qPaIYYotDSdd/w=
 			</data>
 			<key>hash2</key>
 			<data>
-			1t+JdJYK4t+PlM7wiGeNNy+f3n8tEz70JUPqLQmZSFo=
+			rpvmIjDbEllJuymRQ8xSYdPG8oOB088Pvvl+vYgZkqk=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			A6AHYz4Vu7D326xvaw0w20HpWxY=
+			ZkY3vx6E9PsxXsf+nqsHsHOmHF8=
 			</data>
 			<key>hash2</key>
 			<data>
-			81uayPQ7TAEIBBu5ld3mWsaV6jT7hQ7JxorBsYjs0EY=
+			vw/ZQdBuDEexmwIWkY5ioVzy8Lbmu4vHbtm1seMUcEo=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+a+O3IVk5jPsC96qQwEJibtnWGU=
+			ISHzmV5fAzdkHb3IfE6CA+nmpmU=
 			</data>
 			<key>hash2</key>
 			<data>
-			lbRaUcMRo35nUwe2b9j1uqFKoPtlTWp7eOKAtMbG9rQ=
+			jfqfUsQrsM39TCk+XG8NzMS9iOKPeRVyJUFvMJZ5xaI=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode-Swift.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+vSNmRgjm7MpPTxbCWD7VbXa2zw=
+			K8RM+JmxR9oefofUvx96+pilsUk=
 			</data>
 			<key>hash2</key>
 			<data>
-			GdcXDIylssBG01ESJvjYjt1NlMXEbvs5T+oFf5jODP4=
+			men9l2RB3sLxmOfVdj6S/z3Nz9eMK6utsw0qAy1wtes=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode.h</key>
@@ -635,99 +929,99 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			D4CnJmX7mUni+O8wWrZkvV4bpXE=
+			iMOt3ttjfGvg2oOxwHFVSmOeeZE=
 			</data>
 			<key>hash2</key>
 			<data>
-			UOQgpAqOdramkz0oNXVJl/2/mnEXWAV0aBLkNUuO/uQ=
+			Bm6Z0YWRqtjeedZkGucCrqrhsjbZXbsI/+1EeKqpAc0=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			GB5zMQcpda7bKqZDbj7HPvP3zg4=
+			PH13KxHHw82N9m19Rf1EjVUZYeM=
 			</data>
 			<key>hash2</key>
 			<data>
-			pJ7UBfTGWoOuCGSD1lynu3xPxhFhFX9om91O49M2lUQ=
+			kfXmj/KIP2yHTAX+O/EG4/GEVpVZEhTHzysSsOgO6R8=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			dll67Kk9RA2s9dIssmgH8yxh4Fo=
+			OcVUafGiqGUU8z2xyGlZO+RjWMw=
 			</data>
 			<key>hash2</key>
 			<data>
-			MNbLcLk2ZCiOrN/ieNOB+dpbYWS/RmT8qgDpKsydpwM=
+			nmR+zTSK2oFXnQVtZ7SalE1pFnOWCvn3QxZMr169LtM=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			25Q+NCc5qSVOOCBzsWwP2J5pW7g=
+			ckBU6DrWxlneYaDV7KFH8/S169s=
 			</data>
 			<key>hash2</key>
 			<data>
-			TtjuHby4G3H563GjqWSAuD0159eI3i5Hg+g/jAjko3k=
+			FWBy0AruwCTg6/tICpNO1RHL0cf4IiUn0LE910iP1Zg=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			dll67Kk9RA2s9dIssmgH8yxh4Fo=
+			OcVUafGiqGUU8z2xyGlZO+RjWMw=
 			</data>
 			<key>hash2</key>
 			<data>
-			MNbLcLk2ZCiOrN/ieNOB+dpbYWS/RmT8qgDpKsydpwM=
+			nmR+zTSK2oFXnQVtZ7SalE1pFnOWCvn3QxZMr169LtM=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			GB5zMQcpda7bKqZDbj7HPvP3zg4=
+			PH13KxHHw82N9m19Rf1EjVUZYeM=
 			</data>
 			<key>hash2</key>
 			<data>
-			pJ7UBfTGWoOuCGSD1lynu3xPxhFhFX9om91O49M2lUQ=
+			kfXmj/KIP2yHTAX+O/EG4/GEVpVZEhTHzysSsOgO6R8=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vj4nT5by/iFjurJrMTlQUGazxjk=
+			iGTrwSoWLBlNKWkAr11WWhhzx6E=
 			</data>
 			<key>hash2</key>
 			<data>
-			iKcjBnrGo5D37EG6tgBTL9sOwnBm6P6q1jMwaupaOvE=
+			vcJgiKDVgVws8EmigGSjb+dv4KBg1DH99Gi1hxzF2cY=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pVR6HN4Ua8y5IkUxG3/+ExdclNI=
+			dILXNlWKCI7E0YD0jRI7upfrc54=
 			</data>
 			<key>hash2</key>
 			<data>
-			863jSNCJbzQXc+ThgGx+OnsteOQP1anetGQ2KBHQt+E=
+			/xE+I7u/zJ5npcdTqq3zBvNbE0EH3/Jf50FNWf0U2ks=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vj4nT5by/iFjurJrMTlQUGazxjk=
+			iGTrwSoWLBlNKWkAr11WWhhzx6E=
 			</data>
 			<key>hash2</key>
 			<data>
-			iKcjBnrGo5D37EG6tgBTL9sOwnBm6P6q1jMwaupaOvE=
+			vcJgiKDVgVws8EmigGSjb+dv4KBg1DH99Gi1hxzF2cY=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/module.modulemap</key>
@@ -745,11 +1039,517 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			m68Oy9klz6M2NdkX7HMYO9O32tg=
+			Itwt8n0na+eNId9S7O1U+eqfbnc=
 			</data>
 			<key>hash2</key>
 			<data>
-			N16DS54dCvSceRYFwlQzGfbRXRY/WNOPfEixnHQAS94=
+			6H8lVJP85zXuY+NjgM8aQm1S6aVMeh7Rqau6LOrRV18=
+			</data>
+		</dict>
+		<key>ios-arm64_x86_64-simulator/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			nkSPgjS1Ry0SFJmMmTVqqL4VfrU=
+			</data>
+			<key>hash2</key>
+			<data>
+			n3vxFpuyvTu7dfTn5bnOxELTEzPcuSyRfoaoN8XwCic=
+			</data>
+		</dict>
+		<key>ios-arm64_x86_64-simulator/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/DWARF/AppleBikeKitSourceCode</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			uQidueTVhEww6V7Jck76Vl0ACeA=
+			</data>
+			<key>hash2</key>
+			<data>
+			5GaJMdWG7M2XCXT67t4+7DxsEZbQ1HVVjyKjd2s9pb0=
+			</data>
+		</dict>
+		<key>ios-arm64_x86_64-simulator/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/aarch64/AppleBikeKitSourceCode.yml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			1n2bsHkmgqf6I+YoIG7EuSLZaIM=
+			</data>
+			<key>hash2</key>
+			<data>
+			oYpD5aTE6dXLt8W0pKi+7ITBSnnwFUIbmnlf3rXa2Gw=
+			</data>
+		</dict>
+		<key>ios-arm64_x86_64-simulator/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/x86_64/AppleBikeKitSourceCode.yml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rIH2e4v/Dto9nDPu6Xz4eXlxX6A=
+			</data>
+			<key>hash2</key>
+			<data>
+			/+GKoa6DCJMIBDFo0Dbmt6qPsAK7ZlmdFsxYrVMxXb8=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/AppleBikeKitSourceCode</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			YRoW+oM0j/0rkWwL8a3OrPSuf3E=
+			</data>
+			<key>hash2</key>
+			<data>
+			x1Sy5jM/8ceHnCeoXUUAcLf7yGL1TCUlag+qD6YfZsM=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/CoreSDKSourceCode</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/t5hNeeDivtFaeMtA6PfsIZtVG0=
+			</data>
+			<key>hash2</key>
+			<data>
+			7Gyx9+j+mcwHzF4sek/luz3xIz5LBaqPpPSVy55UfhA=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			JXUU4a9XiQuqh4ZXrGQvBVKISfY=
+			</data>
+			<key>hash2</key>
+			<data>
+			N443PW2wP9mepfXmkrrUjLYjcmHqUiDC8F6PTdqlGhw=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			YMH0bY6t80srmlmlhncp2SLIfcI=
+			</data>
+			<key>hash2</key>
+			<data>
+			dVO01YX1Ww8uigcgsEFphU+PcC6VHWnJFzW5JdXzKJY=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode-Swift.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Q3Gjr3a7k+q4DHG3x8lklZSZnEA=
+			</data>
+			<key>hash2</key>
+			<data>
+			lk7TrMYIwRO+xcsFYRcfOAnLkMq20tX+r2vV0odMT3o=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			cLPBmxsnRYrCe3robFx0Yzv9HdA=
+			</data>
+			<key>hash2</key>
+			<data>
+			+XTOwM8RBAEAqJpq22LbNJDrjmf/VcGqGeQyP5sCT/0=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			NkVLFnI+xAGiHwkPbG32dhV22J4=
+			</data>
+			<key>hash2</key>
+			<data>
+			vfyaywQbXk6rVX1KKMAbLDNFI7nT1rU0HjKycGw39lQ=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-watchos.abi.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xnZn5dqr/8q2bRjJHhoud/ay3WE=
+			</data>
+			<key>hash2</key>
+			<data>
+			e/7/2xP81RsUcIVDZu/f8Wvij31va2o7T4LbJ1Ohmik=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-watchos.private.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			uaF1o+LngPcxNiypxOeWcFQzimM=
+			</data>
+			<key>hash2</key>
+			<data>
+			hd67fHrNs9SeOyzawAM1oJNmrpxnOai2eGIXfpc9P7U=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-watchos.swiftdoc</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			aZQ3hHEwveYkRF1oFosRaJ36o2M=
+			</data>
+			<key>hash2</key>
+			<data>
+			GJcjCntLoBnhkjWJZqD17eIf4K7Vfbrt/JgfuawBFU0=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-watchos.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			uaF1o+LngPcxNiypxOeWcFQzimM=
+			</data>
+			<key>hash2</key>
+			<data>
+			hd67fHrNs9SeOyzawAM1oJNmrpxnOai2eGIXfpc9P7U=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64_32-apple-watchos.abi.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xnZn5dqr/8q2bRjJHhoud/ay3WE=
+			</data>
+			<key>hash2</key>
+			<data>
+			e/7/2xP81RsUcIVDZu/f8Wvij31va2o7T4LbJ1Ohmik=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64_32-apple-watchos.private.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RpfCyxhiPgD6s1LyNHnrxVoKwwg=
+			</data>
+			<key>hash2</key>
+			<data>
+			q+dt9191ynuLXTFFzENBOnMNfSvNp8nmObiGNzx7YR8=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64_32-apple-watchos.swiftdoc</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			uVRan77W4tp4D/fVgE1IUC3mfHU=
+			</data>
+			<key>hash2</key>
+			<data>
+			w1g9P0cT2B2g6dB6G8ZT+YGwb9UD2J6dTYl+bH9N8Hw=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64_32-apple-watchos.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RpfCyxhiPgD6s1LyNHnrxVoKwwg=
+			</data>
+			<key>hash2</key>
+			<data>
+			q+dt9191ynuLXTFFzENBOnMNfSvNp8nmObiGNzx7YR8=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/Modules/module.modulemap</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			2t51b9+Ed1K0s+7xlnW+aEH8/Rk=
+			</data>
+			<key>hash2</key>
+			<data>
+			QVZgaHIqe/wdJ7pCibgZ03+PgiqhUjiXIvlJvPWzAhM=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/AppleBikeKitSourceCode.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			zYQl4ozkh78ZUsdqVa7vuVXrj7E=
+			</data>
+			<key>hash2</key>
+			<data>
+			8a1ypKVuvj+vYHyWHeGHaO5XcT0D3yKAmPFKGizgcQA=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			nkSPgjS1Ry0SFJmMmTVqqL4VfrU=
+			</data>
+			<key>hash2</key>
+			<data>
+			n3vxFpuyvTu7dfTn5bnOxELTEzPcuSyRfoaoN8XwCic=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/DWARF/AppleBikeKitSourceCode</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yL9LNGv9oEm0Yd0NQa4a5ZcavM0=
+			</data>
+			<key>hash2</key>
+			<data>
+			kTw7WQNR1jCWAfqr8knVU/gCW8gBJeuv0zUlGvBd0r8=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/aarch64/AppleBikeKitSourceCode.yml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			NG6nhzs3BxEGj3+DA0xUtjGosFc=
+			</data>
+			<key>hash2</key>
+			<data>
+			FhIqAJuNrIVK5KmQYxJcekwZKq0nQ1w4Q9ANom13iNA=
+			</data>
+		</dict>
+		<key>watchos-arm64_arm64_32/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/aarch64_32/AppleBikeKitSourceCode.yml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZDsypgaBT0U1uiqqzbO09sLvWGo=
+			</data>
+			<key>hash2</key>
+			<data>
+			Gr2uamp1/YEfkM8DoFdcOLxIiPXLY/c+VRoUc50YB1g=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/AppleBikeKitSourceCode</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			MoqVyRXJTyQCYT9i4CMXD+cR9ww=
+			</data>
+			<key>hash2</key>
+			<data>
+			GSKq8+iVpVXo1k+lXy7nWoYxZhtG++ZhxUJfyobgtVU=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/CoreSDKSourceCode</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			F3BGWStM5uQYQhHAfbPpNo2cP0w=
+			</data>
+			<key>hash2</key>
+			<data>
+			nl/ruBPHKkQEx+jYKdw70H6JBqe55VGbrnJ7u1EjZ9Y=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			oh5VxxdYle6BUVV4hGjxwx+/8B8=
+			</data>
+			<key>hash2</key>
+			<data>
+			Ys6338TXzV0zcYRs47QBva36N7vVKJXkIsY292dDgho=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Frameworks/CoreSDKSourceCode.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			05MVHqijuUUiL/JRpyG2spyeSzQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			Eqn3gFF0eOG2H8jdlKRIcpMaWkplhzAX+t+tpgCxKkU=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode-Swift.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			K8RM+JmxR9oefofUvx96+pilsUk=
+			</data>
+			<key>hash2</key>
+			<data>
+			men9l2RB3sLxmOfVdj6S/z3Nz9eMK6utsw0qAy1wtes=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Headers/AppleBikeKitSourceCode.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			cLPBmxsnRYrCe3robFx0Yzv9HdA=
+			</data>
+			<key>hash2</key>
+			<data>
+			+XTOwM8RBAEAqJpq22LbNJDrjmf/VcGqGeQyP5sCT/0=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			P000oIYlP/Ya8TxFC7/3zG1yzB8=
+			</data>
+			<key>hash2</key>
+			<data>
+			2rQGOg0iTyo29ZlxLxAWFDFBMwLFarg1Lx9Q2L2sFHM=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-watchos-simulator.abi.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xnZn5dqr/8q2bRjJHhoud/ay3WE=
+			</data>
+			<key>hash2</key>
+			<data>
+			e/7/2xP81RsUcIVDZu/f8Wvij31va2o7T4LbJ1Ohmik=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-watchos-simulator.private.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			wceBh8IyzXnTM0JYEOcuWSz4R4M=
+			</data>
+			<key>hash2</key>
+			<data>
+			Y/PfCeMqJ45LQ2t3Eqxq60TR1ZwWvSrNILLOxfPKdMc=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-watchos-simulator.swiftdoc</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Em0Gv4WEvVoHMv+K9kWzufra+Xk=
+			</data>
+			<key>hash2</key>
+			<data>
+			Hf09RlxhiiO8dIgsg6VCOOLC+ZHGfB5C3WcL+o7JQrs=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/arm64-apple-watchos-simulator.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			wceBh8IyzXnTM0JYEOcuWSz4R4M=
+			</data>
+			<key>hash2</key>
+			<data>
+			Y/PfCeMqJ45LQ2t3Eqxq60TR1ZwWvSrNILLOxfPKdMc=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-watchos-simulator.abi.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xnZn5dqr/8q2bRjJHhoud/ay3WE=
+			</data>
+			<key>hash2</key>
+			<data>
+			e/7/2xP81RsUcIVDZu/f8Wvij31va2o7T4LbJ1Ohmik=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-watchos-simulator.private.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			p/sm0E+7EsW3VT5L9X2/Ko9FLAc=
+			</data>
+			<key>hash2</key>
+			<data>
+			dPvdeV5hT5Ej5OBqX4HKliwPSOe/eK+4WDsDhLYsy8k=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-watchos-simulator.swiftdoc</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			7ZYt5vblRwO7qrkKiNQuAg3ldTo=
+			</data>
+			<key>hash2</key>
+			<data>
+			V9GTM8qZw8BoAvKmYw3LJ3XO3jHlD+1A5KuNG4m2X74=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/AppleBikeKitSourceCode.swiftmodule/x86_64-apple-watchos-simulator.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			p/sm0E+7EsW3VT5L9X2/Ko9FLAc=
+			</data>
+			<key>hash2</key>
+			<data>
+			dPvdeV5hT5Ej5OBqX4HKliwPSOe/eK+4WDsDhLYsy8k=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/Modules/module.modulemap</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			2t51b9+Ed1K0s+7xlnW+aEH8/Rk=
+			</data>
+			<key>hash2</key>
+			<data>
+			QVZgaHIqe/wdJ7pCibgZ03+PgiqhUjiXIvlJvPWzAhM=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/AppleBikeKitSourceCode.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			SDrbDv1dEeq8qqXBj3+vNnLoHEA=
+			</data>
+			<key>hash2</key>
+			<data>
+			HtlIS/5Hb7rO1v39wCC5OvpGPi/py445GmyCPJATLo8=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			nkSPgjS1Ry0SFJmMmTVqqL4VfrU=
+			</data>
+			<key>hash2</key>
+			<data>
+			n3vxFpuyvTu7dfTn5bnOxELTEzPcuSyRfoaoN8XwCic=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/DWARF/AppleBikeKitSourceCode</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			2luaSia34EK9donZN/aV4oceWPU=
+			</data>
+			<key>hash2</key>
+			<data>
+			ugedwXu2VUHAieD1PC6Lis1Km4ZUk+Ibx07zqREY0dQ=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/aarch64/AppleBikeKitSourceCode.yml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			NG6nhzs3BxEGj3+DA0xUtjGosFc=
+			</data>
+			<key>hash2</key>
+			<data>
+			FhIqAJuNrIVK5KmQYxJcekwZKq0nQ1w4Q9ANom13iNA=
+			</data>
+		</dict>
+		<key>watchos-arm64_x86_64-simulator/dSYMs/AppleBikeKitSourceCode.framework.dSYM/Contents/Resources/Relocations/x86_64/AppleBikeKitSourceCode.yml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			E6WM8HqTokkUsvjqYQpA735BqIw=
+			</data>
+			<key>hash2</key>
+			<data>
+			NV6S7rUG6WSK7zj59NDtfNtcLQhzLonx9ONcb2etN8Y=
 			</data>
 		</dict>
 	</dict>

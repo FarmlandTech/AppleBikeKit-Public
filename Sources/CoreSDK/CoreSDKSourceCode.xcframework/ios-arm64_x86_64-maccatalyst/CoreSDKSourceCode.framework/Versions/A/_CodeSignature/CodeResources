@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		59x8s9xw3nTfI7cUH9Gg5HYXcr0=
+		lnQMzgH4jjZmBBf70qAyG93zPwI=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -15,7 +15,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			UPcpL+/LvMybEdetR6Zp9VmCqeiTv6DSt6NTe0xBg64=
+			iVmPkud1i9NG0DwN9u4/4TZxMUgGHp3PZyOyGiQI6hM=
 			</data>
 		</dict>
 		<key>Headers/Common.h</key>
@@ -29,42 +29,42 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4UQAWBFL/faGGeFvdT/3w68xrcNKma2fs1EpjICDD40=
+			BvV56kWJtPOC4XtgfL1RX5yS9P0ypsqUrEdso/XCkbk=
 			</data>
 		</dict>
 		<key>Headers/CoreSDKSourceCode.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			NvP2aFWa09SHh0SXdfUINEyA21Rz+0b65B4bLWHZUCY=
+			+9s+A7V9XQlb4dY6/gKQMhEnYCtGUARp3AAHENuoLkM=
 			</data>
 		</dict>
 		<key>Headers/CoreSDK_Common.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			rXq3b6TykHFWUFsFhzyFMXkeZjWayE6C4ykUgcHll0w=
+			elpxNj9B/sjIiCCgZJDJGWUjY0WSxx6w1wzYH0Oz1hA=
 			</data>
 		</dict>
 		<key>Headers/CoreSDK_DelegateFunc.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			/G/gNpPqzjY/Z4f6J9Lo8yAkac09Susm/ZNh4uoc0D0=
+			z7F1fAiSDsZ7CSZfjMZROEv0SYxouX+EmF2Xe1p3nXM=
 			</data>
 		</dict>
 		<key>Headers/CoreSDK_DeviceInfo.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			m/bzKnhY5uJfGy4YRW/MASqtxDaeR76tz/zmgtXXsjc=
+			Grwgn7ZusobhO8/nGgsfhaxTrYNesCrtP/sEeDcXRik=
 			</data>
 		</dict>
 		<key>Headers/FL_CANInfoStruct.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ImASnNcTfrl7p9kaPpAN4wAOdqhNCYMa8pMY+MwN+t8=
+			/T7V5bOyTL6+qRf9g2UMEaYhS/x2yFa2P4bWlRtMlLU=
 			</data>
 		</dict>
 		<key>Headers/FL_Logs.h</key>
@@ -78,7 +78,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			P7383W1ipKHrw+DPQp1R959dVPj2ad0FpR4FFFui668=
+			w1QKkUJ3J1Yq4hH+8h039uHu0oLr0pMQaijwrABX3l4=
 			</data>
 		</dict>
 		<key>Headers/lib_event_scheduler.h</key>
@@ -99,7 +99,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			SvBP7qpKTE2XiEgyODzH6gAYwohprO3A3QVdCsJUvic=
+			0nsrz/05yKmSkeBKu5vLtpVWAewcqzZeBGWL3qtsnC4=
 			</data>
 		</dict>
 	</dict>
